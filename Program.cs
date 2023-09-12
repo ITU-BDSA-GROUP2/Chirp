@@ -39,7 +39,7 @@ try {
     //https://stackoverflow.com/questions/18757097/writing-data-into-csv-file-in-c-sharp
 
 using(StreamWriter w = File.AppendText("chirp_cli_db.csv")) 
-{   
+{       w.WriteLine();
         var csv = new CsvWriter(w, CultureInfo.InvariantCulture);
         var author = System.Environment.MachineName;
         var message =  args[1] ;
