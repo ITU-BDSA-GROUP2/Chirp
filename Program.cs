@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Globalization;
 using System.Text;
 using CsvHelper;
+using CsvHelper.Expressions;
 
 string command = args[0];
 
@@ -38,13 +39,17 @@ try {
     //https://stackoverflow.com/questions/18757097/writing-data-into-csv-file-in-c-sharp
 
 using(StreamWriter w = File.AppendText("chirp_cli_db.csv")) 
-{
+{   
+        var csv = new CsvWriter(w, CultureInfo.InvariantCulture);
         var author = System.Environment.MachineName;
-        var message = "\"" + args[1] + "\"";
+        var message =  args[1] ;
         var timestamp = DateTimeOffset.Now.ToUnixTimeSeconds();
         var line = string.Format("{0},{1},{2}", author, message,timestamp);
-        w.WriteLine(line);
-        w.Flush();
+        var cheep = new Cheep(author,message,timestamp); 
+        csv.WriteRecord(cheep);
+        csv.Flush();
 }
 }
 public record Cheep(string Author, string Message, long Timestamp);
+
+
