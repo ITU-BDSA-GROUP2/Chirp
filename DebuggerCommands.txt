@@ -1,0 +1,10 @@
+In the directory of your Chirp! CLI project, open VS Code from the terminal via 
+code .
+Set a break point next to the line in which you check if an argument to read cheeps is given to your program.
+You set a breakpoint by clicking left to the line number
+Press the F5 key and start the .Net 5+ and .Net Core debugger
+In case not created yet, click the button to create a launch.json file
+Click the Step Over button (F10) to execute the program line by line
+Likely, execution of your program crashes or ends with no result, since you do not provide any arguments to the program that is executed by the debugger. So stop the debugger via Shift+F5
+Open the file .vscode/launch.json and modify the line that says "args": [], to "args": ["read", "10"],
+Now execute the debugger on your program again via F5, and step through program execution via F10 or F11
