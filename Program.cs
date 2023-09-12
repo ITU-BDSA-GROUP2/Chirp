@@ -22,8 +22,10 @@ try {
         using (var csv = new CsvReader(sr, CultureInfo.InvariantCulture))
 {
             var records = csv.GetRecords<Cheep>();
+
             foreach (var record in records) {
-                Console.WriteLine(record);
+                string time = epoch2String(int.Parse(record.Timestamp.ToString()));
+                Console.WriteLine($"{record.Author} @ " + time + ": " + $"{record.Message}");
             }
 }
 
@@ -46,7 +48,3 @@ using(StreamWriter w = File.AppendText("chirp_cli_db.csv"))
 }
 }
 public record Cheep(string Author, string Message, long Timestamp);
-
-/*
-  string timestamp = match.Groups["timestamp"].ToString();
-                string t = epoch2String(int.Parse(timestamp));*/
