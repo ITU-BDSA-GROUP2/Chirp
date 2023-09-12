@@ -3,6 +3,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Globalization;
 using System.Text;
+using CsvHelper;
 
 string command = args[0];
 var pattern = """(?'author'.+),"(?'message'.+)",(?'timestamp'\d+)""";
@@ -15,8 +16,19 @@ return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local).AddSeconds(epoch).T
 
 if (command == "read") {
 try {
-    using (var sr = new StreamReader("chirp_cli_db.csv")) {
+        using (var sr = new StreamReader("chirp_cli_db.csv"))
+        using (var csv = new CsvReader(sr, CultureInfo.InvariantCulture))
+{
+            var records = csv.GetRecords<String>();
+            foreach (var record in records) {
+                Console.WriteLine(record);
+            }
+}
+
+
+    /*using (var sr = new StreamReader("chirp_cli_db.csv")) {
             sr.ReadLine();
+
                 while (!sr.EndOfStream) {
                 string input = sr.ReadLine();
                 var match = Regex.Match(input, pattern);
@@ -26,7 +38,7 @@ try {
                 string t = epoch2String(int.Parse(timestamp));
                 Console.WriteLine($"{author} @ " + t + ": " + $"{message}");
             }
-        }
+        }*/
 } catch (IOException e) {
     Console.WriteLine("The file could not be read");
     Console.WriteLine(e.Message);
