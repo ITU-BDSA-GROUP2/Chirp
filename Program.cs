@@ -3,30 +3,33 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Globalization;
 using System.Text;
+using CsvHelper;
 
 string command = args[0];
+
+
+
 var pattern = """(?'author'.+),"(?'message'.+)",(?'timestamp'\d+)""";
 Regex rx = new Regex(pattern);
 
 string epoch2String(int epoch) {
 return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local).AddSeconds(epoch).ToString(); }
-
-
+    
 
 if (command == "read") {
 try {
-    using (var sr = new StreamReader("chirp_cli_db.csv")) {
-            sr.ReadLine();
-                while (!sr.EndOfStream) {
-                string input = sr.ReadLine();
-                var match = Regex.Match(input, pattern);
-                var author = match.Groups["author"];
-                var message = match.Groups["message"];
-                string timestamp = match.Groups["timestamp"].ToString();
-                string t = epoch2String(int.Parse(timestamp));
-                Console.WriteLine($"{author} @ " + t + ": " + $"{message}");
+        using (var sr = new StreamReader("chirp_cli_db.csv"))
+        using (var csv = new CsvReader(sr, CultureInfo.InvariantCulture))
+{
+            var records = csv.GetRecords<Cheep>();
+
+            foreach (var record in records) {
+                string time = epoch2String(int.Parse(record.Timestamp.ToString()));
+                Console.WriteLine($"{record.Author} @ " + time + ": " + $"{record.Message}");
             }
-        }
+}
+
+
 } catch (IOException e) {
     Console.WriteLine("The file could not be read");
     Console.WriteLine(e.Message);
@@ -44,3 +47,4 @@ using(StreamWriter w = File.AppendText("chirp_cli_db.csv"))
         w.Flush();
 }
 }
+public record Cheep(string Author, string Message, long Timestamp);
