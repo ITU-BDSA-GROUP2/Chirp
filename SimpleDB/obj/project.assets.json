@@ -14,16 +14,6 @@
             "related": ".xml"
           }
         }
-      },
-      "SimpleDB/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v7.0",
-        "compile": {
-          "bin/placeholder/SimpleDB.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/SimpleDB.dll": {}
-        }
       }
     }
   },
@@ -51,17 +41,11 @@
         "lib/netstandard2.1/CsvHelper.dll",
         "lib/netstandard2.1/CsvHelper.xml"
       ]
-    },
-    "SimpleDB/1.0.0": {
-      "type": "project",
-      "path": "SimpleDB/SimpleDB.csproj",
-      "msbuildProject": "SimpleDB/SimpleDB.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
-      "CsvHelper >= 30.0.1",
-      "SimpleDB >= 1.0.0"
+      "CsvHelper >= 30.0.1"
     ]
   },
   "packageFolders": {
@@ -70,11 +54,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Madso\\Chirp\\Chirp.CLI.csproj",
-      "projectName": "Chirp.CLI",
-      "projectPath": "C:\\Users\\Madso\\Chirp\\Chirp.CLI.csproj",
+      "projectUniqueName": "C:\\Users\\Madso\\Chirp\\SimpleDB\\SimpleDB.csproj",
+      "projectName": "SimpleDB",
+      "projectPath": "C:\\Users\\Madso\\Chirp\\SimpleDB\\SimpleDB.csproj",
       "packagesPath": "C:\\Users\\Madso\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Madso\\Chirp\\obj\\",
+      "outputPath": "C:\\Users\\Madso\\Chirp\\SimpleDB\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Madso\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -88,11 +72,7 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {
-            "C:\\Users\\Madso\\Chirp\\SimpleDB\\SimpleDB.csproj": {
-              "projectPath": "C:\\Users\\Madso\\Chirp\\SimpleDB\\SimpleDB.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
