@@ -46,4 +46,4 @@ public void Store(T record) {
 
 }
 
-public record Cheep(string Author, string Message, long Timestamp);
+
