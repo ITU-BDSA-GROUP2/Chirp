@@ -6,14 +6,13 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v7.0": {
-      "Chirp.CLI/1.0.0": {
+      "SimpleDB/1.0.0": {
         "dependencies": {
           "CsvHelper": "30.0.1",
-          "SimpleDB": "1.0.0",
           "docopt.net": "0.8.1"
         },
         "runtime": {
-          "Chirp.CLI.dll": {}
+          "SimpleDB.dll": {}
         }
       },
       "CsvHelper/30.0.1": {
@@ -35,20 +34,11 @@
           }
         }
       },
-      "System.ValueTuple/4.5.0": {},
-      "SimpleDB/1.0.0": {
-        "dependencies": {
-          "CsvHelper": "30.0.1",
-          "docopt.net": "0.8.1"
-        },
-        "runtime": {
-          "SimpleDB.dll": {}
-        }
-      }
+      "System.ValueTuple/4.5.0": {}
     }
   },
   "libraries": {
-    "Chirp.CLI/1.0.0": {
+    "SimpleDB/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -73,11 +63,6 @@
       "sha512": "sha512-okurQJO6NRE/apDIP23ajJ0hpiNmJ+f0BwOlB/cSqTLQlw5upkf+5+96+iG2Jw40G1fCVCyPz/FhIABUjMR+RQ==",
       "path": "system.valuetuple/4.5.0",
       "hashPath": "system.valuetuple.4.5.0.nupkg.sha512"
-    },
-    "SimpleDB/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     }
   }
 }
