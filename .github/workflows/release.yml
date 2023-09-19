@@ -4,7 +4,6 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  
 jobs: 
   release:
     runs-on: ubuntu-latest
@@ -41,6 +40,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: "App*"
-          tag_name: tag holder
+          tag_name: $tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
