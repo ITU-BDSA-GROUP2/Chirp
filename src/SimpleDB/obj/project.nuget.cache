@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "w3O4eua4AvDqHR1UdYqBaEu0cocnOR4UjJPDit6xUkNVYpY+Q/RHiKG/fCs3xyTM7FPIjcDHZtg+nEGJNsMGww==",
+  "dgSpecHash": "4SdYrE3CBrxZWm+iJgpSb69T5Ke/QvuJ9wjdDzD5vEboU8I36OXrYXtlbfsEPvyR3qk0JEGtgenjZChTGW2dSQ==",
   "success": true,
-  "projectFilePath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/SimpleDB/SimpleDB.csproj",
+  "projectFilePath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/SimpleDB/SimpleDB.csproj",
   "expectedPackageFiles": [
     "/Users/nusers/.nuget/packages/csvhelper/30.0.1/csvhelper.30.0.1.nupkg.sha512"
   ],
