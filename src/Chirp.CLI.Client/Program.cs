@@ -34,8 +34,7 @@ if(arguments["read"].Value is bool read)
 if(arguments["cheep"].Value is bool cheepT)
 {
   if(cheepT) {
-      //https://stackoverflow.com/questions/18757097/writing-data-into-csv-file-in-c-sharp 
-      
+      //https://stackoverflow.com/questions/18757097/writing-data-into-csv-file-in-c-sharp  TEST      
       var author = System.Environment.MachineName;
       var message =  arguments["<message>"];
       var timestamp = DateTimeOffset.Now.ToUnixTimeSeconds() + 7200;
