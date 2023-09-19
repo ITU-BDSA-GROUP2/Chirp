@@ -11,10 +11,8 @@ using System.Collections.Immutable;
 
 const string usage = @"Chirp
 
-
 Usage:
-  
-  Chirp.exe read [<number>]
+  Chirp.exe read
   Chirp.exe cheep <message>
   Chirp.exe (-h | --help)
 
@@ -23,18 +21,20 @@ Options:
 ";
 
 var arguments = new Docopt().Apply(usage, args, exit: true)!;
-var db = CSVDatabase<Cheep>.DBInstance;
 
-if (arguments["read"].Value is bool read)
+string command = args[0];
+
+var db = new CSVDatabase<Cheep>();
+if(arguments["read"].Value is bool read)
 {
-  var limit = Convert.ToInt32(arguments["<number>"].Value);
   if (read) {
-    UserInterface.PrintCheeps(db.Read(limit));
+    UserInterface.PrintCheeps(db.Read());
   }
 }
 if(arguments["cheep"].Value is bool cheepT)
 {
   if(cheepT) {
+      //https://stackoverflow.com/questions/18757097/writing-data-into-csv-file-in-c-sharp 
       
       var author = System.Environment.MachineName;
       var message =  arguments["<message>"];
