@@ -24,7 +24,6 @@ jobs:
           dotnet publish src/App/App.csproj --framework netcoreapp3.1 --runtime "linux-x64" -c Release -o "linux-release"
             7z a -tzip "linux-release.zip" "./linux-release/*"
           rm -r "linux-release"
-          
 
       - name: Publish
         uses: softprops/action-gh-release@v1
