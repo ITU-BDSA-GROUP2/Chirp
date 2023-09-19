@@ -30,5 +30,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: "App*"
+          tag_name: tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
