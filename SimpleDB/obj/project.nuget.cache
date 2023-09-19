@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "l/prDYfdHaRajT4h+k71+m55r90IwCoUanM1mcYy5b2L00yjEmwxIMC1DdaYWhA1hChOGihsv+uSyI8kaTjCtw==",
+  "dgSpecHash": "ehIGE9hCjKbgTYY0tumTDDK6swHvbwtpHmRzfSAIdCHiirSDYPrmMZCuwbJrUXokh6hz5zuy4iD4HQsz4tIGzw==",
   "success": true,
-  "projectFilePath": "/Users/casperpilgaard/Chirp.CLI/SimpleDB/SimpleDB.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/Users/casperpilgaard/Documents/GitHub/Chirp/SimpleDB/SimpleDB.csproj",
+  "expectedPackageFiles": [
+    "/Users/casperpilgaard/.nuget/packages/csvhelper/30.0.1/csvhelper.30.0.1.nupkg.sha512",
+    "/Users/casperpilgaard/.nuget/packages/docopt.net/0.8.1/docopt.net.0.8.1.nupkg.sha512",
+    "/Users/casperpilgaard/.nuget/packages/system.valuetuple/4.5.0/system.valuetuple.4.5.0.nupkg.sha512"
+  ],
   "logs": []
 }
