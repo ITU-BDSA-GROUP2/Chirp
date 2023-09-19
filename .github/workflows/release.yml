@@ -19,6 +19,8 @@ jobs:
       - name: Build
         shell: bash
         run: |
+          tag=$(git describe --tags --abbrev=0)
+
           dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "linux-x64" -c Release -o "linux-release"
             7z a -tzip "linux-release.zip" "./linux-release/*"
           rm -r "linux-release"
