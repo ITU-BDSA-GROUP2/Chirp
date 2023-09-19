@@ -38,6 +38,16 @@
         "runtime": {
           "lib/netcoreapp2.0/_._": {}
         }
+      },
+      "SimpleDB/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/SimpleDB.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SimpleDB.dll": {}
+        }
       }
     }
   },
@@ -126,28 +136,34 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "SimpleDB/1.0.0": {
+      "type": "project",
+      "path": "SimpleDB/SimpleDB.csproj",
+      "msbuildProject": "SimpleDB/SimpleDB.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
       "CsvHelper >= 30.0.1",
+      "SimpleDB >= 1.0.0",
       "docopt.net >= 0.8.1"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mariu\\.nuget\\packages\\": {}
+    "C:\\Users\\Chedd\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mariu\\Documents\\GitHub\\Chirp\\Chirp.CLI.csproj",
+      "projectUniqueName": "c:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\Chirp.CLI.csproj",
       "projectName": "Chirp.CLI",
-      "projectPath": "C:\\Users\\mariu\\Documents\\GitHub\\Chirp\\Chirp.CLI.csproj",
-      "packagesPath": "C:\\Users\\mariu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mariu\\Documents\\GitHub\\Chirp\\obj\\",
+      "projectPath": "c:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\Chirp.CLI.csproj",
+      "packagesPath": "C:\\Users\\Chedd\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\mariu\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Chedd\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -158,7 +174,11 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "c:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\SimpleDB\\SimpleDB.csproj": {
+              "projectPath": "c:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\SimpleDB\\SimpleDB.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
