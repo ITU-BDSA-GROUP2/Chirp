@@ -1,9 +1,9 @@
 name: Release
 on:
   push:
-    branches: [ workflow-test ]
+    branches: [ main ]
   pull_request:
-    branches: [ workflow-test ]
+    branches: [ main ]
 jobs: 
   release:
     runs-on: ubuntu-latest
