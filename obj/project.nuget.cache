@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zty71AT449OVbcC4Mb/CNLsom/sTEdyZSB47CBfbTWpnhJ9RTDfvaa7wrb4mgfkp/2rlGVIYWDmIKabcGimFzQ==",
+  "dgSpecHash": "OQstGX+Age8Q3bkL+iVSYuEOzu79ofw6DBYyqrVSvaAjUpZEMMmkZ+07iBDBCtZwdpJCOycwU4MPefAXTLQVgg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mariu\\Documents\\GitHub\\Chirp\\Chirp.CLI.csproj",
+  "projectFilePath": "c:\\Users\\mariu\\Documents\\GitHub\\Chirp\\Chirp.CLI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mariu\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512",
     "C:\\Users\\mariu\\.nuget\\packages\\docopt.net\\0.8.1\\docopt.net.0.8.1.nupkg.sha512",

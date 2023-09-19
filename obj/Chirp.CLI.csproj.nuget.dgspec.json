@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mariu\\Documents\\GitHub\\Chirp\\Chirp.CLI.csproj": {}
+    "c:\\Users\\mariu\\Documents\\GitHub\\Chirp\\Chirp.CLI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mariu\\Documents\\GitHub\\Chirp\\Chirp.CLI.csproj": {
+    "c:\\Users\\mariu\\Documents\\GitHub\\Chirp\\Chirp.CLI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mariu\\Documents\\GitHub\\Chirp\\Chirp.CLI.csproj",
+        "projectUniqueName": "c:\\Users\\mariu\\Documents\\GitHub\\Chirp\\Chirp.CLI.csproj",
         "projectName": "Chirp.CLI",
-        "projectPath": "C:\\Users\\mariu\\Documents\\GitHub\\Chirp\\Chirp.CLI.csproj",
+        "projectPath": "c:\\Users\\mariu\\Documents\\GitHub\\Chirp\\Chirp.CLI.csproj",
         "packagesPath": "C:\\Users\\mariu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mariu\\Documents\\GitHub\\Chirp\\obj\\",
+        "outputPath": "c:\\Users\\mariu\\Documents\\GitHub\\Chirp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mariu\\AppData\\Roaming\\NuGet\\NuGet.Config"
