@@ -1,0 +1,31 @@
+name: Release
+on:
+  push:
+    branches: [ workflow-test ]
+  pull_request:
+    branches: [ workflow-test ]
+jobs: 
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 7.0.*
+
+      - name: Build
+        shell: bash
+        run: |
+          dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "linux-x64" -c Release -o "linux-release"
+            7z a -tzip "linux-release.zip" "./linux-release/*"
+          rm -r "linux-release"
+
+      - name: Publish
+        uses: softprops/action-gh-release@v1
+        with:
+          files: "App*"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
