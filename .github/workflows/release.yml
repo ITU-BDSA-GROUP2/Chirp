@@ -20,10 +20,11 @@ jobs:
         shell: bash
         run: |
           tag=$(git describe --tags --abbrev=0)
+          release_name="App-$tag-linux-x64"
 
-          dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "linux-x64" -c Release -o "linux-release"
-            7z a -tzip "linux-release.zip" "./linux-release/*"
-          rm -r "linux-release"
+          dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "linux-x64" -c Release -o "$release_name"
+            7z a -tzip "${release_name}.zip" "./${release_name}/*"
+          rm -r "${release_name}"
 
       - name: Publish
         uses: softprops/action-gh-release@v1
