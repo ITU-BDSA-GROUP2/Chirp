@@ -19,7 +19,7 @@ jobs:
       - name: Build
         shell: bash
         run: |
-          dotnet publish Chirp/Chirp.CLI.csproj --framework netcoreapp7.0.x --runtime "linux-x64" -c Release -o "linux-release"
+          dotnet publish ../../Chirp.CLI.csproj --framework netcoreapp7.0.x --runtime "linux-x64" -c Release -o "linux-release"
             7z a -tzip "linux-release.zip" "./linux-release/*"
           rm -r "linux-release"
 
