@@ -25,7 +25,7 @@ jobs:
           dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "win-x64" -c Release -o "$release_name_windows"
 
             7z a -tzip "${release_name_windows}.zip" "./${release_name_windows}/*"  
-            
+
           rm -r "${release_name_windows}"
 
       - name: Build
@@ -57,6 +57,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: "App*"
-          tag_name: myTag
+          tag_name: SOMENEWTAG
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
