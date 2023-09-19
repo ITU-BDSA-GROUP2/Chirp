@@ -1,28 +1,48 @@
-﻿
-using System.Security.Cryptography.X509Certificates;
+﻿using System;
+using System.IO;
 using System.Text.RegularExpressions;
+using System.Globalization;
+using System.Text;
+using CsvHelper;
+using CsvHelper.Expressions;
 using SimpleDB;
+using DocoptNet;
+using System.Collections.Immutable;
 
+const string usage = @"Chirp
 
+Usage:
+  Chirp.exe read
+  Chirp.exe cheep <message>
+  Chirp.exe (-h | --help)
+
+Options:
+  -h --help     Show this screen.
+";
+
+var arguments = new Docopt().Apply(usage, args, exit: true)!;
 
 string command = args[0];
-string message = args[1];
 
-
-
-var pattern = """(?'author'.+),"(?'message'.+)",(?'timestamp'\d+)""";
-Regex rx = new Regex(pattern);
-
-string epoch2String(int epoch) {
-return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local).AddSeconds(epoch).ToString(); }
-    
-
-if (command == "read") {
-} else if(command == "cheep") {
-    //https://stackoverflow.com/questions/18757097/writing-data-into-csv-file-in-c-sharp
-    
-
+var db = new CSVDatabase<Cheep>();
+if(arguments["read"].Value is bool read)
+{
+  if (read) {
+    UserInterface.PrintCheeps(db.Read());
+  }
 }
-public record Cheep(string Author, string Message, long Timestamp);
+if(arguments["cheep"].Value is bool cheepT)
+{
+  if(cheepT) {
+      //https://stackoverflow.com/questions/18757097/writing-data-into-csv-file-in-c-sharp
+      
+      var author = System.Environment.MachineName;
+      var message =  arguments["<message>"];
+      var timestamp = DateTimeOffset.Now.ToUnixTimeSeconds() + 7200;
+      var cheep = new Cheep(author,message.ToString(),timestamp); 
+      db.Store(cheep);
+  }
+}
+
 
 
