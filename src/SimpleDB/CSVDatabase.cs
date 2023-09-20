@@ -12,6 +12,7 @@ using CsvHelper.Expressions;
 
     public sealed class CSVDatabase<T> : IDatabaseRepository<T>
     {
+        // Singleton pattern
         private static readonly CSVDatabase<T> instance = new CSVDatabase<T>();
 
         private CSVDatabase() {}
@@ -30,6 +31,27 @@ using CsvHelper.Expressions;
                 using (var sr = new StreamReader("../../data/chirp_cli_db.csv"))
                 using (var csv = new CsvReader(sr, CultureInfo.InvariantCulture))
                 {
+                    /*var recordsList = new List<T>();
+                    csv.Read();
+                    csv.ReadHeader();
+                    
+
+                    while (csv.Read() && limit > 0)
+                    {
+
+                        var record = new T
+                        {
+                            Author = csv.GetField<string>("Author"),
+                            Message = csv.GetField<string>("Message"),
+                            Timestamp = csv.GetField<long>("Timestamp"),
+                        };
+                        recordsList.Add(record);
+                        limit--;
+                    }
+                    return recordsList;*/
+                    
+                    
+                    // old code
                     var records = csv.GetRecords<T>().ToList();
                     return records;
                 }

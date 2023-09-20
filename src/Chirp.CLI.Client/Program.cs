@@ -11,8 +11,11 @@ using System.Collections.Immutable;
 
 const string usage = @"Chirp
 
+
 Usage:
+  
   Chirp.exe read
+  Chirp.exe read <number>
   Chirp.exe cheep <message>
   Chirp.exe (-h | --help)
 
@@ -21,16 +24,14 @@ Options:
 ";
 
 var arguments = new Docopt().Apply(usage, args, exit: true)!;
-
-string command = args[0];
-
 var db = CSVDatabase<Cheep>.DBInstance;
-var db1 = CSVDatabase<Cheep>.DBInstance;
 
-if(arguments["read"].Value is bool read)
+if (arguments["read"].Value is bool read)
 {
+  var limit = Convert.ToInt32(arguments["<number>"].Value);
+  Console.WriteLine(limit);
   if (read) {
-    UserInterface.PrintCheeps(db.Read());
+    UserInterface.PrintCheeps(db.Read(limit));
   }
 }
 if(arguments["cheep"].Value is bool cheepT)
