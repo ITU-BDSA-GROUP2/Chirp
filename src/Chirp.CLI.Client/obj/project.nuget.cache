@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "1aNzXkX+bONTjow2/t9gdyV7F8S2CcF5B/7sMFsBhWNurPEXALRtw4GShQgOh5nzB8HCSWo1S6rTl30v+lHIMA==",
+  "dgSpecHash": "QqZtFz51/jdigF4QHxf5IMdM2vywnwUpVnMpRbx/UyFfXOQUGHESGavlSo6i9uX8CWIQcXfdG4QIwmVGj5RrtQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Madso\\Chirp\\src\\Chirp.Cli.Client\\Chirp.CLI.csproj",
+  "projectFilePath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/Chirp.CLI.Client/Chirp.CLI.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Madso\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512",
-    "C:\\Users\\Madso\\.nuget\\packages\\docopt.net\\0.8.1\\docopt.net.0.8.1.nupkg.sha512",
-    "C:\\Users\\Madso\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512"
+    "/Users/nusers/.nuget/packages/csvhelper/30.0.1/csvhelper.30.0.1.nupkg.sha512",
+    "/Users/nusers/.nuget/packages/docopt.net/0.8.1/docopt.net.0.8.1.nupkg.sha512",
+    "/Users/nusers/.nuget/packages/system.valuetuple/4.5.0/system.valuetuple.4.5.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -16,21 +16,3 @@
 /Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/Chirp.CLI.Client/obj/Debug/net7.0/Chirp.CLI.pdb
 /Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/Chirp.CLI.Client/obj/Debug/net7.0/Chirp.CLI.genruntimeconfig.cache
 /Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/Chirp.CLI.Client/obj/Debug/net7.0/ref/Chirp.CLI.dll
-C:\Users\Madso\Chirp\src\Chirp.Cli.Client\bin\Debug\net7.0\Chirp.CLI.exe
-C:\Users\Madso\Chirp\src\Chirp.Cli.Client\bin\Debug\net7.0\Chirp.CLI.deps.json
-C:\Users\Madso\Chirp\src\Chirp.Cli.Client\bin\Debug\net7.0\Chirp.CLI.runtimeconfig.json
-C:\Users\Madso\Chirp\src\Chirp.Cli.Client\bin\Debug\net7.0\Chirp.CLI.dll
-C:\Users\Madso\Chirp\src\Chirp.Cli.Client\bin\Debug\net7.0\Chirp.CLI.pdb
-C:\Users\Madso\Chirp\src\Chirp.Cli.Client\bin\Debug\net7.0\CsvHelper.dll
-C:\Users\Madso\Chirp\src\Chirp.Cli.Client\bin\Debug\net7.0\DocoptNet.dll
-C:\Users\Madso\Chirp\src\Chirp.Cli.Client\bin\Debug\net7.0\SimpleDB.dll
-C:\Users\Madso\Chirp\src\Chirp.Cli.Client\bin\Debug\net7.0\SimpleDB.pdb
-C:\Users\Madso\Chirp\src\Chirp.Cli.Client\obj\Debug\net7.0\Chirp.CLI.csproj.AssemblyReference.cache
-C:\Users\Madso\Chirp\src\Chirp.Cli.Client\obj\Debug\net7.0\Chirp.CLI.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Madso\Chirp\src\Chirp.Cli.Client\obj\Debug\net7.0\Chirp.CLI.csproj.CoreCompileInputs.cache
-C:\Users\Madso\Chirp\src\Chirp.Cli.Client\obj\Debug\net7.0\Chirp.CLI.csproj.CopyComplete
-C:\Users\Madso\Chirp\src\Chirp.Cli.Client\obj\Debug\net7.0\Chirp.CLI.dll
-C:\Users\Madso\Chirp\src\Chirp.Cli.Client\obj\Debug\net7.0\refint\Chirp.CLI.dll
-C:\Users\Madso\Chirp\src\Chirp.Cli.Client\obj\Debug\net7.0\Chirp.CLI.pdb
-C:\Users\Madso\Chirp\src\Chirp.Cli.Client\obj\Debug\net7.0\Chirp.CLI.genruntimeconfig.cache
-C:\Users\Madso\Chirp\src\Chirp.Cli.Client\obj\Debug\net7.0\ref\Chirp.CLI.dll
