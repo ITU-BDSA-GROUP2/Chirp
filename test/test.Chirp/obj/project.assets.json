@@ -1755,6 +1755,7 @@
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
           "CsvHelper": "30.0.1",
+          "SimpleDB": "1.0.0",
           "docopt.net": "0.8.1"
         },
         "compile": {
@@ -1762,6 +1763,20 @@
         },
         "runtime": {
           "bin/placeholder/Chirp.CLI.dll": {}
+        }
+      },
+      "SimpleDB/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "CsvHelper": "30.0.1",
+          "docopt.net": "0.8.1"
+        },
+        "compile": {
+          "bin/placeholder/SimpleDB.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SimpleDB.dll": {}
         }
       }
     }
@@ -5648,6 +5663,11 @@
       "type": "project",
       "path": "../../src/Chirp.CLI.Client/Chirp.CLI.csproj",
       "msbuildProject": "../../src/Chirp.CLI.Client/Chirp.CLI.csproj"
+    },
+    "SimpleDB/1.0.0": {
+      "type": "project",
+      "path": "../../src/SimpleDB/SimpleDB.csproj",
+      "msbuildProject": "../../src/SimpleDB/SimpleDB.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -5660,19 +5680,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/nusers/.nuget/packages/": {}
+    "C:\\Users\\Madso\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/test/test.Chirp/test.Chirp.csproj",
+      "projectUniqueName": "C:\\Users\\Madso\\Chirp\\test\\test.Chirp\\test.Chirp.csproj",
       "projectName": "test.Chirp",
-      "projectPath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/test/test.Chirp/test.Chirp.csproj",
-      "packagesPath": "/Users/nusers/.nuget/packages/",
-      "outputPath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/test/test.Chirp/obj/",
+      "projectPath": "C:\\Users\\Madso\\Chirp\\test\\test.Chirp\\test.Chirp.csproj",
+      "packagesPath": "C:\\Users\\Madso\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Madso\\Chirp\\test\\test.Chirp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/nusers/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Madso\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -5684,8 +5704,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/Chirp.CLI.Client/Chirp.CLI.csproj": {
-              "projectPath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/Chirp.CLI.Client/Chirp.CLI.csproj"
+            "C:\\Users\\Madso\\Chirp\\src\\Chirp.CLI.Client\\Chirp.CLI.csproj": {
+              "projectPath": "C:\\Users\\Madso\\Chirp\\src\\Chirp.CLI.Client\\Chirp.CLI.csproj"
             }
           }
         }
@@ -5737,7 +5757,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.400/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

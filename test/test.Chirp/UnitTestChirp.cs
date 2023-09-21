@@ -5,9 +5,6 @@ namespace test.Chirp;
 
 public class UnitTestChirp
 {
-
-
-    
     [Theory]
     [InlineData(1690891760, "01/08/2023 12:09:20")]
     [InlineData(967329900, "26/08/2000 22:45:00")]
@@ -22,6 +19,7 @@ public class UnitTestChirp
         Assert.Equal(value, time);
         
     }
+    
     [Theory]
     [InlineData(29851932, "01-08-2023 12:09:20")]
     [InlineData(965329900, "08-27-2000 12:45:00")]
@@ -36,14 +34,28 @@ public class UnitTestChirp
         Assert.NotEqual(time,value);
     }
 
-    public void test3() {
+    [Theory]
+    [InlineData("Mads Orfelt", "det en cool tweet", 1000000000)]
+    public void PrintCheeps_Should_Print_Cheep_Correctly(string Author, string Message, long Timestamp)
+    {
+        // Arrange
+        var cheep = new Cheep(Author, Message, Timestamp);
+        IEnumerable<Cheep> cheeps = new List<Cheep> { cheep };
 
-        
+    
+        using (StringWriter sw = new StringWriter())
+        {
+            Console.SetOut(sw);
 
-        IEnumerable<CheepCheep> en = list;
-        
+            // Act
+            UserInterface.PrintCheeps(cheeps);
+            string capturedOutput = sw.ToString();
 
-        Assert.Equal(UserInterface.PrintCheeps(en),"Mads Orfelt @ 01-08-2023 12:09:20: det en cool tweet");
+            // Assert
+            string expected = $"{Author} @ {UserInterface.epoch2String(Convert.ToInt32(Timestamp))}: {Message}";
+            Assert.Equal(expected, capturedOutput.Trim());
+        }
     }
+
     
 }
