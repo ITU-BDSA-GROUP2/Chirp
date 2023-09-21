@@ -43,7 +43,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
-          "CsvHelper": "30.0.1"
+          "CsvHelper": "30.0.1",
+          "docopt.net": "0.8.1"
         },
         "compile": {
           "bin/placeholder/SimpleDB.dll": {}
