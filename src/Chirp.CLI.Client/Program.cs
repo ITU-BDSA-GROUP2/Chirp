@@ -14,7 +14,6 @@ const string usage = @"Chirp
 
 
 Usage:
-  
   Chirp.exe read [<number>]
   Chirp.exe cheep <message>
   Chirp.exe (-h | --help)
