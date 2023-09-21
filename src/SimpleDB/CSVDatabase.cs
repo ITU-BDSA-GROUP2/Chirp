@@ -31,29 +31,26 @@ using CsvHelper.Expressions;
                 using (var sr = new StreamReader("../../data/chirp_cli_db.csv"))
                 using (var csv = new CsvReader(sr, CultureInfo.InvariantCulture))
                 {
-                    /*var recordsList = new List<T>();
-                    csv.Read();
-                    csv.ReadHeader();
+
                     
+                    
+    
+                    var allRecords = csv.GetRecords<T>().ToList();
 
-                    while (csv.Read() && limit > 0)
-                    {
+                    var records = new List<T>();
 
-                        var record = new T
-                        {
-                            Author = csv.GetField<string>("Author"),
-                            Message = csv.GetField<string>("Message"),
-                            Timestamp = csv.GetField<long>("Timestamp"),
-                        };
-                        recordsList.Add(record);
+                    if (limit > 0) {
+                        foreach (var record in allRecords) {
+                        if (limit == 0) break;
+                        records.Add(record);
                         limit--;
+                        }
+                        return records;
+                    } else {
+                        return allRecords;
                     }
-                    return recordsList;*/
+
                     
-                    
-                    // old code
-                    var records = csv.GetRecords<T>().ToList();
-                    return records;
                 }
             }
             catch (IOException e)
