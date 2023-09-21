@@ -63,7 +63,7 @@ using CsvHelper.Expressions;
 
         public void Store(T record)
         {
-            using (StreamWriter w = File.AppendText("chirp_cli_db.csv"))
+            using (StreamWriter w = File.AppendText("../../data/chirp_cli_db.csv"))
             {
                 var csv = new CsvWriter(w, CultureInfo.InvariantCulture);
                 w.WriteLine();
