@@ -1,8 +1,5 @@
 namespace test.Chirp;
 
-//using Program;
-
-
 public class UnitTestChirp
 {
     [Theory]

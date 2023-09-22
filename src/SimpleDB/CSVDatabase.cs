@@ -9,7 +9,6 @@ using System.Globalization;
 using CsvHelper;
 using CsvHelper.Expressions;
 
-
     public sealed class CSVDatabase<T> : IDatabaseRepository<T>
     {
         // Singleton pattern
@@ -28,13 +27,9 @@ using CsvHelper.Expressions;
         {
             try
             {
-                using (var sr = new StreamReader("../../data/chirp_cli_db.csv"))
+                using (var sr = new StreamReader("/data/chirp_cli_db.csv"))
                 using (var csv = new CsvReader(sr, CultureInfo.InvariantCulture))
                 {
-
-                    
-                    
-    
                     var allRecords = csv.GetRecords<T>().ToList();
 
                     var records = new List<T>();
@@ -49,11 +44,8 @@ using CsvHelper.Expressions;
                     } else {
                         return allRecords;
                     }
-
-                    
                 }
-            }
-            catch (IOException e)
+            } catch (IOException e)
             {
                 Console.WriteLine("The file could not be read");
                 Console.WriteLine(e.Message);
@@ -71,23 +63,6 @@ using CsvHelper.Expressions;
                 csv.Flush();
             }
         }
-    }
 
-
-
-
-/*
-// public CSVDatabase<T>(){}
-    private static readonly CSVDatabase<T> instance = new CSVDatabase<T>();
-    private CSVDatabase(): base() {
-
-    }
-
-    public static CSVDatabase<T> Instance
-    {
         
-        get
-        {
-            return instance;
-        }
-    }*/
+    }

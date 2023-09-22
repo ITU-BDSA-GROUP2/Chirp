@@ -15,8 +15,6 @@
 /Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/SimpleDB/bin/Debug/net7.0/SimpleDB.pdb
 /Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/SimpleDB/obj/Debug/net7.0/SimpleDB.csproj.AssemblyReference.cache
 /Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/SimpleDB/obj/Debug/net7.0/SimpleDB.GeneratedMSBuildEditorConfig.editorconfig
-/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/SimpleDB/obj/Debug/net7.0/SimpleDB.AssemblyInfoInputs.cache
-/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/SimpleDB/obj/Debug/net7.0/SimpleDB.AssemblyInfo.cs
 /Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/SimpleDB/obj/Debug/net7.0/SimpleDB.csproj.CoreCompileInputs.cache
 /Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/SimpleDB/obj/Debug/net7.0/SimpleDB.dll
 /Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/SimpleDB/obj/Debug/net7.0/refint/SimpleDB.dll
