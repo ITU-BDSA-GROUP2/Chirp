@@ -31,7 +31,6 @@ jobs:
             7z a -tzip "${release_name_linux}.zip" "./${release_name_linux}/*"
 
           rm -r "${release_name_linux}"
-
       - name: Publish
         uses: softprops/action-gh-release@v1
         with:
