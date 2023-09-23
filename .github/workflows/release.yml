@@ -25,7 +25,7 @@ jobs:
         run: |
           release_name_linux="App-linux-x64"
 
-          dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "linux-x64" -c Release -o "$release_name_linux"
+          dotnet publish src\Chirp.CLI.Client\Chirp.CLI.csproj --framework net7.0 --runtime "linux-x64" -c Release -o "$release_name_linux"
 
             7z a -tzip "${release_name_linux}.zip" "./${release_name_linux}/*"
 
