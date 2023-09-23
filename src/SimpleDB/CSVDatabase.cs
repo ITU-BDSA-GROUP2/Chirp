@@ -12,13 +12,20 @@ using CsvHelper.Expressions;
     public sealed class CSVDatabase<T> : IDatabaseRepository<T>
     {
         // Singleton pattern
-        private static readonly CSVDatabase<T> instance = new CSVDatabase<T>();
+        private static CSVDatabase<T> instance;
+        private string filePath;
 
-        private CSVDatabase() {}
+        private CSVDatabase(string filePath) {
+            this.filePath = filePath;
+        }
 
-        public static CSVDatabase<T> DBInstance
+        public static CSVDatabase<T> DBInstance(string filePathToDB)
         {
-            get { return instance; }
+            if (instance == null) {
+                instance = new CSVDatabase<T>(filePathToDB);
+                return instance;
+            }
+            return instance;
         }
 
         Regex rx = new Regex(@"(?'author'.+),""(?'message'.+)"",(?'timestamp'\d+)""");
@@ -27,18 +34,20 @@ using CsvHelper.Expressions;
         {
             try
             {
-                using (var sr = new StreamReader("/data/chirp_cli_db.csv"))
+                // Inversion of Control
+                using (var sr = new StreamReader(filePath))
                 using (var csv = new CsvReader(sr, CultureInfo.InvariantCulture))
                 {
                     var allRecords = csv.GetRecords<T>().ToList();
 
                     var records = new List<T>();
 
-                    if (limit > 0) {
-                        foreach (var record in allRecords) {
-                        if (limit == 0) break;
-                        records.Add(record);
-                        limit--;
+                    if (limit >= 0) {
+                        foreach (var record in allRecords) 
+                        {
+                            if (limit == 0) break;
+                            records.Add(record);
+                            limit--;
                         }
                         return records;
                     } else {
@@ -55,7 +64,7 @@ using CsvHelper.Expressions;
 
         public void Store(T record)
         {
-            using (StreamWriter w = File.AppendText("../../data/chirp_cli_db.csv"))
+            using (StreamWriter w = File.AppendText(filePath))
             {
                 var csv = new CsvWriter(w, CultureInfo.InvariantCulture);
                 w.WriteLine();
@@ -64,5 +73,9 @@ using CsvHelper.Expressions;
             }
         }
 
+        public string getFilePathToDB() 
+        {
+            return filePath;
+        }
         
     }
