@@ -32,11 +32,11 @@ jobs:
 
           rm -r "${release_name_linux}"
           
-          
+
       - name: Publish
         uses: softprops/action-gh-release@v1
         with:
           files: "App*"
-          tag_name: myTag
+          tag_name: ${{ steps.build.outputs.tag }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
