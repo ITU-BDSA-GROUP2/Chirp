@@ -26,6 +26,8 @@ jobs:
           tag=$(git describe --tags --abbrev=0)
           release_name_linux="App-$tag-linux-x64"
 
+          cd ../../src/Chirp.CLI.Client
+
           dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "linux-x64" -c Release -o "$release_name_linux"
 
             7z a -tzip "${release_name_linux}.zip" "./${release_name_linux}/*"
