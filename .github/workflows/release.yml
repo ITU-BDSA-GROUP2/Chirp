@@ -90,7 +90,7 @@ jobs:
   release-windows:
     runs-on: windows-latest
     env:
-      DOTNET_ROOT: /home/runner/.dotnet
+      DOTNET_ROOT: C:\Users\runneradmin\AppData\Local\Microsoft\dotnet
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -117,10 +117,13 @@ jobs:
       - name: Set Tag
         run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
+      - name: Normalize file path
+        run: echo "::set-output name=normalized_path::${{ github.workspace }}\src\Chirp.CLI.Client\${{ env.TAG }}.zip"
+
       - name: Publish for Windows
         uses: softprops/action-gh-release@v1
         with:
-          files: "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_windows}.zip"
-          tag_name: ${{ env.TAG }} # Specify your tag explicitly here this has to be changed so it is automatically done
+          files: ${{ steps.normalize.outputs.normalized_path }}
+          tag_name: ${{ env.TAG }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
