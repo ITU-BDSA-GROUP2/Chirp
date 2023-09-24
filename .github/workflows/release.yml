@@ -39,9 +39,12 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_linux}.zip"
-          tag_name: $tag  # Specify your tag explicitly here this has to be changed so it is automatically done
+          tag_name: ${{ env.tag }} # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set Tag
+        run: echo "tag=${tag}" >> $GITHUB_ENV
 
   release-macos:
     runs-on: macos-latest
@@ -72,9 +75,12 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_macos}.zip"
-          tag_name: $tag  # Specify your tag explicitly here this has to be changed so it is automatically done
+          tag_name: ${{ env.tag }}  # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set Tag
+        run: echo "tag=${tag}" >> $GITHUB_ENV
 
   release-windows:
     runs-on: windows-latest
@@ -105,6 +111,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_windows}.zip"
-          tag_name: $tag # Specify your tag explicitly here this has to be changed so it is automatically done
+          tag_name: ${{ env.tag }} # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Set Tag
+        run: echo "tag=${tag}" >> $GITHUB_ENV
