@@ -10,7 +10,7 @@ on:
     branches: [main]
 
 jobs:
-  release:
+  release-linux:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -21,7 +21,6 @@ jobs:
         with:
           dotnet-version: 7.0.*
 
-      # Build for Linux
       - name: Build for Linux
         shell: bash
         run: |
@@ -36,12 +35,30 @@ jobs:
 
           rm -r "${release_name_linux}"
 
-      # Build for macOS
+      - name: Publish for Linux
+        uses: softprops/action-gh-release@v1
+        with:
+          files: "App-$tag-linux-x64.zip"
+          tag_name: "v1.1.18"  # Specify your tag explicitly here this has to be changed so it is automatically done
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  release-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 7.0.*
+
       - name: Build for macOS
         shell: bash
         run: |
           tag=$(git describe --tags --abbrev=0)
-          release_name_macos="App-$tag-osx-x64"
+          release_name_macos="App-$tag-macos-x64"
 
           cd "src/Chirp.CLI.Client"
 
@@ -51,7 +68,25 @@ jobs:
 
           rm -r "${release_name_macos}"
 
-      # Build for Windows
+      - name: Publish for macOS
+        uses: softprops/action-gh-release@v1
+        with:
+          files: "App-$tag-macos-x64.zip"
+          tag_name: "v1.1.18"  # Specify your tag explicitly here this has to be changed so it is automatically done
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  release-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 7.0.*
+
       - name: Build for Windows
         shell: bash
         run: |
@@ -66,27 +101,10 @@ jobs:
 
           rm -r "${release_name_windows}"
 
-      # Publish for all platforms
-      - name: Publish for Linux
-        uses: softprops/action-gh-release@v1
-        with:
-          files: "App-*linux-x64.zip"
-          tag_name: "v1.1.17"  # Specify your tag explicitly here this has to be changed so it is automatically done
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish for macOS
-        uses: softprops/action-gh-release@v1
-        with:
-          files: "App-*osx-x64.zip"
-          tag_name: "v1.1.17"  # Specify your tag explicitly here this has to be changed so it is automatically done
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Publish for Windows
         uses: softprops/action-gh-release@v1
         with:
-          files: "App-*win-x64.zip"
-          tag_name: "v1.1.17"  # Specify your tag explicitly here this has to be changed so it is automatically done
+          files: "App-$tag-win-x64.zip"
+          tag_name: "v1.1.18"  # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
