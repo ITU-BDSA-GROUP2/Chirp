@@ -21,8 +21,7 @@ jobs:
         with:
           dotnet-version: 7.0.*
 
-      - name: Build Linux
-        id: build-linux
+      - name: Build for Linux
         shell: bash
         run: |
           tag=$(git describe --tags --abbrev=0)
@@ -36,8 +35,7 @@ jobs:
 
           rm -r "${release_name_linux}"
 
-      - name: Build macOS
-        id: build-macos
+      - name: Build for macOS
         shell: bash
         run: |
           tag=$(git describe --tags --abbrev=0)
@@ -51,8 +49,7 @@ jobs:
 
           rm -r "${release_name_macos}"
 
-      - name: Build Windows
-        id: build-windows
+      - name: Build for Windows
         shell: bash
         run: |
           tag=$(git describe --tags --abbrev=0)
@@ -69,26 +66,26 @@ jobs:
       - name: Display Tags
         run: git tag
 
-      - name: Publish Linux Release
+      - name: Publish for Linux
         uses: softprops/action-gh-release@v1
         with:
-          files: "App*linux*"
-          tag_name: "v1.1.14"  # Specify your tag explicitly here this has to be changed so it is automatically done
+          files: "App-$tag-linux-x64.zip"
+          tag_name: "v1.1.15"  # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish macOS Release
+      - name: Publish for macOS
         uses: softprops/action-gh-release@v1
         with:
-          files: "App*macos*"
-          tag_name: "v1.1.14"  # Specify your tag explicitly here this has to be changed so it is automatically done
+          files: "App-$tag-macos-x64.zip"
+          tag_name: "v1.1.15"  # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish Windows Release
+      - name: Publish for Windows
         uses: softprops/action-gh-release@v1
         with:
-          files: "App*windows*"
-          tag_name: "v1.1.14"  # Specify your tag explicitly here this has to be changed so it is automatically done
+          files: "App-$tag-windows-x64.zip"
+          tag_name: "v1.1.15"  # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
