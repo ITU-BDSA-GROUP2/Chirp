@@ -35,16 +35,16 @@ jobs:
 
           rm -r "${release_name_linux}"
 
+      - name: Set Tag
+        run: echo "TAG=$tag" >> $GITHUB_ENV
+
       - name: Publish for Linux
         uses: softprops/action-gh-release@v1
         with:
           files: "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_linux}.zip"
-          tag_name: ${{ env.tag }} # Specify your tag explicitly here this has to be changed so it is automatically done
+          tag_name: ${{ env.TAG }} # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Set Tag
-        run: echo "tag=${tag}" >> $GITHUB_ENV
 
   release-macos:
     runs-on: macos-latest
@@ -71,16 +71,17 @@ jobs:
 
           rm -r "${release_name_macos}"
 
+      - name: Set Tag
+        run: echo "TAG=$tag" >> $GITHUB_ENV
+
       - name: Publish for macOS
         uses: softprops/action-gh-release@v1
         with:
           files: "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_macos}.zip"
-          tag_name: ${{ env.tag }}  # Specify your tag explicitly here this has to be changed so it is automatically done
+          tag_name: ${{ env.TAG }}  # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set Tag
-        run: echo "tag=${tag}" >> $GITHUB_ENV
 
   release-windows:
     runs-on: windows-latest
@@ -106,14 +107,14 @@ jobs:
           7z a -tzip "${release_name_windows}.zip" "./${release_name_windows}/*"
 
           rm -r "${release_name_windows}"
+          
+      - name: Set Tag
+        run: echo "tag=${tag}" >> $GITHUB_ENV
 
       - name: Publish for Windows
         uses: softprops/action-gh-release@v1
         with:
           files: "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_windows}.zip"
-          tag_name: ${{ env.tag }} # Specify your tag explicitly here this has to be changed so it is automatically done
+          tag_name: ${{ env.TAG }} # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: Set Tag
-        run: echo "tag=${tag}" >> $GITHUB_ENV
