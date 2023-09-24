@@ -33,7 +33,7 @@ jobs:
 
           dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "linux-x64" -c Release -o "$release_name_linux"
 
-          7z a -tzip "${release_name_linux}.zip" "./${release_name_linux}/*"
+          7z a -tzip "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_linux}.zip" "./${release_name_linux}/*"
 
           rm -r "${release_name_linux}"
 
@@ -71,7 +71,7 @@ jobs:
 
           dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "osx-x64" -c Release -o "$release_name_macos"
 
-          7z a -tzip "${release_name_macos}.zip" "./${release_name_macos}/*"
+          7z a -tzip "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_macos}.zip" "./${release_name_macos}/*"
 
           rm -r "${release_name_macos}"
 
@@ -110,7 +110,7 @@ jobs:
 
           dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "win-x64" -c Release -o "$release_name_windows"
 
-          7z a -tzip "${release_name_windows}.zip" "./${release_name_windows}/*"
+          7z a -tzip "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_windows}.zip" "./${release_name_windows}/*"
 
           rm -r "${release_name_windows}"
           
