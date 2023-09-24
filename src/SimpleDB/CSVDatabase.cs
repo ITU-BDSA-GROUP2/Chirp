@@ -28,7 +28,7 @@ using CsvHelper.Expressions;
             return instance;
         }
 
-        Regex rx = new Regex(@"(?'author'.+),""(?'message'.+)"",(?'timestamp'\d+)""");
+        //Regex rx = new Regex(@"(?'author'.+),""(?'message'.+)"",(?'timestamp'\d+)""");
 
         public IEnumerable<T> Read(int? limit = null)
         {

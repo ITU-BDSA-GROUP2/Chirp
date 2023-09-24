@@ -47,20 +47,6 @@ public class UnitTestCSVDatabase
         Assert.True(result.Count() > 0);
     }
 
-    /*[Fact]
-    public void Test_If_Read_Function_Works_With_Negativ_Limit()
-    {
-        //Arrange
-        var database = setup();
-        var limit = -1;
-
-        //Act
-        var result = database.Read(limit).ToList();
-
-        //Assert
-        Assert.True(result.Count() != limit);
-    }*/
-
     [Fact]
     public void Test_If_Read_Function_Works_With_Zero_Limit()
     {
@@ -104,11 +90,13 @@ public class UnitTestCSVDatabase
         Assert.True(result.Count() == numberOfCheeps);
     }
 
-    [Fact]
+    /*[Fact]
     public void Test_When_Read_Function_Reads_From_Wrong_Filepath()
-    {
+    {   
+        
         //Arrange
-        //var database = CSVDatabase<Cheep>.DBInstance("chirp_cli_db.csv");
+        //var database = null;
+        //database = CSVDatabase<Cheep>.DBInstance("chirp_cli_db.csv");
         
         //Act
         //var result = database.Read();
@@ -119,7 +107,7 @@ public class UnitTestCSVDatabase
 
         //Assert
        // Assert.True(database.getFilePathToDB() == correctFilePath);
-    }
+    }*/
 
     [Fact]
     public void Test_If_Store_Stores_A_Record()
@@ -140,23 +128,6 @@ public class UnitTestCSVDatabase
         //Assert
         Assert.True(currentNumberOfRecords+1 == newNumberOfRecords);
     }
-
-    [Fact]
-    public void Test_If_Store_Function_Stored_The_Record_Correctly()
-    {
-        //Arrange
-        var database = setup();
-        var currentNumberOfRecords = database.Read().Count();
-        
-        //Act
-        database.Store(cheep);
-        var newNumberOfRecords = database.Read().Count();
-
-        //Assert
-        Assert.True(currentNumberOfRecords+1 == newNumberOfRecords);
-    }
-
-
 
     public record Cheep(string Author, string Message, long Timestamp);
 }
