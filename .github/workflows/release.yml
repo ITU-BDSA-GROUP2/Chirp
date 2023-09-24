@@ -35,13 +35,10 @@ jobs:
 
           rm -r "${release_name_linux}"
 
-      - name: Display Tags
-        run: git tag
-
       - name: Publish
         uses: softprops/action-gh-release@v1
         with:
           files: "App*"
-          tag_name: ${{ steps.build.outputs.tag }}
+          tag_name: "v1.1.13"  # Specify your tag explicitly here
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
