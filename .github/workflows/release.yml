@@ -21,7 +21,8 @@ jobs:
         with:
           dotnet-version: 7.0.*
 
-      - name: Build
+      - name: Build Linux
+        id: build-linux
         shell: bash
         run: |
           tag=$(git describe --tags --abbrev=0)
@@ -35,10 +36,59 @@ jobs:
 
           rm -r "${release_name_linux}"
 
-      - name: Publish
+      - name: Build macOS
+        id: build-macos
+        shell: bash
+        run: |
+          tag=$(git describe --tags --abbrev=0)
+          release_name_macos="App-$tag-macos-x64"
+
+          cd "src/Chirp.CLI.Client"
+
+          dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "osx-x64" -c Release -o "$release_name_macos"
+
+          7z a -tzip "${release_name_macos}.zip" "./${release_name_macos}/*"
+
+          rm -r "${release_name_macos}"
+
+      - name: Build Windows
+        id: build-windows
+        shell: bash
+        run: |
+          tag=$(git describe --tags --abbrev=0)
+          release_name_windows="App-$tag-windows-x64"
+
+          cd "src/Chirp.CLI.Client"
+
+          dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "win-x64" -c Release -o "$release_name_windows"
+
+          7z a -tzip "${release_name_windows}.zip" "./${release_name_windows}/*"
+
+          rm -r "${release_name_windows}"
+
+      - name: Display Tags
+        run: git tag
+
+      - name: Publish Linux Release
         uses: softprops/action-gh-release@v1
         with:
-          files: "App*"
-          tag_name: "v1.1.13"  # Specify your tag explicitly here
+          files: "App*linux*"
+          tag_name: "v1.1.14"  # Specify your tag explicitly here this has to be changed so it is automatically done
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish macOS Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: "App*macos*"
+          tag_name: "v1.1.14"  # Specify your tag explicitly here this has to be changed so it is automatically done
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish Windows Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: "App*windows*"
+          tag_name: "v1.1.14"  # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
