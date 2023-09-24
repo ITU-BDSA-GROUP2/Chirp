@@ -38,7 +38,7 @@ jobs:
           rm -r "${release_name_linux}"
 
       - name: Set Tag
-        run: echo "TAG=$tag" >> $GITHUB_ENV
+        run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
       - name: Publish for Linux
         uses: softprops/action-gh-release@v1
@@ -76,7 +76,7 @@ jobs:
           rm -r "${release_name_macos}"
 
       - name: Set Tag
-        run: echo "TAG=$tag" >> $GITHUB_ENV
+        run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
       - name: Publish for macOS
         uses: softprops/action-gh-release@v1
@@ -115,7 +115,7 @@ jobs:
           rm -r "${release_name_windows}"
           
       - name: Set Tag
-        run: echo "tag=${tag}" >> $GITHUB_ENV
+        run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
       - name: Publish for Windows
         uses: softprops/action-gh-release@v1
