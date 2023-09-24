@@ -39,7 +39,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: "App-$tag-linux-x64.zip"
-          tag_name: "v1.1.18"  # Specify your tag explicitly here this has to be changed so it is automatically done
+          tag_name: $tag  # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -72,7 +72,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: "App-$tag-macos-x64.zip"
-          tag_name: "v1.1.18"  # Specify your tag explicitly here this has to be changed so it is automatically done
+          tag_name: $tag  # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -105,6 +105,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: "App-$tag-win-x64.zip"
-          tag_name: "v1.1.18"  # Specify your tag explicitly here this has to be changed so it is automatically done
+          tag_name: $tag # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
