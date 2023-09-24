@@ -44,7 +44,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_linux}.zip"
-          tag_name: v1.1.27 # Specify your tag explicitly here this has to be changed so it is automatically done
+          tag_name: v1.1.29 # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -82,7 +82,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_macos}.zip"
-          tag_name: v1.1.27  # Specify your tag explicitly here this has to be changed so it is automatically done
+          tag_name: v1.1.29  # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -121,6 +121,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_windows}.zip"
-          tag_name: v1.1.27
+          tag_name: v1.1.29
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
