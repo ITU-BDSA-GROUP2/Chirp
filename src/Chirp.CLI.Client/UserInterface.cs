@@ -1,3 +1,5 @@
+using System.Collections.Generic
+
 public static class UserInterface {
 
     static string epoch2String(int epoch) {
