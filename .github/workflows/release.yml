@@ -3,12 +3,13 @@ on:
   workflow_run:
     workflows: ["Test"]
     branches: [main]
-    types: 
-     - completed
+    types:
+      - completed
 
   push:
-    branches: [ main ]
-jobs: 
+    branches: [main]
+
+jobs:
   release:
     runs-on: ubuntu-latest
     steps:
@@ -30,10 +31,12 @@ jobs:
 
           dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "linux-x64" -c Release -o "$release_name_linux"
 
-            7z a -tzip "${release_name_linux}.zip" "./${release_name_linux}/*"
+          7z a -tzip "${release_name_linux}.zip" "./${release_name_linux}/*"
 
           rm -r "${release_name_linux}"
-          
+
+      - name: Display Tags
+        run: git tag
 
       - name: Publish
         uses: softprops/action-gh-release@v1
