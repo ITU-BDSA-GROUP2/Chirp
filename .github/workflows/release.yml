@@ -117,13 +117,10 @@ jobs:
       - name: Set Tag
         run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
-      - name: Normalize file path
-        run: echo "::set-output name=normalized_path::${{ github.workspace }}\src\Chirp.CLI.Client\${{ env.TAG }}.zip"
-
       - name: Publish for Windows
         uses: softprops/action-gh-release@v1
         with:
-          files: ${{ steps.normalize.outputs.normalized_path }}
+          files: "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_windows}.zip"
           tag_name: ${{ env.TAG }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
