@@ -45,7 +45,7 @@ jobs:
         with:
           files:  |
            ${{ github.workspace }}/src/Chirp.CLI.Client/App-*.zip
-          tag_name: v1.1.37 # Specify your tag explicitly here this has to be changed so it is automatically done
+          tag_name: v1.1.38 # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -84,7 +84,7 @@ jobs:
         with:
           files:  |
             ${{ github.workspace }}/src/Chirp.CLI.Client/App-*.zip
-          tag_name: v1.1.37  # Specify your tag explicitly here this has to be changed so it is automatically done
+          tag_name: v1.1.38  # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -110,9 +110,9 @@ jobs:
 
           cd "src/Chirp.CLI.Client"
 
-          dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "win-x64" -c Release -o "$release_name_windows"
+          dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "win-x64" -c Release -o "$release_name_windows" /p:PublishTrimmed=true /p:PublishSingleFile=true
 
-          7z a -tzip "${{ github.workspace }}\src\Chirp.CLI.Client\${release_name_windows}.zip" "./${release_name_windows}/*"
+          7z a -tzip "${{ github.workspace }}\src\Chirp.CLI.Client\${release_name_windows}.zip" ".\${release_name_windows}\*"
 
           rm -r "${release_name_windows}"
           
@@ -124,6 +124,6 @@ jobs:
         with:
           files:  |
             ${{ github.workspace }}\src\Chirp.CLI.Client\App-*.zip
-          tag_name: v1.1.37
+          tag_name: v1.1.38
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
