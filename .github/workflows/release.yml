@@ -112,7 +112,7 @@ jobs:
 
           dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "win-x64" -c Release -o "$release_name_windows" /p:PublishTrimmed=true /p:PublishSingleFile=true
 
-          7z a -tzip "${{ github.workspace }}\src\Chirp.CLI.Client\${release_name_windows}.zip" ".\${release_name_windows}\*"
+          7z a -tzip "${{ github.workspace }}\src\Chirp.CLI.Client\${release_name_windows}.zip" "./${release_name_windows}/*"
 
           rm -r "${release_name_windows}"
           
@@ -123,7 +123,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files:  |
-            ${{ github.workspace }}\src\Chirp.CLI.Client\App-*.zip
+            ${{ github.workspace }}\src\Chirp.CLI.Client\App-1.1.39-win-x64.zip
           tag_name: v1.1.38
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
