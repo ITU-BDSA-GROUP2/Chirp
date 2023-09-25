@@ -31,7 +31,7 @@ jobs:
 
           cd "src/Chirp.CLI.Client"
 
-          dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "linux-x64" -c Release -o "$release_name_linux"
+          dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "linux-x64" -c Release -o "$release_name_linux" /p:PublishTrimmed=true /p:PublishSingleFile=true
 
           7z a -tzip "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_linux}.zip" "./${release_name_linux}/*"
 
@@ -45,7 +45,7 @@ jobs:
         with:
           files:  |
            ${{ github.workspace }}/src/Chirp.CLI.Client/App-*.zip
-          tag_name: v1.1.32 # Specify your tag explicitly here this has to be changed so it is automatically done
+          tag_name: v1.1.33 # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -70,7 +70,7 @@ jobs:
 
           cd "src/Chirp.CLI.Client"
 
-          dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "osx-x64" -c Release -o "$release_name_macos"
+          dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "osx-x64" -c Release -o "$release_name_macos" /p:PublishTrimmed=true /p:PublishSingleFile=true
 
           7z a -tzip "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_macos}.zip" "./${release_name_macos}/*"
 
@@ -84,7 +84,7 @@ jobs:
         with:
           files:  |
             ${{ github.workspace }}/src/Chirp.CLI.Client/App-*.zip
-          tag_name: v1.1.32  # Specify your tag explicitly here this has to be changed so it is automatically done
+          tag_name: v1.1.33  # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -123,7 +123,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files:  |
-            ${{ github.workspace }}\src\Chirp.CLI.Client\App-*.zip
-          tag_name: v1.1.32
+            ${{ github.workspace }}/src/Chirp.CLI.Client/App-*.zip
+          tag_name: v1.1.33
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
