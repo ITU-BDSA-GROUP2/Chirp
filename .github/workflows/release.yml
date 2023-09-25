@@ -28,12 +28,13 @@ jobs:
         run: |
           tag=$(git describe --tags --abbrev=0)
           release_name_linux="App-$tag-linux-x64"
+          zip_file_linux="${release_name_linux}.zip"
 
           cd "src/Chirp.CLI.Client"
 
           dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "linux-x64" -c Release -o "$release_name_linux"
 
-          7z a -tzip "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_linux}.zip" "./${release_name_linux}/*"
+          7z a -tzip "../$zip_file_linux" "./${release_name_linux}/*"
 
           rm -r "${release_name_linux}"
 
@@ -43,8 +44,8 @@ jobs:
       - name: Publish for Linux
         uses: softprops/action-gh-release@v1
         with:
-          files: "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_linux}.zip"
-          tag_name: v1.1.29 # Specify your tag explicitly here this has to be changed so it is automatically done
+          files: "../$zip_file_linux"
+          tag_name: v1.1.30 # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -66,12 +67,13 @@ jobs:
         run: |
           tag=$(git describe --tags --abbrev=0)
           release_name_macos="App-$tag-macos-x64"
+          zip_file_macos="${release_name_macos}.zip"
 
           cd "src/Chirp.CLI.Client"
 
           dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "osx-x64" -c Release -o "$release_name_macos"
 
-          7z a -tzip "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_macos}.zip" "./${release_name_macos}/*"
+          7z a -tzip "../$zip_file_macos" "./${release_name_macos}/*"
 
           rm -r "${release_name_macos}"
 
@@ -81,8 +83,8 @@ jobs:
       - name: Publish for macOS
         uses: softprops/action-gh-release@v1
         with:
-          files: "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_macos}.zip"
-          tag_name: v1.1.29  # Specify your tag explicitly here this has to be changed so it is automatically done
+          files: "../$zip_file_name"
+          tag_name: v1.1.30  # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -105,12 +107,13 @@ jobs:
         run: |
           tag=$(git describe --tags --abbrev=0)
           release_name_windows="App-$tag-win-x64"
+          zip_file_windows="${release_name_windows}.zip"
 
           cd "src/Chirp.CLI.Client"
 
           dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "win-x64" -c Release -o "$release_name_windows"
 
-          7z a -tzip "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_windows}.zip" "./${release_name_windows}/*"
+          7z a -tzip "../$zip_file_windows" "./${release_name_windows}/*"
 
           rm -r "${release_name_windows}"
           
@@ -120,7 +123,7 @@ jobs:
       - name: Publish for Windows
         uses: softprops/action-gh-release@v1
         with:
-          files: "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_windows}.zip"
-          tag_name: v1.1.29
+          files: "../$zip_file_windows"
+          tag_name: v1.1.30
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
