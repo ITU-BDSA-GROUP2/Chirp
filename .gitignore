@@ -478,11 +478,7 @@ $RECYCLE.BIN/
 
 
 #Ignore
-src/Chirp.CLI.Client/obj/*
-src/Chirp.CLI.Client/bin/*
-
-src/SimpleDB/bin/*
-src/SimpleDB/obj/*
+src/Chirp.CLI.Client/bin/Debug/net7.0/*
 
 
 #Except files below
