@@ -14,7 +14,6 @@ const string usage = @"Chirp
 
 
 Usage:
-  
   Chirp.exe read [<number>]
   Chirp.exe cheep <message>
   Chirp.exe (-h | --help)
@@ -24,11 +23,12 @@ Options:
 ";
 
 var arguments = new Docopt().Apply(usage, args, exit: true)!;
-var db = CSVDatabase<Cheep>.DBInstance;
+var db = CSVDatabase<Cheep>.DBInstance("../data/chirp_cli_db.csv");
 
 if (arguments["read"].Value is bool read)
 {
   var limit = Convert.ToInt32(arguments["<number>"].Value);
+
   if (read) {
     UserInterface.PrintCheeps(db.Read(limit));
   }

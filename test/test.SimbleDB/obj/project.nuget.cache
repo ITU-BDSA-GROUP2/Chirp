@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Fn2Ab7BRKJplIfMRHi+4Tgw0RFfQ6dKTnuFoXX1nZtOUXNUs21xq1K2CMPxB+MulbOL9EIzUbaB7M30HmlgKiw==",
+  "dgSpecHash": "Ikj/SWit7Ms1FDRYAWQ7vQyyaohzjG0YEf3OvxAFkW4gXHIdb6WCH0PGrMBna9FfrKjuE5ptfJlaQWZQahI/2g==",
   "success": true,
   "projectFilePath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/test/test.SimbleDB/test.SimbleDB.csproj",
   "expectedPackageFiles": [
     "/Users/nusers/.nuget/packages/coverlet.collector/3.2.0/coverlet.collector.3.2.0.nupkg.sha512",
+    "/Users/nusers/.nuget/packages/csvhelper/30.0.1/csvhelper.30.0.1.nupkg.sha512",
+    "/Users/nusers/.nuget/packages/docopt.net/0.8.1/docopt.net.0.8.1.nupkg.sha512",
     "/Users/nusers/.nuget/packages/microsoft.codecoverage/17.6.0/microsoft.codecoverage.17.6.0.nupkg.sha512",
     "/Users/nusers/.nuget/packages/microsoft.net.test.sdk/17.6.0/microsoft.net.test.sdk.17.6.0.nupkg.sha512",
     "/Users/nusers/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
@@ -83,6 +85,7 @@
     "/Users/nusers/.nuget/packages/system.threading.tasks/4.3.0/system.threading.tasks.4.3.0.nupkg.sha512",
     "/Users/nusers/.nuget/packages/system.threading.tasks.extensions/4.3.0/system.threading.tasks.extensions.4.3.0.nupkg.sha512",
     "/Users/nusers/.nuget/packages/system.threading.timer/4.3.0/system.threading.timer.4.3.0.nupkg.sha512",
+    "/Users/nusers/.nuget/packages/system.valuetuple/4.5.0/system.valuetuple.4.5.0.nupkg.sha512",
     "/Users/nusers/.nuget/packages/system.xml.readerwriter/4.3.0/system.xml.readerwriter.4.3.0.nupkg.sha512",
     "/Users/nusers/.nuget/packages/system.xml.xdocument/4.3.0/system.xml.xdocument.4.3.0.nupkg.sha512",
     "/Users/nusers/.nuget/packages/xunit/2.4.2/xunit.2.4.2.nupkg.sha512",

@@ -9,51 +9,52 @@ using System.Globalization;
 using CsvHelper;
 using CsvHelper.Expressions;
 
-
     public sealed class CSVDatabase<T> : IDatabaseRepository<T>
     {
         // Singleton pattern
-        private static readonly CSVDatabase<T> instance = new CSVDatabase<T>();
+        private static CSVDatabase<T> instance;
+        private string filePath;
 
-        private CSVDatabase() {}
-
-        public static CSVDatabase<T> DBInstance
-        {
-            get { return instance; }
+        private CSVDatabase(string filePath) {
+            this.filePath = filePath;
         }
 
-        Regex rx = new Regex(@"(?'author'.+),""(?'message'.+)"",(?'timestamp'\d+)""");
+        public static CSVDatabase<T> DBInstance(string filePathToDB)
+        {
+            if (instance == null) {
+                instance = new CSVDatabase<T>(filePathToDB);
+                return instance;
+            }
+            return instance;
+        }
+
+        //Regex rx = new Regex(@"(?'author'.+),""(?'message'.+)"",(?'timestamp'\d+)""");
 
         public IEnumerable<T> Read(int? limit = null)
         {
             try
             {
-                using (var sr = new StreamReader("../../data/chirp_cli_db.csv"))
+                // Inversion of Control
+                using (var sr = new StreamReader(filePath))
                 using (var csv = new CsvReader(sr, CultureInfo.InvariantCulture))
                 {
-
-                    
-                    
-    
                     var allRecords = csv.GetRecords<T>().ToList();
 
                     var records = new List<T>();
 
-                    if (limit > 0) {
-                        foreach (var record in allRecords) {
-                        if (limit == 0) break;
-                        records.Add(record);
-                        limit--;
+                    if (limit >= 0) {
+                        foreach (var record in allRecords) 
+                        {
+                            if (limit == 0) break;
+                            records.Add(record);
+                            limit--;
                         }
                         return records;
                     } else {
                         return allRecords;
                     }
-
-                    
                 }
-            }
-            catch (IOException e)
+            } catch (IOException e)
             {
                 Console.WriteLine("The file could not be read");
                 Console.WriteLine(e.Message);
@@ -63,7 +64,7 @@ using CsvHelper.Expressions;
 
         public void Store(T record)
         {
-            using (StreamWriter w = File.AppendText("../../data/chirp_cli_db.csv"))
+            using (StreamWriter w = File.AppendText(filePath))
             {
                 var csv = new CsvWriter(w, CultureInfo.InvariantCulture);
                 w.WriteLine();
@@ -71,23 +72,10 @@ using CsvHelper.Expressions;
                 csv.Flush();
             }
         }
-    }
 
-
-
-
-/*
-// public CSVDatabase<T>(){}
-    private static readonly CSVDatabase<T> instance = new CSVDatabase<T>();
-    private CSVDatabase(): base() {
-
-    }
-
-    public static CSVDatabase<T> Instance
-    {
-        
-        get
+        public string getFilePathToDB() 
         {
-            return instance;
+            return filePath;
         }
-    }*/
+        
+    }

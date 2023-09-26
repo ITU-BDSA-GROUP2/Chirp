@@ -38,7 +38,8 @@
       "System.ValueTuple/4.5.0": {},
       "SimpleDB/1.0.0": {
         "dependencies": {
-          "CsvHelper": "30.0.1"
+          "CsvHelper": "30.0.1",
+          "docopt.net": "0.8.1"
         },
         "runtime": {
           "SimpleDB.dll": {}
