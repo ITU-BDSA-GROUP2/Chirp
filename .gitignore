@@ -477,8 +477,13 @@ $RECYCLE.BIN/
 *.lnk
 
 
-#Ignore Everything
-*
+#Ignore
+src/Chirp.CLI.Client/obj/*
+src/Chirp.CLI.Client/bin/*
+
+src/SimpleDB/bin/*
+src/SimpleDB/obj/*
+
 
 #Except files below
 !src/**.cs
