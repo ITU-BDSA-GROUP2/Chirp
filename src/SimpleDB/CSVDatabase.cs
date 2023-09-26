@@ -42,7 +42,7 @@ using CsvHelper.Expressions;
 
                     var records = new List<T>();
 
-                    if (limit >= 0) {
+                    if (limit > 0) {
                         foreach (var record in allRecords) 
                         {
                             if (limit == 0) break;
