@@ -36,9 +36,9 @@ IDatabaseRepository<Cheep> db = CSVDatabase<Cheep>.DBInstance("../../data/chirp_
 
 if (arguments["read"].Value is bool read)
 {
-  var limit = Convert.ToInt32(arguments["<number>"].Value);
+  //var limit = Convert.ToInt32(arguments["<number>"].Value);
   
-  var temp = await client.GetStringAsync($"cheeps/{limit}");
+  var temp = await client.GetStringAsync("/cheeps");
   
   Console.WriteLine(temp);
 }

@@ -155,19 +155,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Madso\\.nuget\\packages\\": {}
+    "/Users/casperpilgaard/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Madso\\Chirp\\src\\Chirp.CLI.Client\\Chirp.CLI.csproj",
+      "projectUniqueName": "/Users/casperpilgaard/Documents/GitHub/Chirp/src/Chirp.CLI.Client/Chirp.CLI.csproj",
       "projectName": "Chirp.CLI",
-      "projectPath": "C:\\Users\\Madso\\Chirp\\src\\Chirp.CLI.Client\\Chirp.CLI.csproj",
-      "packagesPath": "C:\\Users\\Madso\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Madso\\Chirp\\src\\Chirp.CLI.Client\\obj\\",
+      "projectPath": "/Users/casperpilgaard/Documents/GitHub/Chirp/src/Chirp.CLI.Client/Chirp.CLI.csproj",
+      "packagesPath": "/Users/casperpilgaard/.nuget/packages/",
+      "outputPath": "/Users/casperpilgaard/Documents/GitHub/Chirp/src/Chirp.CLI.Client/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Madso\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/casperpilgaard/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -179,8 +179,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\Madso\\Chirp\\src\\SimpleDB\\SimpleDB.csproj": {
-              "projectPath": "C:\\Users\\Madso\\Chirp\\src\\SimpleDB\\SimpleDB.csproj"
+            "/Users/casperpilgaard/Documents/GitHub/Chirp/src/SimpleDB/SimpleDB.csproj": {
+              "projectPath": "/Users/casperpilgaard/Documents/GitHub/Chirp/src/SimpleDB/SimpleDB.csproj"
             }
           }
         }
@@ -220,7 +220,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.400/RuntimeIdentifierGraph.json"
       }
     }
   }
