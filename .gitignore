@@ -482,5 +482,4 @@ src/Chirp.CLI.Client/bin/Debug/net7.0/*
 
 
 #Except files below
-!src/**.cs
 !.gitignore
