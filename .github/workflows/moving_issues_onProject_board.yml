@@ -20,4 +20,4 @@ jobs:
         with:
           project: project_board
           column: In progress
-          repo-token: ${{ secrets.GITHUB_TOKEN}}
+          repo-token: ${{ secrets.MOVING_ASSIGNED_ISSUES_TO_PROJECT}}
