@@ -13,7 +13,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
 
-var baseURL = "https://bdsagroup02chirpremotedb.azurewebsites.net/";
+var baseURL = "http://localhost:5002";
 System.Net.Http.HttpClient client = new();
 client.DefaultRequestHeaders.Accept.Clear();
 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
