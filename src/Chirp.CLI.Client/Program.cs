@@ -51,11 +51,12 @@ if(arguments["cheep"].Value is bool cheepT)
       var timestamp = DateTimeOffset.Now.ToUnixTimeSeconds() + 7200;
       var cheep = new Cheep(author,message.ToString(),timestamp);
       
-      string content = JsonSerializer.Serialize(cheep); 
-      //Console.WriteLine(content+"dinmr");
+      var content = JsonSerializer.Serialize(cheep); 
+      //Console.WriteLine(content.author);
 
       //var tempp = JsonSerializer.Deserialize<Cheep>(content);
-      //Console.WriteLine(tempp+"dinmooor");
-      var temp2 = await client.PostAsync("/cheep",content);
+      //Console.WriteLine(tempp+"  ");
+      var temp2 = await client.PostAsJsonAsync<Cheep>("/cheep",cheep);
+      Console.WriteLine(JsonSerializer.Deserialize<Cheep>(content));
   }
 }
