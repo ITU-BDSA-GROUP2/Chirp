@@ -155,19 +155,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/nusers/.nuget/packages/": {}
+    "C:\\Users\\Madso\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/Chirp.CLI.Client/Chirp.CLI.csproj",
+      "projectUniqueName": "C:\\Users\\Madso\\Chirp\\src\\Chirp.CLI.Client\\Chirp.CLI.csproj",
       "projectName": "Chirp.CLI",
-      "projectPath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/Chirp.CLI.Client/Chirp.CLI.csproj",
-      "packagesPath": "/Users/nusers/.nuget/packages/",
-      "outputPath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/Chirp.CLI.Client/obj/",
+      "projectPath": "C:\\Users\\Madso\\Chirp\\src\\Chirp.CLI.Client\\Chirp.CLI.csproj",
+      "packagesPath": "C:\\Users\\Madso\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Madso\\Chirp\\src\\Chirp.CLI.Client\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/nusers/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Madso\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -179,8 +179,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/SimpleDB/SimpleDB.csproj": {
-              "projectPath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/SimpleDB/SimpleDB.csproj"
+            "C:\\Users\\Madso\\Chirp\\src\\SimpleDB\\SimpleDB.csproj": {
+              "projectPath": "C:\\Users\\Madso\\Chirp\\src\\SimpleDB\\SimpleDB.csproj"
             }
           }
         }
@@ -220,7 +220,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.400/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
