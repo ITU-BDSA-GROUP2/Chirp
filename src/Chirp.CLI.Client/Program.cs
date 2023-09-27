@@ -24,6 +24,7 @@ Options:
 
 var arguments = new Docopt().Apply(usage, args, exit: true)!;
 var db = CSVDatabase<Cheep>.DBInstance("../../data/chirp_cli_db.csv");
+Console.WriteLine();
 
 if (arguments["read"].Value is bool read)
 {
