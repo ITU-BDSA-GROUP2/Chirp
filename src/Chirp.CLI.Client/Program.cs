@@ -31,6 +31,7 @@ Options:
   -h --help     Show this screen.
 ";
 
+
 var arguments = new Docopt().Apply(usage, args, exit: true)!;
 IDatabaseRepository<Cheep> db = CSVDatabase<Cheep>.DBInstance("../../data/chirp_cli_db.csv");
 
