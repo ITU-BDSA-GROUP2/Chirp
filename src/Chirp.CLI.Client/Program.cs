@@ -33,7 +33,7 @@ Options:
 
 
 var arguments = new Docopt().Apply(usage, args, exit: true)!;
-IDatabaseRepository<Cheep> db = CSVDatabase<Cheep>.DBInstance("../../data/chirp_cli_db.csv");
+//IDatabaseRepository<Cheep> db = CSVDatabase<Cheep>.DBInstance("../../data/chirp_cli_db.csv");
 
 if (arguments["read"].Value is bool read)
 {
