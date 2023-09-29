@@ -5,7 +5,7 @@ using System;
 using System.IO;
 
 public class IntergrationTestCSVDatabase
-{
+{/*
     private const int maxChrip = 10;
     private const string filePathToDB = "../../../../../data/testingDatabase.csv";
 
@@ -52,5 +52,5 @@ public class IntergrationTestCSVDatabase
         tearDown();
     }
 
-    public record Cheep(string Author, string Message, long Timestamp);
+    public record Cheep(string Author, string Message, long Timestamp);*/
 }

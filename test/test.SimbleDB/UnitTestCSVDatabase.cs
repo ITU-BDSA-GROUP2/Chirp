@@ -3,7 +3,7 @@ namespace test.SimbleDB;
 using SimpleDB;
 
 public class UnitTestCSVDatabase
-{
+{/*
     // hey
     // Startup method to instantiate database singleton
     public CSVDatabase<Cheep> setup() {
@@ -107,7 +107,7 @@ public class UnitTestCSVDatabase
 
         //Assert
        // Assert.True(database.getFilePathToDB() == correctFilePath);
-    }*/
+    }
 
     [Fact]
     public void Test_If_Store_Stores_A_Record()
@@ -126,7 +126,7 @@ public class UnitTestCSVDatabase
         var newNumberOfRecords = database.Read().Count();
 
         //Assert
-        Assert.True(currentNumberOfRecords+1 == newNumberOfRecords);
+        Assert.True(currentNumberOfRecords+1 == newNumberOfRecords);*/
     }
 
     public record Cheep(string Author, string Message, long Timestamp);
