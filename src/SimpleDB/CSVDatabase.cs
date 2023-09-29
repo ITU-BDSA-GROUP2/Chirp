@@ -8,6 +8,9 @@ using System.Text.RegularExpressions;
 using System.Globalization;
 using CsvHelper;
 using CsvHelper.Expressions;
+using System.Reflection;
+
+
 
     public sealed class CSVDatabase<T> : IDatabaseRepository<T>
     {
@@ -34,23 +37,27 @@ using CsvHelper.Expressions;
         {
             try
             {
-                // Inversion of Control
-                using (var sr = new StreamReader(filePath))
-                using (var csv = new CsvReader(sr, CultureInfo.InvariantCulture))
+               Assembly assembly = Assembly.GetExecutingAssembly(); // You can use another assembly if needed
+                
+                
+                using (Stream stream = assembly.GetManifestResourceStream("SimpleDB.chirp_cli_db.csv"))
                 {
-                    var allRecords = csv.GetRecords<T>().ToList();
+                   if (stream == null)
+                    {
+                        Console.WriteLine("Embedded resource not found.");
+                        return null;
+                    }
 
-                    var records = new List<T>();
+                    using (var reader = new StreamReader(stream))
+                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                    {
+                        var allRecords = csv.GetRecords<T>().ToList();
 
-                    if (limit > 0) {
-                        foreach (var record in allRecords) 
+                        if (limit.HasValue && limit > 0)
                         {
-                            if (limit == 0) break;
-                            records.Add(record);
-                            limit--;
+                            return allRecords.Take(limit.Value);
                         }
-                        return records;
-                    } else {
+
                         return allRecords;
                     }
                 }
