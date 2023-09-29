@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SimpleDB\SimpleDB.csproj" />
+    <EmbeddedResource Include="../../data/chirp_cli_db.csv" />
   </ItemGroup>
 
 </Project>
