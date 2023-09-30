@@ -14,7 +14,6 @@ using System.Reflection;
 
     public sealed class CSVDatabase<T> : IDatabaseRepository<T>
     {
-        // Singleton pattern
         private static CSVDatabase<T> instance;
         private string filePath;
 
@@ -31,16 +30,14 @@ using System.Reflection;
             return instance;
         }
 
-        //Regex rx = new Regex(@"(?'author'.+),""(?'message'.+)"",(?'timestamp'\d+)""");
-
         public IEnumerable<T> Read(int? limit = null)
         {
             try
             {
-               Assembly assembly = Assembly.GetExecutingAssembly(); // You can use another assembly if needed
+               Assembly assembly = Assembly.GetExecutingAssembly();
                 
                 
-                using (Stream stream = assembly.GetManifestResourceStream("SimpleDB.chirp_cli_db.csv"))
+                using (Stream stream = assembly.GetManifestResourceStream(filePath))
                 {
                    if (stream == null)
                     {

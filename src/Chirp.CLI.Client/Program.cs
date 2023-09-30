@@ -13,7 +13,8 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
 
-var baseURL = "https://bdsagroup02chirpremotedb.azurewebsites.net";
+//var baseURL = "https://bdsagroup02chirpremotedb.azurewebsites.net";
+var baseURL = "http://localhost:5002";
 System.Net.Http.HttpClient client = new();
 client.DefaultRequestHeaders.Accept.Clear();
 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -33,12 +34,9 @@ Options:
 
 
 var arguments = new Docopt().Apply(usage, args, exit: true)!;
-//IDatabaseRepository<Cheep> db = CSVDatabase<Cheep>.DBInstance("../../data/chirp_cli_db.csv");
 
 if (arguments["read"].Value is bool read)
-{
-  //var limit = Convert.ToInt32(arguments["<number>"].Value);
-  
+{ 
   var temp = await client.GetStringAsync("/cheeps");
 }
 if(arguments["cheep"].Value is bool cheepT)
@@ -49,15 +47,6 @@ if(arguments["cheep"].Value is bool cheepT)
       var message =  arguments["<message>"];
       var timestamp = DateTimeOffset.Now.ToUnixTimeSeconds() + 7200;
       var cheep = new Cheep(author,message.ToString(),timestamp);
-      
-      //Console.WriteLine(content.author);
-
-      //var tempp = JsonSerializer.Deserialize<Cheep>(content);
-      //Console.WriteLine(tempp+"  ");
-
-      // Create an HttpContent object with JSON data
-
       var response = await client.PostAsJsonAsync("/cheep", cheep);
-      //Console.WriteLine(response);
   }
 }

@@ -40,3 +40,13 @@ C:/Users/Madso/Chirp/src/SimpleDB/obj/Debug/net7.0/ref/SimpleDB.dll
 /Users/casperpilgaard/Documents/GitHub/Chirp/src/SimpleDB/obj/Debug/net7.0/refint/SimpleDB.dll
 /Users/casperpilgaard/Documents/GitHub/Chirp/src/SimpleDB/obj/Debug/net7.0/SimpleDB.pdb
 /Users/casperpilgaard/Documents/GitHub/Chirp/src/SimpleDB/obj/Debug/net7.0/ref/SimpleDB.dll
+/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/SimpleDB/bin/Debug/net7.0/SimpleDB.deps.json
+/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/SimpleDB/bin/Debug/net7.0/SimpleDB.dll
+/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/SimpleDB/bin/Debug/net7.0/SimpleDB.pdb
+/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/SimpleDB/obj/Debug/net7.0/SimpleDB.csproj.AssemblyReference.cache
+/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/SimpleDB/obj/Debug/net7.0/SimpleDB.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/SimpleDB/obj/Debug/net7.0/SimpleDB.csproj.CoreCompileInputs.cache
+/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/SimpleDB/obj/Debug/net7.0/SimpleDB.dll
+/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/SimpleDB/obj/Debug/net7.0/refint/SimpleDB.dll
+/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/SimpleDB/obj/Debug/net7.0/SimpleDB.pdb
+/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/SimpleDB/obj/Debug/net7.0/ref/SimpleDB.dll

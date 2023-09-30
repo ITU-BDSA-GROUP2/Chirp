@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ikj/SWit7Ms1FDRYAWQ7vQyyaohzjG0YEf3OvxAFkW4gXHIdb6WCH0PGrMBna9FfrKjuE5ptfJlaQWZQahI/2g==",
+  "dgSpecHash": "SkEJPEQhR9Ct3w2yUBF2qAgsbiuti3kZQFRA1NM8rAShBMYUz7EFuzopG1JAmAXdBceArHoK9B1bfaRhPzzXLQ==",
   "success": true,
-  "projectFilePath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/test/test.SimbleDB/test.SimbleDB.csproj",
+  "projectFilePath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/test/test.SimbleDB/test.SimbleDB.csproj",
   "expectedPackageFiles": [
     "/Users/nusers/.nuget/packages/coverlet.collector/3.2.0/coverlet.collector.3.2.0.nupkg.sha512",
     "/Users/nusers/.nuget/packages/csvhelper/30.0.1/csvhelper.30.0.1.nupkg.sha512",

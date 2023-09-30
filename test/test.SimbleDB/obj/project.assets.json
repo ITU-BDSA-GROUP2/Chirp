@@ -5665,11 +5665,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/test/test.SimbleDB/test.SimbleDB.csproj",
+      "projectUniqueName": "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/test/test.SimbleDB/test.SimbleDB.csproj",
       "projectName": "test.SimbleDB",
-      "projectPath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/test/test.SimbleDB/test.SimbleDB.csproj",
+      "projectPath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/test/test.SimbleDB/test.SimbleDB.csproj",
       "packagesPath": "/Users/nusers/.nuget/packages/",
-      "outputPath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/test/test.SimbleDB/obj/",
+      "outputPath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/test/test.SimbleDB/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/nusers/.nuget/NuGet/NuGet.Config"
@@ -5684,8 +5684,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/SimpleDB/SimpleDB.csproj": {
-              "projectPath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Analysis, Design and Software Architecture/Project/Chirp/src/SimpleDB/SimpleDB.csproj"
+            "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/SimpleDB/SimpleDB.csproj": {
+              "projectPath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/SimpleDB/SimpleDB.csproj"
             }
           }
         }

@@ -2,13 +2,12 @@ namespace test.Chirp;
 
 public class UnitTestChirp
 {
-    /*
     [Theory]
-    [InlineData(1690891760, "01-08-2023 12:09:20")]
-    [InlineData(967329900, "26-08-2000 22:45:00")]
-    [InlineData(937925665, "21-09-1999 14:54:25")]
-    [InlineData(29851932, "12-12-1970 12:12:12")]
-    [InlineData(1049328015, "03-04-2003 00:00:15")]
+    [InlineData(1690891760, "01/08/2023 12:09:20")]
+    [InlineData(967329900, "26/08/2000 22:45:00")]
+    [InlineData(937925665, "21/09/1999 14:54:25")]
+    [InlineData(29851932, "12/12/1970 12:12:12")]
+    [InlineData(1049328015, "03/04/2003 00:00:15")]
     public void epoch2String_Using_Different_times_Correct_Times(int epoch, string time) {
         //Act
         var value = UserInterface.epoch2String(epoch);
@@ -19,11 +18,11 @@ public class UnitTestChirp
     }
 
     [Theory]
-    [InlineData(29851932, "01-08-2023 12:09:20")]
-    [InlineData(965329900, "08-27-2000 12:45:00")]
-    [InlineData(930920660, "12-09-1999 14:54:25")]
-    [InlineData(1690891760, "12-12-1970 12:12:12")]
-    [InlineData(1000000000, "03-04-2003 00:00:15")]
+    [InlineData(29851932, "01/08/2023 12:09:20")]
+    [InlineData(965329900, "08/27/2000 12:45:00")]
+    [InlineData(930920660, "12/09/1999 14:54:25")]
+    [InlineData(1690891760, "12/12/1970 12:12:12")]
+    [InlineData(1000000000, "03/04/2003 00:00:15")]
     public void epoch2String_Using_Different_times_Wrong_Times(int epoch, string time) {
         // Act
         var value = UserInterface.epoch2String(epoch);
@@ -58,6 +57,4 @@ public class UnitTestChirp
             Assert.Equal(expected, capturedOutput.Trim());
         }
     }
-
- */   
 }
