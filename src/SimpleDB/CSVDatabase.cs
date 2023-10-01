@@ -35,21 +35,20 @@ using System.Reflection;
 
         public IEnumerable<T> Read(int? limit = null)
         {
-            // try
-            // {
-            //    Assembly assembly = Assembly.GetExecutingAssembly(); // You can use another assembly if needed
+            try
+            {
+               Assembly assembly = Assembly.GetExecutingAssembly(); // You can use another assembly if needed
                 
                 
-            //     using (Stream stream = assembly.GetManifestResourceStream("SimpleDB.chirp_cli_db.csv"))
-            //     {
-            //        if (stream == null)
-            //         {
-            //             Console.WriteLine("Embedded resource not found.");
-            //             return null;
-            //         }
+                using (Stream stream = assembly.GetManifestResourceStream("SimpleDB.chirp_cli_db.csv"))
+                {
+                   if (stream == null)
+                    {
+                        Console.WriteLine("Embedded resource not found.");
+                        return null;
+                    }
 
-                    // using (var reader = new StreamReader(stream))
-                    using (var reader = new StreamReader(filePath))
+                    using (var reader = new StreamReader(stream))
                     using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                     {
                         var allRecords = csv.GetRecords<T>().ToList();
@@ -62,13 +61,13 @@ using System.Reflection;
                         return allRecords;
                     }
                 }
-            // } catch (IOException e)
-            // {
-            //     Console.WriteLine("The file could not be read");
-            //     Console.WriteLine(e.Message);
-            //     return null;
-            // }
-        //}
+            } catch (IOException e)
+            {
+                Console.WriteLine("The file could not be read");
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
 
         public void Store(T record)
         {
