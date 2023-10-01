@@ -58,6 +58,7 @@ if(arguments["cheep"].Value is bool cheepT)
       // Create an HttpContent object with JSON data
 
       var response = await client.PostAsJsonAsync("/cheep", cheep);
-      //Console.WriteLine(response);
+
+      Console.WriteLine(response);
   }
 }

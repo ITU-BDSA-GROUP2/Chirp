@@ -72,6 +72,10 @@ using System.Reflection;
         public void Store(T record)
         {
 
+
+            try
+            {
+
             Assembly assembly = Assembly.GetExecutingAssembly(); // You can use another assembly if needed                
                 using (Stream stream = assembly.GetManifestResourceStream(filePath))
                 {
@@ -84,6 +88,10 @@ using System.Reflection;
                     }
 
                 }
+            } catch (IOException e) {
+                Console.WriteLine(e.Message);
+                return;
+            }
 
             
 
