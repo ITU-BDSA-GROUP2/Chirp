@@ -72,17 +72,17 @@ using System.Reflection;
         public void Store(T record)
         {
 
-
+            
             try
             {
-
-            Assembly assembly = Assembly.GetExecutingAssembly(); // You can use another assembly if needed                
+                var newList = new List<T>(Read());
+                newList.Add(record);
+                Assembly assembly = Assembly.GetExecutingAssembly(); // You can use another assembly if needed                
                 using (Stream stream = assembly.GetManifestResourceStream(filePath))
                 {
                     using (StreamWriter w = new StreamWriter(stream))
                     using (var csv = new CsvWriter(w, CultureInfo.InvariantCulture)) {
-                        csv.WriteRecords(Read());
-                        csv.WriteRecord(record);
+                        csv.WriteRecords(newList);
                         w.WriteLine();
                         csv.Flush();
                     }
