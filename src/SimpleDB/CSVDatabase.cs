@@ -40,7 +40,7 @@ using System.Reflection;
                Assembly assembly = Assembly.GetExecutingAssembly(); // You can use another assembly if needed
                 
                 
-                using (Stream stream = assembly.GetManifestResourceStream("SimpleDB.chirp_cli_db.csv"))
+                using (Stream stream = assembly.GetManifestResourceStream(filePath))
                 {
                    if (stream == null)
                     {
