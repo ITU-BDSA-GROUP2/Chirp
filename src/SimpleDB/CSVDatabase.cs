@@ -62,12 +62,12 @@ using System.Reflection;
                         return allRecords;
                     }
                 }
-            } catch (IOException e)
-            {
-                Console.WriteLine("The file could not be read");
-                Console.WriteLine(e.Message);
-                return null;
-            }
+            // } catch (IOException e)
+            // {
+            //     Console.WriteLine("The file could not be read");
+            //     Console.WriteLine(e.Message);
+            //     return null;
+            // }
         //}
 
         public void Store(T record)
@@ -86,4 +86,4 @@ using System.Reflection;
             return filePath;
         }
         
-    }
+}
