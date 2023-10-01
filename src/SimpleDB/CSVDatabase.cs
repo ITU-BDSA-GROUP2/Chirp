@@ -71,13 +71,23 @@ using System.Reflection;
 
         public void Store(T record)
         {
-            using (StreamWriter w = File.AppendText(filePath))
-            {
-                var csv = new CsvWriter(w, CultureInfo.InvariantCulture);
-                w.WriteLine();
-                csv.WriteRecord(record);
-                csv.Flush();
-            }
+
+            Assembly assembly = Assembly.GetExecutingAssembly(); // You can use another assembly if needed                
+                using (Stream stream = assembly.GetManifestResourceStream(filePath))
+                {
+                    using (StreamWriter w = new StreamWriter(stream))
+                    using (var csv = new CsvWriter(w, CultureInfo.InvariantCulture)) {
+                        csv.WriteRecords(Read());
+                        csv.WriteRecord(record);
+                        w.WriteLine();
+                        csv.Flush();
+                    }
+
+                }
+
+            
+
+           
         }
 
         public string getFilePathToDB() 
