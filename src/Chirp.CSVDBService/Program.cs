@@ -5,7 +5,8 @@ using System.Text.Json;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-IDatabaseRepository<Cheep> db = CSVDatabase<Cheep>.DBInstance("../../data/chirp_cli_db_2.csv");
+IDatabaseRepository<Cheep> db = CSVDatabase<Cheep>.DBInstance("chirp_db.csv");
+
 
 
 app.MapPost("/cheep", (Cheep cheep) => db.Store(cheep));

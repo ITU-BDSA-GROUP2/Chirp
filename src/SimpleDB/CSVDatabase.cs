@@ -43,15 +43,8 @@ using System.Reflection;
         {
             try
             {
-<<<<<<< HEAD
-               Assembly assembly = Assembly.GetExecutingAssembly(); // You can use another assembly if needed
-                
-                
-                using (Stream stream = assembly.GetManifestResourceStream(filePath))
-=======
                 using (var reader = new StreamReader(filePath))
                 using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
->>>>>>> Retired-Chirp.CLI.Client
                 {
                     var allRecords = csv.GetRecords<T>().ToList();
 
@@ -71,36 +64,18 @@ using System.Reflection;
 
         public void Store(T record)
         {
-
-            
-            try
+            using (StreamWriter w = File.AppendText(filePath))
+            using (var csv = new CsvWriter(w, CultureInfo.InvariantCulture)) 
             {
-                var newList = new List<T>(Read());
-                newList.Add(record);
-                Assembly assembly = Assembly.GetExecutingAssembly(); // You can use another assembly if needed                
-                using (Stream stream = assembly.GetManifestResourceStream(filePath))
-                {
-                    using (StreamWriter w = new StreamWriter(stream))
-                    using (var csv = new CsvWriter(w, CultureInfo.InvariantCulture)) {
-                        csv.WriteRecords(newList);
-                        w.WriteLine();
-                        csv.Flush();
-                    }
-
-                }
-            } catch (IOException e) {
-                Console.WriteLine(e.Message);
-                return;
+                    csv.WriteRecord(record);
+                    w.WriteLine();
+                    csv.Flush();
             }
-
-            
-
-           
         }
-
         public string getFilePathToDB() 
         {
             return filePath;
         }
+
         
 }
