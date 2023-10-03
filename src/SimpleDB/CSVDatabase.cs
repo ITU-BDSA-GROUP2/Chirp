@@ -19,6 +19,15 @@ using System.Reflection;
 
         private CSVDatabase(string filePath) {
             this.filePath = filePath;
+
+            if (!File.Exists(filePath))
+            {
+                using(StreamWriter w = File.CreateText(filePath))
+                using(var csv = new CsvWriter(w, CultureInfo.InvariantCulture))
+                {
+                    csv.WriteHeader<T>();
+                }
+            }
         }
 
         public static CSVDatabase<T> DBInstance(string filePathToDB)
@@ -34,29 +43,16 @@ using System.Reflection;
         {
             try
             {
-               Assembly assembly = Assembly.GetExecutingAssembly();
-                
-                
-                using (Stream stream = assembly.GetManifestResourceStream(filePath))
+                using (var reader = new StreamReader(filePath))
+                using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                 {
-                   if (stream == null)
+                    var allRecords = csv.GetRecords<T>().ToList();
+
+                    if (limit.HasValue && limit > 0)
                     {
-                        Console.WriteLine("Embedded resource not found.");
-                        return null;
+                        return allRecords.Take(limit.Value);
                     }
-
-                    using (var reader = new StreamReader(stream))
-                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-                    {
-                        var allRecords = csv.GetRecords<T>().ToList();
-
-                        if (limit.HasValue && limit > 0)
-                        {
-                            return allRecords.Take(limit.Value);
-                        }
-
-                        return allRecords;
-                    }
+                    return allRecords;
                 }
             } catch (IOException e)
             {
