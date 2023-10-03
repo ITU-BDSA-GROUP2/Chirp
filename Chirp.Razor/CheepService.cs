@@ -16,21 +16,18 @@ public class CheepService : ICheepService
 
     public static void makeList()
     {
-        string sqlDBFilePath = "/data/chirp.db";
-        string sqlQuery = @"SELECT text FROM message ORDER by message.pub_date desc";
-
+        string sqlDBFilePath = "data/chirp.db";
+        var sqlQuery = @"SELECT text FROM message";
         using (var connection = new SqliteConnection($"Data Source={sqlDBFilePath}"))
         {
             connection.Open();
-
             var command = connection.CreateCommand();
             command.CommandText = sqlQuery;
 
             using var reader = command.ExecuteReader();
             while (reader.Read()){
-                
-               CheepViewModel someCheep = new CheepViewModel("marius",sqlQuery,UnixTimeStampToDateTimeString(1690892208));
-               Console.WriteLine("hehehehehehheh");
+                string message = reader[0].ToString();
+               CheepViewModel someCheep = new CheepViewModel("marius",message,UnixTimeStampToDateTimeString(1690892208));
                 _cheeps.Add(someCheep);
                 
             }
@@ -43,6 +40,7 @@ public class CheepService : ICheepService
 
     public List<CheepViewModel> GetCheeps()
     {
+        makeList();
         return _cheeps;
     }
     
