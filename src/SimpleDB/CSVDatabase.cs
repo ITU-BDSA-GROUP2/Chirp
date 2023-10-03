@@ -64,10 +64,10 @@ using System.Reflection;
 
         public void Store(T record)
         {
-            using (StreamWriter w = new StreamWriter(stream))
+            using (StreamWriter w = File.AppendText(filePath))
             using (var csv = new CsvWriter(w, CultureInfo.InvariantCulture)) 
             {
-                    csv.WriteRecords(newList);
+                    csv.WriteRecord(record);
                     w.WriteLine();
                     csv.Flush();
             }
@@ -76,6 +76,6 @@ using System.Reflection;
         {
             return filePath;
         }
-        
+
         
 }
