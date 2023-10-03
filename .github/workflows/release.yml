@@ -7,6 +7,8 @@ on:
       - completed
 
   push:
+    tags:
+    - "v*.*.*"
     branches: [main]
 
 jobs:
@@ -45,10 +47,8 @@ jobs:
         with:
           files:  |
            ${{ github.workspace }}/src/Chirp.CLI.Client/Chirp-*.zip
-          tag_name: ${{ github.ref_name }} # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   release-macos:
     runs-on: ubuntu-latest
     env:
@@ -84,7 +84,6 @@ jobs:
         with:
           files:  |
             ${{ github.workspace }}/src/Chirp.CLI.Client/Chirp-*.zip
-          tag_name: ${{ github.ref_name }} # Specify your tag explicitly here this has to be changed so it is automatically done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -124,6 +123,5 @@ jobs:
         with:
           files:  |
            ${{ github.workspace }}/src/Chirp.CLI.Client/Chirp-*.zip
-          tag_name: ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
