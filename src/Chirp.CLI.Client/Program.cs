@@ -49,5 +49,6 @@ if(arguments["cheep"].Value is bool cheepT)
       var cheep = new Cheep(author,message.ToString(),timestamp);
       var response = await client.PostAsJsonAsync("/cheep", cheep);
       Console.WriteLine(response);
+      
   }
 }
