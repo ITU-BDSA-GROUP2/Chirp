@@ -14,10 +14,12 @@ public class CheepService : ICheepService
     // These would normally be loaded from a database for example
     private static readonly List<CheepViewModel> _cheeps = new List<CheepViewModel>();
 
-    public static void makeList()
+    public List<CheepViewModel> GetCheeps()
     {
-        string sqlDBFilePath = "data/chirp.db";
-        var sqlQuery = @"SELECT text FROM message";
+         string sqlDBFilePath = "data/chirp.db";
+        var sqlQuery = 
+        @"SELECT M.text, U.username, M.pub_date FROM message M
+        JOIN user U ON M.author_id = U.user_id";
         using (var connection = new SqliteConnection($"Data Source={sqlDBFilePath}"))
         {
             connection.Open();
@@ -27,20 +29,13 @@ public class CheepService : ICheepService
             using var reader = command.ExecuteReader();
             while (reader.Read()){
                 string message = reader[0].ToString();
-               CheepViewModel someCheep = new CheepViewModel("marius",message,UnixTimeStampToDateTimeString(1690892208));
+                string author = reader[1].ToString();
+                long timestamp = Convert.ToInt64(reader[2]);
+               CheepViewModel someCheep = new CheepViewModel(author,message,UnixTimeStampToDateTimeString(timestamp));
                 _cheeps.Add(someCheep);
                 
             }
         }
-    }
-
-           // new CheepViewModel("Helge", "Hello, BDSA students!", UnixTimeStampToDateTimeString(1690892208)),
-           // new CheepViewModel("Rasmus", "Hej, velkommen til kurset.", UnixTimeStampToDateTimeString(1690895308)),
-        
-
-    public List<CheepViewModel> GetCheeps()
-    {
-        makeList();
         return _cheeps;
     }
     
