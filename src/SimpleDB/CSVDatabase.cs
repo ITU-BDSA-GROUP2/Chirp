@@ -14,12 +14,20 @@ using System.Reflection;
 
     public sealed class CSVDatabase<T> : IDatabaseRepository<T>
     {
-        // Singleton pattern
         private static CSVDatabase<T> instance;
         private string filePath;
 
         private CSVDatabase(string filePath) {
             this.filePath = filePath;
+
+            if (!File.Exists(filePath))
+            {
+                using(StreamWriter w = File.CreateText(filePath))
+                using(var csv = new CsvWriter(w, CultureInfo.InvariantCulture))
+                {
+                    csv.WriteHeader<T>();
+                }
+            }
         }
 
         public static CSVDatabase<T> DBInstance(string filePathToDB)
@@ -31,35 +39,27 @@ using System.Reflection;
             return instance;
         }
 
-        //Regex rx = new Regex(@"(?'author'.+),""(?'message'.+)"",(?'timestamp'\d+)""");
-
         public IEnumerable<T> Read(int? limit = null)
         {
             try
             {
+<<<<<<< HEAD
                Assembly assembly = Assembly.GetExecutingAssembly(); // You can use another assembly if needed
                 
                 
                 using (Stream stream = assembly.GetManifestResourceStream(filePath))
+=======
+                using (var reader = new StreamReader(filePath))
+                using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+>>>>>>> Retired-Chirp.CLI.Client
                 {
-                   if (stream == null)
+                    var allRecords = csv.GetRecords<T>().ToList();
+
+                    if (limit.HasValue && limit > 0)
                     {
-                        Console.WriteLine("Embedded resource not found.");
-                        return null;
+                        return allRecords.Take(limit.Value);
                     }
-
-                    using (var reader = new StreamReader(stream))
-                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-                    {
-                        var allRecords = csv.GetRecords<T>().ToList();
-
-                        if (limit.HasValue && limit > 0)
-                        {
-                            return allRecords.Take(limit.Value);
-                        }
-
-                        return allRecords;
-                    }
+                    return allRecords;
                 }
             } catch (IOException e)
             {

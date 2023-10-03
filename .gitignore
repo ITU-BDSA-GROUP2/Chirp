@@ -478,7 +478,7 @@ $RECYCLE.BIN/
 
 
 #Ignore
-src/Chirp.CLI.Client/bin/Debug/net7.0/*
+src/Chirp.CLI.Client/bin/Debug/net7.0
 
 
 #Except files below
