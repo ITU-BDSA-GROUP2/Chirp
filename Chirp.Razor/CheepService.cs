@@ -31,13 +31,14 @@ public class CheepService : ICheepService
             value = Environment.GetEnvironmentVariable("CHIRPDBPATH");
             File.Copy(chirpPath, tmp, true);
         }
-        int minNumberCheeps = (page-1) * 32;
-        int maxNumberCheeps = page * 32;
+        
+        int numberOfCheeps = page * 32;
         var sqlQuery =
         $@"SELECT M.text, U.username, M.pub_date FROM message M
         JOIN user U ON M.author_id = U.user_id
         ORDER BY M.pub_date DESC
-        LIMIT {minNumberCheeps},{maxNumberCheeps};";
+        LIMIT 32
+        OFFSET {numberOfCheeps};";
         using (var connection = new SqliteConnection($"Data Source={value}"))
         {
             connection.Open();
