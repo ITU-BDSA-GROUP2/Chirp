@@ -1,0 +1,36 @@
+﻿@page "/{temp:int?}"
+@model Chirp.Razor.Pages.PublicModel
+@{
+    ViewData["Title"] = "Chirp!";
+    Layout = "Shared/_Layout";
+}
+
+<div>
+    <h2> Public Timeline </h2>
+
+    @if (Model.Cheeps.Any())
+    {
+        <ul id="messagelist" class="cheeps">
+            @{int counter = 0;}
+            @for (int i = 0; i < Model.Cheeps.Count; i++)
+            {
+                var cheep = Model.Cheeps[i];
+                if (counter >= 32) break;
+                <li>
+                    <p>
+                        <strong>
+                            <a href="/@cheep.Author">@cheep.Author</a>
+                        </strong>
+                        @cheep.Message
+                        <small>&mdash; @cheep.Timestamp</small>
+                    </p>
+                </li>
+                counter++;
+            }
+        </ul>
+    }
+    else
+    {
+        <em>There are no cheeps so far.</em>
+    }
+</div>
