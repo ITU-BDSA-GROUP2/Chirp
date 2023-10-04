@@ -21,7 +21,7 @@ public class CheepService : ICheepService
         string value = Environment.GetEnvironmentVariable("CHIRPDBPATH");
 
         string tempPath;
-        string chirpPath = "./chirp.db";
+        string chirpPath = "./data/chirp.db";
 
         if (value == null)
         {
@@ -39,7 +39,7 @@ public class CheepService : ICheepService
         ORDER BY M.pub_date DESC
         LIMIT 32
         OFFSET {numberOfCheeps};";
-        using (var connection = new SqliteConnection($"Data Source={chirpPath}"))
+        using (var connection = new SqliteConnection($"Data Source={value}"))
         {
             connection.Open();
             var command = connection.CreateCommand();
