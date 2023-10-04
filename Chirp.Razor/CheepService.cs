@@ -50,8 +50,7 @@ public class CheepService : ICheepService
                 string author = reader[1].ToString();
                 long timestamp = Convert.ToInt64(reader[2]);
                CheepViewModel someCheep = new CheepViewModel(author,message,UnixTimeStampToDateTimeString(timestamp));
-                _cheeps.Add(someCheep);
-                
+                _cheeps.Add(someCheep); 
             }
         }
         return _cheeps;
