@@ -16,7 +16,6 @@ public class CheepService : ICheepService
 
     public List<CheepViewModel> GetCheeps()
     {
-        Environment.SetEnvironmentVariable("CHIRPDBPATH", "");
         string value = Environment.GetEnvironmentVariable("CHIRPDBPATH");
 
         string tempPath;
