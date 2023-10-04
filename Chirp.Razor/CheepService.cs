@@ -33,7 +33,8 @@ public class CheepService : ICheepService
 
         var sqlQuery = 
         @"SELECT M.text, U.username, M.pub_date FROM message M
-        JOIN user U ON M.author_id = U.user_id";
+        JOIN user U ON M.author_id = U.user_id
+        ORDER BY M.pub_date DESC";
         using (var connection = new SqliteConnection($"Data Source={value}"))
         {   
             connection.Open();
