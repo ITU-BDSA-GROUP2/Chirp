@@ -16,6 +16,7 @@ public class CheepService : ICheepService
 
     public List<CheepViewModel> GetCheeps()
     {
+         string sqlDBFilePath = "data/chirp.db";
         string value = Environment.GetEnvironmentVariable("CHIRPDBPATH");
 
         string tempPath;
@@ -33,8 +34,8 @@ public class CheepService : ICheepService
         var sqlQuery = 
         @"SELECT M.text, U.username, M.pub_date FROM message M
         JOIN user U ON M.author_id = U.user_id";
-        using (var connection = new SqliteConnection($"Data Source={value}"))
-        {   
+        using (var connection = new SqliteConnection($"Data Source={sqlDBFilePath}"))
+        {
             connection.Open();
             var command = connection.CreateCommand();
             command.CommandText = sqlQuery;
@@ -45,7 +46,8 @@ public class CheepService : ICheepService
                 string author = reader[1].ToString();
                 long timestamp = Convert.ToInt64(reader[2]);
                CheepViewModel someCheep = new CheepViewModel(author,message,UnixTimeStampToDateTimeString(timestamp));
-                _cheeps.Add(someCheep); 
+                _cheeps.Add(someCheep);
+                
             }
         }
         return _cheeps;
