@@ -19,15 +19,15 @@ public class CheepService : ICheepService
         string value = Environment.GetEnvironmentVariable("CHIRPDBPATH");
 
         string tempPath;
+        string chirpPath = "./data/chirp.db";
 
-        if (value == "")
+        if (value == null)
         {
             tempPath = Path.GetTempPath();
-            string tmp = Path.Combine(tempPath, "chirp.db");
+            string tmp = tempPath + "chirp.db";
             Environment.SetEnvironmentVariable("CHIRPDBPATH", tmp);
             value = Environment.GetEnvironmentVariable("CHIRPDBPATH");
-            Console.WriteLine(value);
-            File.Move("/data/chirp.db", value);
+            File.Move(chirpPath, tmp);
         }
 
         var sqlQuery = 
