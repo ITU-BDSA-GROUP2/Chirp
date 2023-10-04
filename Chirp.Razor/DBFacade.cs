@@ -2,9 +2,9 @@ using System.Data;
 using Microsoft.Data.Sqlite;
 public class DBFacade 
 {
-    DBFacade()
+    /*DBFacade()
     {
         CheepService someCheepService = new CheepService();
-        someCheepService.GetCheeps();
-    }
+        someCheepService.GetCheeps(int page);
+    }*/
 }

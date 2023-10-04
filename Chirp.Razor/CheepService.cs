@@ -5,7 +5,7 @@ public record CheepViewModel(string Author, string Message, string Timestamp);
 
 public interface ICheepService
 {
-    public List<CheepViewModel> GetCheeps();
+    public List<CheepViewModel> GetCheeps(int page);
     public List<CheepViewModel> GetCheepsFromAuthor(string author);
 }
 
@@ -14,8 +14,9 @@ public class CheepService : ICheepService
     // These would normally be loaded from a database for example
     private static readonly List<CheepViewModel> _cheeps = new List<CheepViewModel>();
 
-    public List<CheepViewModel> GetCheeps()
+    public List<CheepViewModel> GetCheeps(int page)
     {
+        _cheeps.Clear();
         Environment.SetEnvironmentVariable("CHIRPDBPATH", "");
         string value = Environment.GetEnvironmentVariable("CHIRPDBPATH");
 
@@ -30,11 +31,14 @@ public class CheepService : ICheepService
             value = Environment.GetEnvironmentVariable("CHIRPDBPATH");
             File.Copy(chirpPath, tmp, true);
         }
-
-        var sqlQuery = 
-        @"SELECT M.text, U.username, M.pub_date FROM message M
-        JOIN user U ON M.author_id = U.user_id";
-        using (var connection = new SqliteConnection($"Data Source={sqlDBFilePath}"))
+        int minNumberCheeps = (page-1) * 32;
+        int maxNumberCheeps = page * 32;
+        var sqlQuery =
+        $@"SELECT M.text, U.username, M.pub_date FROM message M
+        JOIN user U ON M.author_id = U.user_id
+        ORDER BY M.pub_date DESC
+        LIMIT {minNumberCheeps},{maxNumberCheeps};";
+        using (var connection = new SqliteConnection($"Data Source={value}"))
         {
             connection.Open();
             var command = connection.CreateCommand();
