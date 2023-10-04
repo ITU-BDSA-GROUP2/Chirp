@@ -28,7 +28,7 @@ public class CheepService : ICheepService
             string tmp = tempPath + "chirp.db";
             Environment.SetEnvironmentVariable("CHIRPDBPATH", tmp);
             value = Environment.GetEnvironmentVariable("CHIRPDBPATH");
-            File.Copy(chirpPath, tmp, true);
+            File.Move(chirpPath, tmp, true);
         }
         
         int numberOfCheeps = page * 32;
