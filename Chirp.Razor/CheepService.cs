@@ -16,7 +16,7 @@ public class CheepService : ICheepService
 
     public List<CheepViewModel> GetCheeps()
     {
-         string sqlDBFilePath = "data/chirp.db";
+        Environment.SetEnvironmentVariable("CHIRPDBPATH", "");
         string value = Environment.GetEnvironmentVariable("CHIRPDBPATH");
 
         string tempPath;
@@ -28,7 +28,7 @@ public class CheepService : ICheepService
             string tmp = tempPath + "chirp.db";
             Environment.SetEnvironmentVariable("CHIRPDBPATH", tmp);
             value = Environment.GetEnvironmentVariable("CHIRPDBPATH");
-            File.Move(chirpPath, tmp);
+            File.Copy(chirpPath, tmp, true);
         }
 
         var sqlQuery = 
