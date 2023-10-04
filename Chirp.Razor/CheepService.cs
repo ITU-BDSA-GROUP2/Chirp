@@ -39,7 +39,7 @@ public class CheepService : ICheepService
         ORDER BY M.pub_date DESC
         LIMIT 32
         OFFSET {numberOfCheeps};";
-        using (var connection = new SqliteConnection($"Data Source={value}"))
+        using (var connection = new SqliteConnection($"Data Source={chirpPath}"))
         {
             connection.Open();
             var command = connection.CreateCommand();
