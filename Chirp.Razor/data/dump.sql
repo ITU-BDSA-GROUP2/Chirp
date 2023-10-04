@@ -1,4 +1,3 @@
--- SQLBook: Code
 INSERT INTO user VALUES(1,'Roger Histand','Roger+Histand@hotmail.com','AZ0serCHTCtJWR+sQCF4MhhfYLyLuK9tU4bWVy0AOBU=');
 INSERT INTO user VALUES(2,'Luanna Muro','Luanna-Muro@ku.dk','iuN9GA9kRoMQW54696JGUML74QKYNKFaG9mFNozJzqQ=');
 INSERT INTO user VALUES(3,'Wendell Ballan','Wendell-Ballan@gmail.com','vVriphatZcCvXc0ZUS2Ckvy4gd2gHAnf8e+RiLDQYOQ=');
