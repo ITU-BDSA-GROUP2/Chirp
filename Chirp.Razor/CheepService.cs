@@ -21,7 +21,9 @@ public class CheepService : ICheepService
         string value = Environment.GetEnvironmentVariable("CHIRPDBPATH");
 
         string tempPath;
-        string chirpPath = "chirp.db";
+        string chirpPath = "./data/chirp.db";
+
+        if (File.Exists(chirpPath)) Console.WriteLine("det virker");
 
         if (value == null)
         {
@@ -32,7 +34,7 @@ public class CheepService : ICheepService
             File.Copy(chirpPath, tmp, true);
         }
         
-        int numberOfCheeps = (page == 0 ? 32 : 32 * (page+1));
+        int numberOfCheeps = page * 32;
         var sqlQuery =
         $@"SELECT M.text, U.username, M.pub_date FROM message M
         JOIN user U ON M.author_id = U.user_id
