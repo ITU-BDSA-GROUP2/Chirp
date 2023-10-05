@@ -6,7 +6,7 @@ public record CheepViewModel(string Author, string Message, string Timestamp);
 public interface ICheepService
 {
     public List<CheepViewModel> GetCheeps(int page);
-    public List<CheepViewModel> GetCheepsFromAuthor(string author);
+    public List<CheepViewModel> GetCheepsFromAuthor(string author, int page);
 }
 
 public class CheepService : ICheepService
@@ -16,6 +16,45 @@ public class CheepService : ICheepService
 
     public List<CheepViewModel> GetCheeps(int page)
     {
+        int numberOfCheeps = (page == 1 ? 0 : 32 * (page-1));
+        var sqlQuery =
+        $@"SELECT M.text, U.username, M.pub_date FROM message M
+        JOIN user U ON M.author_id = U.user_id
+        ORDER BY M.pub_date DESC
+        LIMIT 32
+        OFFSET {numberOfCheeps};";
+        
+        return Query(sqlQuery);
+    }
+    
+    public List<CheepViewModel> GetCheepsFromAuthor(string author, int page)
+    {
+        author = $"\"{author}\"";
+        // filter by the provided author name
+        int numberOfCheeps = (page == 1 ? 0 : 32 * (page-1));
+        var sqlQuery =
+        $@"SELECT M.text, U.username, M.pub_date FROM message M
+        JOIN user U ON M.author_id = U.user_id
+        WHERE U.username = {author}
+        ORDER BY M.pub_date DESC
+        LIMIT 32
+        OFFSET {numberOfCheeps};";
+
+        return Query(sqlQuery);
+
+    }
+
+    private static string UnixTimeStampToDateTimeString(double unixTimeStamp)
+    {
+        // Unix timestamp is seconds past epoch
+        DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+        dateTime = dateTime.AddSeconds(unixTimeStamp);
+        return dateTime.ToString("MM/dd/yy H:mm:ss");
+    }
+
+
+    public List<CheepViewModel> Query(string query) {
+
         _cheeps.Clear();
         string value = Environment.GetEnvironmentVariable("CHIRPDBPATH");
 
@@ -28,21 +67,14 @@ public class CheepService : ICheepService
             string tmp = tempPath + "chirp.db";
             Environment.SetEnvironmentVariable("CHIRPDBPATH", tmp);
             value = Environment.GetEnvironmentVariable("CHIRPDBPATH");
-            File.Move(chirpPath, tmp, true);
+            File.Copy(chirpPath, tmp, true);
         }
-        
-        int numberOfCheeps = (page == 0 ? 32 : 32 * (page+1));
-        var sqlQuery =
-        $@"SELECT M.text, U.username, M.pub_date FROM message M
-        JOIN user U ON M.author_id = U.user_id
-        ORDER BY M.pub_date DESC
-        LIMIT 32
-        OFFSET {numberOfCheeps};";
+
         using (var connection = new SqliteConnection($"Data Source={value}"))
         {
             connection.Open();
             var command = connection.CreateCommand();
-            command.CommandText = sqlQuery;
+            command.CommandText = query;
 
             using var reader = command.ExecuteReader();
             while (reader.Read()){
@@ -54,20 +86,6 @@ public class CheepService : ICheepService
             }
         }
         return _cheeps;
-    }
-    
-    public List<CheepViewModel> GetCheepsFromAuthor(string author)
-    {
-        // filter by the provided author name
-        return _cheeps.Where(x => x.Author == author).ToList();
-    }
-
-    private static string UnixTimeStampToDateTimeString(double unixTimeStamp)
-    {
-        // Unix timestamp is seconds past epoch
-        DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-        dateTime = dateTime.AddSeconds(unixTimeStamp);
-        return dateTime.ToString("MM/dd/yy H:mm:ss");
     }
 
 }
