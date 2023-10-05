@@ -20,7 +20,7 @@ public class CheepService : ICheepService
         string value = Environment.GetEnvironmentVariable("CHIRPDBPATH");
 
         string tempPath;
-        string chirpPath = "./data/chirp.db";
+        string chirpPath = "chirp.db";
 
         if (value == null)
         {
