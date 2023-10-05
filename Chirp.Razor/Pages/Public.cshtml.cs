@@ -13,9 +13,10 @@ public class PublicModel : PageModel
         _service = service;
     }
 
-    public ActionResult OnGet(int? temp)
+    public ActionResult OnGet()
     {
-        Cheeps = _service.GetCheeps(temp ?? 1);
+        var t = Convert.ToInt32(Request.Query["page"]);
+        Cheeps = _service.GetCheeps(t);
         return Page();
     }
 }
