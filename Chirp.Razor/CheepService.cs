@@ -17,7 +17,6 @@ public class CheepService : ICheepService
     public List<CheepViewModel> GetCheeps(int page)
     {
         _cheeps.Clear();
-        Environment.SetEnvironmentVariable("CHIRPDBPATH", "");
         string value = Environment.GetEnvironmentVariable("CHIRPDBPATH");
 
         string tempPath;
@@ -29,10 +28,10 @@ public class CheepService : ICheepService
             string tmp = tempPath + "chirp.db";
             Environment.SetEnvironmentVariable("CHIRPDBPATH", tmp);
             value = Environment.GetEnvironmentVariable("CHIRPDBPATH");
-            File.Copy(chirpPath, tmp, true);
+            File.Move(chirpPath, tmp, true);
         }
         
-        int numberOfCheeps = (page == 0 ? 32 : 32 * (page+1));
+        int numberOfCheeps = page * 32;
         var sqlQuery =
         $@"SELECT M.text, U.username, M.pub_date FROM message M
         JOIN user U ON M.author_id = U.user_id
