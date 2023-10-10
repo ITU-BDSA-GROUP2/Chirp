@@ -10,12 +10,7 @@ public class IntergrationTestCSVDatabase
     private const string filePathToDB = "../../../../../data/testingDatabase.csv";
 
     public CSVDatabase<Cheep> setup() {
-        CSVDatabase<Cheep> temp = CSVDatabase<Cheep>.DBInstance(filePathToDB);
-        using (StreamWriter w = File.AppendText(filePathToDB)) {
-            w.WriteLine("Author,Message,Timestamp");
-            w.WriteLine();
-        }
-            
+        CSVDatabase<Cheep> temp = CSVDatabase<Cheep>.DBInstance(filePathToDB); 
         for (int i = 0; i < maxChrip; i++) {
             var author = System.Environment.MachineName;
             var message =  "Hello message number: " + i;
@@ -33,23 +28,23 @@ public class IntergrationTestCSVDatabase
     [Fact] 
     public void Test_Store_And_Read_Methods() {
         var database = setup();
-        Cheep newCheep = new Cheep("", "", 0);
         var i = maxChrip;
+    
         var author = System.Environment.MachineName;
-        var message =  "This is a test Chrip";
+        var message =  "This is a test Chirp";
         var timestamp = DateTimeOffset.Now.ToUnixTimeSeconds() + 7200;
-        var cheepToSend = new Cheep(author,message.ToString(),timestamp); 
+        var cheepToSend = new Cheep(author, message, timestamp); 
         database.Store(cheepToSend);
 
-        var temp = database.Read();
-        foreach (var cheep in temp) {
+        var databseCheeps = database.Read();
+        
+        foreach (var cheep in databseCheeps) {
             if(i == 0) {
-                newCheep = cheep;
+                 Assert.True(cheep == cheepToSend);
             }
             i--;
         }
-        Assert.True(newCheep == cheepToSend);
-        tearDown();
+       tearDown();
     }
 
     public record Cheep(string Author, string Message, long Timestamp);

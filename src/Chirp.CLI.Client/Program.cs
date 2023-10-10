@@ -42,13 +42,11 @@ if (arguments["read"].Value is bool read)
 if(arguments["cheep"].Value is bool cheepT)
 {
   if(cheepT) {
-      
       var author = System.Environment.MachineName;
       var message =  arguments["<message>"];
       var timestamp = DateTimeOffset.Now.ToUnixTimeSeconds() + 7200;
       var cheep = new Cheep(author,message.ToString(),timestamp);
       var response = await client.PostAsJsonAsync("/cheep", cheep);
       Console.WriteLine(response);
-
   }
 }
