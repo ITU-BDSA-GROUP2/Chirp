@@ -65,5 +65,17 @@ public class UnitTestChirp
         Assert.Contains("Chirp!", content);
         Assert.Contains($"{author}'s Timeline", content);
     }
+
+    [Theory]
+    [InlineData("Helge", "Hello, BDSA students!")]
+    [InlineData("Rasmus", "Hej, velkommen til kurset.")]
+     public async void Check_if_we_can_find_specfic_cheeps_on_users_timeline(string author, string cheep)
+    {
+        var response = await _client.GetAsync($"/{author}");
+        response.EnsureSuccessStatusCode();
+        var content = await response.Content.ReadAsStringAsync();
+
+        Assert.Contains(cheep, content);
+    }
 }
 }
