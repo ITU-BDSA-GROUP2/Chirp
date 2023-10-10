@@ -31,11 +31,11 @@ jobs:
           tag=$(git describe --tags --abbrev=0)
           release_name_linux="Chirp-$tag-linux-x64"
 
-          cd "src/Chirp.CLI.Client"
+          cd "Chirp.Razor"
 
-          dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "linux-x64" -c Release -o "$release_name_linux" /p:PublishTrimmed=true /p:PublishSingleFile=true
+          dotnet publish Chirp.Razor.csproj --framework net7.0 --runtime "linux-x64" -c Release -o "$release_name_linux" /p:PublishTrimmed=true /p:PublishSingleFile=true
 
-          7z a -tzip "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_linux}.zip" "./${release_name_linux}/*"
+          7z a -tzip "${{ github.workspace }}/Chirp.Razor/${release_name_linux}.zip" "./${release_name_linux}/*"
 
           rm -r "${release_name_linux}"
 
@@ -46,7 +46,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files:  |
-           ${{ github.workspace }}/src/Chirp.CLI.Client/Chirp-*.zip
+           ${{ github.workspace }}/Chirp.Razor/Chirp-*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   release-macos:
@@ -68,11 +68,11 @@ jobs:
           tag=$(git describe --tags --abbrev=0)
           release_name_macos="Chirp-$tag-macos-x64"
 
-          cd "src/Chirp.CLI.Client"
+          cd "Chirp.Razor"
 
-          dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "osx-x64" -c Release -o "$release_name_macos" /p:PublishTrimmed=true /p:PublishSingleFile=true
+          dotnet publish Chirp.Razor.csproj --framework net7.0 --runtime "osx-x64" -c Release -o "$release_name_macos" /p:PublishTrimmed=true /p:PublishSingleFile=true
 
-          7z a -tzip "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_macos}.zip" "./${release_name_macos}/*"
+          7z a -tzip "${{ github.workspace }}/Chirp.Razor/${release_name_macos}.zip" "./${release_name_macos}/*"
 
           rm -r "${release_name_macos}"
 
@@ -83,7 +83,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files:  |
-            ${{ github.workspace }}/src/Chirp.CLI.Client/Chirp-*.zip
+            ${{ github.workspace }}/Chirp.Razor/Chirp-*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -107,11 +107,11 @@ jobs:
           tag=$(git describe --tags --abbrev=0)
           release_name_windows="Chirp-$tag-win-x64"
 
-          cd "src/Chirp.CLI.Client"
+          cd "Chirp.Razor"
 
-          dotnet publish Chirp.CLI.csproj --framework net7.0 --runtime "win-x64" -c Release -o "$release_name_windows"  /p:PublishTrimmed=true /p:PublishSingleFile=true
+          dotnet publish Chirp.Razor.csproj --framework net7.0 --runtime "win-x64" -c Release -o "$release_name_windows"  /p:PublishTrimmed=true /p:PublishSingleFile=true
 
-          7z a -tzip "${{ github.workspace }}/src/Chirp.CLI.Client/${release_name_windows}.zip" "./${release_name_windows}/*" 
+          7z a -tzip "${{ github.workspace }}/Chirp.Razor/${release_name_windows}.zip" "./${release_name_windows}/*" 
 
           rm -r "${release_name_windows}"
           
@@ -122,6 +122,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files:  |
-           ${{ github.workspace }}/src/Chirp.CLI.Client/Chirp-*.zip
+           ${{ github.workspace }}/Chirp.Razor/Chirp-*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
