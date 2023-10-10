@@ -1,87 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/test/test.Chirp/test.Chirp.csproj": {}
+    "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\test\\test.chirp\\test.Chirp.csproj": {}
   },
   "projects": {
-    "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/Chirp.CLI.Client/Chirp.CLI.csproj": {
+    "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\Chirp.Razor\\Chirp.Razor.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/Chirp.CLI.Client/Chirp.CLI.csproj",
-        "projectName": "Chirp.CLI",
-        "projectPath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/Chirp.CLI.Client/Chirp.CLI.csproj",
-        "packagesPath": "/Users/nusers/.nuget/packages/",
-        "outputPath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/Chirp.CLI.Client/obj/",
+        "projectUniqueName": "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\Chirp.Razor\\Chirp.Razor.csproj",
+        "projectName": "Chirp.Razor",
+        "projectPath": "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\Chirp.Razor\\Chirp.Razor.csproj",
+        "packagesPath": "C:\\Users\\Chedd\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\Chirp.Razor\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/nusers/.nuget/NuGet/NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "net7.0"
-        ],
-        "sources": {
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
-            "projectReferences": {
-              "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/SimpleDB/SimpleDB.csproj": {
-                "projectPath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/SimpleDB/SimpleDB.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
-          "dependencies": {
-            "CsvHelper": {
-              "target": "Package",
-              "version": "[30.0.1, )"
-            },
-            "docopt.net": {
-              "target": "Package",
-              "version": "[0.8.1, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.400/RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/SimpleDB/SimpleDB.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/SimpleDB/SimpleDB.csproj",
-        "projectName": "SimpleDB",
-        "projectPath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/SimpleDB/SimpleDB.csproj",
-        "packagesPath": "/Users/nusers/.nuget/packages/",
-        "outputPath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/SimpleDB/obj/",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/Users/nusers/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Chedd\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -105,13 +38,13 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
-            "CsvHelper": {
+            "Microsoft.Data.Sqlite": {
               "target": "Package",
-              "version": "[30.0.1, )"
+              "version": "[7.0.11, )"
             },
-            "docopt.net": {
+            "Microsoft.Data.Sqlite.Core": {
               "target": "Package",
-              "version": "[0.8.1, )"
+              "version": "[7.0.11, )"
             }
           },
           "imports": [
@@ -126,25 +59,28 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.400/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/test/test.Chirp/test.Chirp.csproj": {
+    "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\test\\test.chirp\\test.Chirp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/test/test.Chirp/test.Chirp.csproj",
+        "projectUniqueName": "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\test\\test.chirp\\test.Chirp.csproj",
         "projectName": "test.Chirp",
-        "projectPath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/test/test.Chirp/test.Chirp.csproj",
-        "packagesPath": "/Users/nusers/.nuget/packages/",
-        "outputPath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/test/test.Chirp/obj/",
+        "projectPath": "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\test\\test.chirp\\test.Chirp.csproj",
+        "packagesPath": "C:\\Users\\Chedd\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\test\\test.chirp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/nusers/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Chedd\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -156,8 +92,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/Chirp.CLI.Client/Chirp.CLI.csproj": {
-                "projectPath": "/Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/Chirp.CLI.Client/Chirp.CLI.csproj"
+              "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\Chirp.Razor\\Chirp.Razor.csproj": {
+                "projectPath": "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\Chirp.Razor\\Chirp.Razor.csproj"
               }
             }
           }
@@ -172,6 +108,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Mvc.Testing": {
+              "target": "Package",
+              "version": "[7.0.11, )"
+            },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[17.6.0, )"
@@ -209,7 +149,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.400/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
