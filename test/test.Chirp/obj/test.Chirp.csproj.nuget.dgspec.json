@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\test\\test.Chirp\\test.Chirp.csproj": {}
+    "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\test\\test.chirp\\test.Chirp.csproj": {}
   },
   "projects": {
     "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\Chirp.Razor\\Chirp.Razor.csproj": {
@@ -70,14 +70,14 @@
         }
       }
     },
-    "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\test\\test.Chirp\\test.Chirp.csproj": {
+    "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\test\\test.chirp\\test.Chirp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\test\\test.Chirp\\test.Chirp.csproj",
+        "projectUniqueName": "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\test\\test.chirp\\test.Chirp.csproj",
         "projectName": "test.Chirp",
-        "projectPath": "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\test\\test.Chirp\\test.Chirp.csproj",
+        "projectPath": "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\test\\test.chirp\\test.Chirp.csproj",
         "packagesPath": "C:\\Users\\Chedd\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\test\\test.Chirp\\obj\\",
+        "outputPath": "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\test\\test.chirp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Chedd\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -108,6 +108,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Mvc.Testing": {
+              "target": "Package",
+              "version": "[7.0.11, )"
+            },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[17.6.0, )"

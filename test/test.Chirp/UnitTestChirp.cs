@@ -1,4 +1,5 @@
 namespace test.Chirp;
+using Microsoft.AspNetCore.Mvc.Testing;
 
 public class UnitTestChirp
 {
@@ -44,7 +45,7 @@ public class UnitTestChirp
     [Fact]
     public async void CanSeePublicTimeline()
     {
-        var response = await _client.GetAsync("/public");
+        var response = await _client.GetAsync("/");
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
 
@@ -65,33 +66,4 @@ public class UnitTestChirp
         Assert.Contains($"{author}'s Timeline", content);
     }
 }
-    }
-/*
-    [Theory]
-    [InlineData("Mads Orfelt", "det en cool tweet", 1000000000)]
-    [InlineData("Oliver Prip", "godt vejr til at spille fodbold", 545355450)]
-    [InlineData("Casper Pilgaard", "skal vi tage i Føtex?", 1215432234)]
-    [InlineData("Mads Orfelt", "waouw det bliver vildt", 971543352)]
-    [InlineData("Mads Orfelt", "waouw det bliver vildt", 860432241)]
-    public void PrintCheeps_Should_Print_Cheep_Correctly(string Author, string Message, string Timestamp)
-    {
-        // Arrange
-        var cheep = new CheepViewModel(Author, Message, Timestamp);
-        IEnumerable<Cheep> cheeps = new List<Cheep> { cheep };
-
-    
-        using (StringWriter sw = new StringWriter())
-        {
-            Console.SetOut(sw);
-
-            // Act
-            UserInterface.PrintCheeps(cheeps);
-            string capturedOutput = sw.ToString();
-
-            // Assert
-            string expected = $"{Author} @ {UserInterface.epoch2String(Convert.ToInt32(Timestamp))}: {Message}";
-            Assert.Equal(expected, capturedOutput.Trim());
-        }
-    }
 }
-*/
