@@ -14,7 +14,6 @@ on:
 jobs:
   release-linux:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     env:
       DOTNET_ROOT: /home/runner/.dotnet
     steps:
@@ -52,7 +51,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   release-macos:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     env:
       DOTNET_ROOT: /home/runner/.dotnet
     steps:
@@ -92,7 +90,6 @@ jobs:
 
   release-windows:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     env:
       DOTNET_ROOT: C:\Users\runneradmin\AppData\Local\Microsoft\dotnet
     steps:
