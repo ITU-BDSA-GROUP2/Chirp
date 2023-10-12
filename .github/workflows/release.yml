@@ -28,14 +28,15 @@ jobs:
       - name: Builds release
         shell: bash
         run: |
-          for release in linux-x64 macos-x64 win-x64
           tag=$(git describe --tags --abbrev=0)
+          for release in linux-x64 macos-x64 win-x64
           do
-            echo Chirp-$tag-$release
+            echo 
+          release_os=Chirp-$tag-$release
           cd "Chirp.Razor"
-          dotnet publish Chirp.Razor.csproj --framework net7.0 --runtime "linux-x64" -c Release -o "release" /p:PublishTrimmed=true /p:PublishSingleFile=true
-          7z a -tzip "${{ github.workspace }}/Chirp.Razor/${release}.zip" "./${release}/*"
-          rm -r "${release}"
+          dotnet publish Chirp.Razor.csproj --framework net7.0 --runtime $release -c Release -o "$release_os" /p:PublishTrimmed=true /p:PublishSingleFile=true
+          7z a -tzip "${{ github.workspace }}/Chirp.Razor/${release_os}.zip" "./${release_os}/*"
+          rm -r "${release_os}"
           done
       - name: Set Tag
         run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
