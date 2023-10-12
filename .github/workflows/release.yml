@@ -29,6 +29,7 @@ jobs:
         shell: bash
         run: |
           tag=$(git describe --tags --abbrev=0)
+          cd "Chirp.Razor"
           for release in linux-x64 macos-x64 win-x64
           do
             echo 
