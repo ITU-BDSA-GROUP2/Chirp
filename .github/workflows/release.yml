@@ -44,6 +44,7 @@ jobs:
            ${{ github.workspace }}/Chirp.Razor/Chirp-*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
   release-macos:
     runs-on: ubuntu-latest
     env:
