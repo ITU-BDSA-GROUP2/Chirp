@@ -5,14 +5,15 @@ on:
     branches: [main]
     types:
       - completed
-
   push:
     tags:
     - "v*.*.*"
     branches: [main]
-
 jobs:
+  tests: 
+    uses: ./.github/workflows/build_and_test.yml
   release-linux:
+    needs: ["tests"]
     runs-on: ubuntu-latest
     env:
       DOTNET_ROOT: /home/runner/.dotnet
@@ -44,8 +45,9 @@ jobs:
            ${{ github.workspace }}/Chirp.Razor/Chirp-*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+
   release-macos:
+    needs: ["tests"]
     runs-on: ubuntu-latest
     env:
       DOTNET_ROOT: /home/runner/.dotnet
@@ -80,6 +82,7 @@ jobs:
 
 
   release-windows:
+    needs: ["tests"]
     runs-on: ubuntu-latest
     env:
       DOTNET_ROOT: C:\Users\runneradmin\AppData\Local\Microsoft\dotnet
