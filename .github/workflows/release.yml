@@ -33,7 +33,6 @@ jobs:
           do
             echo 
           release_os=Chirp-$tag-$release
-          cd "Chirp.Razor"
           dotnet publish Chirp.Razor.csproj --framework net7.0 --runtime $release -c Release -o "$release_os" /p:PublishTrimmed=true /p:PublishSingleFile=true
           7z a -tzip "${{ github.workspace }}/Chirp.Razor/${release_os}.zip" "./${release_os}/*"
           rm -r "${release_os}"
