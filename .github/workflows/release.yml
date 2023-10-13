@@ -12,7 +12,7 @@ on:
 jobs:
   tests: 
     uses: ./.github/workflows/build_and_test.yml
-  release-linux:
+  release:
     needs: ["tests"]
     runs-on: ubuntu-latest
     env:
@@ -25,90 +25,23 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 7.0.*
-
-      - name: Build for Linux
+      - name: Builds release
         shell: bash
         run: |
           tag=$(git describe --tags --abbrev=0)
-          release_name_linux="Chirp-$tag-linux-x64"
           cd "Chirp.Razor"
-          dotnet publish Chirp.Razor.csproj --framework net7.0 --runtime "linux-x64" -c Release -o "$release_name_linux" /p:PublishTrimmed=true /p:PublishSingleFile=true
-          7z a -tzip "${{ github.workspace }}/Chirp.Razor/${release_name_linux}.zip" "./${release_name_linux}/*"
-          rm -r "${release_name_linux}"
+          for release in linux-x64 osx-x64 win-x64
+          do
+            echo 
+          release_os=Chirp-$tag-$release
+          dotnet publish Chirp.Razor.csproj --framework net7.0 --runtime $release -c Release -o "$release_os" /p:PublishTrimmed=true /p:PublishSingleFile=true
+          7z a -tzip "${{ github.workspace }}/Chirp.Razor/${release_os}.zip" "./${release_os}/*"
+          rm -r "${release_os}"
+          done
       - name: Set Tag
         run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
-      - name: Publish for Linux
-        uses: softprops/action-gh-release@v1
-        with:
-          files:  |
-           ${{ github.workspace }}/Chirp.Razor/Chirp-*.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  release-macos:
-    needs: ["tests"]
-    runs-on: ubuntu-latest
-    env:
-      DOTNET_ROOT: /home/runner/.dotnet
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-
-      - name: Setup dotnet
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 7.0.*
-
-      - name: Build for macOS
-        shell: bash
-        run: |
-          tag=$(git describe --tags --abbrev=0)
-          release_name_macos="Chirp-$tag-macos-x64"
-          cd "Chirp.Razor"
-          dotnet publish Chirp.Razor.csproj --framework net7.0 --runtime "osx-x64" -c Release -o "$release_name_macos" /p:PublishTrimmed=true /p:PublishSingleFile=true
-          7z a -tzip "${{ github.workspace }}/Chirp.Razor/${release_name_macos}.zip" "./${release_name_macos}/*"
-          rm -r "${release_name_macos}"
-      - name: Set Tag
-        run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
-
-      - name: Publish for macOS
-        uses: softprops/action-gh-release@v1
-        with:
-          files:  |
-            ${{ github.workspace }}/Chirp.Razor/Chirp-*.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
-  release-windows:
-    needs: ["tests"]
-    runs-on: ubuntu-latest
-    env:
-      DOTNET_ROOT: C:\Users\runneradmin\AppData\Local\Microsoft\dotnet
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-
-      - name: Setup dotnet
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 7.0.*
-
-      - name: Build for Windows
-        shell: bash
-        run: |
-          tag=$(git describe --tags --abbrev=0)
-          release_name_windows="Chirp-$tag-win-x64"
-          cd "Chirp.Razor"
-          dotnet publish Chirp.Razor.csproj --framework net7.0 --runtime "win-x64" -c Release -o "$release_name_windows"  /p:PublishTrimmed=true /p:PublishSingleFile=true
-          7z a -tzip "${{ github.workspace }}/Chirp.Razor/${release_name_windows}.zip" "./${release_name_windows}/*" 
-          rm -r "${release_name_windows}"
-          
-      - name: Set Tag
-        run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
-
-      - name: Publish for Windows
+      - name: Publish release
         uses: softprops/action-gh-release@v1
         with:
           files:  |
