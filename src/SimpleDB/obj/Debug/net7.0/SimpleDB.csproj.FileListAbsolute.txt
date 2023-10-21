@@ -50,3 +50,13 @@ C:/Users/Madso/Chirp/src/SimpleDB/obj/Debug/net7.0/ref/SimpleDB.dll
 /Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/SimpleDB/obj/Debug/net7.0/refint/SimpleDB.dll
 /Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/SimpleDB/obj/Debug/net7.0/SimpleDB.pdb
 /Users/nusers/Desktop/Skole/Uni/3. semester/Thingy/Chirp/src/SimpleDB/obj/Debug/net7.0/ref/SimpleDB.dll
+C:\Users\mariu\Documents\GitHub\Chirp\src\SimpleDB\bin\Debug\net7.0\SimpleDB.deps.json
+C:\Users\mariu\Documents\GitHub\Chirp\src\SimpleDB\bin\Debug\net7.0\SimpleDB.dll
+C:\Users\mariu\Documents\GitHub\Chirp\src\SimpleDB\bin\Debug\net7.0\SimpleDB.pdb
+C:\Users\mariu\Documents\GitHub\Chirp\src\SimpleDB\obj\Debug\net7.0\SimpleDB.csproj.AssemblyReference.cache
+C:\Users\mariu\Documents\GitHub\Chirp\src\SimpleDB\obj\Debug\net7.0\SimpleDB.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mariu\Documents\GitHub\Chirp\src\SimpleDB\obj\Debug\net7.0\SimpleDB.csproj.CoreCompileInputs.cache
+C:\Users\mariu\Documents\GitHub\Chirp\src\SimpleDB\obj\Debug\net7.0\SimpleDB.dll
+C:\Users\mariu\Documents\GitHub\Chirp\src\SimpleDB\obj\Debug\net7.0\refint\SimpleDB.dll
+C:\Users\mariu\Documents\GitHub\Chirp\src\SimpleDB\obj\Debug\net7.0\SimpleDB.pdb
+C:\Users\mariu\Documents\GitHub\Chirp\src\SimpleDB\obj\Debug\net7.0\ref\SimpleDB.dll

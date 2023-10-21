@@ -483,3 +483,6 @@ src/Chirp.CLI.Client/bin/Debug/net7.0
 
 #Except files below
 !.gitignore
+/test-results/
+/playwright-report/
+/playwright/.cache/

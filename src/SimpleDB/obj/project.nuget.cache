@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "kbPkQPWHnUM2Ahr4pi2notogHSxRjuHaHBeN2QsRdTRzKbkRiTsj1piGCbhis4OgIzWZ2bp+6ayB8ah5JDk16A==",
+  "dgSpecHash": "O+maEkC6QQHAdzaTaqdY3yhnX4Ieu4v/YdGmnkErS0eAOTO0td+1DUxHRIYdX+0+Ro8/KkT3D36GwMV7d5Wcfw==",
   "success": true,
-  "projectFilePath": "/Users/casperpilgaard/Documents/GitHub/Chirp/src/SimpleDB/SimpleDB.csproj",
+  "projectFilePath": "C:\\Users\\mariu\\Documents\\GitHub\\Chirp\\src\\SimpleDB\\SimpleDB.csproj",
   "expectedPackageFiles": [
-    "/Users/casperpilgaard/.nuget/packages/csvhelper/30.0.1/csvhelper.30.0.1.nupkg.sha512",
-    "/Users/casperpilgaard/.nuget/packages/docopt.net/0.8.1/docopt.net.0.8.1.nupkg.sha512",
-    "/Users/casperpilgaard/.nuget/packages/system.valuetuple/4.5.0/system.valuetuple.4.5.0.nupkg.sha512"
+    "C:\\Users\\mariu\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512",
+    "C:\\Users\\mariu\\.nuget\\packages\\docopt.net\\0.8.1\\docopt.net.0.8.1.nupkg.sha512",
+    "C:\\Users\\mariu\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512"
   ],
   "logs": []
 }

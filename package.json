@@ -1,0 +1,17 @@
+{
+  "name": "chirp",
+  "version": "1.0.0",
+  "description": "This is a project for the BDSA course",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.39.0",
+    "@types/node": "^20.8.7"
+  }
+}
