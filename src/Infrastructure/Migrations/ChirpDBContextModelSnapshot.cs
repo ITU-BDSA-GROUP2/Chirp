@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EFGetStarted.Migrations
 {
-    [DbContext(typeof(CheepContext))]
-    partial class CheepContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(ChirpDBContext))]
+    partial class ChirpDBContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

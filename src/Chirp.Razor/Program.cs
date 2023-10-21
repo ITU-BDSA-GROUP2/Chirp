@@ -1,13 +1,31 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
-//builder.Services.AddDbContext<ChirpContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("Chirp")));
+
+builder.Services.AddDbContext<ChirpDBContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("Chirp")));
 //builder.Services. noget med scope
 
 
+var folder = Environment.SpecialFolder.LocalApplicationData;
+var path = Environment.GetFolderPath(folder);
+var DbPath = System.IO.Path.Join(path, "chirp.db");
+    
+
+
+// The following configures EF to create a Sqlite database file in the
+// special "local" folder for your platform.
+builder.Services.AddDbContext<ChirpDBContext>(options => options.UseSqlite($"Data Source={DbPath}"));
+
+
+
+builder.Services.AddRazorPages();
+
+
 //Not needed
-builder.Services.<AddSingleton<ICheepService, CheepService>();>
+builder.Services.AddSingleton<ICheepRepository, CheepRepository>();
+
+// Tror den skal se således ud
+//builder.Services.AddSingleton<ICheepRepository, CheepRepository>();
 
 
 var app = builder.Build();

@@ -1,41 +1,46 @@
 using System;
 using System.Linq;
+using EFCore;
+using Microsoft.EntityFrameworkCore;
+namespace Infrastructure;
 
 public class CheepRepository : ICheepRepository
 {
-    CheepContext db = new CheepContext();
+    private readonly ChirpDBContext db;
 
-    public async Task CreateCheep(CheepDto cheep)  
+    public CheepRepository(ChirpDBContext context)
     {
+        db = context;
+    }
 
+
+    public async Task<IEnumerable<CheepDto>> GetCheeps(int offset)
+    {
+        var cheeps = await db.Cheeps
+            .OrderByDescending(c => c.TimeStamp)
+            .Skip(offset)
+            .Take(32)
+            .Select(c => new CheepDto(c.Text, c.Author.Name, c.TimeStamp))
+            .ToListAsync();
+
+        return cheeps;
+    }
+
+
+    /*public async Task CreateCheep(CheepDto cheep)  
+    {
         db.Add(cheep);
         db.SaveChanges();
-    }
+    }*/
 
-    public async Task<IEnumerable<CheepDto>> GetCheepFromPage(int page)
+    /*public async Task<IEnumerable<CheepDto>> GetCheepFromAuthor(string user, int page, int offset)
     {
-        // var Cheep = from c in db
-        // orderby c.DateTime descending;
-        // select new {Cheep = c.Cheep}
-       
-        var cheeps = await db.Cheeps
+        return await db.Cheeps
         .OrderByDescending(c => c.TimeStamp)
-        .ToAsyncList();
-
-        return cheeps;
-        
-    }
-
-    public async Task<IEnumerable<CheepDto>> GetCheepFromAuthor(string author, int? page)
-    {
-        // var Cheep = from c in db
-        // orderby c.DateTime descending;
-        // select new {Cheep = c.Cheep}
-       
-        var cheeps = await db.Cheeps
-        .OrderByDescending(c => c.TimeStamp)
-        .ToAsyncList();
-
-        return cheeps;
-    }
+        .Where(u => u.Author.Name == user)
+        .Skip(offset)
+        .Take(32)
+        .Select(c => new CheepDto(c.Text, c.Author.Name, c.TimeStamp))
+        .ToListAsync();
+    }*/
 }
