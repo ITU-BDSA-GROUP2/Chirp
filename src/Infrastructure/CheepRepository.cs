@@ -11,6 +11,7 @@ public class CheepRepository : ICheepRepository
     public CheepRepository(ChirpDBContext context)
     {
         db = context;
+        DbInitializer.SeedDatabase(context);
     }
 
 
@@ -33,7 +34,7 @@ public class CheepRepository : ICheepRepository
         db.SaveChanges();
     }*/
 
-    /*public async Task<IEnumerable<CheepDto>> GetCheepFromAuthor(string user, int page, int offset)
+    public async Task<IEnumerable<CheepDto>> GetCheepFromAuthor(string user, int offset)
     {
         return await db.Cheeps
         .OrderByDescending(c => c.TimeStamp)
@@ -42,5 +43,5 @@ public class CheepRepository : ICheepRepository
         .Take(32)
         .Select(c => new CheepDto(c.Text, c.Author.Name, c.TimeStamp))
         .ToListAsync();
-    }*/
+    }
 }
