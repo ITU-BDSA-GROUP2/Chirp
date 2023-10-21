@@ -11,7 +11,7 @@ namespace PlaywrightTests;
 public class Tests : PageTest
 {
     [Test]
-    public async Task HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingtoTheIntroPage()
+    public async Task checTitle()
     {
         await Page.GotoAsync("https://bdsagroup02chirpremotedb.azurewebsites.net");
 
