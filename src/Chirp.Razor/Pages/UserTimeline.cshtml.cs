@@ -18,7 +18,7 @@ public class UserTimelineModel : PageModel
     public async Task<ActionResult> OnGet(string author)
     {
         var t = Convert.ToInt32(Request.Query["page"]);
-        if (t == 0) t = 1;
+        if (t > 0) t -= 1;
         Cheeps = await _service.GetCheepsFromAuthor(author, t);
         return Page();
        
