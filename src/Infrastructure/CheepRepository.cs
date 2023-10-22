@@ -17,14 +17,12 @@ public class CheepRepository : ICheepRepository
 
     public async Task<IEnumerable<CheepDto>> GetCheeps(int offset)
     {
-        var cheeps = await db.Cheeps
+        return await db.Cheeps
             .OrderByDescending(c => c.TimeStamp)
             .Skip(offset)
             .Take(32)
             .Select(c => new CheepDto(c.Text, c.Author.Name, c.TimeStamp))
             .ToListAsync();
-
-        return cheeps;
     }
 
 
