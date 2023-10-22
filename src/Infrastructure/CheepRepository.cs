@@ -16,7 +16,7 @@ public class CheepRepository : ICheepRepository
 
     public async Task CreateCheep(CheepDto cheep)  
     {
-        db.Cheeps.Add(cheep);
+        db.Add(cheep);
         db.SaveChanges();
     }
 
@@ -30,7 +30,7 @@ public class CheepRepository : ICheepRepository
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<CheepDto>> GetCheepFromAuthor(string authorName, int page)
+    public async Task<IEnumerable<CheepDto>> GetCheepsFromAuthor(string authorName, int page)
     {
         return await db.Cheeps
         .OrderByDescending(c => c.TimeStamp)

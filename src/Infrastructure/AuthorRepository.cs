@@ -13,23 +13,29 @@ public class AuthorRepository : IAuthorRepository
         db = context;
     }
 
-    public Task CreateNewAuthor(AuthorDto newAuthor) 
+    public async Task CreateNewAuthor(AuthorDto newAuthor) 
     {   
-        db.Author.Add(newAuthor);
+        db.Add(newAuthor);
         db.SaveChanges();
     }
 
-    public async Task GetAuthorByName(string authorName)
+    public async Task<AuthorDto> GetAuthorByName(string authorName)
     {
-        return await db.Author
+        var author = await db.Authors
         .Where(u => u.Name == authorName)
-        .Select(a => new AuthorDto(a.AuthorId, a.Name, a.Email));
+        .Select(a => new AuthorDto(a.Name, a.Email))
+        .FirstOrDefaultAsync();
+
+        return author;
     }
     
-    public Task GetAuthorByEmail(string authorEmail)
+    public async Task<AuthorDto> GetAuthorByEmail(string authorEmail)
     {
-        return await db.Author
+        var author = await db.Authors
         .Where(u => u.Email == authorEmail)
-        .Select(a => new AuthorDto(a.AuthorId, a.Name, a.Email));
+        .Select(a => new AuthorDto(a.Name, a.Email))
+        .FirstOrDefaultAsync();
+
+        return author;
     }
 }
