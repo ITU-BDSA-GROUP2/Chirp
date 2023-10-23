@@ -16,24 +16,22 @@ var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddDbContext<ChirpDBContext>(options => options.UseSqlite($"Data Source={DbPath}"));
 
 
-        var folder = Environment.SpecialFolder.LocalApplicationData;
-        var path = Environment.GetFolderPath(folder);
-        var DbPath = System.IO.Path.Join(path, "chirp.db");
-
-   builder.Services.AddDbContext<ChirpDBContext>(options
-        => options.UseSqlite($"Data Source={DbPath}"));
-
-
-
-
-
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<ChirpDBContext>();
 builder.Services.AddScoped<ICheepRepository, CheepRepository>();
 // Tror den skal se således ud
 //builder.Services.AddSingleton<ICheepRepository, CheepRepository>();
 
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope()){
+    
+    var services = scope.ServiceProvider;
+
+    var context = services.GetRequiredService<ChirpDBContext>();
+    DbInitializer.SeedDatabase(context);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

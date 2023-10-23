@@ -11,7 +11,6 @@ public class CheepRepository : ICheepRepository
     public CheepRepository(ChirpDBContext context)
     {
         db = context;
-        DbInitializer.SeedDatabase(context);
     }
 
     public async Task CreateCheep(CheepDto cheep)  
