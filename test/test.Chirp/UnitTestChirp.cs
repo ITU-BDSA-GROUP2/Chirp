@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc.Testing;
 
 public class UnitTestChirp
 {
+
+    
+    /* These tests was used for unix timestamp conversion, we dont use this anymore 
     [Theory]
     [InlineData(1690891760, "08/01/23 12:09:20")]
     [InlineData(967329900, "08/26/00 22:45:00")]
@@ -17,6 +20,7 @@ public class UnitTestChirp
         Assert.Equal(value, time);
         
     }
+    
 
     [Theory]
     [InlineData(29851932, "08/01/2023 12:09:20")]
@@ -31,19 +35,20 @@ public class UnitTestChirp
         // Assert
         Assert.NotEqual(time,value);
     }
+    */
     public class TestAPI : IClassFixture<WebApplicationFactory<Program>>
 {
-    private readonly WebApplicationFactory<Program> _fixture;
-    private readonly HttpClient _client;
+    protected readonly WebApplicationFactory<Program> _fixture;
+    protected readonly HttpClient _client;
 
-    public TestAPI(WebApplicationFactory<Program> fixture)
+    protected TestAPI(WebApplicationFactory<Program> fixture)
     {
         _fixture = fixture;
         _client = _fixture.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = true, HandleCookies = true });
     }
 
     [Fact]
-    public async void CanSeePublicTimeline()
+    protected async void CanSeePublicTimeline()
     {
         var response = await _client.GetAsync("/");
         response.EnsureSuccessStatusCode();
@@ -56,7 +61,7 @@ public class UnitTestChirp
     [Theory]
     [InlineData("Helge")]
     [InlineData("Rasmus")]
-    public async void CanSeePrivateTimeline(string author)
+    protected async void CanSeePrivateTimeline(string author)
     {
         var response = await _client.GetAsync($"/{author}");
         response.EnsureSuccessStatusCode();
@@ -69,7 +74,7 @@ public class UnitTestChirp
     [Theory]
     [InlineData("Helge", "Hello, BDSA students!")]
     [InlineData("Rasmus", "Hej, velkommen til kurset.")]
-     public async void Check_if_we_can_find_specfic_cheeps_on_users_timeline(string author, string cheep)
+     protected async void Check_if_we_can_find_specfic_cheeps_on_users_timeline(string author, string cheep)
     {
         var response = await _client.GetAsync($"/{author}");
         response.EnsureSuccessStatusCode();
