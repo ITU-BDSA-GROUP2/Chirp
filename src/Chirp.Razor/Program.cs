@@ -1,7 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using EFCore;
 using Infrastructure;
+using System.Reflection;
 
+public class Program {
+
+    public static void Main(string[] args){
 var builder = WebApplication.CreateBuilder(args);
 
 // Vælg MIT license
@@ -53,3 +57,5 @@ app.UseRouting();
 app.MapRazorPages();
 
 app.Run();
+}
+}
