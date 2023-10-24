@@ -658,3 +658,13 @@ C:\Users\Chedd\OneDrive\Dokumenter\GitHub\Chirp\test\test.chirp\bin\Debug\net7.0
 C:\Users\Chedd\OneDrive\Dokumenter\GitHub\Chirp\test\test.chirp\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
 C:\Users\Chedd\OneDrive\Dokumenter\GitHub\Chirp\test\test.chirp\bin\Debug\net7.0\Microsoft.Extensions.Hosting.dll
 C:\Users\Chedd\OneDrive\Dokumenter\GitHub\Chirp\test\test.chirp\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
+C:\Users\Madso\Chirp\test\test.Chirp\obj\Debug\net7.0\test.Chirp.csproj.AssemblyReference.cache
+C:\Users\Madso\Chirp\test\test.Chirp\obj\Debug\net7.0\MvcTestingAppManifest.json
+C:\Users\Madso\Chirp\test\test.Chirp\obj\Debug\net7.0\test.Chirp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Madso\Chirp\test\test.Chirp\obj\Debug\net7.0\test.Chirp.AssemblyInfoInputs.cache
+C:\Users\Madso\Chirp\test\test.Chirp\obj\Debug\net7.0\test.Chirp.AssemblyInfo.cs
+C:\Users\Madso\Chirp\test\test.Chirp\obj\Debug\net7.0\test.Chirp.csproj.CoreCompileInputs.cache
+C:\Users\Madso\Chirp\test\test.Chirp\obj\Debug\net7.0\test.Chirp.dll
+C:\Users\Madso\Chirp\test\test.Chirp\obj\Debug\net7.0\refint\test.Chirp.dll
+C:\Users\Madso\Chirp\test\test.Chirp\obj\Debug\net7.0\test.Chirp.pdb
+C:\Users\Madso\Chirp\test\test.Chirp\bin\Debug\net7.0\CoverletSourceRootsMapping

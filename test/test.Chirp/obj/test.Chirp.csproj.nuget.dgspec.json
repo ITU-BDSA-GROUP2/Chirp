@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\test\\test.chirp\\test.Chirp.csproj": {}
+    "C:\\Users\\Madso\\Chirp\\test\\test.Chirp\\test.Chirp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\Chirp.Razor\\Chirp.Razor.csproj": {
+    "C:\\Users\\Madso\\Chirp\\src\\Chirp.Razor\\Chirp.Razor.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\Chirp.Razor\\Chirp.Razor.csproj",
+        "projectUniqueName": "C:\\Users\\Madso\\Chirp\\src\\Chirp.Razor\\Chirp.Razor.csproj",
         "projectName": "Chirp.Razor",
-        "projectPath": "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\Chirp.Razor\\Chirp.Razor.csproj",
-        "packagesPath": "C:\\Users\\Chedd\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\Chirp.Razor\\obj\\",
+        "projectPath": "C:\\Users\\Madso\\Chirp\\src\\Chirp.Razor\\Chirp.Razor.csproj",
+        "packagesPath": "C:\\Users\\Madso\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Madso\\Chirp\\src\\Chirp.Razor\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Chedd\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Madso\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -25,7 +25,14 @@
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Madso\\Chirp\\src\\EFCore\\EFCore.csproj": {
+                "projectPath": "C:\\Users\\Madso\\Chirp\\src\\EFCore\\EFCore.csproj"
+              },
+              "C:\\Users\\Madso\\Chirp\\src\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Madso\\Chirp\\src\\Infrastructure\\Infrastructure.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -38,13 +45,15 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
-            "Microsoft.Data.Sqlite": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.11, )"
+              "version": "[7.0.12, )"
             },
-            "Microsoft.Data.Sqlite.Core": {
+            "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[7.0.11, )"
+              "version": "[7.0.12, )"
             }
           },
           "imports": [
@@ -70,17 +79,70 @@
         }
       }
     },
-    "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\test\\test.chirp\\test.Chirp.csproj": {
+    "C:\\Users\\Madso\\Chirp\\src\\EFCore\\EFCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\test\\test.chirp\\test.Chirp.csproj",
-        "projectName": "test.Chirp",
-        "projectPath": "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\test\\test.chirp\\test.Chirp.csproj",
-        "packagesPath": "C:\\Users\\Chedd\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\test\\test.chirp\\obj\\",
+        "projectUniqueName": "C:\\Users\\Madso\\Chirp\\src\\EFCore\\EFCore.csproj",
+        "projectName": "EFCore",
+        "projectPath": "C:\\Users\\Madso\\Chirp\\src\\EFCore\\EFCore.csproj",
+        "packagesPath": "C:\\Users\\Madso\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Madso\\Chirp\\src\\EFCore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Chedd\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Madso\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Madso\\Chirp\\src\\Infrastructure\\Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Madso\\Chirp\\src\\Infrastructure\\Infrastructure.csproj",
+        "projectName": "Infrastructure",
+        "projectPath": "C:\\Users\\Madso\\Chirp\\src\\Infrastructure\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Madso\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Madso\\Chirp\\src\\Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Madso\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -92,8 +154,77 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\Chirp.Razor\\Chirp.Razor.csproj": {
-                "projectPath": "C:\\Users\\Chedd\\OneDrive\\Dokumenter\\GitHub\\Chirp\\Chirp.Razor\\Chirp.Razor.csproj"
+              "C:\\Users\\Madso\\Chirp\\src\\EFCore\\EFCore.csproj": {
+                "projectPath": "C:\\Users\\Madso\\Chirp\\src\\EFCore\\EFCore.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.12, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[7.0.11, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Madso\\Chirp\\test\\test.Chirp\\test.Chirp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Madso\\Chirp\\test\\test.Chirp\\test.Chirp.csproj",
+        "projectName": "test.Chirp",
+        "projectPath": "C:\\Users\\Madso\\Chirp\\test\\test.Chirp\\test.Chirp.csproj",
+        "packagesPath": "C:\\Users\\Madso\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Madso\\Chirp\\test\\test.Chirp\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Madso\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\Madso\\Chirp\\src\\Chirp.Razor\\Chirp.Razor.csproj": {
+                "projectPath": "C:\\Users\\Madso\\Chirp\\src\\Chirp.Razor\\Chirp.Razor.csproj"
               }
             }
           }
