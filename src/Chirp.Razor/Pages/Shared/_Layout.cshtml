@@ -13,12 +13,15 @@
         @RenderBody()
     </div>
     <div class=footer>
-    <ul class = "pagination">
-            @for (int i = 1; i <= Model.AllCheeps.Count/32; i++)
-            {
-                <li><a href="?page=@i" >@i</a></li>
-            }
-        </ul>
+        @{ double numberOfPages = Math.Ceiling((double)Model.AllCheeps.Count/32); }
+        @if (numberOfPages > 1) {
+            <ul class = "pagination">
+                @for (int i = 1; i <= numberOfPages; i++)
+                {
+                    <li><a href="?page=@i" >@i</a></li>
+                }
+            </ul>
+        }
     </div>
         Chirp &mdash; An ASP.NET Application
     </div>

@@ -4,6 +4,10 @@ using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Vælg MIT license
+// Opdater eller slet issue workflow 
+// chrip_cli branch 
+
 // Add services to the container.
 //builder.Services.AddDbContext<ChirpDBContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("Chirp")));
 
