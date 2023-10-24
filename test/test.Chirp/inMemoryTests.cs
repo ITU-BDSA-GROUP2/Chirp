@@ -43,8 +43,8 @@ public class SqliteInMemoryChirpingControllerTest : IDisposable
             viewCommand.ExecuteNonQuery();
         }
         context.AddRange(
-            new Author { Name = "Helge", Url = "http://blog1.com/" },
-            new Author { Name = "Rasmus", Url = "http://blog2.com/" });
+            new AuthorDto ( "Helge", "http://blog1.com/" ),
+            new AuthorDto ( "Rasmus", "http://blog2.com/" ));
         context.SaveChanges();
     }
 
@@ -53,19 +53,20 @@ public class SqliteInMemoryChirpingControllerTest : IDisposable
     public void Dispose() => _connection.Dispose();
     #endregion
 
-    #region GetCheep
+    #region GetAuthor
     [Fact]
-    public void GetCheep()
+    public async Task GetAuthor()
     {
-        using var context = CreateContext();
-        var Author = new AuthorDto("Helge","Helge@wow.dk");
-        var controller = new AuthorRepository(context);
+    using var context = CreateContext();
 
-        var blog = controller.GetAuthorByName("Helge");
+    var controller = new AuthorRepository(context);
 
-        Assert.Equal(Author.Name, blog.Name);
+    var authorDto = await controller.GetAuthorByName("Helge");
+
+    Assert.NotNull(authorDto);
+    Assert.Equal("ropf@itu.dk", authorDto.Email);
     }
-    #endregion
+#endregion
 
     // [Fact]
     // public void GetAllBlogs()
