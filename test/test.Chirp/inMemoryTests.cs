@@ -22,7 +22,7 @@ public class SqliteInMemoryChirpingControllerTest : IDisposable
     {
         // Create and open a connection. This creates the SQLite in-memory database, which will persist until the connection is closed
         // at the end of the test (see Dispose below).
-        _connection = new SqliteConnection("chirpTest.db =:memory:");
+        _connection = new SqliteConnection("Filename=:memory:");
         _connection.Open();
 
         // These options will be used by the context instances in this test suite, including the connection opened above.
@@ -37,14 +37,14 @@ public class SqliteInMemoryChirpingControllerTest : IDisposable
         {
             using var viewCommand = context.Database.GetDbConnection().CreateCommand();
             viewCommand.CommandText = @"
-                CREATE VIEW AllResources AS
-                SELECT Url
-                FROM Blogs;";
+                CREATE VIEW AllAuthors AS
+                SELECT Email
+                FROM Author;";
             viewCommand.ExecuteNonQuery();
         }
         context.AddRange(
-            new AuthorDto ( "Helge", "http://blog1.com/" ),
-            new AuthorDto ( "Rasmus", "http://blog2.com/" ));
+            new Author { Name = "Helge", Email = "ropf@itu.dk" },
+            new Author { Name = "Rasmus", Email = "ropf@itu.dk" });
         context.SaveChanges();
     }
 
