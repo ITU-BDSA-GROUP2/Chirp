@@ -18,6 +18,12 @@ public class ChirpDBContext : DbContext
         var path = Environment.GetFolderPath(folder);
         DbPath = System.IO.Path.Join(path, "chirp.db");
     }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Author>()
+           .HasIndex(c => c.AuthorId)
+           .IsUnique();
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
         => options.UseSqlite($"Data source={DbPath}");
