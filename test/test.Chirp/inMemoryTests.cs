@@ -42,9 +42,20 @@ public class SqliteInMemoryChirpingControllerTest : IDisposable
                 FROM Author;";
             viewCommand.ExecuteNonQuery();
         }
-        context.AddRange(
-            new Author { Name = "Helge", Email = "ropf@itu.dk" },
-            new Author { Name = "Rasmus", Email = "ropf@itu.dk" });
+        var author1 = new Author
+        {
+            Name = "Helge",
+            Email = "ropf@itu.dk",
+            Cheeps = new List<Cheep> { new Cheep { Text = "Hello, BDSA students!" } }
+        };
+
+        var author2 = new Author
+        {
+            Name = "Rasmus",
+            Email = "ropf@itu.dk",
+            Cheeps = new List<Cheep> { new Cheep { Text = "Hej, velkommen til kurset." } }
+        };
+        context.AddRange(author1, author2);
         context.SaveChanges();
     }
 
@@ -69,30 +80,34 @@ public class SqliteInMemoryChirpingControllerTest : IDisposable
 #endregion
 
     // [Fact]
-    // public void GetAllBlogs()
-    // {
-    //     using var context = CreateContext();
-    //     var controller = new BloggingController(context);
+    //  public void GetAllBlogs()
+    //  {
+    //      using var context = CreateContext();
+    //      var controller = new AuthorRepository(context);
 
-    //     var blogs = controller.GetAllBlogs().Value;
+    //      var blogs = controller.GetAllBlogs().Value;
 
-    //     Assert.Collection(
-    //         blogs,
-    //         b => Assert.Equal("Blog1", b.Name),
-    //         b => Assert.Equal("Blog2", b.Name));
-    // }
+    //      Assert.Collection(
+    //          blogs,
+    //          b => Assert.Equal("Blog1", b.Name),
+    //          b => Assert.Equal("Blog2", b.Name));
+    //  }
 
-    // [Fact]
-    // public void AddBlog()
-    // {
-    //     using var context = CreateContext();
-    //     var controller = new BloggingController(context);
+     [Fact]
+     public void CreateNewAuthor()
+     {
+         using var context = CreateContext();
+         var controller = new AuthorRepository(context);
 
-    //     controller.AddBlog("Blog3", "http://blog3.com");
+         var authorDto1 = new AuthorDto("Helge", "ropf@itu.dk");
 
-    //     var blog = context.Blogs.Single(b => b.Name == "Blog3");
-    //     Assert.Equal("http://blog3.com", blog.Url);
-    // }
+         controller.CreateNewAuthor(authorDto1);
+
+         var author = context.Authors.FirstOrDefault(a => a.Name == "Helge");
+
+         Assert.NotNull(author);
+         Assert.Equal("Helge", author.Name);
+     }
 
     // [Fact]
     // public void UpdateBlogUrl()
