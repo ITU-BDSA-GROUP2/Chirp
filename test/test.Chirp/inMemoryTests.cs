@@ -55,7 +55,8 @@ public class SqliteInMemoryChirpingControllerTest : IDisposable
             Email = "ropf@itu.dk",
             Cheeps = new List<Cheep> { new Cheep { Text = "Hej, velkommen til kurset." } }
         };
-        context.AddRange(author1, author2);
+        var cheep1 = new Cheep {Text = "Hej med jer alle!", Author = author1, TimeStamp = DateTime.Now};
+        context.AddRange(author1, author2, cheep1);
         context.SaveChanges();
     }
 
@@ -106,7 +107,21 @@ public class SqliteInMemoryChirpingControllerTest : IDisposable
          var author = context.Authors.FirstOrDefault(a => a.Name == "Helge");
 
          Assert.NotNull(author);
-         Assert.Equal("Helge", author.Name);
+         Assert.Equal(authorDto1.Name, author.Name);
+     }
+     [Fact]
+     public void createCheep() 
+     {
+        using var context = CreateContext();
+        var controller = new CheepRepository(context);
+
+        var cheep1 = new CheepDto("Hej med jer alle!", "Helge",DateTime.Now);
+
+        controller.CreateCheep(cheep1);
+
+        var cheep = context.Cheeps.FirstOrDefault(a => a.Text == "Hej med jer alle!");
+
+        Assert.Equal(cheep1.Text, cheep.Text);
      }
 
     // [Fact]
