@@ -56,7 +56,8 @@ public class SqliteInMemoryChirpingControllerTest : IDisposable
             Cheeps = new List<Cheep> { new Cheep { Text = "Hej, velkommen til kurset." } }
         };
         var cheep1 = new Cheep {Text = "Hej med jer alle!", Author = author1, TimeStamp = DateTime.Now};
-        context.AddRange(author1, author2, cheep1);
+        var cheep2 = new Cheep {Text = "wow det bliver vildt!", Author = author2, TimeStamp = DateTime.Now};
+        context.AddRange(author1, author2, cheep1, cheep2);
         context.SaveChanges();
     }
 
@@ -115,7 +116,7 @@ public class SqliteInMemoryChirpingControllerTest : IDisposable
         using var context = CreateContext();
         var controller = new CheepRepository(context);
 
-        var cheep1 = new CheepDto("Hej med jer alle!", "Helge",DateTime.Now);
+        var cheep1 = new CheepDto("Hej med jer alle!", "Helge", DateTime.Now);
 
         controller.CreateCheep(cheep1);
 
@@ -123,6 +124,20 @@ public class SqliteInMemoryChirpingControllerTest : IDisposable
 
         Assert.Equal(cheep1.Text, cheep.Text);
      }
+    
+    [Fact]
+    public async void getAllCheeps() 
+    {
+        using var context = CreateContext();
+        var controller = new CheepRepository(context);
+
+        var cheeps1 = await controller.GetCheeps(1);
+        
+        Assert.NotNull(cheeps1);
+        Assert.Equal("Hej med jer alle!", cheeps1.ElementAt(0).Text);
+        Assert.Equal("wow det bliver vildt!", cheeps1.ElementAt(1).Text);
+
+    }
 
     // [Fact]
     // public void UpdateBlogUrl()
