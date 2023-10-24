@@ -70,28 +70,33 @@ public class SqliteInMemoryChirpingControllerTest : IDisposable
     [Fact]
     public async Task getAuthorByName()
     {
-    using var context = CreateContext();
 
-    var controller = new AuthorRepository(context);
+        //Arrange
+        using var context = CreateContext();
+        var controller = new AuthorRepository(context);
 
-    var authorDto = await controller.GetAuthorByName("Helge");
+        //Act
+        var authorDto = await controller.GetAuthorByName("Helge");
 
-    Assert.NotNull(authorDto);
-    Assert.Equal("Helge", authorDto.Name);
+        //Assert
+        Assert.NotNull(authorDto);
+        Assert.Equal("Helge", authorDto.Name);
     }
 #endregion
 
     [Fact]
     public async Task getAuthorByEmail()
     {
-    using var context = CreateContext();
+        //Arrange
+        using var context = CreateContext();
+        var controller = new AuthorRepository(context);
 
-    var controller = new AuthorRepository(context);
+        //Act
+        var authorDto1 = await controller.GetAuthorByName("Rasmus");
 
-    var authorDto1 = await controller.GetAuthorByName("Rasmus");
-
-    Assert.NotNull(authorDto1);
-    Assert.Equal("rnie@itu.dk", authorDto1.Email);
+        //Assert
+        Assert.NotNull(authorDto1);
+        Assert.Equal("rnie@itu.dk", authorDto1.Email);
     }
 
     // [Fact]
@@ -111,41 +116,67 @@ public class SqliteInMemoryChirpingControllerTest : IDisposable
      [Fact]
      public void CreateNewAuthor()
      {
+        //Arrange
          using var context = CreateContext();
          var controller = new AuthorRepository(context);
-
          var authorDto1 = new AuthorDto("Helge", "ropf@itu.dk");
 
+        //Act
          controller.CreateNewAuthor(authorDto1);
-
          var author = context.Authors.FirstOrDefault(a => a.Name == "Helge");
 
+        //Assert
          Assert.NotNull(author);
          Assert.Equal(authorDto1.Name, author.Name);
      }
+
+     [Fact]
+     public async void GetCheepsFromAuthor()
+     {
+
+        //Arrange
+         using var context = CreateContext();
+         var controller = new CheepRepository(context);
+
+        //Act
+         var cheeps = await controller.GetCheepsFromAuthor("Helge", 1);
+         var firstCheepName = cheeps.First().Author;
+        
+        //Assert
+         Assert.NotNull(cheeps);
+         Assert.Equal("Helge", firstCheepName);
+     }
+
      [Fact]
      public void createCheep() 
      {
+
+        //Arrange
         using var context = CreateContext();
         var controller = new CheepRepository(context);
-
         var cheep1 = new CheepDto("Hej med jer alle!", "Helge", DateTime.Now);
 
+        //Act
         controller.CreateCheep(cheep1);
-
         var cheep = context.Cheeps.FirstOrDefault(a => a.Text == "Hej med jer alle!");
 
+        //Assert
+        Assert.NotNull(cheep);
         Assert.Equal(cheep1.Text, cheep.Text);
      }
     
     [Fact]
     public async void getAllCheeps() 
     {
+
+        //Arrange
         using var context = CreateContext();
         var controller = new CheepRepository(context);
 
+        //Act
         var cheeps1 = await controller.GetCheeps(1);
         
+        //Assert
         Assert.NotNull(cheeps1);
         Assert.Equal("Hej med jer alle!", cheeps1.ElementAt(0).Text);
         Assert.Equal("wow det bliver vildt!", cheeps1.ElementAt(1).Text);
