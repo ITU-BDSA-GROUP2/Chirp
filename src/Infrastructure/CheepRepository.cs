@@ -39,4 +39,19 @@ public class CheepRepository : ICheepRepository
         .Select(c => new CheepDto(c.Text, c.Author.Name, c.TimeStamp))
         .ToListAsync();
     }
+
+    public async Task<IEnumerable<CheepDto>> GetAllCheeps() {
+        return await db.Cheeps
+            .OrderByDescending(c => c.TimeStamp)
+            .Select(c => new CheepDto(c.Text, c.Author.Name, c.TimeStamp))
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<CheepDto>> GetAllCheepsFromAuthor(string authorName) {
+        return await db.Cheeps
+            .OrderByDescending(c => c.TimeStamp)
+            .Where(u => u.Author.Name == authorName)
+            .Select(c => new CheepDto(c.Text, c.Author.Name, c.TimeStamp))
+            .ToListAsync();
+    }
 }
