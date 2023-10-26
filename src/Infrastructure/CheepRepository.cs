@@ -13,7 +13,7 @@ public class CheepRepository : ICheepRepository
         db = context;
     }
 
-    public async Task CreateCheep(CheepDto cheep)  
+    public void CreateCheep(CheepDto cheep)
     {
         db.Add(cheep);
         db.SaveChanges();

@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 public class ChirpDBContext : DbContext
 {
-    public DbSet<Cheep> Cheeps { get; set; }
-    public DbSet<Author> Authors { get; set; }
+    public required DbSet<Cheep> Cheeps { get; set; }
+    public required DbSet<Author> Authors { get; set; }
     public string DbPath { get; }
 
-    
+
     //public ChirpDBContext(DbContextOptions<ChirpDBContext> options) : base(options) { }
 
     public ChirpDBContext()
@@ -17,6 +17,12 @@ public class ChirpDBContext : DbContext
         var folder = Environment.SpecialFolder.LocalApplicationData;
         var path = Environment.GetFolderPath(folder);
         DbPath = System.IO.Path.Join(path, "chirp.db");
+    }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Author>()
+           .HasIndex(c => c.AuthorId)
+           .IsUnique();
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
