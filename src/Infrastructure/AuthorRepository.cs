@@ -15,7 +15,13 @@ public class AuthorRepository : IAuthorRepository
 
     public void CreateNewAuthor(AuthorDto newAuthor)
     {
-        db.Add(newAuthor);
+        var author = new Author {
+            Name = newAuthor.Name,
+            Email = newAuthor.Email,
+        };
+        
+        
+        db.Authors.Add(author);
         db.SaveChanges();
     }
 

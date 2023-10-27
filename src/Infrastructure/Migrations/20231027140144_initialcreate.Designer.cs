@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Infrastructure.Migrations
+namespace Chirp.Razor.Migrations
 {
     [DbContext(typeof(ChirpDBContext))]
-    [Migration("20231021213822_InitialCreate1")]
-    partial class InitialCreate1
+    [Migration("20231027140144_initialcreate")]
+    partial class initialcreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,9 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("AuthorId");
 
+                    b.HasIndex("AuthorId")
+                        .IsUnique();
+
                     b.ToTable("Authors");
                 });
 
@@ -49,6 +52,7 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Text")
                         .IsRequired()
+                        .HasMaxLength(280)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("TimeStamp")
