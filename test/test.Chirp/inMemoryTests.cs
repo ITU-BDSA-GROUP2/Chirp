@@ -133,6 +133,42 @@ public class InMemoryTests : IDisposable {
     //     Assert.Equal(3, listOfCheeps.Count);
     //  }
 
+    // [Fact]
+    // public async void createCheep()
+    // {
+    //     //Arrange
+    //     var cheepTest = new Cheep() { CheepId = 1, AuthorId = a10.AuthorId, Author = a10, Text = "They were married in Chicago, with old Smith, and was expected aboard every day; meantime, the two went past me.", TimeStamp = DateTime.Parse("2023-08-01 13:14:37") };
+    // }
+
+    [Fact]
+    public async void GetCheepsFromAuthor() 
+    {
+        //Arrange
+        var authorName = "Voldemort";
+        int cheepPage = 0;
+
+        //Act
+        var allCheeps = await cController.GetCheepsFromAuthor(authorName,cheepPage);
+
+        //Assert
+        Assert.NotNull(allCheeps);
+        Assert.Equal(2, allCheeps.Count());
+    }
+
+    [Fact]
+    public async void GetCheeps()
+    {
+        //Arrange 
+        int cheepPage = 0;
+
+        //Act
+        var allCheeps = await cController.GetCheeps(cheepPage);
+
+        //Assert
+        Assert.NotNull(allCheeps);
+        Assert.Equal(3, allCheeps.Count());
+    }
+
      
      
      public void SeedDatabase() {
