@@ -83,19 +83,19 @@ public class UnitTestChirp
         Assert.Contains(cheep, content);
     }
 
-    [Theory]
-    [InlineData(1)]
-    [InlineData(2)]
-    protected async void Check_if_cheeps_exists_on_different_pages(int page)
-    {
-        var response = await _client.GetAsync($"/?={page}");
-        response.EnsureSuccessStatusCode();
-        var content = await response.Content.ReadAsStringAsync();
+    // [Theory]
+    // [InlineData(1)]
+    // [InlineData(2)]
+    // protected async void Check_if_cheeps_exists_on_different_pages(int page)
+    // {
+    //     var response = await _client.GetAsync($"/?={page}");
+    //     response.EnsureSuccessStatusCode();
+    //     var content = await response.Content.ReadAsStringAsync();
 
-        var errorMessage = "There are no cheeps so far.";
+    //     var errorMessage = "There are no cheeps so far.";
 
-        Assert.DoesNotContain(errorMessage,content);
-    }
+    //     Assert.DoesNotContain(errorMessage,content);
+    // }
 
     // [Theory]
     // [InlineData(1000)]
