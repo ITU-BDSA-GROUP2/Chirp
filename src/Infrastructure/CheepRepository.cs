@@ -13,9 +13,18 @@ public class CheepRepository : ICheepRepository
         db = context;
     }
 
-    public void CreateCheep(CheepDto cheep)
+    public async void CreateCheep(CheepDto cheep)
     {
-        db.Add(cheep);
+        var author = await db.Authors
+        .Where(a => a.Name == cheep.Author)
+        .FirstOrDefaultAsync();
+        var newCheep = new Cheep {
+            Text = cheep.Text,
+            TimeStamp = cheep.Timestamp,
+            AuthorId = author.AuthorId,
+            Author = author,
+        };
+        db.Cheeps.Add(newCheep);
         db.SaveChanges();
     }
 

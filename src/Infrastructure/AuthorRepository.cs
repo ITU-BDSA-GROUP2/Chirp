@@ -15,7 +15,13 @@ public class AuthorRepository : IAuthorRepository
 
     public void CreateNewAuthor(AuthorDto newAuthor)
     {
-        db.Add(newAuthor);
+        var author = new Author {
+            Name = newAuthor.Name,
+            Email = newAuthor.Email,
+            Cheeps = new List<Cheep>(),
+        };
+        
+        db.Authors.Add(author);
         db.SaveChanges();
     }
 
@@ -35,7 +41,6 @@ public class AuthorRepository : IAuthorRepository
         .Where(u => u.Email == authorEmail)
         .Select(a => new AuthorDto(a.Name, a.Email))
         .FirstOrDefaultAsync();
-
         return author;
     }
 }

@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Infrastructure.Migrations
+namespace Chirp.Razor.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate1 : Migration
+    public partial class initialcreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,7 +31,7 @@ namespace Infrastructure.Migrations
                 {
                     CheepId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Text = table.Column<string>(type: "TEXT", nullable: false),
+                    Text = table.Column<string>(type: "TEXT", maxLength: 280, nullable: false),
                     TimeStamp = table.Column<DateTime>(type: "TEXT", nullable: false),
                     AuthorId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
@@ -45,6 +45,12 @@ namespace Infrastructure.Migrations
                         principalColumn: "AuthorId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Authors_AuthorId",
+                table: "Authors",
+                column: "AuthorId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cheeps_AuthorId",
