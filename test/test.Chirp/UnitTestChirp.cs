@@ -41,7 +41,7 @@ public class UnitTestChirp
     protected readonly WebApplicationFactory<Program> _fixture;
     protected readonly HttpClient _client;
 
-    protected TestAPI(WebApplicationFactory<Program> fixture)
+    public TestAPI(WebApplicationFactory<Program> fixture)
     {
         _fixture = fixture;
         _client = _fixture.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = true, HandleCookies = true });
@@ -82,5 +82,33 @@ public class UnitTestChirp
 
         Assert.Contains(cheep, content);
     }
+
+    // [Theory]
+    // [InlineData(1)]
+    // [InlineData(2)]
+    // protected async void Check_if_cheeps_exists_on_different_pages(int page)
+    // {
+    //     var response = await _client.GetAsync($"/?={page}");
+    //     response.EnsureSuccessStatusCode();
+    //     var content = await response.Content.ReadAsStringAsync();
+
+    //     var errorMessage = "There are no cheeps so far.";
+
+    //     Assert.DoesNotContain(errorMessage,content);
+    // }
+
+    // [Theory]
+    // [InlineData(1000)]
+    // [InlineData(1001)]
+    // protected async void Check_if_cheeps_does_not_exist_on_different_pages(int page)
+    // {
+    //     var response = await _client.GetAsync($"/?={page}");
+    //     response.EnsureSuccessStatusCode();
+    //     var content = await response.Content.ReadAsStringAsync();
+
+    //     var errorMessage = "There are no cheeps so far.";
+
+    //     Assert.Contains(errorMessage,content);
+    // }
 }
 }
