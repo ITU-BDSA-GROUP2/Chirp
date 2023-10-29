@@ -1,197 +1,300 @@
 using System;
 using System.Data.Common;
 using System.Linq;
-//using EF.Testing.BloggingWebApi.Controllers;
-//using EF.Testing.BusinessLogic;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Chirp.Razor;
 using Infrastructure;
-namespace EF.Testing.UnitTests;
+namespace test.Chirp;
 
-//http://localhost:5273
+public class InMemoryTests : IDisposable {
+    private readonly DbContextOptions<ChirpDBContext> builder;
+    private readonly SqliteConnection connection;
+    private readonly ChirpDBContext context;
+    private readonly AuthorRepository aController;
+    private readonly CheepRepository cController;
 
-public class SqliteInMemoryChirpingControllerTest : IDisposable
-{
-    private readonly DbConnection _connection;
-    private readonly DbContextOptions<ChirpDBContext> _contextOptions;
-
-    #region ConstructorAndDispose
-    public SqliteInMemoryChirpingControllerTest()
+    public InMemoryTests()
     {
-        // Create and open a connection. This creates the SQLite in-memory database, which will persist until the connection is closed
-        // at the end of the test (see Dispose below).
-        _connection = new SqliteConnection("Filename=:memory:");
-        _connection.Open();
 
-        // These options will be used by the context instances in this test suite, including the connection opened above.
-        _contextOptions = new DbContextOptionsBuilder<ChirpDBContext>()
-            .UseSqlite(_connection)
-            .Options;
 
-        // Create the schema and seed some data
-        using var context = new ChirpDBContext();
+        connection = new SqliteConnection("Filename=:memory:");
+        connection.Open();
 
-        if (context.Database.EnsureCreated())
-        {
-            using var viewCommand = context.Database.GetDbConnection().CreateCommand();
-            viewCommand.CommandText = @"
-                CREATE VIEW AllAuthors AS
-                SELECT Email
-                FROM Author;";
-            viewCommand.ExecuteNonQuery();
-        }
-        var author1 = new Author
-        {
-            Name = "Helge",
-            Email = "ropf@itu.dk",
-            Cheeps = new List<Cheep> { new Cheep { Text = "Hello, BDSA students!" } }
-        };
+        builder = new DbContextOptionsBuilder<ChirpDBContext>()
+        .UseSqlite(connection)
+        .Options;
 
-        var author2 = new Author
-        {
-            Name = "Rasmus",
-            Email = "rnie@itu.dk",
-            Cheeps = new List<Cheep> { new Cheep { Text = "Hej, velkommen til kurset." } }
-        };
-        var cheep1 = new Cheep {Text = "Hej med jer alle!", Author = author1, TimeStamp = DateTime.Now};
-        var cheep2 = new Cheep {Text = "wow det bliver vildt!", Author = author2, TimeStamp = DateTime.Now};
-        context.AddRange(author1, author2, cheep1, cheep2);
-        context.SaveChanges();
+        context = new ChirpDBContext(builder);
+        
+        context.Database.EnsureCreatedAsync(); // Applies the schema to the database
+
+        //Add data to database
+        SeedDatabase();
+
+        aController = new AuthorRepository(context);
+
+        cController = new CheepRepository(context);
+
     }
 
-    ChirpDBContext CreateContext() => new ChirpDBContext();
+    public void Dispose()
+    {
+        context.Database.EnsureDeletedAsync();
+        context.Dispose();
+    }
 
-    public void Dispose() => _connection.Dispose();
-    #endregion
-
-    #region GetAuthorByName
+    //AuthorRepository test methods
     [Fact]
-    public async Task getAuthorByName()
-    {
-
-        //Arrange
-        using var context = CreateContext();
-        var controller = new AuthorRepository(context);
-
-        //Act
-        var authorDto = await controller.GetAuthorByName("Helge");
-
-        //Assert
-        Assert.NotNull(authorDto);
-        Assert.Equal("Helge", authorDto.Name);
-    }
-#endregion
-
-    [Fact]
-    public async Task getAuthorByEmail()
-    {
-        //Arrange
-        using var context = CreateContext();
-        var controller = new AuthorRepository(context);
-
-        //Act
-        var authorDto1 = await controller.GetAuthorByName("Rasmus");
-
-        //Assert
-        Assert.NotNull(authorDto1);
-        Assert.Equal("rnie@itu.dk", authorDto1.Email);
-    }
-
-    // [Fact]
-    //  public void GetAllBlogs()
-    //  {
-    //      using var context = CreateContext();
-    //      var controller = new AuthorRepository(context);
-
-    //      var blogs = controller.GetAllBlogs().Value;
-
-    //      Assert.Collection(
-    //          blogs,
-    //          b => Assert.Equal("Blog1", b.Name),
-    //          b => Assert.Equal("Blog2", b.Name));
-    //  }
-
-     [Fact]
-     public void CreateNewAuthor()
+     public async void CreateNewAuthor()
      {
         //Arrange
-         using var context = CreateContext();
-         var controller = new AuthorRepository(context);
-         var authorDto1 = new AuthorDto("Helge", "ropf@itu.dk");
+        var authorDto = new AuthorDto("Asger", "Asger@asd.com");
 
         //Act
-         controller.CreateNewAuthor(authorDto1);
-         var author = context.Authors.FirstOrDefault(a => a.Name == "Helge");
+         aController.CreateNewAuthor(authorDto);
+         var author = await context.Authors
+         .Where(a => a.Name == authorDto.Name)
+         .FirstOrDefaultAsync();
 
         //Assert
          Assert.NotNull(author);
-         Assert.Equal(authorDto1.Name, author.Name);
+         Assert.Equal(authorDto.Name, author.Name);
      }
 
-     [Fact]
-     public async void GetCheepsFromAuthor()
-     {
 
+    [Fact]
+    public async void GetAuthorByNameThatExist()
+    {
         //Arrange
-         using var context = CreateContext();
-         var controller = new CheepRepository(context);
+        var authorName = "Voldemort";
 
         //Act
-         var cheeps = await controller.GetCheepsFromAuthor("Helge", 1);
-         var firstCheepName = cheeps.First().Author;
-        
+        var author = await aController.GetAuthorByName(authorName);
+
         //Assert
-         Assert.NotNull(cheeps);
-         Assert.Equal("Helge", firstCheepName);
-     }
+        Assert.NotNull(author);
+        Assert.Equal(authorName, author.Name);
+    }
 
-     [Fact]
-     public void createCheep() 
-     {
-
+    [Fact]
+    public async void GetAuthorByNameThatDoesNotExist()
+    {
         //Arrange
-        using var context = CreateContext();
-        var controller = new CheepRepository(context);
-        var cheep1 = new CheepDto("Hej med jer alle!", "Helge", DateTime.Now);
+        var authorName = "Harry Potter";
 
         //Act
-        controller.CreateCheep(cheep1);
-        var cheep = context.Cheeps.FirstOrDefault(a => a.Text == "Hej med jer alle!");
+        var author = await aController.GetAuthorByName(authorName);
+
+        //Assert
+        Assert.Null(author);
+    }
+
+    [Fact]
+    public async void GetAuthorByEmail()
+    {
+        //Arrange
+        var authorEmail = "Svanhildur.Jørgensen@yahoo.com";
+
+        //Act
+        var author = await aController.GetAuthorByEmail(authorEmail);
+
+        //Assert
+        Assert.NotNull(author);
+        Assert.Equal(authorEmail, author.Email);
+    }
+
+    [Fact]
+    public async void GetAuthorByEmailThatDoesNotExist()
+    {
+        //Arrange
+        var authorEmail = "VoldARMAN@jubiiiiii.com";
+
+        //Act
+        var author = await aController.GetAuthorByEmail(authorEmail);
+
+        //Assert
+        Assert.Null(author);
+    }
+        
+
+
+     
+    //CheepRepository test methods
+     [Fact]
+     public async void CreateCheep() {
+        //Arrange
+        var cheepDto = new CheepDto("Hello my friends! :)", "Voldemort", DateTime.Now);
+
+        //Act
+        cController.CreateCheep(cheepDto);
+        var cheep = await context.Cheeps
+        .Where(c => c.Text == cheepDto.Text)
+        .FirstOrDefaultAsync();
 
         //Assert
         Assert.NotNull(cheep);
-        Assert.Equal(cheep1.Text, cheep.Text);
+        Assert.Equal(cheepDto.Text, cheep.Text);
+        Assert.Equal(cheepDto.Author, cheep.Author.Name);
+        Assert.Equal(cheepDto.Timestamp, cheep.TimeStamp);
      }
-    
-    [Fact]
-    public async void getAllCheeps() 
-    {
 
+
+
+    [Fact]
+    public async void GetCheepsFromAuthor() 
+    {
         //Arrange
-        using var context = CreateContext();
-        var controller = new CheepRepository(context);
+        var authorName = "Voldemort";
+        int cheepPage = 0;
 
         //Act
-        var cheeps1 = await controller.GetCheeps(1);
-        
+        var allCheeps = await cController.GetCheepsFromAuthor(authorName,cheepPage);
+
         //Assert
-        Assert.NotNull(cheeps1);
-        Assert.Equal("Hej med jer alle!", cheeps1.ElementAt(0).Text);
-        Assert.Equal("wow det bliver vildt!", cheeps1.ElementAt(1).Text);
+        Assert.NotNull(allCheeps);
+        Assert.Equal(2, allCheeps.Count());
+    }
+
+    [Fact]
+    public async void GetCheepsFromAuthorThatDoesNotExist() 
+    {
+        //Arrange
+        var authorName = "MonsterDrinker9000";
+        int cheepPage = 0;
+
+        //Act
+        var allCheeps = await cController.GetCheepsFromAuthor(authorName,cheepPage);
+
+        //Assert
+        Assert.NotNull(allCheeps);
+        Assert.Equal(0, allCheeps.Count());
+    }
+
+
+
+    [Fact]
+    public async void GetCheepsFromPage()
+    {
+        //Arrange 
+        var author = new AuthorDto("Hans", "Hansemanden@asd.com");
+        aController.CreateNewAuthor(author);
+        for (int i = 0; i < 50; i++) {
+            var cheep = new CheepDto(i.ToString(), author.Name, DateTime.Now);
+            cController.CreateCheep(cheep);
+        }
+        var pageSize = 32;
+        var expectedCheepCount = 53;
+        int cheepPage1 = 0;
+        int cheepPage2 = 1;
+
+        //Act
+        var cheepsPage1 = await cController.GetCheeps(cheepPage1);
+        var cheepsPage2 = await cController.GetCheeps(cheepPage2);
+
+
+        //Assert
+        Assert.NotNull(cheepsPage1);
+        Assert.Equal(pageSize, cheepsPage1.Count());
+        Assert.Equal(expectedCheepCount-pageSize, cheepsPage2.Count());
+
 
     }
 
-    // [Fact]
-    // public void UpdateBlogUrl()
-    // {
-    //     using var context = CreateContext();
-    //     var controller = new BloggingController(context);
+    [Fact]
+    public async void GetCheepsFromSpecificAuthorPage() {
+        //Arrange
+        var author = new AuthorDto("Hans", "Hansemanden@asd.com");
+        aController.CreateNewAuthor(author);
+        for (int i = 0; i < 50; i++) {
+            var cheep = new CheepDto(i.ToString(), author.Name, DateTime.Now);
+            cController.CreateCheep(cheep);
+        }
+        var pageSize = 32;
+        var expectedCheepCount = 50;
+        var cheepPage1 = 0;
+        var cheepPage2 = 1;
+        var cheepPage3 = 2;
 
-    //     controller.UpdateBlogUrl("Blog2", "http://blog2_updated.com");
+        //Act
+        var cheepsPage1 = await cController.GetCheepsFromAuthor(author.Name, cheepPage1);
+        var cheepsPage2 = await cController.GetCheepsFromAuthor(author.Name, cheepPage2);
+        var cheepsPage3 = await cController.GetCheepsFromAuthor(author.Name, cheepPage3);
 
-    //     var blog = context.Blogs.Single(b => b.Name == "Blog2");
-    //     Assert.Equal("http://blog2_updated.com", blog.Url);
-    // }
+
+        //Assert
+        Assert.NotNull(cheepsPage1);
+        Assert.NotNull(cheepsPage2);
+        Assert.NotNull(cheepsPage3);
+
+        Assert.Equal(pageSize, cheepsPage1.Count());
+        Assert.Equal(expectedCheepCount-pageSize, cheepsPage2.Count());
+        Assert.Equal(0, cheepsPage3.Count());
+    }
+
+    [Fact]
+    public async void GetAllCheeps() {
+        //Arrange
+        var author = new AuthorDto("Hans", "Hansemanden@asd.com");
+        aController.CreateNewAuthor(author);
+        for (int i = 0; i < 50; i++) {
+            var cheep = new CheepDto(i.ToString(), author.Name, DateTime.Now);
+            cController.CreateCheep(cheep);
+        }
+        var expectedCheepCount = 53;
+        
+        //Act
+        var allCheeps = await cController.GetAllCheeps();
+        
+        //Assert
+        Assert.NotNull(allCheeps);
+        
+        Assert.Equal(expectedCheepCount, allCheeps.Count());
+    }
+
+    [Fact]
+    public async void GetAllCheepsFromAuthor() {
+        //Arrange
+        var author = new AuthorDto("Hans", "Hansemanden@asd.com");
+        aController.CreateNewAuthor(author);
+        for (int i = 0; i < 50; i++) {
+            var cheep = new CheepDto(i.ToString(), author.Name, DateTime.Now);
+            cController.CreateCheep(cheep);
+        }
+        var expectedCheepCount = 50;
+        
+        //Act
+        var allCheepsFromHans = await cController.GetAllCheepsFromAuthor(author.Name);
+        
+        //Assert
+        Assert.NotNull(allCheepsFromHans);
+        
+        Assert.Equal(expectedCheepCount, allCheepsFromHans.Count());
+    }
+
+
+     private void SeedDatabase() {
+        var a1 = new Author() { AuthorId = 1, Name = "Voldemort", Email = "Voldemanden@gmail.com", Cheeps = new List<Cheep>() };
+        var a2 = new Author() { AuthorId = 2, Name = "Svanhildur", Email = "Svanhildur.Jørgensen@yahoo.com", Cheeps = new List<Cheep>() };
+        
+        var authors = new List<Author> { a1, a2 };
+
+        var c1 = new Cheep() { CheepId = 1, AuthorId = a1.AuthorId, Author = a1, Text = "Harry Potter suckz!!", TimeStamp = DateTime.Parse("2023-08-01 13:14:37") };
+        var c2 = new Cheep() { CheepId = 2, AuthorId = a1.AuthorId, Author = a1, Text = "HAHAAHHAHA I KILLED HARRY POTTER!!!", TimeStamp = DateTime.Parse("2023-08-01 13:14:45") };
+
+        var c3 = new Cheep() { CheepId = 3, AuthorId = a2.AuthorId, Author = a2, Text = "I hate my name. How do I change this?", TimeStamp = DateTime.Parse("2023-06-01 09:10:45") };
+
+
+        var cheeps = new List<Cheep> { c1, c2, c3 };
+
+        a1.Cheeps = new List<Cheep>() { c1, c2 };
+        a2.Cheeps = new List<Cheep>() { c3 };
+
+        context.Authors.AddRange(authors);
+        context.Cheeps.AddRange(cheeps);
+        context.SaveChanges();
+     }
+
+
 }
