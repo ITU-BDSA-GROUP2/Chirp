@@ -12,7 +12,6 @@ public class ChirpDBContext : IdentityDbContext<ApplicationUser>
     [Required]
     public DbSet<Author> Authors { get; set; }
 
-    public string DbPath { get; }
 
 
     public ChirpDBContext(DbContextOptions<ChirpDBContext> options) : base(options) { }
@@ -20,6 +19,7 @@ public class ChirpDBContext : IdentityDbContext<ApplicationUser>
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Author>()
            .HasIndex(c => c.AuthorId)
            .IsUnique();

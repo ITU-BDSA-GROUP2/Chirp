@@ -36,6 +36,7 @@ public class Program
          .AddDefaultUI()
          .AddDefaultTokenProviders();
 
+
         // Tror den skal se således ud
         //builder.Services.AddSingleton<ICheepRepository, CheepRepository>();
 
