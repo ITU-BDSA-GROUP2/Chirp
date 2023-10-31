@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using EFCore;
 using Infrastructure;
 using System.Reflection;
+using Microsoft.AspNetCore.Identity;
 
 public class Program
 {
@@ -28,12 +29,13 @@ public class Program
         builder.Services.AddDbContext<ChirpDBContext>(options => options.UseSqlite($"Data source={DbPath}"));
 
         builder.Services.AddScoped<ICheepRepository, CheepRepository>();
-        services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+
+        builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
          options.Password.RequiredLength = 8)
          .AddEntityFrameworkStores<ChirpDBContext>()
+         .AddDefaultUI()
          .AddDefaultTokenProviders();
-        services.AddTransient<IEmailSender, AuthMessageSender>();
-        services.AddTransient<ISmsSender, AuthMessageSender>();
+
         // Tror den skal se således ud
         //builder.Services.AddSingleton<ICheepRepository, CheepRepository>();
 
@@ -59,6 +61,8 @@ public class Program
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
+
+        app.UseAuthentication();
 
         app.UseRouting();
 

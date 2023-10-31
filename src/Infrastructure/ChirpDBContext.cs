@@ -2,9 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-
-public class ChirpDBContext : DbContext
+public class ChirpDBContext : IdentityDbContext<ApplicationUser>
 {
     [Required]
     public DbSet<Cheep> Cheeps { get; set; }
