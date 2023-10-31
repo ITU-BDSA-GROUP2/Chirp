@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-public class ChirpDBContext : IdentityDbContext<ApplicationUser>
+public class ChirpDBContext : IdentityDbContext
 {
     [Required]
     public DbSet<Cheep> Cheeps { get; set; }

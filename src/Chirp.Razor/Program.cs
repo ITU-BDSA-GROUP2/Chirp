@@ -30,7 +30,7 @@ public class Program
 
         builder.Services.AddScoped<ICheepRepository, CheepRepository>();
 
-        builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+        builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
          options.Password.RequiredLength = 8)
          .AddEntityFrameworkStores<ChirpDBContext>()
          .AddDefaultUI()
