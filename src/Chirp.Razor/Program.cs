@@ -3,7 +3,7 @@ using EFCore;
 using Infrastructure;
 using System.Reflection;
 using Microsoft.AspNetCore.Identity;
-
+using Microsoft.AspNetCore.Authentication.Cookies;
 public class Program
 {
 
@@ -35,6 +35,18 @@ public class Program
          .AddEntityFrameworkStores<ChirpDBContext>()
          .AddDefaultUI()
          .AddDefaultTokenProviders();
+        builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = "GitHub";
+            })
+            .AddCookie()
+            .AddGitHub(o =>
+            {
+                o.ClientId = builder.Configuration["authentication:github:clientId"];
+                o.ClientSecret = builder.Configuration["authentication:github:clientSecret"];
+            });
 
 
         // Tror den skal se således ud
@@ -63,12 +75,9 @@ public class Program
         app.UseHttpsRedirection();
         app.UseStaticFiles();
 
-        app.UseAuthentication();
-
         app.UseRouting();
-
+        app.UseAuthentication();
         app.UseAuthorization();
-
         app.MapRazorPages();
 
         app.Run();

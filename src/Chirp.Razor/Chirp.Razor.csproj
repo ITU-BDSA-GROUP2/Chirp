@@ -1,9 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>b27d7b65-1b5f-4872-b10a-593eb4e844a5</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,8 +13,9 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-
-   <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.13" />
+    
+    <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="7.0.4" />   
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.13" />
    
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.13" />
 
