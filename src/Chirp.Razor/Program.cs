@@ -29,6 +29,8 @@ public class Program
         builder.Services.AddDbContext<ChirpDBContext>(options => options.UseSqlite($"Data source={DbPath}"));
 
         builder.Services.AddScoped<ICheepRepository, CheepRepository>();
+        builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+
 
         builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
          options.Password.RequiredLength = 8)
