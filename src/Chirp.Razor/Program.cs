@@ -35,18 +35,18 @@ public class Program
          .AddEntityFrameworkStores<ChirpDBContext>()
          .AddDefaultUI()
          .AddDefaultTokenProviders();
-        builder.Services.AddAuthentication(options =>
+        /*builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = "GitHub";
             })
-            .AddCookie()
+            .AddCookie();
             .AddGitHub(o =>
             {
                 o.ClientId = builder.Configuration["authentication:github:clientId"];
                 o.ClientSecret = builder.Configuration["authentication:github:clientSecret"];
-            });
+            });*/
 
 
         // Tror den skal se således ud
@@ -77,7 +77,7 @@ public class Program
 
         app.UseRouting();
         app.UseAuthentication();
-        app.UseAuthorization();
+        //app.UseAuthorization();
         app.MapRazorPages();
 
         app.Run();
