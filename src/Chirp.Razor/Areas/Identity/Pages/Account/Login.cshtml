@@ -18,17 +18,17 @@
             <div class="multiRow">
                 <div class="singleRow">
                     <form id="account" method="post">
-                        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                        <div asp-validation-summary="ModelOnly" class="errorMSG" role="alert"></div>
                         <div class="form-floating mb-3 wrapper">
                             <label asp-for="Input.Email" class="form-label text">Email</label>
                             <input asp-for="Input.Email" class="form-control emailAndPassword" autocomplete="username" aria-required="true"
-                                placeholder="name@example.com" /> 
+                                placeholder="Name@example.com" /> 
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
                         </div>
                         <div class="form-floating mb-3 wrapper">
                         <label asp-for="Input.Password" class="form-label text">Password</label>
                             <input asp-for="Input.Password" class="form-control emailAndPassword" autocomplete="current-password"
-                                aria-required="true" placeholder="password" />
+                                aria-required="true" placeholder="Password" />
                             <span asp-validation-for="Input.Password" class="text-danger"></span>
                         </div>
                         <div class="checkbox mb-3 rememberMe">

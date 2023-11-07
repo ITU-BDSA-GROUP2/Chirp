@@ -318,6 +318,21 @@ ul.pagination li {
   margin-top: 3.55rem;
 }
 
+.logoutButton {
+  font-size: 20px;
+  padding: 20px;
+  width: 100%;
+  background-color: #fff;
+  color: #cc6e6e;
+  border: 2px solid #cc6e6e;
+  transition: .5s ease-in-out;
+}
+
+.logoutButton:hover {
+  background-color: #cc6e6e;
+  color: #ffffff;
+}
+
 .linksWrapper {
   margin: 20px;
 }
@@ -330,4 +345,11 @@ ul.pagination li {
 .links:hover {
   text-decoration: underline;
   color: #cc6e6e;
+}
+
+.errorMSG li {
+  color: #ff1a1a;
+  text-decoration: none;
+  list-style-type: none;
+  margin: 15px;
 }
