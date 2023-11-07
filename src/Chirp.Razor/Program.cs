@@ -29,6 +29,8 @@ public class Program
         builder.Services.AddDbContext<ChirpDBContext>(options => options.UseSqlite($"Data source={DbPath}"));
 
         builder.Services.AddScoped<ICheepRepository, CheepRepository>();
+        builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+
 
         builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
          options.Password.RequiredLength = 8)
@@ -79,7 +81,10 @@ public class Program
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapRazorPages();
-
+        app.UseCookiePolicy(new CookiePolicyOptions()
+        {
+            MinimumSameSitePolicy = SameSiteMode.Lax
+        });
         app.Run();
     }
 }
