@@ -77,9 +77,12 @@ public class Program
 
         app.UseRouting();
         app.UseAuthentication();
-        //app.UseAuthorization();
+        app.UseAuthorization();
         app.MapRazorPages();
-
+        app.UseCookiePolicy(new CookiePolicyOptions()
+        {
+            MinimumSameSitePolicy = SameSiteMode.Lax
+        });
         app.Run();
     }
 }
