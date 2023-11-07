@@ -1,28 +1,56 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>@ViewData["Title"]</title>
-        <link href="/css/style.css" rel="stylesheet" type="text/css" />
-        <link rel="icon" type="image/png" href="/favicon/favicon.ico">
-    </head>
-    <body>
-        <div class=page>
-            <h1><img src="/images/icon1.png" alt="Icon1"/>Chirp!</h1>
+
+<head>
+    <title>@ViewData["Title"]</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" href="/favicon/favicon.ico">
+</head>
+
+<body>
+    <div class=page>
+        <h1><img src="/images/icon1.png" alt="Icon1" />Chirp!</h1>
+        <! –– 
+        taken from the https://github.com/itu-bdsa/lecture_notes/blob/main/sessions/session_08/README_PROJECT.md
+        -->
+            <div class=navigation>
+            @if (User.Identity.IsAuthenticated)
+            {
+                    <div>
+                        <a href="/@(User.Identity.Name)">my timeline</a> |
+                        <a href="/">public timeline</a> |
+                        <a href="/Identity/Account/Logout">logout [@(User.Identity.Name)]</a>
+                    </div>
+            }
+            else
+            {
+                    <div>
+                        <a href="/">public timeline</a> |
+                         <a href="/Identity/Account/Register">Register</a>
+                         <a href="/Identity/Account/Login">Login</a>
+                    </div>
+            }
+            </div>
             <div class=body>
-                @RenderBody()
+            @RenderBody()
             </div>
             <div class=footer>
-                @{ double numberOfPages = Math.Ceiling((double)Model.AllCheeps.Count/32); }
-                @if (numberOfPages > 1) {
-                    <ul class = "pagination">
-                        @for (int i = 1; i <= numberOfPages; i++)
-                        {
-                            <li><a href="?page=@i" >@i</a></li>
-                        }
+            @{
+                double numberOfPages = Math.Ceiling((double)Model.AllCheeps.Count / 32);
+            }
+            @if (numberOfPages > 1)
+            {
+                    <ul class="pagination">
+                    @for (int i = 1; i <= numberOfPages; i++)
+                    {
+                            <li><a href="?page=@i">@i</a></li>
+                    }
                     </ul>
-                }
+            }
                 Chirp &mdash; An ASP.NET Application
             </div>
-        </div>
-    </body>
+    </div>
+    
+</body>
+
 </html>
