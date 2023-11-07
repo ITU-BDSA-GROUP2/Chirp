@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-
+using EFCore;
 namespace Chirp.Razor.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
@@ -19,9 +19,10 @@ namespace Chirp.Razor.Areas.Identity.Pages.Account
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IEmailSender _sender;
-
-        public RegisterConfirmationModel(UserManager<IdentityUser> userManager, IEmailSender sender)
+        private readonly IAuthorRepository _authorRepo;
+        public RegisterConfirmationModel(UserManager<IdentityUser> userManager, IEmailSender sender, IAuthorRepository authorRepo)
         {
+            _authorRepo = authorRepo;
             _userManager = userManager;
             _sender = sender;
         }
@@ -63,6 +64,8 @@ namespace Chirp.Razor.Areas.Identity.Pages.Account
             DisplayConfirmAccountLink = true;
             if (DisplayConfirmAccountLink)
             {
+                AuthorDto author = new AuthorDto(Email, Email);
+                _authorRepo.CreateNewAuthor(author);
                 var userId = await _userManager.GetUserIdAsync(user);
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
