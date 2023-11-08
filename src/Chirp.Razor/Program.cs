@@ -11,9 +11,6 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Vælg MIT license
-        // Opdater eller slet issue workflow 
-        // chrip_cli branch 
 
         // Add services to the container.
         //builder.Services.AddDbContext<ChirpDBContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("Chirp")));
@@ -63,6 +60,7 @@ public class Program
             var services = scope.ServiceProvider;
 
             var context = services.GetRequiredService<ChirpDBContext>();
+            context.Database.Migrate();
             DbInitializer.SeedDatabase(context);
         }
 
