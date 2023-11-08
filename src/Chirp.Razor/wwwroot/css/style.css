@@ -1,3 +1,10 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: #eccaca;
   font-family: 'Trebuchet MS', sans-serif;
@@ -11,7 +18,7 @@ a {
 a:hover {
   color: #333;
 }
-
+/*
 input[type="text"],
 input[type="password"] {
   background: white;
@@ -23,7 +30,7 @@ input[type="password"] {
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   color: #571010;
-}
+}*/
 
 input[type="submit"] {
   background: #571010;
@@ -229,4 +236,120 @@ li.topic {
 
 ul.pagination li {
   display: inline;
+}
+
+
+/*
+===========================
+        OUR STYLES
+===========================
+*/
+
+.multiRow {
+  display: flex;
+  flex-flow: row;
+  width: 100%;
+}
+
+.singleRow:first-child {
+  border-right: 1px solid #545454;
+}
+
+.singleRow {
+  width: 50%;
+}
+
+.titleWrapper {
+  display: flex;
+  flex-flow: row;
+  width: 100%;
+  margin-left: 10px;
+}
+
+.titleWrapper h2 {
+  margin: 0 auto;
+  width: 50%;
+}
+
+.wrapper {
+  display: flex;
+  flex-flow: column;
+  margin: 2rem;
+}
+
+.text {
+  display: inline-block;
+  color: #571010;
+  text-shadow: 0 1px 2px #ccc;
+  padding-bottom: 10px;
+}
+
+.emailAndPassword {
+  padding: 15px;
+  width: 78%;
+  font-size: 15px;
+  border: 2px solid #cc6e6e;
+  color: #545454;
+  outline: none;
+  transition: .5s ease;
+}
+
+.rememberMe {
+  margin-left: 2rem;
+  margin-top: -1.5rem;
+}
+
+.loginButton {
+  margin: 1.5rem 0 1rem 2rem;
+  font-size: 15px;
+  padding: 15px 102px;
+  background-color: white;
+  color: #545454;
+  border: 2px solid #cc6e6e;
+  transition: .5s ease-in-out;
+}
+
+.loginButton:hover {
+  background-color: #cc6e6e;
+  color: #ffffff;
+}
+
+.githubButton {
+  margin-top: 3.55rem;
+}
+
+.logoutButton {
+  font-size: 20px;
+  padding: 20px;
+  width: 100%;
+  background-color: #fff;
+  color: #cc6e6e;
+  border: 2px solid #cc6e6e;
+  transition: .5s ease-in-out;
+}
+
+.logoutButton:hover {
+  background-color: #cc6e6e;
+  color: #ffffff;
+}
+
+.linksWrapper {
+  margin: 20px;
+}
+
+.links {
+  text-decoration: none;
+  color: #545454;
+}
+
+.links:hover {
+  text-decoration: underline;
+  color: #cc6e6e;
+}
+
+.errorMSG li {
+  color: #ff1a1a;
+  text-decoration: none;
+  list-style-type: none;
+  margin: 15px;
 }
