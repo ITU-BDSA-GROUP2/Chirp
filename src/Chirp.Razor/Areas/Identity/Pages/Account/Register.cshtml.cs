@@ -126,7 +126,7 @@ namespace Chirp.Razor.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
 
-                    AuthorDto author = new AuthorDto(user.Name, user.Email);
+                    AuthorDto author = new AuthorDto(Input.Email, Input.Email);
                     _authorRepo.CreateNewAuthor(author);
                     Console.WriteLine(author);
                     _logger.LogInformation("User created a new account with password.");
