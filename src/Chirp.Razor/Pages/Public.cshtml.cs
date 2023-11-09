@@ -26,4 +26,10 @@ public class PublicModel : PageModel
         AllCheeps = await _service.GetAllCheeps();
         return Page();
     }
+
+    public async Task<ActionResult> OnPost() {
+        var cheep = new CheepDto(Request.Form["CheepText"], User.Identity.Name, DateTime.Now);
+        _service.CreateCheep(cheep);
+        return Page();
+    }
 }
