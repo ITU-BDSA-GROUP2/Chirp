@@ -22,12 +22,16 @@ public class Program
 
         builder.Services.AddRazorPages();
 
-        var folder = Environment.SpecialFolder.LocalApplicationData;
-        var path = Environment.GetFolderPath(folder);
-        var DbPath = System.IO.Path.Join(path, "chirp.db");
+        // var folder = Environment.SpecialFolder.LocalApplicationData;
+        // var path = Environment.GetFolderPath(folder);
+        // var DbPath = System.IO.Path.Join(path, "chirp.db");
+        var connectionString = builder.Configuration.GetConnectionString("sqlConnection");
 
-        builder.Services.AddDbContext<ChirpDBContext>(options => options.UseSqlite($"Data source={DbPath}"));
-
+        builder.Services.AddDbContext<ChirpDBContext>(
+            options => options.UseSqlServer(
+                connectionString,
+                providerOptions => providerOptions.EnableRetryOnFailure()));                
+                
         builder.Services.AddScoped<ICheepRepository, CheepRepository>();
 
         builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
@@ -35,18 +39,18 @@ public class Program
          .AddEntityFrameworkStores<ChirpDBContext>()
          .AddDefaultUI()
          .AddDefaultTokenProviders();
-        builder.Services.AddAuthentication(options =>
-            {
+        // builder.Services.AddAuthentication(options =>
+            // {
                 // options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 // options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 // options.DefaultChallengeScheme = "GitHub";
-            })
+            // })
             //.AddCookie();
-            .AddGitHub(o =>
-            {
-                o.ClientId = builder.Configuration["authentication:github:clientId"];
-                o.ClientSecret = builder.Configuration["authentication:github:clientSecret"];
-            });
+            // .AddGitHub(o =>
+            // {
+            //     o.ClientId = builder.Configuration["authentication:github:clientId"];
+            //     o.ClientSecret = builder.Configuration["authentication:github:clientSecret"];
+            // });
 
 
         // Tror den skal se således ud
