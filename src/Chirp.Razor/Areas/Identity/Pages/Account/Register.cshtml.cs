@@ -30,7 +30,7 @@ namespace Chirp.Razor.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-        public readonly IAuthorRepository _authorRepo;
+        private readonly IAuthorRepository _authorRepo;
 
 
         public RegisterModel(
@@ -125,7 +125,6 @@ namespace Chirp.Razor.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-
                     AuthorDto author = new AuthorDto(Input.Email, Input.Email);
                     _authorRepo.CreateNewAuthor(author);
                     Console.WriteLine(author);
