@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Madso\\Chirp\\test\\test.Chirp\\test.Chirp.csproj": {}
+    "/Users/casperpilgaard/Documents/GitHub/Chirp/test/test.Chirp/test.Chirp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Madso\\Chirp\\src\\Chirp.Razor\\Chirp.Razor.csproj": {
+    "/Users/casperpilgaard/Documents/GitHub/Chirp/src/Chirp.Razor/Chirp.Razor.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Madso\\Chirp\\src\\Chirp.Razor\\Chirp.Razor.csproj",
+        "projectUniqueName": "/Users/casperpilgaard/Documents/GitHub/Chirp/src/Chirp.Razor/Chirp.Razor.csproj",
         "projectName": "Chirp.Razor",
-        "projectPath": "C:\\Users\\Madso\\Chirp\\src\\Chirp.Razor\\Chirp.Razor.csproj",
-        "packagesPath": "C:\\Users\\Madso\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Madso\\Chirp\\src\\Chirp.Razor\\obj\\",
+        "projectPath": "/Users/casperpilgaard/Documents/GitHub/Chirp/src/Chirp.Razor/Chirp.Razor.csproj",
+        "packagesPath": "/Users/casperpilgaard/.nuget/packages/",
+        "outputPath": "/Users/casperpilgaard/Documents/GitHub/Chirp/src/Chirp.Razor/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Madso\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/casperpilgaard/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -26,11 +26,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Madso\\Chirp\\src\\EFCore\\EFCore.csproj": {
-                "projectPath": "C:\\Users\\Madso\\Chirp\\src\\EFCore\\EFCore.csproj"
+              "/Users/casperpilgaard/Documents/GitHub/Chirp/src/EFCore/EFCore.csproj": {
+                "projectPath": "/Users/casperpilgaard/Documents/GitHub/Chirp/src/EFCore/EFCore.csproj"
               },
-              "C:\\Users\\Madso\\Chirp\\src\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\Madso\\Chirp\\src\\Infrastructure\\Infrastructure.csproj"
+              "/Users/casperpilgaard/Documents/GitHub/Chirp/src/Infrastructure/Infrastructure.csproj": {
+                "projectPath": "/Users/casperpilgaard/Documents/GitHub/Chirp/src/Infrastructure/Infrastructure.csproj"
               }
             }
           }
@@ -45,6 +45,18 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "AspNet.Security.OAuth.GitHub": {
+              "target": "Package",
+              "version": "[7.0.4, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.13, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[7.0.13, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -54,6 +66,10 @@
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[7.0.12, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[7.0.11, )"
             }
           },
           "imports": [
@@ -75,21 +91,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.400/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Madso\\Chirp\\src\\EFCore\\EFCore.csproj": {
+    "/Users/casperpilgaard/Documents/GitHub/Chirp/src/EFCore/EFCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Madso\\Chirp\\src\\EFCore\\EFCore.csproj",
+        "projectUniqueName": "/Users/casperpilgaard/Documents/GitHub/Chirp/src/EFCore/EFCore.csproj",
         "projectName": "EFCore",
-        "projectPath": "C:\\Users\\Madso\\Chirp\\src\\EFCore\\EFCore.csproj",
-        "packagesPath": "C:\\Users\\Madso\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Madso\\Chirp\\src\\EFCore\\obj\\",
+        "projectPath": "/Users/casperpilgaard/Documents/GitHub/Chirp/src/EFCore/EFCore.csproj",
+        "packagesPath": "/Users/casperpilgaard/.nuget/packages/",
+        "outputPath": "/Users/casperpilgaard/Documents/GitHub/Chirp/src/EFCore/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Madso\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/casperpilgaard/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -128,21 +144,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.400/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Madso\\Chirp\\src\\Infrastructure\\Infrastructure.csproj": {
+    "/Users/casperpilgaard/Documents/GitHub/Chirp/src/Infrastructure/Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Madso\\Chirp\\src\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "/Users/casperpilgaard/Documents/GitHub/Chirp/src/Infrastructure/Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\Madso\\Chirp\\src\\Infrastructure\\Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\Madso\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Madso\\Chirp\\src\\Infrastructure\\obj\\",
+        "projectPath": "/Users/casperpilgaard/Documents/GitHub/Chirp/src/Infrastructure/Infrastructure.csproj",
+        "packagesPath": "/Users/casperpilgaard/.nuget/packages/",
+        "outputPath": "/Users/casperpilgaard/Documents/GitHub/Chirp/src/Infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Madso\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/casperpilgaard/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -154,8 +170,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Madso\\Chirp\\src\\EFCore\\EFCore.csproj": {
-                "projectPath": "C:\\Users\\Madso\\Chirp\\src\\EFCore\\EFCore.csproj"
+              "/Users/casperpilgaard/Documents/GitHub/Chirp/src/EFCore/EFCore.csproj": {
+                "projectPath": "/Users/casperpilgaard/Documents/GitHub/Chirp/src/EFCore/EFCore.csproj"
               }
             }
           }
@@ -170,6 +186,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -197,21 +217,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.400/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Madso\\Chirp\\test\\test.Chirp\\test.Chirp.csproj": {
+    "/Users/casperpilgaard/Documents/GitHub/Chirp/test/test.Chirp/test.Chirp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Madso\\Chirp\\test\\test.Chirp\\test.Chirp.csproj",
+        "projectUniqueName": "/Users/casperpilgaard/Documents/GitHub/Chirp/test/test.Chirp/test.Chirp.csproj",
         "projectName": "test.Chirp",
-        "projectPath": "C:\\Users\\Madso\\Chirp\\test\\test.Chirp\\test.Chirp.csproj",
-        "packagesPath": "C:\\Users\\Madso\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Madso\\Chirp\\test\\test.Chirp\\obj\\",
+        "projectPath": "/Users/casperpilgaard/Documents/GitHub/Chirp/test/test.Chirp/test.Chirp.csproj",
+        "packagesPath": "/Users/casperpilgaard/.nuget/packages/",
+        "outputPath": "/Users/casperpilgaard/Documents/GitHub/Chirp/test/test.Chirp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Madso\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/casperpilgaard/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -223,8 +243,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Madso\\Chirp\\src\\Chirp.Razor\\Chirp.Razor.csproj": {
-                "projectPath": "C:\\Users\\Madso\\Chirp\\src\\Chirp.Razor\\Chirp.Razor.csproj"
+              "/Users/casperpilgaard/Documents/GitHub/Chirp/src/Chirp.Razor/Chirp.Razor.csproj": {
+                "projectPath": "/Users/casperpilgaard/Documents/GitHub/Chirp/src/Chirp.Razor/Chirp.Razor.csproj"
               }
             }
           }
@@ -280,7 +300,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.400/RuntimeIdentifierGraph.json"
         }
       }
     }
