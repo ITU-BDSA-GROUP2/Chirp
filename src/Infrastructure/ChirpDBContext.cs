@@ -6,10 +6,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 public class ChirpDBContext : IdentityDbContext
 {
-    [Required]
     public DbSet<Cheep> Cheeps { get; set; }
 
-    [Required]
     public DbSet<Author> Authors { get; set; }
 
 
