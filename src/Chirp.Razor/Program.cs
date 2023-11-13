@@ -43,8 +43,8 @@ public class Program
             //.AddCookie();
             .AddGitHub(o =>
             {
-                o.ClientId = builder.Configuration["authentication:githublocalhost:clientId"];
-                o.ClientSecret = builder.Configuration["authentication:githublocalhost:clientSecret"];
+                o.ClientId = builder.Configuration["authentication:github:clientId"];
+                o.ClientSecret = builder.Configuration["authentication:github:clientSecret"];
             });
 
 
