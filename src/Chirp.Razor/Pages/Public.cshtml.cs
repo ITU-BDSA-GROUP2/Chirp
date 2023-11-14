@@ -38,14 +38,14 @@ public class PublicModel : PageModel
         var user = await _authorRepo.GetAuthorByName(author);
         if (user == null) {
             var authorDto = new AuthorDto(author, author);
-            _authorRepo.CreateNewAuthor(authorDto);
+            await _authorRepo.CreateNewAuthor(authorDto);
         }
 
         string text = Request.Form["CheepText"];
         Console.WriteLine(text);
         DateTime timestamp = DateTime.Now;
         var cheep = new CheepDto(text, author, timestamp);
-        _service.CreateCheep(cheep);
+        await _service.CreateCheep(cheep);
 
         var t = Convert.ToInt32(Request.Query["page"]);
         if (t > 0) t -= 1;
