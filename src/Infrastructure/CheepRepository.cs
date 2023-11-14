@@ -13,7 +13,7 @@ public class CheepRepository : ICheepRepository
         db = context;
     }
 
-    public async void CreateCheep(CheepDto cheep)
+    public async Task CreateCheep(CheepDto cheep)
     {
         var author = await db.Authors
         .Where(a => a.Name == cheep.Author)
@@ -25,7 +25,7 @@ public class CheepRepository : ICheepRepository
             Author = author,
         };
         db.Cheeps.Add(newCheep);
-        db.SaveChanges();
+        await db.SaveChangesAsync();
     }
 
     public async Task<IEnumerable<CheepDto>> GetCheeps(int page)

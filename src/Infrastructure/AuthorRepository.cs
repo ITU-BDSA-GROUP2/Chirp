@@ -13,7 +13,7 @@ public class AuthorRepository : IAuthorRepository
         db = context;
     }
 
-    public void CreateNewAuthor(AuthorDto newAuthor)
+    public async Task CreateNewAuthor(AuthorDto newAuthor)
     {
         var author = new Author {
             Name = newAuthor.Name,
@@ -22,7 +22,7 @@ public class AuthorRepository : IAuthorRepository
         };
         
         db.Authors.Add(author);
-        db.SaveChanges();
+        await db.SaveChangesAsync();
     }
 
     public async Task<AuthorDto> GetAuthorByName(string authorName)
