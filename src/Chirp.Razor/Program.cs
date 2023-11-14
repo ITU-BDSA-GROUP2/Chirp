@@ -29,24 +29,26 @@ builder.Services.AddDbContext<ChirpDBContext>(
         providerOptions => providerOptions.EnableRetryOnFailure()));                
         
 builder.Services.AddScoped<ICheepRepository, CheepRepository>();
+builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.Password.RequiredLength = 8)
     .AddEntityFrameworkStores<ChirpDBContext>()
     .AddDefaultUI()
     .AddDefaultTokenProviders();
-// builder.Services.AddAuthentication(options =>
-    // {
+builder.Services.AddAuthentication(options =>
+    {
         // options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
         // options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
         // options.DefaultChallengeScheme = "GitHub";
-    // })
-    //.AddCookie();
-    // .AddGitHub(o =>
-    // {
-    //     o.ClientId = builder.Configuration["authentication:github:clientId"];
-    //     o.ClientSecret = builder.Configuration["authentication:github:clientSecret"];
-    // });
+    })
+    // .AddCookie();
+    .AddGitHub(o =>
+    {
+        o.ClientId = builder.Configuration["authentication:githublocalhost:clientId"];
+        o.ClientSecret = builder.Configuration["authentication:githublocalhost:clientSecret"];
+    });
 
 
 // Tror den skal se således ud
@@ -80,5 +82,8 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapRazorPages();
-
+app.UseCookiePolicy(new CookiePolicyOptions()
+        {
+            MinimumSameSitePolicy = SameSiteMode.Lax
+        });
 app.Run();
