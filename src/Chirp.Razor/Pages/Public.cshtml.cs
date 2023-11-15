@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Infrastructure;
 using EFCore;
 
@@ -15,7 +17,9 @@ public class PublicModel : PageModel
 
     public IEnumerable<CheepDto> AllCheeps { get; set; } = new List<CheepDto>();
 
-    public string? CheepText { get; set; }
+    [Required]   
+     [StringLength(240, MinimumLength = 7)]
+    public string CheepText { get; set; }
 
     public PublicModel(ICheepRepository service, IAuthorRepository authorRepo)
     {
