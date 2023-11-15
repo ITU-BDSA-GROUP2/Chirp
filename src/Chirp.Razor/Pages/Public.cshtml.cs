@@ -42,8 +42,7 @@ public class PublicModel : PageModel
 
         string text = Request.Form["CheepText"]!;
         Console.WriteLine(text);
-        DateTime timestamp = DateTime.Now;
-        var cheep = new CheepDto(text, author, timestamp);
+        var cheep = new CheepDto(text, author, DateTime.Now.AddHours(1));
         await _service.CreateCheep(cheep);
 
         return await showCheeps();
