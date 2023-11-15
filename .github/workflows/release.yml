@@ -39,11 +39,13 @@ jobs:
           rm -r "${release_os}"
           done
       - name: Set Tag
+        id: tag
         run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
       - name: Publish release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ steps.tag.outputs.release_tag }}
           files:  |
            ${{ github.workspace }}/Chirp.Razor/Chirp-*.zip
         env:
