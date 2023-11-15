@@ -64,8 +64,8 @@ namespace Chirp.Razor.Areas.Identity.Pages.Account
             DisplayConfirmAccountLink = true;
             if (DisplayConfirmAccountLink)
             {
-                AuthorDto author = new AuthorDto(Email, Email);
-                _authorRepo.CreateNewAuthor(author);
+                // AuthorDto author = new AuthorDto(Email, Email);
+                // await _authorRepo.CreateNewAuthor(author);
                 var userId = await _userManager.GetUserIdAsync(user);
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
