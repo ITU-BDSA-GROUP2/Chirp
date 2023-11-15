@@ -26,7 +26,7 @@ var connectionString = builder.Configuration.GetConnectionString("dbProduction")
 builder.Services.AddDbContext<ChirpDBContext>(
     options => options.UseSqlServer(
         connectionString,
-        providerOptions => providerOptions.EnableRetryOnFailure().MigrationsAssembly("Chirp.Razor")));                
+        providerOptions => providerOptions.EnableRetryOnFailure()));                
         
 builder.Services.AddScoped<ICheepRepository, CheepRepository>();
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
