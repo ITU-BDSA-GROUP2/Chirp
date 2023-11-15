@@ -21,7 +21,7 @@ builder.Services.AddRazorPages();
 // var folder = Environment.SpecialFolder.LocalApplicationData;
 // var path = Environment.GetFolderPath(folder);
 // var DbPath = System.IO.Path.Join(path, "chirp.db");
-var connectionString = builder.Configuration["ConnectionStrings:dbProduction"];
+var connectionString = builder.Configuration.GetConnectionString("dbProduction");
 
 builder.Services.AddDbContext<ChirpDBContext>(
     options => options.UseSqlServer(
