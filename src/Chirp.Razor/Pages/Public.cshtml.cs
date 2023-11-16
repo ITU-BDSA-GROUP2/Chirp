@@ -17,9 +17,8 @@ public class PublicModel : PageModel
 
     public IEnumerable<CheepDto> AllCheeps { get; set; } = new List<CheepDto>();
 
-    
     [StringLength(240)]
-    public string CheepText { get; set; }
+    public string CheepText { get; set; } = "";
 
     public PublicModel(ICheepRepository service, IAuthorRepository authorRepo)
     {
