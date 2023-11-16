@@ -45,7 +45,7 @@ public class PublicModel : PageModel
 
         string text = Request.Form["CheepText"]!;
         if (text.Length > 0 && text.Length <= 240) {
-             var cheep = new CheepDto(text, author, DateTime.Now.AddHours(1));
+             var cheep = new CheepDto(text, author, DateTime.UtcNow);
             await _service.CreateCheep(cheep);
         } else {
             ModelState.AddModelError("ErrorMessageLength", "You can betweem 1 and 240 characters");

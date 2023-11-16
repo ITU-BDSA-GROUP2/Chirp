@@ -34,7 +34,7 @@ public class CheepRepository : ICheepRepository
             .OrderByDescending(c => c.TimeStamp)
             .Skip(page*pageSize)
             .Take(pageSize)
-            .Select(c => new CheepDto(c.Text, c.Author.Name, c.TimeStamp))
+            .Select(c => new CheepDto(c.Text, c.Author.Name, c.TimeStamp.ToLocalTime()))
             .ToListAsync();
     }
 
@@ -45,14 +45,14 @@ public class CheepRepository : ICheepRepository
             .Where(u => u.Author.Name == authorName)
             .Skip(page*pageSize)
             .Take(pageSize)
-            .Select(c => new CheepDto(c.Text, c.Author.Name, c.TimeStamp))
+            .Select(c => new CheepDto(c.Text, c.Author.Name, c.TimeStamp.ToLocalTime()))
             .ToListAsync();
     }
 
     public async Task<IEnumerable<CheepDto>> GetAllCheeps() {
         return await db.Cheeps
             .OrderByDescending(c => c.TimeStamp)
-            .Select(c => new CheepDto(c.Text, c.Author.Name, c.TimeStamp))
+            .Select(c => new CheepDto(c.Text, c.Author.Name, c.TimeStamp.ToLocalTime()))
             .ToListAsync();
     }
 
@@ -60,7 +60,7 @@ public class CheepRepository : ICheepRepository
         return await db.Cheeps
             .OrderByDescending(c => c.TimeStamp)
             .Where(u => u.Author.Name == authorName)
-            .Select(c => new CheepDto(c.Text, c.Author.Name, c.TimeStamp))
+            .Select(c => new CheepDto(c.Text, c.Author.Name, c.TimeStamp.ToLocalTime()))
             .ToListAsync();
     }
 }
