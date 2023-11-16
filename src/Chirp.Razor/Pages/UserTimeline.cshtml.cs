@@ -38,7 +38,7 @@ public class UserTimelineModel : PageModel
         }
 
         string text = Request.Form["CheepText"]!;
-        var cheep = new CheepDto(text, author, DateTime.Now.AddHours(1));
+        var cheep = new CheepDto(text, author, DateTime.UtcNow);
         await _service.CreateCheep(cheep);
 
         return await showCheeps(author);
