@@ -8,14 +8,20 @@
 }
 
 @if (User.Identity!.IsAuthenticated)
-    {
+    {   
+        
         <div class="cheepbox">
             <h3>What's on your mind @(User.Identity.Name)?</h3>
             <form method="post">
                 <input style="float: left" type="text" asp-for="CheepText">
                 <input type="submit" value="Share">
             </form>
-            </div>
+             @if (!ViewData.ModelState.IsValid) {
+                <ul class="errorMSG">
+                    <li>@Html.ValidationMessage("ErrorMessageLength")</li>
+                </ul>
+            }
+        </div>
     }
 
 <div>
