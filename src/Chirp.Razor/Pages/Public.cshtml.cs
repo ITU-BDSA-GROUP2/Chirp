@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Infrastructure;
 using EFCore;
 
@@ -15,7 +17,9 @@ public class PublicModel : PageModel
 
     public IEnumerable<CheepDto> AllCheeps { get; set; } = new List<CheepDto>();
 
-    public string? CheepText { get; set; }
+    
+    [StringLength(240)]
+    public string CheepText { get; set; }
 
     public PublicModel(ICheepRepository service, IAuthorRepository authorRepo)
     {
@@ -41,9 +45,16 @@ public class PublicModel : PageModel
         }
 
         string text = Request.Form["CheepText"]!;
+        if (text.Length > 0 && text.Length <= 240) {
+             var cheep = new CheepDto(text, author, DateTime.Now.AddHours(1));
+            await _service.CreateCheep(cheep);
+        } else {
+            ModelState.AddModelError("ErrorMessageLength", "You can betweem 1 and 240 characters");
+            //return Page();
+            return await showCheeps();
+        }
         Console.WriteLine(text);
-        var cheep = new CheepDto(text, author, DateTime.Now.AddHours(1));
-        await _service.CreateCheep(cheep);
+       
 
         return await showCheeps();
     }

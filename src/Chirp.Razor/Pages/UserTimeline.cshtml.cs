@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Infrastructure;
 using EFCore;
 
@@ -11,9 +13,9 @@ public class UserTimelineModel : PageModel
     private readonly ICheepRepository _service;
     public IEnumerable<CheepDto> Cheeps { get; set; } = new List<CheepDto>();
     public IEnumerable<CheepDto> AllCheeps { get; set; } = new List<CheepDto>();
-    public string? CheepText { get; set; }
-
-
+ 
+    [StringLength(240)]
+    public string CheepText { get; set; }
 
     public UserTimelineModel(ICheepRepository service, IAuthorRepository authorRepo)
     {
