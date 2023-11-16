@@ -19,7 +19,7 @@ builder.Services.AddRazorPages();
 // var folder = Environment.SpecialFolder.LocalApplicationData;
 // var path = Environment.GetFolderPath(folder);
 // var DbPath = System.IO.Path.Join(path, "chirp.db");
-var connectionString = builder.Configuration["ConnectionStrings:dbProduction"];
+var connectionString = builder.Configuration.GetConnectionString("ChirpDb");
 
 builder.Services.AddDbContext<ChirpDBContext>(
     options => options.UseSqlServer(
@@ -35,17 +35,10 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     .AddEntityFrameworkStores<ChirpDBContext>()
     .AddDefaultUI()
     .AddDefaultTokenProviders();
-builder.Services.AddAuthentication(options =>
+builder.Services.AddAuthentication().AddGitHub(o =>
     {
-        // options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-        // options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-        // options.DefaultChallengeScheme = "GitHub";
-    })
-    // .AddCookie();
-    .AddGitHub(o =>
-    {
-        o.ClientId = builder.Configuration["authentication:github:clientId"]!;
-        o.ClientSecret = builder.Configuration["authentication:github:clientSecret"]!;
+        o.ClientId = builder.Configuration["AUTHENTICATION_GITHUB_CLIENTID"]!;
+        o.ClientSecret = builder.Configuration["GITHUB_PROVIDER_AUTHENTICATION_SECRET"]!;
     });
 
 
