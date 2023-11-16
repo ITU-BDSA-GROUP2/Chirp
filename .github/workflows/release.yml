@@ -28,13 +28,6 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 7.0.*
-      - name: Check commit message for release trigger
-        run: |
-          if [ "$(git log -1 --pretty=%B)" = "release_trigger:true" ]; then
-          echo "Release trigger found. Deploying release..."
-          else
-          echo "No release trigger found. Skipping release."
-          fi
       - name: Builds release
         shell: bash
         run: |
