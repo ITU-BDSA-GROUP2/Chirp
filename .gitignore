@@ -478,9 +478,7 @@ $RECYCLE.BIN/
 
 
 #Ignore
-*
 
 
 #Except files below
 !.gitignore
-!*.cs
