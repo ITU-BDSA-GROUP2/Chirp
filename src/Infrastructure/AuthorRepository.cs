@@ -19,6 +19,7 @@ public class AuthorRepository : IAuthorRepository
             Name = newAuthor.Name,
             Email = newAuthor.Email,
             Cheeps = new List<Cheep>(),
+            FollowerList = new List<Author>(),
         };
         
         db.Authors.Add(author);

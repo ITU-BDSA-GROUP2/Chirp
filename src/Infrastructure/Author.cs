@@ -10,4 +10,6 @@ public class Author
     public string Email { get; set; } = "";
     [Required]
     public List<Cheep> Cheeps { get; set; } = new List<Cheep>();
+    [Required]
+    public List<Author> Following { get; set; } = new List<Author>();
 }
