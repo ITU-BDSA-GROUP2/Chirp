@@ -21,3 +21,5 @@ jobs:
       run: dotnet build src/Chirp.Razor --no-restore
     - name: Test
       run: dotnet test test/test.Chirp --no-build --verbosity normal
+    - name: UiTest
+      run: dotnet test PlaywrightTests --no-build --verbosity normal
