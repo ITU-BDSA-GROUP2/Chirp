@@ -67,7 +67,7 @@ public class FollowerListRepository : IFollowerListRepository
         (a.FollowedAuthorId == followedUser.AuthorId))
         .FirstOrDefaultAsync();
 
-         if (unfollow != null) {
+        if (unfollow != null) {
             db.Following.Remove(unfollow);
         } else {
             throw new ArgumentNullException("No cheep to be removed");

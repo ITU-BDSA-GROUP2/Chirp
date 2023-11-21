@@ -14,7 +14,7 @@ public class UserTimelineModel : PageModel
     public IEnumerable<CheepDto> Cheeps { get; set; } = new List<CheepDto>();
     public IEnumerable<CheepDto> AllCheeps { get; set; } = new List<CheepDto>();
  
-    [StringLength(240)]
+    [StringLength(160)]
     public string CheepText { get; set; } = "";
 
     public UserTimelineModel(ICheepRepository service, IAuthorRepository authorRepo)

@@ -23,7 +23,7 @@ public class PublicModel : PageModel
     public IEnumerable<FollowDto> Followers { get; set; } = new List<FollowDto>();
 
 
-    [StringLength(240)]
+    [StringLength(160)]
     public string CheepText { get; set; } = "";
 
     public string Author { get; set;} = "";
@@ -49,7 +49,7 @@ public class PublicModel : PageModel
         }
 
         string text = Request.Form["CheepText"]!;
-        if (text.Length > 0 && text.Length <= 240) {
+        if (text.Length > 0 && text.Length <= 160) {
              var cheep = new CheepDto(text, author, DateTime.UtcNow);
             await _service.CreateCheep(cheep);
         } else {
@@ -93,7 +93,7 @@ public class PublicModel : PageModel
 
         var authorDto = new AuthorDto(Author, Author);
 
-        await _followRepo.Follow(userDto, authorDto);
+        await _followRepo.UnFollow(userDto, authorDto);
 
         return await ShowCheeps();
     }

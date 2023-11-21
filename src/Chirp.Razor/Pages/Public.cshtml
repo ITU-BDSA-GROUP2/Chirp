@@ -36,18 +36,18 @@
                             <a href="/@cheep.Author">@cheep.Author</a>
                         </strong>
                         
-                        @if (Model.Followers.Where(c => c.AuthorId == cheep.AuthorId) == null)
-                        {
-                        <form method="POST" asp-page-handler="Follow" > 
-                            <input type="hidden" value="@cheep.Author" asp-for="Author"/>
-                            <button type="submit">Follow</button>
-                        </form>
-                        }
-                        else 
+                        @if (Model.Followers.Any())
                         {
                         <form method="POST" asp-page-handler="Unfollow" > 
                             <input type="hidden" value="@cheep.Author" asp-for="Author"/>
                             <button type="submit">Unfollow</button>
+                        </form>
+                        }
+                        else 
+                        {
+                        <form method="POST" asp-page-handler="Follow" > 
+                            <input type="hidden" value="@cheep.Author" asp-for="Author"/>
+                            <button type="submit">follow</button>
                         </form> 
                         }
                         @cheep.Text
