@@ -95,18 +95,6 @@ public class Tests : PageTest
     {
         await Page.GotoAsync("https://bdsagroup2chirprazor.azurewebsites.net/");
 
-        var userTimeline = Page.GetByRole(AriaRole.Link, new() { Name = "Jacqualine Gilcoine" });
-
-        await userTimeline.ClickAsync();
-
-        await Expect(Page.Locator("h2")).ToHaveTextAsync("Jacqualine Gilcoine's Timeline");
-    }
-    [Test]
-    // When we click on public timeline we can actually see public timeline
-    public async Task WhenClickUserViewTimeline()
-    {
-        await Page.GotoAsync("https://bdsagroup2chirprazor.azurewebsites.net/");
-
         await Page.Locator("p").Filter(new() { HasText = "Jacqualine Gilcoine Starbuck now is what we hear the worst. — 08/01/2023 13:17:3" }).GetByRole(AriaRole.Link).ClickAsync();
 
         await Expect(Page.Locator("h2")).ToHaveTextAsync("Jacqualine Gilcoine's Timeline");
