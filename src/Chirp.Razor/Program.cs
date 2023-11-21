@@ -74,7 +74,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapRazorPages();
 app.UseCookiePolicy(new CookiePolicyOptions()
-        {
-            MinimumSameSitePolicy = SameSiteMode.Lax
-        });
+    {
+        MinimumSameSitePolicy = SameSiteMode.Lax
+    });
 app.Run();

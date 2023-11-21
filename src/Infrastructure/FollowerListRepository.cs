@@ -16,10 +16,10 @@ public class FollowerListRepository : IFollowerListRepository
     }
 
 
-    public async Task Follow(AuthorDto authorFollows, AuthorDto authorFollowed)
+    public async Task Follow(string authorFollows, string authorFollowed)
     {
         var user = await db.Authors
-        .Where(a => a.Name == authorFollows.Name)
+        .Where(a => a.Name == authorFollows)
         .FirstOrDefaultAsync();
 
         if (user == null) {
@@ -27,7 +27,7 @@ public class FollowerListRepository : IFollowerListRepository
         }
 
         var followedUser = await db.Authors
-        .Where(a => a.Name == authorFollowed.Name)
+        .Where(a => a.Name == authorFollowed)
         .FirstOrDefaultAsync();
 
         if (followedUser == null) {
@@ -39,14 +39,18 @@ public class FollowerListRepository : IFollowerListRepository
             FollowedAuthorId = followedUser.AuthorId,
         };
 
+        if (await db.Following
+        .Where(f => (f.UserId == followList.UserId) && (f.FollowedAuthorId == followList.FollowedAuthorId))
+        .FirstOrDefaultAsync() != null) return;
+
         db.Following.Add(followList);
         await db.SaveChangesAsync();
     }
 
-    public async Task UnFollow(AuthorDto authorFollows, AuthorDto authorFollowed)
+    public async Task UnFollow(string authorFollows, string authorFollowed)
     {
         var user = await db.Authors
-        .Where(a => a.Name == authorFollows.Name)
+        .Where(a => a.Name == authorFollows)
         .FirstOrDefaultAsync();
 
         if (user == null) {
@@ -54,7 +58,7 @@ public class FollowerListRepository : IFollowerListRepository
         }
 
         var followedUser = await db.Authors
-        .Where(a => a.Name == authorFollowed.Name)
+        .Where(a => a.Name == authorFollowed)
         .FirstOrDefaultAsync();
 
         if (followedUser == null) {
@@ -70,21 +74,24 @@ public class FollowerListRepository : IFollowerListRepository
         if (unfollow != null) {
             db.Following.Remove(unfollow);
         } else {
-            throw new ArgumentNullException("No cheep to be removed");
+            return;
         }
         await db.SaveChangesAsync();
     }
 
     public async Task<IEnumerable<FollowDto>> GetFollowers(string authorName)
     {
-        int id = await db.Authors.
-        Where(c => c.Name == authorName)
-        .Select(c => c.AuthorId)
+        var user = await db.Authors
+        .Where(c => c.Name == authorName)
+        .FirstOrDefaultAsync();
+
+        var author = await db.Authors
+        .Where(c => c.Name == authorName)
         .FirstOrDefaultAsync();
 
         return await db.Following
-            .Where(u => u.UserId == id)
-            .Select(c => new FollowDto(c.UserId, c.FollowedAuthorId))
+            .Where(u => u.UserId == user.AuthorId)
+            .Select(c => new FollowDto(c.UserId, c.FollowedAuthorId, user.Name, author.Name))
             .ToListAsync();
     }
 

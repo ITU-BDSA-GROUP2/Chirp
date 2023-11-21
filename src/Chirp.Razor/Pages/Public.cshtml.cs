@@ -69,14 +69,11 @@ public class PublicModel : PageModel
             return Redirect("/Identity/Account/Register");
         }
 
-        var userDto = new AuthorDto(user.Name, user.Name);
-
-        var authorDto = new AuthorDto(Author, Author);
-
-        Console.WriteLine(Author);
 
 
-        await _followRepo.Follow(userDto, authorDto);
+
+
+        await _followRepo.Follow(user.Name, Author);
 
         return await ShowCheeps();
     }
@@ -89,11 +86,7 @@ public class PublicModel : PageModel
             return Redirect("/Identity/Account/Register"); //Should never be possible.
         }
 
-        var userDto = new AuthorDto(user.Name, user.Name);
-
-        var authorDto = new AuthorDto(Author, Author);
-
-        await _followRepo.UnFollow(userDto, authorDto);
+        await _followRepo.UnFollow(user.Name, Author);
 
         return await ShowCheeps();
     }
