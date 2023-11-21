@@ -130,6 +130,8 @@ div.page ul.cheeps p {
   margin: 0;
 }
 
+
+
 div.page ul.cheeps li img {
   float: left;
   padding: 0 10px 0 0;
@@ -352,4 +354,60 @@ ul.pagination li {
   text-decoration: none;
   list-style-type: none;
   margin: 15px;
+}
+
+.followButton {
+  margin-top: 5px;
+  padding: 5px 10px;
+  background-color: #F0FAF9;
+  color: #cc6e6e;
+  border: 2px solid #cc6e6e;
+  transition: ease-in-out .5s;
+}
+
+.followButton:hover {
+  background-color: #cc6e6e;
+  color: #fff;
+  cursor: pointer;
+}
+
+div.page ul.cheeps p.cheepText {
+  margin: 1rem 0 0 0.5rem;
+}
+
+.footerGrouping {
+  display: flex;
+  flex-flow: row-reverse;
+  justify-content: flex-end;
+  margin: 5px;
+}
+
+.likeWrapper {
+  display: flex;
+  flex-flow: row;
+}
+
+.time {
+  padding: 10px;
+  position: absolute;
+  left: 62.5%;
+}
+
+.likeButton {
+  margin-top: 5px;
+  padding: 7.5px 10px;
+  color: #cc6e6e;
+  border: 2px solid #cc6e6e;
+  transition: ease-in-out .5s;
+}
+.likeButton:hover {
+  cursor: pointer;
+  background-color: #cc6e6e;
+  color: #fff;
+}
+
+.likeCounter {
+  margin-top: 5px;
+  padding: 10px;
+  color: #cc6e6e;
 }
