@@ -26,23 +26,10 @@
 
 <div>
     <h2> @routeName's Timeline </h2>
-
+    
     @if (Model.Cheeps.Any())
     {
-        <ul id="messagelist" class="cheeps">
-            @foreach (var cheep in Model.Cheeps)
-            {
-                <li>
-                    <p>
-                        <strong>
-                            <a href="/@cheep.Author">@cheep.Author</a>
-                        </strong>
-                        @cheep.Text
-                        <small>&mdash; @cheep.Timestamp</small>
-                    </p>
-                </li>
-            }
-        </ul>
+        @Html.Partial("Shared/Cheeps.cshtml")
     }
     else
     {
