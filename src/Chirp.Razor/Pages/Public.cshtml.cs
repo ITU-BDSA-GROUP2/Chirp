@@ -13,29 +13,34 @@ public class PublicModel : PageModel
 
     private readonly IAuthorRepository _authorRepo;
 
+    private readonly IFollowerListRepository _followRepo;
+
+
     public IEnumerable<CheepDto> Cheeps { get; set; } = new List<CheepDto>();
 
     public IEnumerable<CheepDto> AllCheeps { get; set; } = new List<CheepDto>();
 
+    public IEnumerable<FollowDto> Followers { get; set; } = new List<FollowDto>();
+
+
     [StringLength(240)]
     public string CheepText { get; set; } = "";
 
-    public PublicModel(ICheepRepository service, IAuthorRepository authorRepo)
+    public string Author { get; set;} = "";
+
+    public PublicModel(ICheepRepository service, IAuthorRepository authorRepo, IFollowerListRepository followRepo)
     {
         _service = service;
         _authorRepo = authorRepo;
+        _followRepo = followRepo;
     }
 
     public async Task<ActionResult> OnGet()
     {
-        var t = Convert.ToInt32(Request.Query["page"]);
-        if (t > 0) t -= 1;
-        Cheeps = await _service.GetCheeps(t);
-        AllCheeps = await _service.GetAllCheeps();
-        return await showCheeps();
+        return await ShowCheeps();
     }
 
-    public async Task<ActionResult> OnPost()
+    public async Task<ActionResult> OnPostCheep()
     {
             var author = User.Identity!.Name!;
         if (await _authorRepo.GetAuthorByName(author!) == null) {
@@ -50,19 +55,55 @@ public class PublicModel : PageModel
         } else {
             ModelState.AddModelError("ErrorMessageLength", "You can betweem 1 and 240 characters");
             //return Page();
-            return await showCheeps();
+            return await ShowCheeps();
         }
-        Console.WriteLine(text);
        
-
-        return await showCheeps();
+        return await ShowCheeps();
     }
 
-    private async Task<ActionResult> showCheeps() {
+    public async Task<ActionResult> OnPostFollow() {
+        var user = User.Identity!;
+        Author = Request.Form["Author"]!;
+
+        if (user.Name == null) {
+            return Redirect("/Identity/Account/Register");
+        }
+
+        var userDto = new AuthorDto(user.Name, user.Name);
+
+        var authorDto = new AuthorDto(Author, Author);
+
+        Console.WriteLine(Author);
+
+
+        await _followRepo.Follow(userDto, authorDto);
+
+        return await ShowCheeps();
+    }
+
+    public async Task<ActionResult> OnPostUnfollow() {
+        var user = User.Identity!;
+        Author = Request.Form["Author"]!;
+
+        if (user.Name == null) {
+            return Redirect("/Identity/Account/Register"); //Should never be possible.
+        }
+
+        var userDto = new AuthorDto(user.Name, user.Name);
+
+        var authorDto = new AuthorDto(Author, Author);
+
+        await _followRepo.Follow(userDto, authorDto);
+
+        return await ShowCheeps();
+    }
+
+    private async Task<ActionResult> ShowCheeps() {
         var t = Convert.ToInt32(Request.Query["page"]);
         if (t > 0) t -= 1;
         Cheeps = await _service.GetCheeps(t);
         AllCheeps = await _service.GetAllCheeps();
+        Followers = await _followRepo.GetFollowers(User.Identity!.Name!);
         return Page();
     }
 }

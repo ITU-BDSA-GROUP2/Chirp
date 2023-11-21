@@ -18,6 +18,10 @@ public class CheepRepository : ICheepRepository
         var author = await db.Authors
         .Where(a => a.Name == cheep.Author)
         .FirstOrDefaultAsync();
+
+        if (author == null) {
+            throw new ArgumentNullException("Author doesn't exist");
+        }
         var newCheep = new Cheep {
             Text = cheep.Text,
             TimeStamp = cheep.Timestamp,

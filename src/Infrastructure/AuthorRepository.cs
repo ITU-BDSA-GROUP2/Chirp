@@ -19,7 +19,6 @@ public class AuthorRepository : IAuthorRepository
             Name = newAuthor.Name,
             Email = newAuthor.Email,
             Cheeps = new List<Cheep>(),
-            FollowerList = new List<Author>(),
         };
         
         db.Authors.Add(author);
@@ -33,6 +32,10 @@ public class AuthorRepository : IAuthorRepository
         .Select(a => new AuthorDto(a.Name, a.Email))
         .FirstOrDefaultAsync();
 
+        if (author == null) {
+            throw new ArgumentNullException("Author does not exist");
+        }
+
         return author;
     }
 
@@ -42,6 +45,11 @@ public class AuthorRepository : IAuthorRepository
         .Where(u => u.Email == authorEmail)
         .Select(a => new AuthorDto(a.Name, a.Email))
         .FirstOrDefaultAsync();
+
+        if (author == null) {
+            throw new ArgumentNullException("Author does not exist");
+        }
+
         return author;
     }
 }

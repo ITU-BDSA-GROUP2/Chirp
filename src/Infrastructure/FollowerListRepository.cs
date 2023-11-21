@@ -6,11 +6,11 @@ namespace Infrastructure;
 
 
 
-public class FollowerList : IFollowerListRepository
+public class FollowerListRepository : IFollowerListRepository
 {
     private readonly ChirpDBContext db;
 
-    public FollowerList(ChirpDBContext context)
+    public FollowerListRepository(ChirpDBContext context)
     {
         db = context;
     }
@@ -18,48 +18,74 @@ public class FollowerList : IFollowerListRepository
 
     public async Task Follow(AuthorDto authorFollows, AuthorDto authorFollowed)
     {
-        var user = await db.Author
+        var user = await db.Authors
         .Where(a => a.Name == authorFollows.Name)
         .FirstOrDefaultAsync();
 
-        var followedUser = await db.Author
+        if (user == null) {
+            throw new ArgumentNullException("No user exists");
+        }
+
+        var followedUser = await db.Authors
         .Where(a => a.Name == authorFollowed.Name)
         .FirstOrDefaultAsync();
 
-        var followList = new FollowerList()
-        {
-            AuthorID = user.AuthorID,
-            Author = user,
-            FollowedAuthorID = followedUser.AuthorID,
-            FollowedAuthor = followedUser,   
+        if (followedUser == null) {
+            throw new ArgumentNullException("No user exists");
         }
 
-        db.FollowerList.Add(followList);
+        var followList = new FollowerList {
+            UserId = user.AuthorId,
+            FollowedAuthorId = followedUser.AuthorId,
+        };
+
+        db.Following.Add(followList);
         await db.SaveChangesAsync();
     }
 
     public async Task UnFollow(AuthorDto authorFollows, AuthorDto authorFollowed)
     {
-        var user = await db.Author
+        var user = await db.Authors
         .Where(a => a.Name == authorFollows.Name)
         .FirstOrDefaultAsync();
 
-        var followedUser = await db.Author
+        if (user == null) {
+            throw new ArgumentNullException("No user exists");
+        }
+
+        var followedUser = await db.Authors
         .Where(a => a.Name == authorFollowed.Name)
         .FirstOrDefaultAsync();
 
-        var unfollow = await db.FollowerList
+        if (followedUser == null) {
+            throw new ArgumentNullException("No user exists");
+        }
+
+        var unfollow = await db.Following
         .Where(a =>
-        (a.AuthorID == user.AuthorID) &&
-        (a.FollowedAuthorID == followedUser.AuthorID)
-        )
+        (a.UserId == user.AuthorId) &&
+        (a.FollowedAuthorId == followedUser.AuthorId))
+        .FirstOrDefaultAsync();
 
          if (unfollow != null) {
-            db.FollowerList.Remove(unfollow);
+            db.Following.Remove(unfollow);
         } else {
             throw new ArgumentNullException("No cheep to be removed");
         }
         await db.SaveChangesAsync();
+    }
+
+    public async Task<IEnumerable<FollowDto>> GetFollowers(string authorName)
+    {
+        int id = await db.Authors.
+        Where(c => c.Name == authorName)
+        .Select(c => c.AuthorId)
+        .FirstOrDefaultAsync();
+
+        return await db.Following
+            .Where(u => u.UserId == id)
+            .Select(c => new FollowDto(c.UserId, c.FollowedAuthorId))
+            .ToListAsync();
     }
 
 }

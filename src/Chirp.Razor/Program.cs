@@ -28,6 +28,7 @@ builder.Services.AddDbContext<ChirpDBContext>(
         
 builder.Services.AddScoped<ICheepRepository, CheepRepository>();
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+builder.Services.AddScoped<IFollowerListRepository, FollowerListRepository>();
 
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>

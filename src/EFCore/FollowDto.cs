@@ -1,0 +1,1 @@
+public record FollowDto(int UserId, int AuthorId);
