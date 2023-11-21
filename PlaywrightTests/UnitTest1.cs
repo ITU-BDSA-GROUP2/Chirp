@@ -33,5 +33,19 @@ public class Tests : PageTest
 
         await Expect(Page).ToHaveTitleAsync(new Regex("Log in"));
     }
+    [Test]
+    public async Task RegisterButtonDirectsToRegisterPage()
+    {
+        await Page.GotoAsync("https://bdsagroup2chirprazor.azurewebsites.net/");
+
+        var register = Page.GetByRole(AriaRole.Link, new() { Name = "Register" });
+
+        await Expect(register).ToHaveAttributeAsync("href", "/Identity/Account/Register");
+
+        await register.ClickAsync();
+
+        await Expect(Page).ToHaveTitleAsync(new Regex("Register"));
+    }
+
 
 }
