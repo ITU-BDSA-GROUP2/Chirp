@@ -2,14 +2,30 @@
     @foreach (var cheep in Model.Cheeps)
     {
         <li>
-            <p>
+            <img src="https://placehold.co/50x50"> 
+            <p class="cheepAuhtor">
                 <strong>
                     <a href="/@cheep.Author">@cheep.Author</a>
                 </strong>
-                <br>
-                @cheep.Text
-                <small>&mdash; @cheep.Timestamp.ToLocalTime()</small>
             </p>
+            <form method="POST"> 
+                <button class="followButton" type="submit">Follow</button>
+            </form>
+            
+            <p class="cheepText">
+                @cheep.Text
+            </p>
+            <br>
+            <hr>
+            <div class="footerGrouping">
+                <p class="time"><small>&mdash; @cheep.Timestamp.ToLocalTime()</small></p>
+                <span class="likeWrapper">
+                    <div class="likeButton">
+                        Like
+                    </div>
+                    <span class="likeCounter">0</span>
+                </span>
+            </div>
         </li>
     }
 </ul>
