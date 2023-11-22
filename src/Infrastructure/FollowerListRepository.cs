@@ -85,13 +85,15 @@ public class FollowerListRepository : IFollowerListRepository
         .Where(c => c.Name == authorName)
         .FirstOrDefaultAsync();
 
-        var author = await db.Authors
-        .Where(c => c.Name == authorName)
-        .FirstOrDefaultAsync();
+        if (user == null)
+        {
+            return Enumerable.Empty<FollowDto>();
+        }
+
 
         return await db.Following
             .Where(u => u.UserId == user.AuthorId)
-            .Select(c => new FollowDto(c.UserId, c.FollowedAuthorId, user.Name, author.Name))
+            .Select(c => new FollowDto(c.UserId, c.FollowedAuthorId))
             .ToListAsync();
     }
 

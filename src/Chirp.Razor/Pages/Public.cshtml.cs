@@ -44,8 +44,7 @@ public class PublicModel : PageModel
     {
             var author = User.Identity!.Name!;
         if (await _authorRepo.GetAuthorByName(author!) == null) {
-            var authorDto = new AuthorDto(author, author);
-            await _authorRepo.CreateNewAuthor(authorDto);
+            await _authorRepo.CreateNewAuthor(author, author);
         }
 
         string text = Request.Form["CheepText"]!;
@@ -70,9 +69,6 @@ public class PublicModel : PageModel
         }
 
 
-
-
-
         await _followRepo.Follow(user.Name, Author);
 
         return await ShowCheeps();
@@ -89,6 +85,13 @@ public class PublicModel : PageModel
         await _followRepo.UnFollow(user.Name, Author);
 
         return await ShowCheeps();
+    }
+
+    public async Task<bool> IsFollowed(string authorName) {
+        var author = await _authorRepo.GetAuthorByName(authorName);
+
+        return Followers.Where(f => f.AuthorId == author.AuthorId).FirstOrDefault() != null;
+    
     }
 
     private async Task<ActionResult> ShowCheeps() {

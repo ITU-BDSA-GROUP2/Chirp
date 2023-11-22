@@ -1,1 +1,1 @@
-public record AuthorDto(string Name, string Email);
+public record AuthorDto(string Name, string Email, int AuthorId);

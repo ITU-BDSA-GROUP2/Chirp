@@ -33,8 +33,7 @@ public class UserTimelineModel : PageModel
         {
             var author = User.Identity!.Name!;
         if (await _authorRepo.GetAuthorByName(author!) == null) {
-            var authorDto = new AuthorDto(author, author);
-            await _authorRepo.CreateNewAuthor(authorDto);
+            await _authorRepo.CreateNewAuthor(author, author);
         }
 
         string text = Request.Form["CheepText"]!;

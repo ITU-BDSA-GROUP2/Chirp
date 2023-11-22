@@ -36,25 +36,21 @@
                             <a href="/@cheep.Author">@cheep.Author</a>
                         </strong>
                         
-                        @if (Model.Followers.Any()) 
-                        {               
-                            @if (Model.Followers
-                            .Where(f => f.authorName == cheep.Author)
-                            .First() != null) 
-                            {
-                        <form method="POST" asp-page-handler="Unfollow" > 
-                            <input type="hidden" value="@cheep.Author" asp-for="Author"/>
-                            <button type="submit">Unfollow</button>
-                        </form>
-                            }
-                            }
-                            else 
-                            {
-                        <form method="POST" asp-page-handler="Follow" > 
-                            <input type="hidden" value="@cheep.Author" asp-for="Author"/>
-                            <button type="submit">Follow</button>
-                        </form> 
-                            }
+                        @if (await Model.IsFollowed(cheep.Author)) {
+                            <form method="POST" asp-page-handler="Unfollow" > 
+                                <input type="hidden" value="@cheep.Author" asp-for="Author"/>
+                                <button type="submit">Unfollow</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form method="POST" asp-page-handler="Follow" > 
+                                <input type="hidden" value="@cheep.Author" asp-for="Author"/>
+                                <button type="submit">Follow</button>
+                            </form> 
+                        }
+                        
+                        
                         @cheep.Text
                         <small>&mdash; @cheep.Timestamp.ToLocalTime()</small>
                     </p>
