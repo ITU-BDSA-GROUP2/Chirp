@@ -13,11 +13,11 @@ public class AuthorRepository : IAuthorRepository
         db = context;
     }
 
-    public async Task CreateNewAuthor(AuthorDto newAuthor)
+    public async Task CreateNewAuthor(string name, string email)
     {
         var author = new Author {
-            Name = newAuthor.Name,
-            Email = newAuthor.Email,
+            Name =  name,
+            Email = email,
             Cheeps = new List<Cheep>(),
         };
         
@@ -29,8 +29,12 @@ public class AuthorRepository : IAuthorRepository
     {
         var author = await db.Authors
         .Where(u => u.Name == authorName)
-        .Select(a => new AuthorDto(a.Name, a.Email))
+        .Select(a => new AuthorDto(a.Name, a.Email, a.AuthorId))
         .FirstOrDefaultAsync();
+
+        if (author == null) {
+            throw new ArgumentNullException("Author does not exist");
+        }
 
         return author;
     }
@@ -39,8 +43,13 @@ public class AuthorRepository : IAuthorRepository
     {
         var author = await db.Authors
         .Where(u => u.Email == authorEmail)
-        .Select(a => new AuthorDto(a.Name, a.Email))
+        .Select(a => new AuthorDto(a.Name, a.Email, a.AuthorId))
         .FirstOrDefaultAsync();
+
+        if (author == null) {
+            throw new ArgumentNullException("Author does not exist");
+        }
+
         return author;
     }
 }

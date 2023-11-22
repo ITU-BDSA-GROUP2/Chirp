@@ -14,7 +14,7 @@ public class UserTimelineModel : PageModel
     public IEnumerable<CheepDto> Cheeps { get; set; } = new List<CheepDto>();
     public IEnumerable<CheepDto> AllCheeps { get; set; } = new List<CheepDto>();
  
-    [StringLength(240)]
+    [StringLength(160)]
     public string CheepText { get; set; } = "";
 
     public UserTimelineModel(ICheepRepository service, IAuthorRepository authorRepo)
@@ -33,8 +33,7 @@ public class UserTimelineModel : PageModel
         {
             var author = User.Identity!.Name!;
         if (await _authorRepo.GetAuthorByName(author!) == null) {
-            var authorDto = new AuthorDto(author, author);
-            await _authorRepo.CreateNewAuthor(authorDto);
+            await _authorRepo.CreateNewAuthor(author, author);
         }
 
         string text = Request.Form["CheepText"]!;

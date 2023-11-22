@@ -16,6 +16,36 @@
     @if (Model.Cheeps.Any())
     {
         @Html.Partial("Shared/_Cheeps.cshtml")
+        <ul id="messagelist" class="cheeps">
+            @foreach (var cheep in Model.Cheeps)
+            {
+                <li>
+                    <p>
+                        <strong>
+                            <a href="/@cheep.Author">@cheep.Author</a>
+                        </strong>
+                        
+                        @if (await Model.IsFollowed(cheep.Author)) {
+                            <form method="POST" asp-page-handler="Unfollow" > 
+                                <input type="hidden" value="@cheep.Author" asp-for="Author"/>
+                                <button type="submit">Unfollow</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form method="POST" asp-page-handler="Follow" > 
+                                <input type="hidden" value="@cheep.Author" asp-for="Author"/>
+                                <button type="submit">Follow</button>
+                            </form> 
+                        }
+                        
+                        
+                        @cheep.Text
+                        <small>&mdash; @cheep.Timestamp.ToLocalTime()</small>
+                    </p>
+                </li>
+            }
+        </ul>
     }
     else
     {

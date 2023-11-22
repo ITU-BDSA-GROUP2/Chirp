@@ -50,17 +50,18 @@ public class InMemoryTests : IDisposable {
      public async void CreateNewAuthor()
      {
         //Arrange
-        var authorDto = new AuthorDto("Asger", "Asger@asd.com");
+        var authorName = "Asger";
+        var email = "Asger@asd.com";
 
         //Act
-         aController.CreateNewAuthor(authorDto);
+         await aController.CreateNewAuthor(authorName, email);
          var author = await context.Authors
-         .Where(a => a.Name == authorDto.Name)
+         .Where(a => a.Name == authorName)
          .FirstOrDefaultAsync();
 
         //Assert
          Assert.NotNull(author);
-         Assert.Equal(authorDto.Name, author.Name);
+         Assert.Equal(authorName, authorName);
      }
 
 
@@ -78,6 +79,7 @@ public class InMemoryTests : IDisposable {
         Assert.Equal(authorName, author.Name);
     }
 
+    //Found from here: https://stackoverflow.com/a/45017575
     [Fact]
     public async void GetAuthorByNameThatDoesNotExist()
     {
@@ -85,10 +87,8 @@ public class InMemoryTests : IDisposable {
         var authorName = "Harry Potter";
 
         //Act
-        var author = await aController.GetAuthorByName(authorName);
-
         //Assert
-        Assert.Null(author);
+        await Assert.ThrowsAsync<ArgumentNullException>(() => aController.GetAuthorByName(authorName));
     }
 
     [Fact]
@@ -105,17 +105,18 @@ public class InMemoryTests : IDisposable {
         Assert.Equal(authorEmail, author.Email);
     }
 
+
+    //Inspiration from here: https://stackoverflow.com/a/45017575
     [Fact]
     public async void GetAuthorByEmailThatDoesNotExist()
     {
         //Arrange
         var authorEmail = "VoldARMAN@jubiiiiii.com";
 
+        
         //Act
-        var author = await aController.GetAuthorByEmail(authorEmail);
-
         //Assert
-        Assert.Null(author);
+        await Assert.ThrowsAsync<ArgumentNullException>(() => aController.GetAuthorByEmail(authorEmail));
     }
         
 
@@ -128,7 +129,7 @@ public class InMemoryTests : IDisposable {
         var cheepDto = new CheepDto("Hello my friends! :)", "Voldemort", DateTime.Now);
 
         //Act
-        cController.CreateCheep(cheepDto);
+        await cController.CreateCheep(cheepDto);
         var cheep = await context.Cheeps
         .Where(c => c.Text == cheepDto.Text)
         .FirstOrDefaultAsync();
@@ -169,7 +170,7 @@ public class InMemoryTests : IDisposable {
 
         //Assert
         Assert.NotNull(allCheeps);
-        Assert.Equal(0, allCheeps.Count());
+        Assert.Empty(allCheeps);
     }
 
 
@@ -178,11 +179,12 @@ public class InMemoryTests : IDisposable {
     public async void GetCheepsFromPage()
     {
         //Arrange 
-        var author = new AuthorDto("Hans", "Hansemanden@asd.com");
-        aController.CreateNewAuthor(author);
+        var authorName = "Hans";
+        var email = "Hansemanden@asd.com";
+        await aController.CreateNewAuthor(authorName, email);
         for (int i = 0; i < 50; i++) {
-            var cheep = new CheepDto(i.ToString(), author.Name, DateTime.Now);
-            cController.CreateCheep(cheep);
+            var cheep = new CheepDto(i.ToString(), authorName, DateTime.Now);
+            await cController.CreateCheep(cheep);
         }
         var pageSize = 32;
         var expectedCheepCount = 53;
@@ -205,11 +207,12 @@ public class InMemoryTests : IDisposable {
     [Fact]
     public async void GetCheepsFromSpecificAuthorPage() {
         //Arrange
-        var author = new AuthorDto("Hans", "Hansemanden@asd.com");
-        aController.CreateNewAuthor(author);
+        var authorName = "Hans";
+        var email = "Hansemanden@asd.com";
+        await aController.CreateNewAuthor(authorName, email);
         for (int i = 0; i < 50; i++) {
-            var cheep = new CheepDto(i.ToString(), author.Name, DateTime.Now);
-            cController.CreateCheep(cheep);
+            var cheep = new CheepDto(i.ToString(), authorName, DateTime.Now);
+            await cController.CreateCheep(cheep);
         }
         var pageSize = 32;
         var expectedCheepCount = 50;
@@ -218,9 +221,9 @@ public class InMemoryTests : IDisposable {
         var cheepPage3 = 2;
 
         //Act
-        var cheepsPage1 = await cController.GetCheepsFromAuthor(author.Name, cheepPage1);
-        var cheepsPage2 = await cController.GetCheepsFromAuthor(author.Name, cheepPage2);
-        var cheepsPage3 = await cController.GetCheepsFromAuthor(author.Name, cheepPage3);
+        var cheepsPage1 = await cController.GetCheepsFromAuthor(authorName, cheepPage1);
+        var cheepsPage2 = await cController.GetCheepsFromAuthor(authorName, cheepPage2);
+        var cheepsPage3 = await cController.GetCheepsFromAuthor(authorName, cheepPage3);
 
 
         //Assert
@@ -230,17 +233,18 @@ public class InMemoryTests : IDisposable {
 
         Assert.Equal(pageSize, cheepsPage1.Count());
         Assert.Equal(expectedCheepCount-pageSize, cheepsPage2.Count());
-        Assert.Equal(0, cheepsPage3.Count());
+        Assert.Empty(cheepsPage3);
     }
 
     [Fact]
     public async void GetAllCheeps() {
         //Arrange
-        var author = new AuthorDto("Hans", "Hansemanden@asd.com");
-        aController.CreateNewAuthor(author);
+        var authorName = "Hans";
+        var email = "Hansemanden@asd.com";
+        await aController.CreateNewAuthor(authorName, email);
         for (int i = 0; i < 50; i++) {
-            var cheep = new CheepDto(i.ToString(), author.Name, DateTime.Now);
-            cController.CreateCheep(cheep);
+            var cheep = new CheepDto(i.ToString(), authorName, DateTime.Now);
+            await cController.CreateCheep(cheep);
         }
         var expectedCheepCount = 53;
         
@@ -256,16 +260,17 @@ public class InMemoryTests : IDisposable {
     [Fact]
     public async void GetAllCheepsFromAuthor() {
         //Arrange
-        var author = new AuthorDto("Hans", "Hansemanden@asd.com");
-        aController.CreateNewAuthor(author);
+        var authorName = "Hans";
+        var email = "Hansemanden@asd.com";
+        await aController.CreateNewAuthor(authorName, email);
         for (int i = 0; i < 50; i++) {
-            var cheep = new CheepDto(i.ToString(), author.Name, DateTime.Now);
-            cController.CreateCheep(cheep);
+            var cheep = new CheepDto(i.ToString(), authorName, DateTime.Now);
+            await cController.CreateCheep(cheep);
         }
         var expectedCheepCount = 50;
         
         //Act
-        var allCheepsFromHans = await cController.GetAllCheepsFromAuthor(author.Name);
+        var allCheepsFromHans = await cController.GetAllCheepsFromAuthor(authorName);
         
         //Assert
         Assert.NotNull(allCheepsFromHans);

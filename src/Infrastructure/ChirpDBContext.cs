@@ -10,6 +10,8 @@ public class ChirpDBContext : IdentityDbContext
 
     public DbSet<Author> Authors { get; set; }
 
+    public DbSet<FollowerList> Following { get; set; }
+
 
 
     public ChirpDBContext(DbContextOptions<ChirpDBContext> options) : base(options) { }
@@ -21,5 +23,7 @@ public class ChirpDBContext : IdentityDbContext
         modelBuilder.Entity<Author>()
            .HasIndex(c => c.AuthorId)
            .IsUnique();
+        modelBuilder.Entity<FollowerList>()
+            .HasKey(c => new {c.UserId, c.FollowedAuthorId});
     }
 }
