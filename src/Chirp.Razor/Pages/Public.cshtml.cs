@@ -54,10 +54,10 @@ public class PublicModel : PageModel
         } else {
             ModelState.AddModelError("ErrorMessageLength", "You can betweem 1 and 240 characters");
             //return Page();
-            return await ShowCheeps();
+            return RedirectToPage();
         }
        
-        return await ShowCheeps();
+        return RedirectToPage();
     }
 
     public async Task<ActionResult> OnPostFollow() {
@@ -68,10 +68,9 @@ public class PublicModel : PageModel
             return Redirect("/Identity/Account/Register");
         }
 
-
         await _followRepo.Follow(user.Name, Author);
 
-        return await ShowCheeps();
+        return RedirectToPage();
     }
 
     public async Task<ActionResult> OnPostUnfollow() {
@@ -84,7 +83,7 @@ public class PublicModel : PageModel
 
         await _followRepo.UnFollow(user.Name, Author);
 
-        return await ShowCheeps();
+        return RedirectToPage();
     }
 
     public async Task<bool> IsFollowed(string authorName) {

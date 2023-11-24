@@ -23,7 +23,7 @@ public class FollowerListRepository : IFollowerListRepository
         .FirstOrDefaultAsync();
 
         if (user == null) {
-            throw new ArgumentNullException("No user exists");
+            throw new ArgumentNullException("No user logged in");
         }
 
         var followedUser = await db.Authors
@@ -31,7 +31,7 @@ public class FollowerListRepository : IFollowerListRepository
         .FirstOrDefaultAsync();
 
         if (followedUser == null) {
-            throw new ArgumentNullException("No user exists");
+            throw new ArgumentNullException("User tried to follow does not exist");
         }
 
         var followList = new FollowerList {
@@ -54,7 +54,7 @@ public class FollowerListRepository : IFollowerListRepository
         .FirstOrDefaultAsync();
 
         if (user == null) {
-            throw new ArgumentNullException("No user exists");
+            throw new ArgumentNullException("No user logged in");
         }
 
         var followedUser = await db.Authors
@@ -62,7 +62,7 @@ public class FollowerListRepository : IFollowerListRepository
         .FirstOrDefaultAsync();
 
         if (followedUser == null) {
-            throw new ArgumentNullException("No user exists");
+            throw new ArgumentNullException("User tried to follow does not exist");
         }
 
         var unfollow = await db.Following

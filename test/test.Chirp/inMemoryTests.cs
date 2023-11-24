@@ -14,6 +14,8 @@ public class InMemoryTests : IDisposable {
     private readonly ChirpDBContext context;
     private readonly AuthorRepository aController;
     private readonly CheepRepository cController;
+    private readonly FollowerListRepository fController;
+
 
     public InMemoryTests()
     {
@@ -37,6 +39,7 @@ public class InMemoryTests : IDisposable {
 
         cController = new CheepRepository(context);
 
+        fController = new FollowerListRepository(context);
     }
 
     public void Dispose()
@@ -277,6 +280,72 @@ public class InMemoryTests : IDisposable {
         
         Assert.Equal(expectedCheepCount, allCheepsFromHans.Count());
     }
+
+    [Fact]
+    public async void FollowAuthor() {
+
+        //Arrange
+        var loggedInUser = "Voldemort";
+        var loggedInUserId = await context.Authors.Where(a => a.Name == loggedInUser).Select(a => a.AuthorId).FirstOrDefaultAsync();
+
+        var userToFollow = "Svanhildur";
+        var userToFollowId = await context.Authors.Where(a => a.Name == userToFollow).Select(a => a.AuthorId).FirstOrDefaultAsync();
+
+
+        
+        //Act
+        await fController.Follow(loggedInUser, userToFollow);
+        bool isUserFollowed = await context.Following.Where(a => a.UserId == loggedInUserId && a.FollowedAuthorId == userToFollowId).FirstOrDefaultAsync() != null;
+
+
+        //Assert
+        Assert.Equal(isUserFollowed, true);
+    }
+
+    [Fact]
+    public async void UnfollowAuthor() {
+
+        //Arrange
+        var loggedInUser = "Voldemort";
+        var loggedInUserId = await context.Authors.Where(a => a.Name == loggedInUser).Select(a => a.AuthorId).FirstOrDefaultAsync();
+
+        var userToFollow = "Svanhildur";
+        var userToFollowId = await context.Authors.Where(a => a.Name == userToFollow).Select(a => a.AuthorId).FirstOrDefaultAsync();
+        await fController.Follow(loggedInUser, userToFollow);
+
+
+        
+        //Act
+        await fController.UnFollow(loggedInUser, userToFollow);
+        bool isUserFollowed = await context.Following.Where(a => a.UserId == loggedInUserId && a.FollowedAuthorId == userToFollowId).FirstOrDefaultAsync() != null;
+
+        //Assert
+        Assert.Equal(isUserFollowed, false);
+    }
+
+    [Fact]
+    public async void GetAllCheepsFromFollowed() {
+
+        //Arrange
+        var loggedInUser = "Voldemort";
+        var loggedInUserId = await context.Authors.Where(a => a.Name == loggedInUser).Select(a => a.AuthorId).FirstOrDefaultAsync();
+
+        var userToFollow = "Svanhildur";
+        var userToFollowId = await context.Authors.Where(a => a.Name == userToFollow).Select(a => a.AuthorId).FirstOrDefaultAsync();
+        await fController.Follow(loggedInUser, userToFollow);
+
+        var expectedCheepCount = 3;
+
+
+        
+        //Act
+        var cheepsFromUserAndFollowed = await cController.GetAllCheepsFromFollowed(loggedInUser, 0);
+        //Assert
+        Assert.NotNull(cheepsFromUserAndFollowed);
+        Assert.Equal(expectedCheepCount, cheepsFromUserAndFollowed.Count());
+    }
+
+
 
 
      private void SeedDatabase() {
