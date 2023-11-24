@@ -7,5 +7,7 @@ public interface ICheepRepository
     public Task<IEnumerable<CheepDto>> GetCheepsFromAuthor(string user, int offset);
     public Task<IEnumerable<CheepDto>> GetAllCheeps();
     public Task<IEnumerable<CheepDto>> GetAllCheepsFromAuthor(string user);
+    public Task<IEnumerable<CheepDto>> GetAllCheepsFromFollowed(string user, int offset);
+    public Task<IEnumerable<CheepDto>> GetAllCheepsFromFollowedCount(string user);
 
 }
