@@ -39,6 +39,10 @@ public class AboutMeModel : PageModel
     public async Task<AuthorDto> getAuthor(int id) {
         return await _authorRepo.GetAuthorByID(id);
     }
+
+    public async Task<AuthorDto> getCurrentAuthor(string name) {
+        return await _authorRepo.GetAuthorByName(name);
+    }
     
 
     

@@ -14,13 +14,14 @@
         </div>
         <div class="profileData">
             <form class="updateUserInformation">
+                @{
+                    var currentUser = Model.getCurrentAuthor(User.Identity.Name).Result;
+                }
                 <div class="inputWrapper">
                     <input class="updateUserInformationInput" autocomplete="username" aria-required="true"
-                            value="Oliver Prip" />
+                            value="@currentUser.Name" />
                     <input class="updateUserInformationInput" autocomplete="username" aria-required="true"
-                            value="OHAG" />
-                    <input class="updateUserInformationInput" autocomplete="username" aria-required="true"
-                            value="o@o.com" />
+                            value="@currentUser.Email" />
                 </div>
                 <div class="buttonWrapper">
                     <button type="submit" class="updateButton">Update user</button>
@@ -37,7 +38,9 @@
                 @foreach (var follower in Model.Followers)
                 {
                     
-                    <li><a href="/@follower">@Model.getAuthor(follower.AuthorId).Result.Name</a></li>
+                       var nameOfFollower =  Model.getAuthor(follower.AuthorId).Result.Name;
+                    
+                    <li><a href="/@nameOfFollower">@nameOfFollower</a></li>
                 }
             </ul>
         }
