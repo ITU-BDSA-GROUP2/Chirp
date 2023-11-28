@@ -52,4 +52,21 @@ public class AuthorRepository : IAuthorRepository
 
         return author;
     }
+
+    public async Task UpdateAuthorName(string oldName, string newName) {
+        var author = await db.Authors
+        .Where(a => a.Name == oldName)
+        .FirstOrDefaultAsync();
+
+        if (author == null) {
+            return;
+        }
+        author.Name = newName;
+        await db.SaveChangesAsync();
+    }
+
+    public async Task DeleteUser(string name) {
+
+    }
+
 }
