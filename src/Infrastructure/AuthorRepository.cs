@@ -67,7 +67,7 @@ public class AuthorRepository : IAuthorRepository
         return author;
     }
 
-    public async Task UpdateAuthorName(string oldName, string newName) {
+    public async Task UpdateAuthor(string oldName, string newName, string email) {
         var author = await db.Authors
         .Where(a => a.Name == oldName)
         .FirstOrDefaultAsync();
@@ -76,6 +76,7 @@ public class AuthorRepository : IAuthorRepository
             return;
         }
         author.Name = newName;
+        author.Email = email;
         await db.SaveChangesAsync();
     }
 
