@@ -10,7 +10,7 @@
                     </p>
 
 
-                    @if (!cheep.Author.Equals(User.Identity.Name)) {
+                    @if (!cheep.Author.Equals(User.Identity?.Name)) {
                     @if (await Model.IsFollowed(cheep.Author)) {
                         <form method="POST" asp-page-handler="Unfollow" > 
                             <input type="hidden" value="@cheep.Author" asp-for="Author"/>

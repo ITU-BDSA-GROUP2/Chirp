@@ -34,17 +34,7 @@ public class UserTimelineModel : PageModel
 
     public async Task<ActionResult> OnGet(string author)
     {
-        var t = Convert.ToInt32(Request.Query["page"]);
-        if (t > 0) t -= 1;
-        if (author.Equals(User.Identity.Name)) {
-            Cheeps = await _service.GetAllCheepsFromFollowed(author, t);
-            AllCheeps = await _service.GetAllCheepsFromFollowedCount(author);
-        } else {
-            Cheeps = await _service.GetCheepsFromAuthor(author, t);
-            AllCheeps = await _service.GetAllCheepsFromAuthor(author);
-
-        }
-        return Page();
+        return await ShowCheeps(author);
        
     }
         public async Task<ActionResult> OnPostCheep() 
@@ -58,7 +48,7 @@ public class UserTimelineModel : PageModel
         var cheep = new CheepDto(text, author, DateTime.UtcNow);
         await _service.CreateCheep(cheep);
 
-        return await showCheeps(author);
+        return await ShowCheeps(author);
     }
 
         public async Task<ActionResult> OnPostFollow() {
@@ -95,12 +85,18 @@ public class UserTimelineModel : PageModel
     
     }
 
-    private async Task<ActionResult> showCheeps(string author) {
+    private async Task<ActionResult> ShowCheeps(string author) {
         var t = Convert.ToInt32(Request.Query["page"]);
         if (t > 0) t -= 1;
-        Cheeps = await _service.GetCheepsFromAuthor(author, t);
-        AllCheeps = await _service.GetAllCheepsFromAuthor(author);
-        Followers = await _followRepo.GetFollowers(User.Identity!.Name!);
+        if (author.Equals(User.Identity?.Name!)) {
+            Cheeps = await _service.GetAllCheepsFromFollowed(author, t);
+            AllCheeps = await _service.GetAllCheepsFromFollowedCount(author);
+        } else {
+            Cheeps = await _service.GetCheepsFromAuthor(author, t);
+            AllCheeps = await _service.GetAllCheepsFromAuthor(author);
+
+        }
+        Followers = await _followRepo.GetFollowers(User.Identity?.Name!);
         return Page();
     }
 }
