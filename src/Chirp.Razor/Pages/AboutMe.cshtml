@@ -6,7 +6,6 @@
     Layout = "Shared/_Layout";
 }
 
-
 <div>
     <h2> About me </h2>
     <div class="userInformation">
@@ -37,7 +36,8 @@
             <ul>
                 @foreach (var follower in Model.Followers)
                 {
-                    <li><a href="/@follower">@follower</a></li>
+                    
+                    <li><a href="/@follower">@Model.getAuthor(follower.AuthorId).Result.Name</a></li>
                 }
             </ul>
         }

@@ -35,5 +35,10 @@ public class AboutMeModel : PageModel
         return Page();
     }
 
+    public async Task<AuthorDto> getAuthor(int id) {
+        return await _authorRepo.GetAuthorByID(id);
+    }
+    
+
     
 }

@@ -25,6 +25,20 @@ public class AuthorRepository : IAuthorRepository
         await db.SaveChangesAsync();
     }
 
+    public async Task<AuthorDto> GetAuthorByID(int id)
+    {
+        var author = await db.Authors
+        .Where(u => u.AuthorId == id)
+        .Select(a => new AuthorDto(a.Name, a.Email, a.AuthorId))
+        .FirstOrDefaultAsync();
+
+        if (author == null) {
+            throw new ArgumentNullException("Author does not exist");
+        }
+
+        return author;
+    }
+
     public async Task<AuthorDto> GetAuthorByName(string authorName)
     {
         var author = await db.Authors
