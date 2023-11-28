@@ -30,6 +30,7 @@ public class AboutMeModel : PageModel
     }
 
     public async Task<ActionResult> OnGet() {
+        if(User.Identity.Name == null) return Redirect("/Identity/Account/Login"); 
         Followers = await _followRepo.GetFollowers(User.Identity.Name); 
         Cheeps = await _service.GetCheepsFromAuthor(User.Identity.Name, 0); 
         return Page();
