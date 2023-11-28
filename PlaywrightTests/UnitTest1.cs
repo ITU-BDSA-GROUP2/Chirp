@@ -79,7 +79,7 @@ public class Tests : PageTest
     }
     [Test]
     // When we click on public timeline we can actually see public timeline
-    public async Task PublicTimelineDirectsToHomepage()
+    public async Task PublicTimelineDirectsToHomePage()
     {
         await Page.GotoAsync("https://bdsagroup2chirprazor.azurewebsites.net/");
 
@@ -95,9 +95,86 @@ public class Tests : PageTest
     {
         await Page.GotoAsync("https://bdsagroup2chirprazor.azurewebsites.net/");
 
-        await Page.Locator("p").Filter(new() { HasText = "Jacqualine Gilcoine Starbuck now is what we hear the worst. — 08/01/2023 13:17:3" }).GetByRole(AriaRole.Link).ClickAsync();
+        await Page.Locator("li").Filter(new() { HasText = "Jacqualine Gilcoine Follow Starbuck now is what we hear the worst. — 08/01/2023 " }).GetByRole(AriaRole.Link).ClickAsync();
 
         await Expect(Page.Locator("h2")).ToHaveTextAsync("Jacqualine Gilcoine's Timeline");
+
+
+    }
+    [Test]
+    public async Task UserCanLoginAndFollowAnotherUser()
+    {
+        await Page.GotoAsync("https://bdsagroup2chirprazor.azurewebsites.net/");
+
+        await Page.GetByRole(AriaRole.Link, new() { Name = "Login" }).ClickAsync();
+
+        await Page.GetByPlaceholder("Name@example.com").ClickAsync();
+
+        await Page.GetByPlaceholder("Name@example.com").FillAsync("cool1@gmail.com");
+
+        await Page.GetByPlaceholder("Password").ClickAsync();
+
+        await Page.GetByPlaceholder("Password").FillAsync("Dqa68dfs!");
+
+        await Page.GetByRole(AriaRole.Button, new() { Name = "Log in" }).ClickAsync();
+
+        await Page.Locator("li").Filter(new() { HasText = "Jacqualine Gilcoine Follow Starbuck now is what we hear the worst. — 08/01/2023 " }).GetByRole(AriaRole.Button).ClickAsync();
+
+        await Page.GetByRole(AriaRole.Link, new() { Name = "My timeline" }).ClickAsync();
+
+        await Page.Locator("li").Filter(new() { HasText = "Jacqualine Gilcoine Follow Starbuck now is what we hear the worst. — 08/01/2023 " }).GetByRole(AriaRole.Link).ClickAsync();
+
+        await Expect(Page.Locator("h2")).ToHaveTextAsync("Jacqualine Gilcoine's Timeline");
+    }
+    [Test]
+    public async Task UserCanLoginAndUnfollowAnotherUser()
+    {
+        await Page.GotoAsync("https://bdsagroup2chirprazor.azurewebsites.net/");
+
+        await Page.GetByRole(AriaRole.Link, new() { Name = "Login" }).ClickAsync();
+
+        await Page.GetByPlaceholder("Name@example.com").ClickAsync();
+
+        await Page.GetByPlaceholder("Name@example.com").FillAsync("cool1@gmail.com");
+
+        await Page.GetByPlaceholder("Password").ClickAsync();
+
+        await Page.GetByPlaceholder("Password").FillAsync("Dqa68dfs!");
+
+        await Page.GetByRole(AriaRole.Button, new() { Name = "Log in" }).ClickAsync();
+
+        await Page.Locator("li").Filter(new() { HasText = "Jacqualine Gilcoine Unfollow Starbuck now is what we hear the worst. — 08/01/2023 " }).GetByRole(AriaRole.Button).ClickAsync();
+
+        await Page.GetByRole(AriaRole.Link, new() { Name = "My timeline" }).ClickAsync();
+
+        await Expect(Page.Locator("body")).Not.ToContainTextAsync("Starbuck now is what we hear the worst");
+
+
+    }
+    [Test]
+    public async Task UserCanLoginAndUnfollowAnotherUser()
+    {
+        await Page.GotoAsync("https://bdsagroup2chirprazor.azurewebsites.net/");
+
+        await Page.GetByRole(AriaRole.Link, new() { Name = "Login" }).ClickAsync();
+
+        await Page.GetByPlaceholder("Name@example.com").ClickAsync();
+
+        await Page.GetByPlaceholder("Name@example.com").FillAsync("cool1@gmail.com");
+
+        await Page.GetByPlaceholder("Password").ClickAsync();
+
+        await Page.GetByPlaceholder("Password").FillAsync("Dqa68dfs!");
+
+        await Page.GetByRole(AriaRole.Button, new() { Name = "Log in" }).ClickAsync();
+
+        await Page.Locator("li").Filter(new() { HasText = "Jacqualine Gilcoine Unfollow Starbuck now is what we hear the worst. — 08/01/2023 " }).GetByRole(AriaRole.Button).ClickAsync();
+
+        await Page.GetByRole(AriaRole.Link, new() { Name = "My timeline" }).ClickAsync();
+
+        await Expect(Page.Locator("body")).Not.ToContainTextAsync("Starbuck now is what we hear the worst");
+
+
     }
 
 }
