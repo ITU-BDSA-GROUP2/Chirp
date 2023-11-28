@@ -100,6 +100,7 @@ public class UserTimelineModel : PageModel
         if (t > 0) t -= 1;
         Cheeps = await _service.GetCheepsFromAuthor(author, t);
         AllCheeps = await _service.GetAllCheepsFromAuthor(author);
+        Followers = await _followRepo.GetFollowers(User.Identity!.Name!);
         return Page();
     }
 }
