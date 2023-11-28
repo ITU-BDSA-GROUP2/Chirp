@@ -411,3 +411,87 @@ div.page ul.cheeps p.cheepText {
   padding: 10px;
   color: #cc6e6e;
 }
+
+.userInformation {
+  display: flex;
+  flex-flow: row;
+}
+
+.profileData {
+  margin-top: 25px;
+}
+
+.profileData ul {
+  list-style-type: none;
+}
+
+.followesList {
+  margin: 15px 0px 25px 0px;
+}
+
+.followesList ul {
+  list-style-type: none;
+  padding-left: 10px;
+}
+
+.followesList ul li {
+  padding: 5px 0px;
+}
+
+.updateUserInformation {
+  display: flex;
+  flex-flow: column;
+  margin-left: 50px;
+}
+
+.updateUserInformation input:focus,
+.updateUserInformation input:hover {
+  color: #000;
+  border: 2px solid #cc6e6e;
+}
+
+.updateUserInformationInput {
+  padding: 10px;
+  width: 50%;
+  font-size: 15px;
+  border: 2px solid #fff;
+  color: #949494;
+  outline: none;
+  transition: .5s ease;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-flow: row;
+}
+
+.buttonWrapper {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonWrapper button {
+  padding: 10px 15px;
+  margin: 15px;
+  background-color: #fff;
+  transition: .5s ease-in-out;
+}
+
+.updateButton {
+  border: 2px solid #26776F;
+}
+.updateButton:hover {
+  background-color: #26776F;
+  color: #fff;
+}
+
+.deleteButton {
+  border: 2px solid #ff1a1a;
+}
+
+.deleteButton:hover {
+  background-color: #ff1a1a;
+  color: #fff;
+}

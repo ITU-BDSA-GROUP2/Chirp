@@ -11,16 +11,26 @@
     <h2> About me </h2>
     <div class="userInformation">
         <div class="profilePicture">
-            <img src="https://placehold.co/100x100"> 
+            <img src="https://placehold.co/150x150"> 
         </div>
         <div class="profileData">
-            <ul>
-                <li>Oliver Prip</li>
-                <li>o@o.com User.Identity.Email</li>
-                <li>OHAG User.Identity.Name</li>
-            </ul>
+            <form class="updateUserInformation">
+                <div class="inputWrapper">
+                    <input class="updateUserInformationInput" autocomplete="username" aria-required="true"
+                            value="Oliver Prip" />
+                    <input class="updateUserInformationInput" autocomplete="username" aria-required="true"
+                            value="OHAG" />
+                    <input class="updateUserInformationInput" autocomplete="username" aria-required="true"
+                            value="o@o.com" />
+                </div>
+                <div class="buttonWrapper">
+                    <button type="submit" class="updateButton">Update user</button>
+                    <button type="submit" class="deleteButton">Delete user</button>
+                </div>
+            </form>
         </div>
     </div>
+    <hr>
     <div class="followesList">
         @if (Model.Followers.Any())
         {
