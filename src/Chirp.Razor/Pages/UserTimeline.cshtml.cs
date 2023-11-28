@@ -29,7 +29,7 @@ public class UserTimelineModel : PageModel
         _service = service;
         _authorRepo = authorRepo;
         _followRepo = followRepo;
-
+        
     }
 
     public async Task<ActionResult> OnGet(string author)

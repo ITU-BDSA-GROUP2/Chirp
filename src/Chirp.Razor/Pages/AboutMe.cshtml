@@ -1,0 +1,82 @@
+@page "/aboutme"
+@model Chirp.Razor.Pages.AboutMeModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Chirp!";
+    Layout = "Shared/_Layout";
+}
+
+<div>
+    <h2> About me </h2>
+    <div class="userInformation">
+        <div class="profilePicture">
+            <img src="https://placehold.co/150x150"> 
+        </div>
+        <div class="profileData">
+            <form class="updateUserInformation">
+                <div class="inputWrapper">
+                    <input class="updateUserInformationInput" autocomplete="username" aria-required="true"
+                            value="Oliver Prip" />
+                    <input class="updateUserInformationInput" autocomplete="username" aria-required="true"
+                            value="OHAG" />
+                    <input class="updateUserInformationInput" autocomplete="username" aria-required="true"
+                            value="o@o.com" />
+                </div>
+                <div class="buttonWrapper">
+                    <button type="submit" class="updateButton">Update user</button>
+                    <button type="submit" class="deleteButton">Delete user</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <div class="followesList">
+        @if (Model.Followers.Any())
+        {
+            <ul>
+                @foreach (var follower in Model.Followers)
+                {
+                    
+                    <li><a href="/@follower">@Model.getAuthor(follower.AuthorId).Result.Name</a></li>
+                }
+            </ul>
+        }
+   </div>
+   <hr>
+   <div>
+      @if (Model.Cheeps.Any())
+    {
+        <ul id="messagelist" class="cheeps">
+            @foreach (var cheep in Model.Cheeps)
+            {
+                <li>
+                    <img src="https://placehold.co/50x50"> 
+                    <p class="cheepAuhtor">
+                        <strong>
+                            <a href="/@cheep.Author">@cheep.Author</a>
+                        </strong>
+                    </p>  
+                    <p class="cheepText">
+                        @cheep.Text
+                    </p>
+                    <br>
+                    <hr>
+                    <div class="footerGrouping">
+                        <p class="time"><small>&mdash; @cheep.Timestamp.ToLocalTime()</small></p>
+                        <span class="likeWrapper">
+                            <div class="likeButton">
+                                Like
+                            </div>
+                            <span class="likeCounter">0</span>
+                        </span>
+                    </div>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <em>There are no cheeps so far.</em>
+    }
+   </div>
+</div>
