@@ -15,7 +15,7 @@
         <div class="profileData">
             <form class="updateUserInformation">
                 @{
-                    var currentUser = Model.getCurrentAuthor(User.Identity.Name).Result;
+                    var currentUser = Model.getCurrentAuthor(User.Identity?.Name!).Result;
                 }
                 <div class="inputWrapper">
                     <input class="updateUserInformationInput" autocomplete="username" aria-required="true"
