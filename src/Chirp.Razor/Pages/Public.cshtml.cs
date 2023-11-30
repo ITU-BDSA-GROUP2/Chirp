@@ -23,7 +23,7 @@ public class PublicModel : PageModel
     public IEnumerable<FollowDto> Followers { get; set; } = new List<FollowDto>();
 
     [BindProperty]
-    [StringLength(160)]
+    [StringLength(160, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 1)]
     public string CheepText { get; set; }
 
     [BindProperty]
@@ -48,12 +48,9 @@ public class PublicModel : PageModel
             await _authorRepo.CreateNewAuthor(author, author);
         }
 
-        if (CheepText.Length > 0 && CheepText.Length <= 160) {
-             var cheep = new CheepDto(CheepText, author, DateTime.UtcNow);
-            await _service.CreateCheep(cheep);
-        } else {
-            ModelState.AddModelError("ErrorMessageLength", "You can type between 1 and 160 characters");
-            return RedirectToPage();
+        if (!ModelState.IsValid) 
+        {
+            return await ShowCheeps();
         }
        
         return RedirectToPage();

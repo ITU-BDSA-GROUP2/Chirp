@@ -349,7 +349,7 @@ ul.pagination li {
   color: #cc6e6e;
 }
 
-.errorMSG li {
+.errorMSG li, .errorMSG {
   color: #ff1a1a;
   text-decoration: none;
   list-style-type: none;

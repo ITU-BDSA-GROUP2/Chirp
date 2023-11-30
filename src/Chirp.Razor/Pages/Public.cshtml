@@ -9,8 +9,10 @@
     <div class="cheepbox">
         <h3>What's on your mind @(User.Identity!.Name!)?</h3>
         <form method="post" asp-page-handler="Cheep">
+        <div asp-validation-summary="ModelOnly" class="errorMSG" role="alert"></div>
             <input style="float: left" type="text" asp-for="CheepText">
             <input type="submit" value="Share">
+            <span asp-validation-for="CheepText" class="text-danger"></span>
         </form>
         @if (!ViewData.ModelState.IsValid) {
             <ul class="errorMSG">
