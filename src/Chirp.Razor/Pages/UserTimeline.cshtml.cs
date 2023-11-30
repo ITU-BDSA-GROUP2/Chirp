@@ -38,7 +38,7 @@ public class UserTimelineModel : PageModel
         return await ShowCheeps(author);
        
     }
-        public async Task<ActionResult> OnPostCheep()
+        public async Task<ActionResult> OnPostCheep(string authorPage)
     {
         var author = User.Identity!.Name!;
         if (await _authorRepo.GetAuthorByName(author!) == null) {
@@ -50,8 +50,7 @@ public class UserTimelineModel : PageModel
             await _service.CreateCheep(cheep);
         } else {
             ModelState.AddModelError("ErrorMessageLength", "Cheep must not be blank");
-            return await ShowCheeps();
-
+            return await ShowCheeps(authorPage);
         }
         return RedirectToPage();
     }
