@@ -14,6 +14,7 @@
         </div>
         <div class="profileData">
             <form class="updateUserInformation" method="POST" asp-page-handler="UpdateAuthor">
+                <div asp-validation-summary="ModelOnly" class="errorMSG" role="alert"></div>
                 @{
                     var currentUser = Model.getCurrentAuthor(User.Identity?.Name!).Result;
                 }
@@ -32,16 +33,9 @@
             </form>
         </div>
         <div>
-            @if (ViewData.ModelState.IsValid) {
-                <ul>
-                <li>User Updated</li>
-                </ul>
-            } else {
-                <ul>
-                <li>@Html.ValidationMessage("ErrorMessageUsername")</li>
-                <li>@Html.ValidationMessage("ErrorMessageEmail")</li>
-                </ul>
-            }
+            
+                
+            
         </div>
     </div>
     <hr>

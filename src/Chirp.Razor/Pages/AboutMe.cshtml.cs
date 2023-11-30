@@ -15,6 +15,8 @@ public class AboutMeModel : PageModel
     private readonly IFollowerListRepository _followRepo;
 
     private readonly UserManager<IdentityUser> _userManager;
+    private readonly SignInManager<IdentityUser> _signInManager;
+
     
 
     public IEnumerable<CheepDto> Cheeps { get; set; } = new List<CheepDto>();
@@ -34,12 +36,19 @@ public class AboutMeModel : PageModel
     public string Email { get; set; }
  
 
-    public AboutMeModel(ICheepRepository service, IAuthorRepository authorRepo, IFollowerListRepository followRepo, UserManager<IdentityUser> userManager)
+    public AboutMeModel(
+    ICheepRepository service, 
+    IAuthorRepository authorRepo,
+    IFollowerListRepository followRepo,
+    UserManager<IdentityUser> userManager,
+    SignInManager<IdentityUser> signInManager
+    )
     {
         _service = service;
         _authorRepo = authorRepo;
         _followRepo = followRepo;
         _userManager = userManager;
+        _signInManager = signInManager;
     }
 
     public async Task<ActionResult> OnGet() {
@@ -65,9 +74,9 @@ public class AboutMeModel : PageModel
 
         var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-        var currentName = user.UserName;
+        string currentName = user.UserName;
 
-        var currentEmail = user.Email;
+        string currentEmail = user.Email;
 
         if (currentName.Equals(Username) && currentEmail.Equals(Email))
         {
@@ -80,23 +89,39 @@ public class AboutMeModel : PageModel
             // Update Username
             var usernameCheck = await _userManager.FindByNameAsync(Username);
 
-            if (usernameCheck == null || !currentName.Equals(Username))
+            var authorNameCheck = await _authorRepo.GetAuthorByName(Username);
+
+            if (usernameCheck != null && !currentName.Equals(Username) && authorNameCheck!=null)
             {
-                ModelState.AddModelError("ErrorMessageUsername", "Username already in use");
+                ModelState.AddModelError(string.Empty, "Username already in use");
             }
-            if (emailCheck == null || !currentEmail.Equals(Email))
+            if (emailCheck != null && !currentEmail.Equals(Email))
             {
-                ModelState.AddModelError("ErrorMessageEmail", "Email already in use");
+                ModelState.AddModelError(string.Empty, "Email already in use");
             }
 
             if (ModelState.IsValid) {
                 user.UserName = Username;
                 user.Email = Email;
-                await _authorRepo.UpdateAuthor(currentName, Username, Email);
-                await _userManager.UpdateAsync(user);
+                var result = await _userManager.UpdateAsync(user);
+
+                if (result.Succeeded) {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    await _authorRepo.UpdateAuthor(currentName, user.UserName, user.Email);
+                }
             }
             
-            return RedirectToPage();
+                
+
+
+            if(User.Identity?.Name == null) 
+        {
+            return Redirect("/Identity/Account/Login"); 
+        }
+
+        Followers = await _followRepo.GetFollowers(User.Identity.Name); 
+        Cheeps = await _service.GetCheepsFromAuthor(User.Identity.Name, 0); 
+        return Page();
 
     }
 
