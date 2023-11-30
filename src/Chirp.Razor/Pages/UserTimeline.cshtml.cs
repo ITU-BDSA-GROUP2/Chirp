@@ -21,6 +21,7 @@ public class UserTimelineModel : PageModel
     public string Author { get; set;} = "";
 
     [BindProperty]
+    [DisplayFormat(ConvertEmptyStringToNull = false)]
     [StringLength(160)]
     public string CheepText { get; set; } = "";
 
@@ -43,15 +44,15 @@ public class UserTimelineModel : PageModel
         if (await _authorRepo.GetAuthorByName(author!) == null) {
             await _authorRepo.CreateNewAuthor(author, author);
         }
-
-        if (CheepText.Length > 0 && CheepText.Length <= 160) {
-             var cheep = new CheepDto(CheepText, author, DateTime.UtcNow);
+        if (CheepText.Length > 0) 
+        {
+            var cheep = new CheepDto(CheepText, author, DateTime.UtcNow);
             await _service.CreateCheep(cheep);
         } else {
-            ModelState.AddModelError("ErrorMessageLength", "You can type between 1 and 160 characters");
-            return RedirectToPage();
+            ModelState.AddModelError("ErrorMessageLength", "Cheep must not be blank");
+            return await ShowCheeps();
+
         }
-       
         return RedirectToPage();
     }
 

@@ -23,11 +23,12 @@ public class PublicModel : PageModel
     public IEnumerable<FollowDto> Followers { get; set; } = new List<FollowDto>();
 
     [BindProperty]
-    [StringLength(160, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 1)]
-    public string CheepText { get; set; }
+    [DisplayFormat(ConvertEmptyStringToNull = false)]
+    [StringLength(160)]
+    public string CheepText { get; set; } = "";
 
     [BindProperty]
-    public string Author { get; set;}
+    public string Author { get; set;} = "";
 
     public PublicModel(ICheepRepository service, IAuthorRepository authorRepo, IFollowerListRepository followRepo)
     {
@@ -47,12 +48,15 @@ public class PublicModel : PageModel
         if (await _authorRepo.GetAuthorByName(author!) == null) {
             await _authorRepo.CreateNewAuthor(author, author);
         }
-
-        if (!ModelState.IsValid) 
+        if (CheepText.Length > 0) 
         {
+            var cheep = new CheepDto(CheepText, author, DateTime.UtcNow);
+            await _service.CreateCheep(cheep);
+        } else {
+            ModelState.AddModelError("ErrorMessageLength", "Cheep must not be blank");
             return await ShowCheeps();
+
         }
-       
         return RedirectToPage();
     }
 
