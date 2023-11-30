@@ -6,4 +6,6 @@ public interface IAuthorRepository
     public Task<AuthorDto> GetAuthorByID(int id);
     public Task<AuthorDto> GetAuthorByName(string authorName);
     public Task<AuthorDto> GetAuthorByEmail(string authorEmail);
+    public Task UpdateAuthor(string oldName, string newName, string email);
+
 }

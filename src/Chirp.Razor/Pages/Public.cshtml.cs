@@ -22,11 +22,12 @@ public class PublicModel : PageModel
 
     public IEnumerable<FollowDto> Followers { get; set; } = new List<FollowDto>();
 
-
+    [BindProperty]
     [StringLength(160)]
-    public string CheepText { get; set; } = "";
+    public string CheepText { get; set; }
 
-    public string Author { get; set;} = "";
+    [BindProperty]
+    public string Author { get; set;}
 
     public PublicModel(ICheepRepository service, IAuthorRepository authorRepo, IFollowerListRepository followRepo)
     {
@@ -42,18 +43,16 @@ public class PublicModel : PageModel
 
     public async Task<ActionResult> OnPostCheep()
     {
-            var author = User.Identity!.Name!;
+        var author = User.Identity!.Name!;
         if (await _authorRepo.GetAuthorByName(author!) == null) {
             await _authorRepo.CreateNewAuthor(author, author);
         }
 
-        string text = Request.Form["CheepText"]!;
-        if (text.Length > 0 && text.Length <= 160) {
-             var cheep = new CheepDto(text, author, DateTime.UtcNow);
+        if (CheepText.Length > 0 && CheepText.Length <= 160) {
+             var cheep = new CheepDto(CheepText, author, DateTime.UtcNow);
             await _service.CreateCheep(cheep);
         } else {
-            ModelState.AddModelError("ErrorMessageLength", "You can betweem 1 and 240 characters");
-            //return Page();
+            ModelState.AddModelError("ErrorMessageLength", "You can type between 1 and 160 characters");
             return RedirectToPage();
         }
        
@@ -62,7 +61,6 @@ public class PublicModel : PageModel
 
     public async Task<ActionResult> OnPostFollow() {
         var user = User.Identity!;
-        Author = Request.Form["Author"]!;
 
         if (user.Name == null) {
             return Redirect("/Identity/Account/Register");
@@ -75,7 +73,6 @@ public class PublicModel : PageModel
 
     public async Task<ActionResult> OnPostUnfollow() {
         var user = User.Identity!;
-        Author = Request.Form["Author"]!;
 
         if (user.Name == null) {
             return Redirect("/Identity/Account/Register"); //Should never be possible.

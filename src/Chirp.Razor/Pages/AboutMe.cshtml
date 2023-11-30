@@ -13,21 +13,21 @@
             <img src="https://placehold.co/150x150"> 
         </div>
         <div class="profileData">
-            <form class="updateUserInformation" method="POST">
+            <form class="updateUserInformation" method="POST" asp-page-handler="UpdateAuthor">
                 @{
                     var currentUser = Model.getCurrentAuthor(User.Identity?.Name!).Result;
                 }
                 <div class="inputWrapper">
-                    <input class="updateUserInformationInput" autocomplete="username" aria-required="true"
+                    <input asp-for="Username" class="updateUserInformationInput" autocomplete="username" aria-required="true"
                             value="@currentUser.Name" />
-                    <input class="updateUserInformationInput" autocomplete="username" aria-required="true"
+                    <input asp-for="Email" class="updateUserInformationInput" autocomplete="username" aria-required="true"
                             value="@currentUser.Email" />
                 </div>
                 <div class="buttonWrapper">
                     <button type="submit" class="updateButton">Update user</button>
                 </div>
             </form>
-            <form method="POST">
+            <form method="POST" asp-page-handler="DeleteAuthor">
                 <button type="submit" class="deleteButton">Delete user</button>
             </form>
         </div>

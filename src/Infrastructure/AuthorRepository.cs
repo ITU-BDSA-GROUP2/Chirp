@@ -73,14 +73,15 @@ public class AuthorRepository : IAuthorRepository
         .FirstOrDefaultAsync();
 
         if (author == null) {
-            return;
+            throw new ArgumentNullException("Error! Could not find user");
         }
         author.Name = newName;
         author.Email = email;
         await db.SaveChangesAsync();
     }
 
-    public async Task DeleteUser(string name) {
+    public async Task DeleteUser(string name)
+    {
 
     }
 

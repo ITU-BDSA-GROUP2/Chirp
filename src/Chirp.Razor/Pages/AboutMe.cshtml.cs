@@ -23,6 +23,10 @@ public class AboutMeModel : PageModel
 
 
     public string Author { get; set;} = "";
+    [BindProperty]
+    public string Username { get; set;}
+    [BindProperty]
+    public string Email { get; set; }
  
 
     public AboutMeModel(ICheepRepository service, IAuthorRepository authorRepo, IFollowerListRepository followRepo, UserManager<IdentityUser> userManager)
@@ -52,31 +56,44 @@ public class AboutMeModel : PageModel
         return await _authorRepo.GetAuthorByName(name);
     }
 
-    // public async Task<ActionResult> OnPostUpdateAuthor() {
+    public async Task<ActionResult> OnPostUpdateAuthor() {
 
-    //     var name = Input.Name;
-    //     var email = Input.Email;
-    //     if (User.Identity.Equals(name) && User.Identity.Email.Equals(name)) {
-    //         return Page();
-    //     }
-        
+        var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-    //         //Update email if it doesn't exist
-    //         var emailCheck = await _userManager.FindByEmailAsync(email);
+        var currentName = user.UserName;
 
-    //         //Update Username
-    //         var usernameCheck = await _userManager.FindByUserNameAsync(name);
+        var currentEmail = user.Email;
 
-    //         if (usernameCheck )
+        if (currentName.Equals(Username) && currentEmail.Equals(Email))
+        {
+            return RedirectToPage();
+        } 
 
-    //         var user = await _userManager.FindByIdAsync(userId);
+            // Update email if it doesn't exist
+            var emailCheck = await _userManager.FindByEmailAsync(Email);
 
-    //         user.Username = name;
-    //         user.Email = email;
+            // Update Username
+            var usernameCheck = await _userManager.FindByNameAsync(Username);
 
-    //         await _userManager.UpdateAsync(user);
-    //         return RedirectToPage();
-    // }
+            if (usernameCheck == null || !currentName.Equals(Username))
+            {
+                ModelState.AddModelError("ErrorMessageLength", "Username already in use");
+                return RedirectToPage();
+            }
+            else if (emailCheck == null || !currentEmail.Equals(Email))
+            {
+                ModelState.AddModelError("ErrorMessageLength", "Email already in use");
+                return RedirectToPage();
+            }
+            
+            user.UserName = Username;
+            user.Email = Email;
+            await _authorRepo.UpdateAuthor(currentName, Username, Email);
+            await _userManager.UpdateAsync(user);
+
+            return RedirectToPage();
+
+    }
 
     // public async Task<ActionResult> OnPostDeleteAuthor() {
 
