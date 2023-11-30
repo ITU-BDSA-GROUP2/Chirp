@@ -18,9 +18,9 @@
                     var currentUser = Model.getCurrentAuthor(User.Identity?.Name!).Result;
                 }
                 <div class="inputWrapper">
-                    <input asp-for="Username" class="updateUserInformationInput" autocomplete="username" aria-required="true"
+                    <input asp-for="Username" class="updateUserInformationInput" autocomplete="off" aria-required="true"
                             value="@currentUser.Name" />
-                    <input asp-for="Email" class="updateUserInformationInput" autocomplete="username" aria-required="true"
+                    <input asp-for="Email" class="updateUserInformationInput" autocomplete="off" aria-required="true"
                             value="@currentUser.Email" />
                 </div>
                 <div class="buttonWrapper">
@@ -30,6 +30,18 @@
             <form method="POST" asp-page-handler="DeleteAuthor">
                 <button type="submit" class="deleteButton">Delete user</button>
             </form>
+        </div>
+        <div>
+            @if (ViewData.ModelState.IsValid) {
+                <ul>
+                <li>User Updated</li>
+                </ul>
+            } else {
+                <ul>
+                <li>@Html.ValidationMessage("ErrorMessageUsername")</li>
+                <li>@Html.ValidationMessage("ErrorMessageEmail")</li>
+                </ul>
+            }
         </div>
     </div>
     <hr>

@@ -23,9 +23,14 @@ public class AboutMeModel : PageModel
 
 
     public string Author { get; set;} = "";
+
     [BindProperty]
+    [DisplayFormat(ConvertEmptyStringToNull = false)]
     public string Username { get; set;}
+
     [BindProperty]
+    [DisplayFormat(ConvertEmptyStringToNull = false)]
+
     public string Email { get; set; }
  
 
@@ -77,20 +82,20 @@ public class AboutMeModel : PageModel
 
             if (usernameCheck == null || !currentName.Equals(Username))
             {
-                ModelState.AddModelError("ErrorMessageLength", "Username already in use");
-                return RedirectToPage();
+                ModelState.AddModelError("ErrorMessageUsername", "Username already in use");
             }
-            else if (emailCheck == null || !currentEmail.Equals(Email))
+            if (emailCheck == null || !currentEmail.Equals(Email))
             {
-                ModelState.AddModelError("ErrorMessageLength", "Email already in use");
-                return RedirectToPage();
+                ModelState.AddModelError("ErrorMessageEmail", "Email already in use");
+            }
+
+            if (ModelState.IsValid) {
+                user.UserName = Username;
+                user.Email = Email;
+                await _authorRepo.UpdateAuthor(currentName, Username, Email);
+                await _userManager.UpdateAsync(user);
             }
             
-            user.UserName = Username;
-            user.Email = Email;
-            await _authorRepo.UpdateAuthor(currentName, Username, Email);
-            await _userManager.UpdateAsync(user);
-
             return RedirectToPage();
 
     }
