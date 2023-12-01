@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "Chirp!";
     Layout = "Shared/_Layout";
+    var currentUser = await Model.GetCurrentAuthor(User.Identity?.Name!);
 }
 
 <div>
@@ -15,14 +16,19 @@
         <div class="profileData">
             <form class="updateUserInformation" method="POST" asp-page-handler="UpdateAuthor">
                 <div asp-validation-summary="ModelOnly" class="errorMSG" role="alert"></div>
-                @{
-                    var currentUser = Model.getCurrentAuthor(User.Identity?.Name!).Result;
-                }
                 <div class="inputWrapper">
-                    <input asp-for="Username" class="updateUserInformationInput" autocomplete="off" aria-required="true"
+                    <input asp-for="Username" class="updateUserInformationInput" autocomplete="false" aria-required="true"
                             value="@currentUser.Name" />
-                    <input asp-for="Email" class="updateUserInformationInput" autocomplete="off" aria-required="true"
+                    <input asp-for="Email" class="updateUserInformationInput" autocomplete="false" aria-required="true"
                             value="@currentUser.Email" />
+                </div>
+                <div>
+                @if (!ViewData.ModelState.IsValid) {
+                <ul class="errorMSG">
+                <li>@Html.ValidationMessage("ErrorMessageUsername")</li>
+                <li>@Html.ValidationMessage("ErrorMessageEmail")</li>
+                </ul>
+                }
                 </div>
                 <div class="buttonWrapper">
                     <button type="submit" class="updateButton">Update user</button>

@@ -52,6 +52,7 @@ public class AboutMeModel : PageModel
     }
 
     public async Task<ActionResult> OnGet() {
+        
         if(User.Identity?.Name == null) 
         {
             return Redirect("/Identity/Account/Login"); 
@@ -66,13 +67,15 @@ public class AboutMeModel : PageModel
         return await _authorRepo.GetAuthorByID(id);
     }
 
-    public async Task<AuthorDto> getCurrentAuthor(string name) {
+    public async Task<AuthorDto> GetCurrentAuthor(string name) {
         return await _authorRepo.GetAuthorByName(name);
     }
 
     public async Task<ActionResult> OnPostUpdateAuthor() {
 
-        var user = await _userManager.FindByNameAsync(User.Identity.Name);
+        var currentUser = User.Identity.Name;
+
+        var user = await _userManager.FindByNameAsync(currentUser);
 
         string currentName = user.UserName;
 
@@ -90,14 +93,17 @@ public class AboutMeModel : PageModel
             var usernameCheck = await _userManager.FindByNameAsync(Username);
 
             var authorNameCheck = await _authorRepo.GetAuthorByName(Username);
+            var authorEmailCheck = await _authorRepo.GetAuthorByEmail(Email);
 
-            if (usernameCheck != null && !currentName.Equals(Username) && authorNameCheck!=null)
+            Console.WriteLine(authorNameCheck != null);
+
+            if (usernameCheck != null && !currentName.Equals(Username) || authorNameCheck!=null)
             {
-                ModelState.AddModelError(string.Empty, "Username already in use");
+                ModelState.AddModelError("ErrorMessageUsername", "Username already in use");
             }
-            if (emailCheck != null && !currentEmail.Equals(Email))
+            if (emailCheck != null && !currentEmail.Equals(Email) || authorEmailCheck!=null)
             {
-                ModelState.AddModelError(string.Empty, "Email already in use");
+                ModelState.AddModelError("ErrorMessageEmail", "Email already in use");
             }
 
             if (ModelState.IsValid) {
@@ -108,19 +114,12 @@ public class AboutMeModel : PageModel
                 if (result.Succeeded) {
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     await _authorRepo.UpdateAuthor(currentName, user.UserName, user.Email);
+                    return RedirectToAction("/");
                 }
             }
             
-                
-
-
-            if(User.Identity?.Name == null) 
-        {
-            return Redirect("/Identity/Account/Login"); 
-        }
-
-        Followers = await _followRepo.GetFollowers(User.Identity.Name); 
-        Cheeps = await _service.GetCheepsFromAuthor(User.Identity.Name, 0); 
+        Followers = await _followRepo.GetFollowers(user.UserName); 
+        Cheeps = await _service.GetCheepsFromAuthor(user.UserName, 0); 
         return Page();
 
     }

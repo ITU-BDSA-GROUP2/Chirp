@@ -46,9 +46,6 @@ public class AuthorRepository : IAuthorRepository
         .Select(a => new AuthorDto(a.Name, a.Email, a.AuthorId))
         .FirstOrDefaultAsync();
 
-        if (author == null) {
-            throw new ArgumentNullException("Author does not exist");
-        }
 
         return author;
     }
@@ -72,9 +69,7 @@ public class AuthorRepository : IAuthorRepository
         .Where(a => a.Name == oldName)
         .FirstOrDefaultAsync();
 
-        if (author == null) {
-            throw new ArgumentNullException("Error! Could not find user");
-        }
+        
         author.Name = newName;
         author.Email = email;
         await db.SaveChangesAsync();
