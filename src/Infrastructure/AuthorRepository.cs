@@ -57,10 +57,6 @@ public class AuthorRepository : IAuthorRepository
         .Select(a => new AuthorDto(a.Name, a.Email, a.AuthorId))
         .FirstOrDefaultAsync();
 
-        if (author == null) {
-            throw new ArgumentNullException("Author does not exist");
-        }
-
         return author;
     }
 
