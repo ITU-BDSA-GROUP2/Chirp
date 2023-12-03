@@ -25,31 +25,70 @@ public class AuthorRepository : IAuthorRepository
         await db.SaveChangesAsync();
     }
 
-    public async Task<AuthorDto> GetAuthorByName(string authorName)
+    public async Task<AuthorDto?> GetAuthorByID(int id)
+    {
+        var author = await db.Authors
+        .Where(u => u.AuthorId == id)
+        .Select(a => new AuthorDto(a.Name, a.Email, a.AuthorId))
+        .FirstOrDefaultAsync();
+
+        if (author == null) {
+            throw new ArgumentNullException("Author does not exist");
+        }
+
+        return author;
+    }
+
+    
+    public async Task<AuthorDto?> GetAuthorByName(string authorName)
     {
         var author = await db.Authors
         .Where(u => u.Name == authorName)
         .Select(a => new AuthorDto(a.Name, a.Email, a.AuthorId))
         .FirstOrDefaultAsync();
 
-        if (author == null) {
-            throw new ArgumentNullException("Author does not exist");
-        }
 
         return author;
     }
 
-    public async Task<AuthorDto> GetAuthorByEmail(string authorEmail)
+    public async Task<AuthorDto?> GetAuthorByEmail(string authorEmail)
     {
         var author = await db.Authors
         .Where(u => u.Email == authorEmail)
         .Select(a => new AuthorDto(a.Name, a.Email, a.AuthorId))
         .FirstOrDefaultAsync();
 
-        if (author == null) {
-            throw new ArgumentNullException("Author does not exist");
-        }
-
         return author;
     }
+
+    public async Task UpdateAuthor(string oldName, string newName, string email) {
+        var author = await db.Authors
+        .Where(a => a.Name == oldName)
+        .FirstOrDefaultAsync();
+
+        if (author == null) {
+            return;
+        }
+
+        
+        author.Name = newName;
+        author.Email = email;
+        await db.SaveChangesAsync();
+    }
+
+    public async Task DeleteAuthor(string name)
+    {
+        var author = await db.Authors
+        .Where(a => a.Name == name)
+        .FirstOrDefaultAsync();
+
+        if (author == null) {
+            return;
+        }
+
+        db.Remove(author);
+
+        await db.SaveChangesAsync();
+    }
+
 }

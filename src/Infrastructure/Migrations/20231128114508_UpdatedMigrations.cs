@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Chirp.Razor.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedFollowerList : Migration
+    public partial class UpdatedMigrations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -62,6 +62,18 @@ namespace Chirp.Razor.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Authors", x => x.AuthorId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Following",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    FollowedAuthorId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Following", x => new { x.UserId, x.FollowedAuthorId });
                 });
 
             migrationBuilder.CreateTable(
@@ -176,7 +188,7 @@ namespace Chirp.Razor.Migrations
                 {
                     CheepId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Text = table.Column<string>(type: "nvarchar(280)", maxLength: 280, nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(160)", maxLength: 160, nullable: false),
                     TimeStamp = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AuthorId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -189,24 +201,6 @@ namespace Chirp.Razor.Migrations
                         principalTable: "Authors",
                         principalColumn: "AuthorId",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Following",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    FollowedAuthorId = table.Column<int>(type: "int", nullable: false),
-                    AuthorId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Following", x => new { x.UserId, x.FollowedAuthorId });
-                    table.ForeignKey(
-                        name: "FK_Following_Authors_AuthorId",
-                        column: x => x.AuthorId,
-                        principalTable: "Authors",
-                        principalColumn: "AuthorId");
                 });
 
             migrationBuilder.CreateIndex(
@@ -249,19 +243,8 @@ namespace Chirp.Razor.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Authors_AuthorId",
-                table: "Authors",
-                column: "AuthorId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Cheeps_AuthorId",
                 table: "Cheeps",
-                column: "AuthorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Following_AuthorId",
-                table: "Following",
                 column: "AuthorId");
         }
 

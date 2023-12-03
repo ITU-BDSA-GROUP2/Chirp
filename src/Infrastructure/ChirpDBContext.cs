@@ -21,8 +21,10 @@ public class ChirpDBContext : IdentityDbContext
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Author>()
-           .HasIndex(c => c.AuthorId)
-           .IsUnique();
+            .HasMany(a => a.Cheeps)
+            .WithOne(c => c.Author)
+            .HasForeignKey(c => c.AuthorId)
+            .OnDelete(DeleteBehavior.Cascade);
         modelBuilder.Entity<FollowerList>()
             .HasKey(c => new {c.UserId, c.FollowedAuthorId});
     }

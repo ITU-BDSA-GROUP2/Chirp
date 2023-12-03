@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Chirp.Razor.Migrations
 {
     [DbContext(typeof(ChirpDBContext))]
-    [Migration("20231121115325_AddedFollowerList")]
-    partial class AddedFollowerList
+    [Migration("20231128114508_UpdatedMigrations")]
+    partial class UpdatedMigrations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,9 +42,6 @@ namespace Chirp.Razor.Migrations
 
                     b.HasKey("AuthorId");
 
-                    b.HasIndex("AuthorId")
-                        .IsUnique();
-
                     b.ToTable("Authors");
                 });
 
@@ -61,8 +58,8 @@ namespace Chirp.Razor.Migrations
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasMaxLength(280)
-                        .HasColumnType("nvarchar(280)");
+                        .HasMaxLength(160)
+                        .HasColumnType("nvarchar(160)");
 
                     b.Property<DateTime>("TimeStamp")
                         .HasColumnType("datetime2");
@@ -82,12 +79,7 @@ namespace Chirp.Razor.Migrations
                     b.Property<int>("FollowedAuthorId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("AuthorId")
-                        .HasColumnType("int");
-
                     b.HasKey("UserId", "FollowedAuthorId");
-
-                    b.HasIndex("AuthorId");
 
                     b.ToTable("Following");
                 });
@@ -301,13 +293,6 @@ namespace Chirp.Razor.Migrations
                     b.Navigation("Author");
                 });
 
-            modelBuilder.Entity("FollowerList", b =>
-                {
-                    b.HasOne("Author", null)
-                        .WithMany("Followings")
-                        .HasForeignKey("AuthorId");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -362,8 +347,6 @@ namespace Chirp.Razor.Migrations
             modelBuilder.Entity("Author", b =>
                 {
                     b.Navigation("Cheeps");
-
-                    b.Navigation("Followings");
                 });
 #pragma warning restore 612, 618
         }

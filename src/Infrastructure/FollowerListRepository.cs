@@ -90,7 +90,6 @@ public class FollowerListRepository : IFollowerListRepository
             return Enumerable.Empty<FollowDto>();
         }
 
-
         return await db.Following
             .Where(u => u.UserId == user.AuthorId)
             .Select(c => new FollowDto(c.UserId, c.FollowedAuthorId))

@@ -17,10 +17,11 @@ public class UserTimelineModel : PageModel
     public IEnumerable<CheepDto> AllCheeps { get; set; } = new List<CheepDto>();
     public IEnumerable<FollowDto> Followers { get; set; } = new List<FollowDto>();
 
-
+    [BindProperty]
     public string Author { get; set;} = "";
 
- 
+    [BindProperty]
+    [DisplayFormat(ConvertEmptyStringToNull = false)]
     [StringLength(160)]
     public string CheepText { get; set; } = "";
 
@@ -29,41 +30,33 @@ public class UserTimelineModel : PageModel
         _service = service;
         _authorRepo = authorRepo;
         _followRepo = followRepo;
-
+        
     }
 
     public async Task<ActionResult> OnGet(string author)
     {
-        var t = Convert.ToInt32(Request.Query["page"]);
-        if (t > 0) t -= 1;
-        if (author.Equals(User.Identity.Name)) {
-            Cheeps = await _service.GetAllCheepsFromFollowed(author, t);
-            AllCheeps = await _service.GetAllCheepsFromFollowedCount(author);
-        } else {
-            Cheeps = await _service.GetCheepsFromAuthor(author, t);
-            AllCheeps = await _service.GetAllCheepsFromAuthor(author);
-
-        }
-        return Page();
+        return await ShowCheeps(author);
        
     }
-        public async Task<ActionResult> OnPostCheep() 
-        {
-            var author = User.Identity!.Name!;
+        public async Task<ActionResult> OnPostCheep(string authorPage)
+    {
+        var author = User.Identity!.Name!;
         if (await _authorRepo.GetAuthorByName(author!) == null) {
             await _authorRepo.CreateNewAuthor(author, author);
         }
-
-        string text = Request.Form["CheepText"]!;
-        var cheep = new CheepDto(text, author, DateTime.UtcNow);
-        await _service.CreateCheep(cheep);
-
-        return await showCheeps(author);
+        if (CheepText.Length > 0) 
+        {
+            var cheep = new CheepDto(CheepText, author, DateTime.UtcNow);
+            await _service.CreateCheep(cheep);
+        } else {
+            ModelState.AddModelError("ErrorMessageLength", "Cheep must not be blank");
+            return await ShowCheeps(authorPage);
+        }
+        return RedirectToPage();
     }
 
         public async Task<ActionResult> OnPostFollow() {
         var user = User.Identity!;
-        Author = Request.Form["Author"]!;
 
         if (user.Name == null) {
             return Redirect("/Identity/Account/Register");
@@ -77,7 +70,6 @@ public class UserTimelineModel : PageModel
 
     public async Task<ActionResult> OnPostUnfollow() {
         var user = User.Identity!;
-        Author = Request.Form["Author"]!;
 
         if (user.Name == null) {
             return Redirect("/Identity/Account/Register"); //Should never be possible.
@@ -91,15 +83,22 @@ public class UserTimelineModel : PageModel
     public async Task<bool> IsFollowed(string authorName) {
         var author = await _authorRepo.GetAuthorByName(authorName);
 
-        return Followers.Where(f => f.AuthorId == author.AuthorId).FirstOrDefault() != null;
+        return Followers.Where(f => f.AuthorId == author!.AuthorId).FirstOrDefault() != null;
     
     }
 
-    private async Task<ActionResult> showCheeps(string author) {
+    private async Task<ActionResult> ShowCheeps(string author) {
         var t = Convert.ToInt32(Request.Query["page"]);
         if (t > 0) t -= 1;
-        Cheeps = await _service.GetCheepsFromAuthor(author, t);
-        AllCheeps = await _service.GetAllCheepsFromAuthor(author);
+        if (author.Equals(User.Identity?.Name!)) {
+            Cheeps = await _service.GetAllCheepsFromFollowed(author, t);
+            AllCheeps = await _service.GetAllCheepsFromFollowedCount(author);
+        } else {
+            Cheeps = await _service.GetCheepsFromAuthor(author, t);
+            AllCheeps = await _service.GetAllCheepsFromAuthor(author);
+
+        }
+        Followers = await _followRepo.GetFollowers(User.Identity?.Name!);
         return Page();
     }
 }

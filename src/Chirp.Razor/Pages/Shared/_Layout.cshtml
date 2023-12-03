@@ -3,7 +3,7 @@
 
 <head>
     <title>@ViewData["Title"]</title>
-    <link href="/css/style1.css" rel="stylesheet" type="text/css" />
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
     <link rel="icon" type="image/png" href="/favicon/favicon.ico">
 </head>
 
@@ -19,6 +19,7 @@
                     <div>
                         <a href="/@(User.Identity.Name)">My timeline</a> |
                         <a href="/">Public timeline</a> |
+                        <a href="/aboutme">About Me</a> |
                         <a href="/Identity/Account/Logout">Logout [@(User.Identity.Name)]</a>
                     </div>
             }

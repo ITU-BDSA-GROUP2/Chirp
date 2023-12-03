@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Chirp.Razor;
 using Infrastructure;
+using Microsoft.AspNetCore.Identity;
 namespace test.Chirp;
 
 public class InMemoryTests : IDisposable {
@@ -15,6 +16,7 @@ public class InMemoryTests : IDisposable {
     private readonly AuthorRepository aController;
     private readonly CheepRepository cController;
     private readonly FollowerListRepository fController;
+
 
 
     public InMemoryTests()
@@ -40,6 +42,7 @@ public class InMemoryTests : IDisposable {
         cController = new CheepRepository(context);
 
         fController = new FollowerListRepository(context);
+
     }
 
     public void Dispose()
@@ -345,6 +348,34 @@ public class InMemoryTests : IDisposable {
         Assert.Equal(expectedCheepCount, cheepsFromUserAndFollowed.Count());
     }
 
+    [Fact]
+    public async void UpdateAuthor() {
+
+        //Arrange
+        var loggedInUser = "Voldemort";
+        var desiredName = "Voldemor";
+        var desiredEmail = "Voldemor@gmail.com";
+
+        //Act
+        await aController.UpdateAuthor(loggedInUser, desiredName, desiredEmail);
+
+        var updatedAuthorCheck = await context.Authors
+        .Where(a => a.Name == "Voldemor")
+        .FirstOrDefaultAsync();
+        var oldAuthor = await context.Authors
+        .Where(a => a.Name == "Voldemort")
+        .FirstOrDefaultAsync();
+
+        //Assert
+        Assert.NotNull(updatedAuthorCheck);
+        Assert.Null(oldAuthor);
+
+        Assert.Equal(updatedAuthorCheck.Name, "Voldemor");
+        Assert.Equal(updatedAuthorCheck.Email, "Voldemor@gmail.com");
+
+
+
+    }
 
 
 
