@@ -25,7 +25,7 @@ public class AuthorRepository : IAuthorRepository
         await db.SaveChangesAsync();
     }
 
-    public async Task<AuthorDto> GetAuthorByID(int id)
+    public async Task<AuthorDto?> GetAuthorByID(int id)
     {
         var author = await db.Authors
         .Where(u => u.AuthorId == id)
@@ -39,7 +39,8 @@ public class AuthorRepository : IAuthorRepository
         return author;
     }
 
-    public async Task<AuthorDto> GetAuthorByName(string authorName)
+    
+    public async Task<AuthorDto?> GetAuthorByName(string authorName)
     {
         var author = await db.Authors
         .Where(u => u.Name == authorName)
@@ -50,7 +51,7 @@ public class AuthorRepository : IAuthorRepository
         return author;
     }
 
-    public async Task<AuthorDto> GetAuthorByEmail(string authorEmail)
+    public async Task<AuthorDto?> GetAuthorByEmail(string authorEmail)
     {
         var author = await db.Authors
         .Where(u => u.Email == authorEmail)
@@ -65,15 +66,29 @@ public class AuthorRepository : IAuthorRepository
         .Where(a => a.Name == oldName)
         .FirstOrDefaultAsync();
 
+        if (author == null) {
+            return;
+        }
+
         
         author.Name = newName;
         author.Email = email;
         await db.SaveChangesAsync();
     }
 
-    public async Task DeleteUser(string name)
+    public async Task DeleteAuthor(string name)
     {
+        var author = await db.Authors
+        .Where(a => a.Name == name)
+        .FirstOrDefaultAsync();
 
+        if (author == null) {
+            return;
+        }
+
+        db.Remove(author);
+
+        await db.SaveChangesAsync();
     }
 
 }

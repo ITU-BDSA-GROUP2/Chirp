@@ -122,7 +122,10 @@ namespace Chirp.Razor.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = CreateUser();
+                var user = new IdentityUser{
+                    UserName = Input.Username,
+                    Email = Input.Email,
+                };
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 

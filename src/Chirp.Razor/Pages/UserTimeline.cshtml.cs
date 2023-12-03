@@ -83,7 +83,7 @@ public class UserTimelineModel : PageModel
     public async Task<bool> IsFollowed(string authorName) {
         var author = await _authorRepo.GetAuthorByName(authorName);
 
-        return Followers.Where(f => f.AuthorId == author.AuthorId).FirstOrDefault() != null;
+        return Followers.Where(f => f.AuthorId == author!.AuthorId).FirstOrDefault() != null;
     
     }
 

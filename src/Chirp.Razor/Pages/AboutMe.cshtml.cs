@@ -28,12 +28,11 @@ public class AboutMeModel : PageModel
 
     [BindProperty]
     [DisplayFormat(ConvertEmptyStringToNull = false)]
-    public string Username { get; set;}
+    public string Username { get; set;} = "";
 
     [BindProperty]
     [DisplayFormat(ConvertEmptyStringToNull = false)]
-
-    public string Email { get; set; }
+    public string Email { get; set; } = "";
  
 
     public AboutMeModel(
@@ -73,15 +72,15 @@ public class AboutMeModel : PageModel
 
     public async Task<ActionResult> OnPostUpdateAuthor() {
 
-        var currentUser = User.Identity.Name;
+        var currentUser = User.Identity!.Name!;
 
         var user = await _userManager.FindByNameAsync(currentUser);
 
-        string currentName = user.UserName;
+        var currentName = user!.UserName;
 
-        string currentEmail = user.Email;
+        var currentEmail = user!.Email;
 
-        if (currentName.Equals(Username) && currentEmail.Equals(Email))
+        if (currentName!.Equals(Username) && currentEmail!.Equals(Email))
         {
             return RedirectToPage();
         } 
@@ -97,11 +96,11 @@ public class AboutMeModel : PageModel
 
             Console.WriteLine(authorNameCheck != null);
 
-            if (usernameCheck != null && !currentName.Equals(Username) || authorNameCheck!=null)
+            if ((usernameCheck != null || authorNameCheck!=null) && !currentName.Equals(Username) )
             {
                 ModelState.AddModelError("ErrorMessageUsername", "Username already in use");
             }
-            if (emailCheck != null && !currentEmail.Equals(Email) || authorEmailCheck!=null)
+            if ((emailCheck != null || authorEmailCheck!=null) && !currentEmail!.Equals(Email))
             {
                 ModelState.AddModelError("ErrorMessageEmail", "Email already in use");
             }
@@ -118,15 +117,36 @@ public class AboutMeModel : PageModel
                 }
             }
             
-        Followers = await _followRepo.GetFollowers(user.UserName); 
-        Cheeps = await _service.GetCheepsFromAuthor(user.UserName, 0); 
+        Followers = await _followRepo.GetFollowers(user.UserName!); 
+        Cheeps = await _service.GetCheepsFromAuthor(user.UserName!, 0); 
         return Page();
 
     }
 
-    // public async Task<ActionResult> OnPostDeleteAuthor() {
+    public async Task<ActionResult> OnPostDeleteAuthor() {
 
-    // }
+        var user = await _userManager.FindByNameAsync(User.Identity!.Name!);
+
+        if (user == null) {
+            ModelState.AddModelError("ErrorMessage", "Something went wrong");
+            Followers = await _followRepo.GetFollowers(User.Identity!.Name!); 
+            Cheeps = await _service.GetCheepsFromAuthor(User.Identity!.Name!, 0); 
+            return Page();
+        }
+
+        var result = await _userManager.DeleteAsync(user);
+
+        if (result.Succeeded) {
+            await _authorRepo.DeleteAuthor(User.Identity!.Name!);
+            await _signInManager.SignOutAsync();
+            return Redirect("/");
+        }
+
+        Followers = await _followRepo.GetFollowers(User.Identity!.Name!); 
+        Cheeps = await _service.GetCheepsFromAuthor(User.Identity!.Name!, 0); 
+        return Page();
+
+    }
 
     
 
