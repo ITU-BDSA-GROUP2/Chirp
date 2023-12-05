@@ -163,10 +163,19 @@ namespace Chirp.Razor.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = CreateUser();
+                var user = new IdentityUser{
+                    UserName = Input.Username,
+                    Email = Input.Email,
+                };
 
-                await _userStore.SetUserNameAsync(user, Input.Username, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                var checkEmail = await _userManager.FindByEmailAsync(Input.Email);
+
+                if (checkEmail != null) {
+                    ModelState.AddModelError(string.Empty, "Email is already in use");
+                    ProviderDisplayName = info.ProviderDisplayName;
+                    ReturnUrl = returnUrl;
+                    return Page();
+                }
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
