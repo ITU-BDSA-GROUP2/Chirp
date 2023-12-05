@@ -14,7 +14,7 @@ public class ChirpDBContext : IdentityDbContext
 
 
 
-    public ChirpDBContext(DbContextOptions<ChirpDBContext> options) : base(options) { }
+    public ChirpDBContext(DbContextOptions<ChirpDBContext> options) : base(options) {}
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

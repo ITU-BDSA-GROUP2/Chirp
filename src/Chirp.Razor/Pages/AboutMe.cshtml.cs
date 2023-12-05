@@ -36,11 +36,11 @@ public class AboutMeModel : PageModel
  
 
     public AboutMeModel(
-    ICheepRepository service, 
-    IAuthorRepository authorRepo,
-    IFollowerListRepository followRepo,
-    UserManager<IdentityUser> userManager,
-    SignInManager<IdentityUser> signInManager
+        ICheepRepository service, 
+        IAuthorRepository authorRepo,
+        IFollowerListRepository followRepo,
+        UserManager<IdentityUser> userManager,
+        SignInManager<IdentityUser> signInManager
     )
     {
         _service = service;
@@ -50,7 +50,8 @@ public class AboutMeModel : PageModel
         _signInManager = signInManager;
     }
 
-    public async Task<ActionResult> OnGet() {
+    public async Task<ActionResult> OnGet() 
+    {
         
         if(User.Identity?.Name == null) 
         {
@@ -62,15 +63,18 @@ public class AboutMeModel : PageModel
         return Page();
     }
 
-    public async Task<AuthorDto> getAuthor(int id) {
+    public async Task<AuthorDto> getAuthor(int id) 
+    {
         return await _authorRepo.GetAuthorByID(id);
     }
 
-    public async Task<AuthorDto> GetCurrentAuthor(string name) {
+    public async Task<AuthorDto> GetCurrentAuthor(string name) 
+    {
         return await _authorRepo.GetAuthorByName(name);
     }
 
-    public async Task<ActionResult> OnPostUpdateAuthor() {
+    public async Task<ActionResult> OnPostUpdateAuthor() 
+    {
 
         var currentUser = User.Identity!.Name!;
 
@@ -105,12 +109,14 @@ public class AboutMeModel : PageModel
                 ModelState.AddModelError("ErrorMessageEmail", "Email already in use");
             }
 
-            if (ModelState.IsValid) {
+            if (ModelState.IsValid) 
+            {
                 user.UserName = Username;
                 user.Email = Email;
                 var result = await _userManager.UpdateAsync(user);
 
-                if (result.Succeeded) {
+                if (result.Succeeded) 
+                {
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     await _authorRepo.UpdateAuthor(currentName, user.UserName, user.Email);
                     return RedirectToAction("/");
@@ -123,11 +129,13 @@ public class AboutMeModel : PageModel
 
     }
 
-    public async Task<ActionResult> OnPostDeleteAuthor() {
+    public async Task<ActionResult> OnPostDeleteAuthor() 
+    {
 
         var user = await _userManager.FindByNameAsync(User.Identity!.Name!);
 
-        if (user == null) {
+        if (user == null) 
+        {
             ModelState.AddModelError("ErrorMessage", "Something went wrong");
             Followers = await _followRepo.GetFollowers(User.Identity!.Name!); 
             Cheeps = await _service.GetCheepsFromAuthor(User.Identity!.Name!, 0); 
@@ -136,7 +144,8 @@ public class AboutMeModel : PageModel
 
         var result = await _userManager.DeleteAsync(user);
 
-        if (result.Succeeded) {
+        if (result.Succeeded) 
+        {
             await _authorRepo.DeleteAuthor(User.Identity!.Name!);
             await _signInManager.SignOutAsync();
             return Redirect("/");
@@ -145,10 +154,5 @@ public class AboutMeModel : PageModel
         Followers = await _followRepo.GetFollowers(User.Identity!.Name!); 
         Cheeps = await _service.GetCheepsFromAuthor(User.Identity!.Name!, 0); 
         return Page();
-
-    }
-
-    
-
-    
+    }  
 }

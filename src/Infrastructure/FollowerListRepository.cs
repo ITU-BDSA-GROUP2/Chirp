@@ -22,7 +22,8 @@ public class FollowerListRepository : IFollowerListRepository
         .Where(a => a.Name == authorFollows)
         .FirstOrDefaultAsync();
 
-        if (user == null) {
+        if (user == null) 
+        {
             throw new ArgumentNullException("No user logged in");
         }
 
@@ -30,7 +31,8 @@ public class FollowerListRepository : IFollowerListRepository
         .Where(a => a.Name == authorFollowed)
         .FirstOrDefaultAsync();
 
-        if (followedUser == null) {
+        if (followedUser == null) 
+        {
             throw new ArgumentNullException("User tried to follow does not exist");
         }
 
@@ -53,7 +55,8 @@ public class FollowerListRepository : IFollowerListRepository
         .Where(a => a.Name == authorFollows)
         .FirstOrDefaultAsync();
 
-        if (user == null) {
+        if (user == null) 
+        {
             throw new ArgumentNullException("No user logged in");
         }
 
@@ -61,7 +64,8 @@ public class FollowerListRepository : IFollowerListRepository
         .Where(a => a.Name == authorFollowed)
         .FirstOrDefaultAsync();
 
-        if (followedUser == null) {
+        if (followedUser == null) 
+        {
             throw new ArgumentNullException("User tried to follow does not exist");
         }
 
@@ -71,9 +75,12 @@ public class FollowerListRepository : IFollowerListRepository
         (a.FollowedAuthorId == followedUser.AuthorId))
         .FirstOrDefaultAsync();
 
-        if (unfollow != null) {
+        if (unfollow != null) 
+        {
             db.Following.Remove(unfollow);
-        } else {
+        }
+        else 
+        {
             return;
         }
         await db.SaveChangesAsync();

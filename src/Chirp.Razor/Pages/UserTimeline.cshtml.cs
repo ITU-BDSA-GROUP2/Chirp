@@ -38,10 +38,11 @@ public class UserTimelineModel : PageModel
         return await ShowCheeps(author);
        
     }
-        public async Task<ActionResult> OnPostCheep(string authorPage)
+    public async Task<ActionResult> OnPostCheep(string authorPage)
     {
         var author = User.Identity!.Name!;
-        if (await _authorRepo.GetAuthorByName(author!) == null) {
+        if (await _authorRepo.GetAuthorByName(author!) == null) 
+        {
             await _authorRepo.CreateNewAuthor(author, author);
         }
         if (CheepText.Length > 0) 
@@ -55,10 +56,12 @@ public class UserTimelineModel : PageModel
         return RedirectToPage();
     }
 
-        public async Task<ActionResult> OnPostFollow() {
+    public async Task<ActionResult> OnPostFollow() 
+    {
         var user = User.Identity!;
 
-        if (user.Name == null) {
+        if (user.Name == null) 
+        {
             return Redirect("/Identity/Account/Register");
         }
 
@@ -68,10 +71,12 @@ public class UserTimelineModel : PageModel
         return RedirectToPage();
     }
 
-    public async Task<ActionResult> OnPostUnfollow() {
+    public async Task<ActionResult> OnPostUnfollow() 
+    {
         var user = User.Identity!;
 
-        if (user.Name == null) {
+        if (user.Name == null) 
+        {
             return Redirect("/Identity/Account/Register"); //Should never be possible.
         }
 
@@ -80,20 +85,23 @@ public class UserTimelineModel : PageModel
         return RedirectToPage();
     }
 
-    public async Task<bool> IsFollowed(string authorName) {
+    public async Task<bool> IsFollowed(string authorName) 
+    {
         var author = await _authorRepo.GetAuthorByName(authorName);
-
         return Followers.Where(f => f.AuthorId == author!.AuthorId).FirstOrDefault() != null;
-    
     }
 
-    private async Task<ActionResult> ShowCheeps(string author) {
+    private async Task<ActionResult> ShowCheeps(string author) 
+    {
         var t = Convert.ToInt32(Request.Query["page"]);
         if (t > 0) t -= 1;
-        if (author.Equals(User.Identity?.Name!)) {
+        if (author.Equals(User.Identity?.Name!)) 
+        {
             Cheeps = await _service.GetAllCheepsFromFollowed(author, t);
             AllCheeps = await _service.GetAllCheepsFromFollowedCount(author);
-        } else {
+        } 
+        else
+        {
             Cheeps = await _service.GetCheepsFromAuthor(author, t);
             AllCheeps = await _service.GetAllCheepsFromAuthor(author);
 
