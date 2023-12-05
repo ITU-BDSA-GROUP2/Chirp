@@ -301,7 +301,7 @@ ul.pagination li {
   margin-top: -1.5rem;
 }
 
-.loginButton {
+.loginButton, .externalRegister {
   margin: 1.5rem 0 1rem 2rem;
   font-size: 15px;
   padding: 15px 102px;
@@ -311,7 +311,11 @@ ul.pagination li {
   transition: .5s ease-in-out;
 }
 
-.loginButton:hover {
+.externalRegister {
+  margin: 1.5rem 11rem;
+}
+
+.loginButton:hover, .externalRegister:hover {
   background-color: #cc6e6e;
   color: #ffffff;
 }
@@ -415,18 +419,12 @@ div.page ul.cheeps p.cheepText {
 .userInformation {
   display: flex;
   flex-flow: row;
+  justify-content: center;
+  
 }
-
-.profileData {
-  margin-top: 25px;
-}
-
-.profileData ul {
-  list-style-type: none;
-}
-
+ 
 .followesList {
-  margin: 15px 0px 25px 0px;
+  margin-top: 8px;
 }
 
 .followesList ul {
@@ -451,25 +449,27 @@ div.page ul.cheeps p.cheepText {
 }
 
 .updateUserInformationInput {
-  padding: 10px;
-  width: 50%;
+  padding: 15px;
+  width: 78%;
   font-size: 15px;
-  border: 2px solid #fff;
-  color: #949494;
+  border: 2px solid #cc6e6e;
+  color: #545454;
   outline: none;
   transition: .5s ease;
 }
 
 .inputWrapper {
   display: flex;
-  flex-flow: row;
+  flex-flow: column;
+}
+
+.inputWrapper span {
+  margin-bottom: 15px;
 }
 
 .buttonWrapper {
   display: flex;
-  flex-flow: row;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
 }
 
 .buttonWrapper button {
@@ -485,6 +485,12 @@ div.page ul.cheeps p.cheepText {
 .updateButton:hover {
   background-color: #26776F;
   color: #fff;
+}
+
+.deleteUserFormPos {
+  position: relative;
+  top: -21%;
+  left: 53.5%;
 }
 
 .deleteButton {
