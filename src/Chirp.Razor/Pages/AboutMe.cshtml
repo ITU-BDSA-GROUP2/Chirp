@@ -16,7 +16,8 @@
         <div>
             <form class="updateUserInformation" method="POST" asp-page-handler="UpdateAuthor">
                 <div>
-                    @if (!ViewData.ModelState.IsValid) {
+                    @if (!ViewData.ModelState.IsValid) 
+                    {
                         <ul class="errorMSG">
                             <li>@Html.ValidationMessage("ErrorMessageUsername")</li>
                             <li>@Html.ValidationMessage("ErrorMessageEmail")</li>
@@ -62,13 +63,15 @@
                     <li><a href="/@nameOfFollower">@nameOfFollower</a></li>
                 }
             </ul>
-        } else {
+        }
+        else 
+        {
             <p class="text">You have no followers.</p>
         }
    </div>
    <hr>
-   <div>
-      @if (Model.Cheeps.Any())
+    <div>
+    @if (Model.Cheeps.Any())
     {
         <ul id="messagelist" class="cheeps">
             @foreach (var cheep in Model.Cheeps)

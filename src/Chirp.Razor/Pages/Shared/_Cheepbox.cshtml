@@ -5,7 +5,8 @@
             <input style="float: left" type="text" asp-for="CheepText">
             <input type="submit" value="Share">
         </form>
-        @if (!ViewData.ModelState.IsValid) {
+        @if (!ViewData.ModelState.IsValid) 
+        {
             <ul class="errorMSG">
                 <li>@Html.ValidationMessage("ErrorMessageLength")</li>
             </ul>

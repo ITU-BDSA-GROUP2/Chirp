@@ -32,7 +32,8 @@ public class AuthorRepository : IAuthorRepository
         .Select(a => new AuthorDto(a.Name, a.Email, a.AuthorId))
         .FirstOrDefaultAsync();
 
-        if (author == null) {
+        if (author == null) 
+        {
             throw new ArgumentNullException("Author does not exist");
         }
 
@@ -46,7 +47,6 @@ public class AuthorRepository : IAuthorRepository
         .Where(u => u.Name == authorName)
         .Select(a => new AuthorDto(a.Name, a.Email, a.AuthorId))
         .FirstOrDefaultAsync();
-
 
         return author;
     }
@@ -66,7 +66,8 @@ public class AuthorRepository : IAuthorRepository
         .Where(a => a.Name == oldName)
         .FirstOrDefaultAsync();
 
-        if (author == null) {
+        if (author == null) 
+        {
             return;
         }
 
@@ -82,7 +83,8 @@ public class AuthorRepository : IAuthorRepository
         .Where(a => a.Name == name)
         .FirstOrDefaultAsync();
 
-        if (author == null) {
+        if (author == null) 
+        {
             return;
         }
 

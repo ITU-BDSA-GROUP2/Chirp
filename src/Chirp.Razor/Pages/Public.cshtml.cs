@@ -45,14 +45,17 @@ public class PublicModel : PageModel
     public async Task<ActionResult> OnPostCheep()
     {
         var author = User.Identity!.Name!;
-        if (await _authorRepo.GetAuthorByName(author!) == null) {
+        if (await _authorRepo.GetAuthorByName(author!) == null) 
+        {
             await _authorRepo.CreateNewAuthor(author, author);
         }
         if (CheepText.Length > 0) 
         {
             var cheep = new CheepDto(CheepText, author, DateTime.UtcNow);
             await _service.CreateCheep(cheep);
-        } else {
+        } 
+        else
+        {
             ModelState.AddModelError("ErrorMessageLength", "Cheep must not be blank");
             return await ShowCheeps();
 
@@ -60,10 +63,12 @@ public class PublicModel : PageModel
         return RedirectToPage();
     }
 
-    public async Task<ActionResult> OnPostFollow() {
+    public async Task<ActionResult> OnPostFollow() 
+    {
         var user = User.Identity!;
 
-        if (user.Name == null) {
+        if (user.Name == null) 
+        {
             return Redirect("/Identity/Account/Register");
         }
 
@@ -72,10 +77,12 @@ public class PublicModel : PageModel
         return RedirectToPage();
     }
 
-    public async Task<ActionResult> OnPostUnfollow() {
+    public async Task<ActionResult> OnPostUnfollow() 
+    {
         var user = User.Identity!;
 
-        if (user.Name == null) {
+        if (user.Name == null) 
+        {
             return Redirect("/Identity/Account/Register"); //Should never be possible.
         }
 
@@ -84,14 +91,16 @@ public class PublicModel : PageModel
         return RedirectToPage();
     }
 
-    public async Task<bool> IsFollowed(string authorName) {
+    public async Task<bool> IsFollowed(string authorName) 
+    {
         var author = await _authorRepo.GetAuthorByName(authorName);
 
         return Followers.Where(f => f.AuthorId == author.AuthorId).FirstOrDefault() != null;
     
     }
 
-    private async Task<ActionResult> ShowCheeps() {
+    private async Task<ActionResult> ShowCheeps() 
+    {
         var t = Convert.ToInt32(Request.Query["page"]);
         if (t > 0) t -= 1;
         Cheeps = await _service.GetCheeps(t);
