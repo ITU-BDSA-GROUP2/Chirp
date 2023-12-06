@@ -83,8 +83,22 @@ public class AboutMeModel : PageModel
         return await _authorRepo.GetAuthorImageUrl(User.Identity!.Name!);
     }
 
-    public async Task UpdateImageUrl() 
+
+    public async Task<ActionResult> OnPostLike()
     {
+        var user = User.Identity!;
+
+        if (user.Name == null) 
+        {
+            return Redirect("/Identity/Account/Register"); //Should never be possible.
+        }
+
+        if (CheepId == 0) {
+            return RedirectToPage();
+
+        } 
+        await _likeRepo.Like(CheepId, user.Name);
+        return RedirectToPage();
     }
 
     public async Task<ActionResult> OnPostImage() {
@@ -101,6 +115,9 @@ public class AboutMeModel : PageModel
 
     public async Task<bool> IsLiked(int id, string authorName)
     {
+        if (authorName == null) {
+            return false;
+        }
         return await _likeRepo.IsLiked(id, authorName);
     }
 

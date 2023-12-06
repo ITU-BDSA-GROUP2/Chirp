@@ -71,7 +71,7 @@
                         <div>
                         <form method="POST" asp-page-handler="Like"> 
                             <input type="hidden" value="@cheep.Id" asp-for="CheepId"/>
-                            @if (!await Model.IsLiked(cheep.Id, cheep.Author)) 
+                            @if (!await Model.IsLiked(cheep.Id, User.Identity.Name)) 
                             {
                                 <button class="likeButton" type="submit">Like</button>
                             } else {

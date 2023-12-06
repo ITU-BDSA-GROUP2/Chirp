@@ -123,6 +123,10 @@ public class PublicModel : PageModel
 
     public async Task<bool> IsLiked(int id, string authorName)
     {
+
+        if (authorName == null) {
+            return false;
+        }
         return await _likeRepo.IsLiked(id, authorName);
     }
 
