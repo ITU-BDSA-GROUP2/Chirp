@@ -110,7 +110,6 @@ public class PublicModel : PageModel
             return RedirectToPage();
 
         } 
-        Console.WriteLine(CheepId);
         await _likeRepo.Like(CheepId, user.Name);
         return RedirectToPage();
     }

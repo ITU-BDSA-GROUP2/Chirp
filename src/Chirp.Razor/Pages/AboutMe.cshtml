@@ -53,7 +53,7 @@
     <div class="followesList">
         @if (Model.Followers.Any())
         {
-            <p class="text">Here is a list of your followers:</p>
+            <p class="text">You are following:</p>
             <ul>
                 @foreach (var follower in Model.Followers)
                 {
@@ -66,7 +66,7 @@
         }
         else 
         {
-            <p class="text">You have no followers.</p>
+            <p class="text">You are not following anyone.</p>
         }
    </div>
    <hr>

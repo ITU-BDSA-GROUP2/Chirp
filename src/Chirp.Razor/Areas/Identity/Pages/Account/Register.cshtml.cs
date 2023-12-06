@@ -126,7 +126,14 @@ namespace Chirp.Razor.Areas.Identity.Pages.Account
                     UserName = Input.Username,
                     Email = Input.Email,
                 };
-
+                //This should make sure that we can't create the same email multiple times.
+                var emailCheck = await _userManager.FindByEmailAsync(Input.Email);
+                if (emailCheck != null) 
+                {
+                    ModelState.AddModelError(string.Empty, "Email already in use");
+                    return Page();
+                }
+                
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
