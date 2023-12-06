@@ -31,7 +31,7 @@
         @foreach (var cheep in Model.Cheeps)
         {
             <li>
-                <img src="https://placehold.co/50x50"> 
+                <img src="@await Model.GetImageUrl(cheep.Author)"> 
                 <p class="cheepAuhtor">
                     <strong>
                         <a href="/@cheep.Author">@cheep.Author</a>

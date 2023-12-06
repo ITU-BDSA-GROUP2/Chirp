@@ -61,6 +61,39 @@ public class AuthorRepository : IAuthorRepository
         return author;
     }
 
+    public async Task<string> GetAuthorImageUrl(string authorName)
+    {
+         return await db.Authors
+        .Where(u => u.Name == authorName)
+        .Select(a => a.ImageUrl)
+        .FirstOrDefaultAsync();
+    }
+
+    public async Task SetAuthorImageUrl(string authorName, string imageUrl)
+    {
+         var author = await db.Authors
+        .Where(u => u.Name == authorName)
+        .FirstOrDefaultAsync();
+
+        if (!await ValidateImageUrl(imageUrl)) 
+        {
+            return;
+        }
+        author.ImageUrl = imageUrl;
+        await db.SaveChangesAsync();
+    }
+
+    public async Task<bool> ValidateImageUrl(string imageUrl) 
+    {
+        var list = new List<string>();
+        list.Add("images/bird1.webp");
+        list.Add("images/Bird2.png");
+        list.Add("images/Bird3.png");
+        list.Add("images/Image4.png");
+
+        return list.Contains(imageUrl);
+    }
+
     public async Task UpdateAuthor(string oldName, string newName, string email) {
         var author = await db.Authors
         .Where(a => a.Name == oldName)

@@ -130,11 +130,13 @@ div.page ul.cheeps p {
   margin: 0;
 }
 
-
-
 div.page ul.cheeps li img {
   float: left;
-  padding: 0 10px 0 0;
+  padding: 0 10px 0 0; 
+  min-width: 50px;
+  min-height: 50px;
+  max-width:50px;
+  max-height:50px;
 }
 
 div.page ul.cheeps li small {
@@ -500,4 +502,35 @@ div.page ul.cheeps p.cheepText {
 .deleteButton:hover {
   background-color: #ff1a1a;
   color: #fff;
+}
+
+.profilePicture {
+  margin-right: 25px;
+}
+
+.profilePicture img{
+  min-width: 200px;
+  min-height: 200px;
+  max-width: 200px;
+  max-height: 200px;
+  border: 2px solid #cc6e6e;
+}
+
+.imageButtons {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.imageButtons i {
+  margin: 0px 10px;
+  font-size: 20px;
+}
+
+.imageButtons i.checkmark:hover{
+  color:#26776F;
+}
+
+.imageButtons i:hover {
+  cursor: pointer;
+  color: #cc6e6e;
 }

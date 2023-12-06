@@ -11,8 +11,20 @@
     <h2> About me </h2>
     <div class="userInformation">
         <div class="profilePicture">
-            <img src="https://placehold.co/200x200"> 
+        <form method="POST" asp-page-handler="Image">
+            <img id ="imgid" src="@await Model.GetImageUrl()" value="@await Model.GetImageUrl()" asp-for="ImageUrl"> 
+            <div class="imageButtons" >
+            <i class="fa-solid fa-arrow-left" onclick="prevImg(document.getElementById('imgid').value)"></i>
+            <button type="submit">
+            <i class="fa-solid fa-check checkmark"></i>
+            </button>
+            <i class="fa-solid fa-arrow-right" onclick="nextImg(document.getElementById('imgid').value)"></i>
+            </form> 
         </div>
+        </div>
+
+        
+
         <div>
             <form class="updateUserInformation" method="POST" asp-page-handler="UpdateAuthor">
                 <div>

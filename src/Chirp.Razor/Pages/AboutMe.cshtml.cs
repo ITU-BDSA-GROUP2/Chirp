@@ -33,6 +33,10 @@ public class AboutMeModel : PageModel
     [BindProperty]
     [DisplayFormat(ConvertEmptyStringToNull = false)]
     public string Email { get; set; } = "";
+
+    [BindProperty]
+    public string ImageUrl { get; set; } = "images/bird1.webp";
+
  
 
     public AboutMeModel(
@@ -66,6 +70,21 @@ public class AboutMeModel : PageModel
     public async Task<AuthorDto> getAuthor(int id) 
     {
         return await _authorRepo.GetAuthorByID(id);
+    }
+
+    public async Task<string> GetImageUrl() {
+        return await _authorRepo.GetAuthorImageUrl(User.Identity!.Name!);
+    }
+
+    public async Task UpdateImageUrl() 
+    {
+    }
+
+    public async Task<ActionResult> OnPostImage() {
+        Console.WriteLine("HER");
+        Console.WriteLine(ImageUrl);
+        await _authorRepo.SetAuthorImageUrl(User.Identity!.Name!, ImageUrl);
+        return RedirectToPage();
     }
 
     public async Task<AuthorDto> GetCurrentAuthor(string name) 
