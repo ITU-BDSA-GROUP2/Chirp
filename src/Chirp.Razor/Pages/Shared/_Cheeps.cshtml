@@ -38,10 +38,11 @@
                 <div class="footerGrouping">
                     <p class="time"><small>&mdash; @cheep.Timestamp.ToLocalTime()</small></p>
                     <span class="likeWrapper">
-                        <div class="likeButton">
-                            Like
-                        </div>
-                        <span class="likeCounter">0</span>
+                        <form method="POST" asp-page-handler="Like" > 
+                            <input type="hidden" value="@cheep.Id" asp-for="CheepId"/>
+                            <button class="likeButton" type="submit">Like</button>
+                        </form> 
+                        <span class="likeCounter">@cheep.Likes</span>
                     </span>
                 </div>
             </li>

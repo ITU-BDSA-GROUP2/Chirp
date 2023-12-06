@@ -34,6 +34,8 @@ public class Program {
         builder.Services.AddScoped<ICheepRepository, CheepRepository>();
         builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
         builder.Services.AddScoped<IFollowerListRepository, FollowerListRepository>();
+        builder.Services.AddScoped<ILikeRepository, LikeRepository>();
+
 
 
         builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>

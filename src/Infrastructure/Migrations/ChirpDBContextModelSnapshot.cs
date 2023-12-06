@@ -53,6 +53,9 @@ namespace Chirp.Razor.Migrations
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Likes")
+                        .HasColumnType("int");
+
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasMaxLength(160)
@@ -79,6 +82,19 @@ namespace Chirp.Razor.Migrations
                     b.HasKey("UserId", "FollowedAuthorId");
 
                     b.ToTable("Following");
+                });
+
+            modelBuilder.Entity("Like", b =>
+                {
+                    b.Property<int>("CheepId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CheepId", "UserId");
+
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

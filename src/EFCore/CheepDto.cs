@@ -1,1 +1,1 @@
-public record CheepDto(string Text, string Author, DateTime Timestamp);
+public record CheepDto(string Text, string Author, DateTime Timestamp, int Id, int Likes);

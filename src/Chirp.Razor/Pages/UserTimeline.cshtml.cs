@@ -12,6 +12,8 @@ public class UserTimelineModel : PageModel
     private readonly IAuthorRepository _authorRepo;
     private readonly ICheepRepository _service;
     private readonly IFollowerListRepository _followRepo;
+    private readonly ILikeRepository _likeRepo;
+
 
     public IEnumerable<CheepDto> Cheeps { get; set; } = new List<CheepDto>();
     public IEnumerable<CheepDto> AllCheeps { get; set; } = new List<CheepDto>();
@@ -25,11 +27,15 @@ public class UserTimelineModel : PageModel
     [StringLength(160)]
     public string CheepText { get; set; } = "";
 
-    public UserTimelineModel(ICheepRepository service, IAuthorRepository authorRepo, IFollowerListRepository followRepo)
+    [BindProperty]
+    public int CheepId { get; set; } = 0;
+
+    public UserTimelineModel(ICheepRepository service, IAuthorRepository authorRepo, IFollowerListRepository followRepo, ILikeRepository likeRepo)
     {
         _service = service;
         _authorRepo = authorRepo;
         _followRepo = followRepo;
+        _likeRepo = likeRepo;
         
     }
 
@@ -47,8 +53,7 @@ public class UserTimelineModel : PageModel
         }
         if (CheepText.Length > 0) 
         {
-            var cheep = new CheepDto(CheepText, author, DateTime.UtcNow);
-            await _service.CreateCheep(cheep);
+            await _service.CreateCheep(CheepText, author, DateTime.UtcNow);
         } else {
             ModelState.AddModelError("ErrorMessageLength", "Cheep must not be blank");
             return await ShowCheeps(authorPage);
@@ -82,6 +87,24 @@ public class UserTimelineModel : PageModel
 
         await _followRepo.UnFollow(user.Name, Author);
 
+        return RedirectToPage();
+    }
+
+    public async Task<ActionResult> OnPostLike()
+    {
+        var user = User.Identity!;
+
+        if (user.Name == null) 
+        {
+            return Redirect("/Identity/Account/Register"); //Should never be possible.
+        }
+
+        if (CheepId == 0) {
+            return RedirectToPage();
+
+        } 
+        Console.WriteLine(CheepId);
+        await _likeRepo.Like(CheepId, user.Name);
         return RedirectToPage();
     }
 

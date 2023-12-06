@@ -5,6 +5,7 @@
     ViewData["Title"] = "Chirp!";
     Layout = "Shared/_Layout";
 }
+
 @if (User.Identity!.IsAuthenticated) 
 {
     <div class="cheepbox">
@@ -24,7 +25,59 @@
     <h2> Public Timeline </h2>
     @if (Model.Cheeps.Any())
     {
-        <partial name="Shared/_Cheeps.cshtml" />
+        //Html.RenderPartial("Shared/_Cheeps", Model);
+
+    <ul id="messagelist" class="cheeps">
+        @foreach (var cheep in Model.Cheeps)
+        {
+            <li>
+                <img src="https://placehold.co/50x50"> 
+                <p class="cheepAuhtor">
+                    <strong>
+                        <a href="/@cheep.Author">@cheep.Author</a>
+                    </strong>
+                </p>
+
+                @if (!cheep.Author.Equals(User.Identity?.Name)) 
+                {
+                    @if (await Model.IsFollowed(cheep.Author)) 
+                    {
+                        <form method="POST" asp-page-handler="Unfollow" > 
+                            <input type="hidden" value="@cheep.Author" asp-for="Author"/>
+                        <button class="followButton" type="submit">Unfollow</button>
+                        </form>
+                    }
+                    else 
+                    {
+                        <form method="POST" asp-page-handler="Follow" > 
+                            <input type="hidden" value="@cheep.Author" asp-for="Author"/>
+                            <button class="followButton" type="submit">Follow</button>
+                        </form> 
+                    }
+                }
+                            
+                <p class="cheepText">
+                    @cheep.Text
+                </p>
+
+                <br>
+                <hr>
+                    
+                <div class="footerGrouping">
+                    <p class="time"><small>&mdash; @cheep.Timestamp.ToLocalTime()</small></p>
+                    <span class="likeWrapper">
+                        <div>
+                        <form method="POST" asp-page-handler="Like"> 
+                            <input type="hidden" value="@cheep.Id" asp-for="CheepId"/>
+                            <button class="likeButton" type="submit">Like</button>
+                        </form> 
+                        </div>
+                        <span class="likeCounter">@cheep.Likes</span>
+                    </span>
+                </div>
+            </li>
+        }
+    </ul>
     }
     else
     {

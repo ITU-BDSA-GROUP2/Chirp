@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Chirp.Razor.Migrations
 {
     [DbContext(typeof(ChirpDBContext))]
-    [Migration("20231128114508_UpdatedMigrations")]
-    partial class UpdatedMigrations
+    [Migration("20231205224936_AddedLikes")]
+    partial class AddedLikes
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,6 +56,9 @@ namespace Chirp.Razor.Migrations
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Likes")
+                        .HasColumnType("int");
+
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasMaxLength(160)
@@ -82,6 +85,19 @@ namespace Chirp.Razor.Migrations
                     b.HasKey("UserId", "FollowedAuthorId");
 
                     b.ToTable("Following");
+                });
+
+            modelBuilder.Entity("Like", b =>
+                {
+                    b.Property<int>("CheepId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CheepId", "UserId");
+
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

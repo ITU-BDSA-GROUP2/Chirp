@@ -15,6 +15,9 @@ public class PublicModel : PageModel
 
     private readonly IFollowerListRepository _followRepo;
 
+    private readonly ILikeRepository _likeRepo;
+
+
 
     public IEnumerable<CheepDto> Cheeps { get; set; } = new List<CheepDto>();
 
@@ -29,12 +32,16 @@ public class PublicModel : PageModel
 
     [BindProperty]
     public string Author { get; set;} = "";
+    [BindProperty]
+    public int CheepId { get; set; } = 0;
 
-    public PublicModel(ICheepRepository service, IAuthorRepository authorRepo, IFollowerListRepository followRepo)
+    public PublicModel(ICheepRepository service, IAuthorRepository authorRepo, IFollowerListRepository followRepo, ILikeRepository likeRepo)
     {
         _service = service;
         _authorRepo = authorRepo;
         _followRepo = followRepo;
+        _likeRepo = likeRepo;
+
     }
 
     public async Task<ActionResult> OnGet()
@@ -51,8 +58,7 @@ public class PublicModel : PageModel
         }
         if (CheepText.Length > 0) 
         {
-            var cheep = new CheepDto(CheepText, author, DateTime.UtcNow);
-            await _service.CreateCheep(cheep);
+            await _service.CreateCheep(CheepText, author, DateTime.UtcNow);
         } 
         else
         {
@@ -91,10 +97,27 @@ public class PublicModel : PageModel
         return RedirectToPage();
     }
 
+    public async Task<ActionResult> OnPostLike()
+    {
+        var user = User.Identity!;
+
+        if (user.Name == null) 
+        {
+            return Redirect("/Identity/Account/Register"); //Should never be possible.
+        }
+
+        if (CheepId == 0) {
+            return RedirectToPage();
+
+        } 
+        Console.WriteLine(CheepId);
+        await _likeRepo.Like(CheepId, user.Name);
+        return RedirectToPage();
+    }
+
     public async Task<bool> IsFollowed(string authorName) 
     {
         var author = await _authorRepo.GetAuthorByName(authorName);
-
         return Followers.Where(f => f.AuthorId == author.AuthorId).FirstOrDefault() != null;
     
     }

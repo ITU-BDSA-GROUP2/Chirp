@@ -2,7 +2,7 @@
 
 public interface ICheepRepository
 {
-    public Task CreateCheep(CheepDto newCheep);
+    public Task CreateCheep(string text, string author, DateTime Timestamp);
     public Task<IEnumerable<CheepDto>> GetCheeps(int offset);
     public Task<IEnumerable<CheepDto>> GetCheepsFromAuthor(string user, int offset);
     public Task<IEnumerable<CheepDto>> GetAllCheeps();

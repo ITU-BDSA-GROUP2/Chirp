@@ -13,4 +13,6 @@ public class Cheep
     [Required]
     public Author Author { get; set; } = new Author();
 
+    public int Likes { get; set; } = 0;
+
 }

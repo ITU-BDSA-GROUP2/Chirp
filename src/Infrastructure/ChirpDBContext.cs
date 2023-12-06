@@ -12,7 +12,7 @@ public class ChirpDBContext : IdentityDbContext
 
     public DbSet<FollowerList> Following { get; set; }
 
-
+    public DbSet<Like> Likes { get; set; }
 
     public ChirpDBContext(DbContextOptions<ChirpDBContext> options) : base(options) {}
 
@@ -27,5 +27,7 @@ public class ChirpDBContext : IdentityDbContext
             .OnDelete(DeleteBehavior.Cascade);
         modelBuilder.Entity<FollowerList>()
             .HasKey(c => new {c.UserId, c.FollowedAuthorId});
+        modelBuilder.Entity<Like>()
+            .HasKey(x => new {x.CheepId, x.UserId});
     }
 }
