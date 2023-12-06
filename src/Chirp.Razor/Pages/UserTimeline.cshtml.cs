@@ -113,6 +113,16 @@ public class UserTimelineModel : PageModel
         return Followers.Where(f => f.AuthorId == author!.AuthorId).FirstOrDefault() != null;
     }
 
+    public async Task<bool> IsLiked(int id, string authorName)
+    {
+        return await _likeRepo.IsLiked(id, authorName);
+    }
+
+    public async Task<string> GetImageUrl(string authorName) 
+    {
+        return await _authorRepo.GetAuthorImageUrl(authorName);
+    }
+
     private async Task<ActionResult> ShowCheeps(string author) 
     {
         var t = Convert.ToInt32(Request.Query["page"]);

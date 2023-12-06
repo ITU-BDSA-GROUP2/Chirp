@@ -29,11 +29,11 @@
     @if (Model.Cheeps.Any())
     {
         //<partial name="Shared/_Cheeps.cshtml" />
-        <ul id="messagelist" class="cheeps">
+    <ul id="messagelist" class="cheeps">
         @foreach (var cheep in Model.Cheeps)
         {
             <li>
-                <img src="https://placehold.co/50x50"> 
+                <img src="@await Model.GetImageUrl(cheep.Author)"> 
                 <p class="cheepAuhtor">
                     <strong>
                         <a href="/@cheep.Author">@cheep.Author</a>
@@ -71,7 +71,14 @@
                         <div>
                         <form method="POST" asp-page-handler="Like"> 
                             <input type="hidden" value="@cheep.Id" asp-for="CheepId"/>
-                            <button class="likeButton" type="submit">Like</button>
+                            @if (!await Model.IsLiked(cheep.Id, cheep.Author)) 
+                            {
+                                <button class="likeButton" type="submit">Like</button>
+                            } else {
+                                <button class="likeButton" type="submit">Dislike</button>
+
+                            }
+                            
                         </form> 
                         </div>
                         <span class="likeCounter">@cheep.Likes</span>
@@ -86,4 +93,3 @@
         <em>There are no cheeps so far.</em>
     }
 </div>
-

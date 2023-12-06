@@ -3,8 +3,6 @@
 "images/Bird3.png",
 "images/Image4.png");
 
-console.log('Script loaded');
-
 function nextImg(curImg) {
     let imgNum = 0;
 
@@ -16,7 +14,9 @@ function nextImg(curImg) {
         }
     }
     let container = document.getElementById('imgid');
+    let container1 = document.getElementById('curImg');
     container.value = images[imgNum];
+    container1.value = images[imgNum];
     container.src = images[imgNum];
 }
 
@@ -31,7 +31,9 @@ function prevImg(curImg) {
         }
     }
     let container = document.getElementById('imgid');
+    let container1 = document.getElementById('curImg');
     container.value = images[imgNum];
+    container1.value = images[imgNum];
     container.src = images[imgNum];
 }
 
