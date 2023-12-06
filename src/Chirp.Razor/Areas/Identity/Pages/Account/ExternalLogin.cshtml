@@ -21,14 +21,14 @@
 
             <div class="form-floating mb-3 wrapper">
                         <label asp-for="Input.Username" class="text">Username</label>
-                        <input asp-for="Input.Username" class="form-control emailAndPassword" autocomplete="username" aria-required="true"
+                        <input asp-for="Input.Username" class="form-control emailAndPassword" autocomplete="off" aria-required="true"
                             placeholder="Username" />
                         <span asp-validation-for="Input.Username" class="text-danger"></span>
                     </div>
 
             <div class="form-floating mb-3 wrapper">
                         <label asp-for="Input.Email" class="text">Email</label>
-                        <input asp-for="Input.Email" class="form-control emailAndPassword" autocomplete="email" aria-required="true"
+                        <input asp-for="Input.Email" class="form-control emailAndPassword" autocomplete="off" aria-required="true"
                             placeholder="Please enter your email." />
                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
