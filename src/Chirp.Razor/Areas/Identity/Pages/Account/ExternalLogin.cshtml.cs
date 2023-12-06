@@ -163,16 +163,18 @@ namespace Chirp.Razor.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser
-                {
+                var user = new IdentityUser{
                     UserName = Input.Username,
-                    Email = Input.Email
+                    Email = Input.Email,
                 };
-                
-                //This should make sure that we don't make the same email twice.
-                var emailCheck = await _userManager.FindByEmailAsync(Input.Email);
-                if (emailCheck != null) {
-                    ModelState.AddModelError(string.Empty, "Email already in use");
+
+                var checkEmail = await _userManager.FindByEmailAsync(Input.Email);
+
+                if (checkEmail != null) {
+                    ModelState.AddModelError(string.Empty, "Email is already in use");
+                    ProviderDisplayName = info.ProviderDisplayName;
+                    ReturnUrl = returnUrl;
+                    return Page();
                 }
 
                 var result = await _userManager.CreateAsync(user);

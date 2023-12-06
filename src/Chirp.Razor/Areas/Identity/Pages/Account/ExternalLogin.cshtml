@@ -17,8 +17,7 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-
+            <div asp-validation-summary="ModelOnly" class="errorMSG" role="alert"></div>
             <div class="form-floating mb-3 wrapper">
                         <label asp-for="Input.Username" class="text">Username</label>
                         <input asp-for="Input.Username" class="form-control emailAndPassword" autocomplete="off" aria-required="true"
@@ -32,8 +31,6 @@
                             placeholder="Please enter your email." />
                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
-
-            
             <button type="submit" class="externalRegister">Register</button>
         </form>
     </div>
