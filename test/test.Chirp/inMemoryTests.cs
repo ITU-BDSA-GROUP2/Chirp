@@ -92,9 +92,12 @@ public class InMemoryTests : IDisposable {
         //Arrange
         var authorName = "Harry Potter";
 
+
         //Act
+        var author = await aController.GetAuthorByName(authorName);
+
         //Assert
-        await Assert.ThrowsAsync<ArgumentNullException>(() => aController.GetAuthorByName(authorName));
+        Assert.Null(author);
     }
 
     [Fact]
@@ -119,10 +122,10 @@ public class InMemoryTests : IDisposable {
         //Arrange
         var authorEmail = "VoldARMAN@jubiiiiii.com";
 
-        
         //Act
+        var author = await aController.GetAuthorByEmail(authorEmail);
         //Assert
-        await Assert.ThrowsAsync<ArgumentNullException>(() => aController.GetAuthorByEmail(authorEmail));
+        Assert.Null(author);
     }
         
 
@@ -373,6 +376,27 @@ public class InMemoryTests : IDisposable {
         Assert.Equal(updatedAuthorCheck.Name, "Voldemor");
         Assert.Equal(updatedAuthorCheck.Email, "Voldemor@gmail.com");
 
+    }
+
+    [Fact]
+    public async void DeleteAuthor() {
+
+        //Arrange
+        var userName = "Voldemort";
+
+        var user = await context.Authors
+        .Where(a => a.Name == userName)
+        .FirstOrDefaultAsync();
+
+        //Act
+        await aController.DeleteAuthor(userName);
+        var deletedAuthorCheck = await context.Authors
+        .Where(a => a.Name == userName)
+        .FirstOrDefaultAsync();
+
+        //Assert
+        Assert.NotNull(user);
+        Assert.Null(deletedAuthorCheck);
 
 
     }
