@@ -13,6 +13,8 @@ public class AboutMeModel : PageModel
     private readonly IAuthorRepository _authorRepo;
     private readonly ICheepRepository _service;
     private readonly IFollowerListRepository _followRepo;
+    private readonly ILikeRepository _likeRepo;
+
 
     private readonly UserManager<IdentityUser> _userManager;
     private readonly SignInManager<IdentityUser> _signInManager;
@@ -33,12 +35,20 @@ public class AboutMeModel : PageModel
     [BindProperty]
     [DisplayFormat(ConvertEmptyStringToNull = false)]
     public string Email { get; set; } = "";
+
+    [BindProperty]
+    public string ImageUrl { get; set; } = "images/bird1.webp";
+
+    [BindProperty]
+    public int CheepId { get; set; } = 0;
+
  
 
     public AboutMeModel(
         ICheepRepository service, 
         IAuthorRepository authorRepo,
         IFollowerListRepository followRepo,
+        ILikeRepository likeRepo,
         UserManager<IdentityUser> userManager,
         SignInManager<IdentityUser> signInManager
     )
@@ -46,6 +56,7 @@ public class AboutMeModel : PageModel
         _service = service;
         _authorRepo = authorRepo;
         _followRepo = followRepo;
+        _likeRepo = likeRepo;
         _userManager = userManager;
         _signInManager = signInManager;
     }
@@ -68,9 +79,51 @@ public class AboutMeModel : PageModel
         return await _authorRepo.GetAuthorByID(id);
     }
 
+    public async Task<string> GetImageUrl() {
+        return await _authorRepo.GetAuthorImageUrl(User.Identity!.Name!);
+    }
+
+
+    public async Task<ActionResult> OnPostLike()
+    {
+        var user = User.Identity!;
+
+        if (user.Name == null) 
+        {
+            return Redirect("/Identity/Account/Register"); //Should never be possible.
+        }
+
+        if (CheepId == 0) {
+            return RedirectToPage();
+
+        } 
+        await _likeRepo.Like(CheepId, user.Name);
+        return RedirectToPage();
+    }
+
+    public async Task<ActionResult> OnPostImage() {
+        Console.WriteLine("HER");
+        Console.WriteLine(ImageUrl);
+        await _authorRepo.SetAuthorImageUrl(User.Identity!.Name!, ImageUrl);
+        return RedirectToPage();
+    }
+
     public async Task<AuthorDto> GetCurrentAuthor(string name) 
     {
         return await _authorRepo.GetAuthorByName(name);
+    }
+
+    public async Task<bool> IsLiked(int id, string authorName)
+    {
+        if (authorName == null) {
+            return false;
+        }
+        return await _likeRepo.IsLiked(id, authorName);
+    }
+
+    public async Task<string> GetImageUrl(string authorName) 
+    {
+        return await _authorRepo.GetAuthorImageUrl(authorName);
     }
 
     public async Task<ActionResult> OnPostUpdateAuthor() 
@@ -98,16 +151,17 @@ public class AboutMeModel : PageModel
             var authorNameCheck = await _authorRepo.GetAuthorByName(Username);
             var authorEmailCheck = await _authorRepo.GetAuthorByEmail(Email);
 
-            Console.WriteLine(authorNameCheck != null);
 
-            if ((usernameCheck != null || authorNameCheck!=null) && !currentName.Equals(Username) )
+            if (usernameCheck != null || authorNameCheck!=null)
             {
                 ModelState.AddModelError("ErrorMessageUsername", "Username already in use");
             }
-            if ((emailCheck != null || authorEmailCheck!=null) && !currentEmail!.Equals(Email))
+            if (emailCheck != null || authorEmailCheck!=null)
             {
                 ModelState.AddModelError("ErrorMessageEmail", "Email already in use");
             }
+
+
 
             if (ModelState.IsValid) 
             {

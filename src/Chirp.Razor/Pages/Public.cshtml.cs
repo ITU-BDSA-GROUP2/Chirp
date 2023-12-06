@@ -121,6 +121,20 @@ public class PublicModel : PageModel
     
     }
 
+    public async Task<bool> IsLiked(int id, string authorName)
+    {
+
+        if (authorName == null) {
+            return false;
+        }
+        return await _likeRepo.IsLiked(id, authorName);
+    }
+
+    public async Task<string> GetImageUrl(string authorName) 
+    {
+        return await _authorRepo.GetAuthorImageUrl(authorName);
+    }
+
     private async Task<ActionResult> ShowCheeps() 
     {
         var t = Convert.ToInt32(Request.Query["page"]);
