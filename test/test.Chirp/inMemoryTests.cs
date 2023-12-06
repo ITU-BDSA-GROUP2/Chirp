@@ -371,7 +371,6 @@ public class InMemoryTests : IDisposable {
         Assert.NotNull(updatedAuthorCheck);
         Assert.Null(oldAuthor);
 
-<<<<<<< HEAD
         Assert.Equal(updatedAuthorCheck.Name, "Voldemor");
         Assert.Equal(updatedAuthorCheck.Email, "Voldemor@gmail.com");
 
@@ -396,12 +395,6 @@ public class InMemoryTests : IDisposable {
         //Assert
         Assert.NotNull(user);
         Assert.Null(deletedAuthorCheck);
-
-
-=======
-        Assert.Equal("Voldemor", updatedAuthorCheck.Name);
-        Assert.Equal("Voldemor@gmail.com", updatedAuthorCheck.Email);
->>>>>>> LikesRepository
     }
 
 
