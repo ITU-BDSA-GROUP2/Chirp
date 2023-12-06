@@ -527,7 +527,12 @@ div.page ul.cheeps p.cheepText {
   font-size: 20px;
 }
 
-.imageButtons i.checkmark:hover{
+.checkmark {
+  border: none;
+  background-color: #FFF;
+}
+
+.checkmark:hover > i, .imageButtons .checkmark i:hover  {
   color:#26776F;
 }
 

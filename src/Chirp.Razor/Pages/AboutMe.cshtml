@@ -14,13 +14,13 @@
         <form method="POST" asp-page-handler="Image">
             
             <img id ="imgid" src="@await Model.GetImageUrl()" value="@await Model.GetImageUrl()" asp-for="ImageUrl"> 
-            <input id="curImg" type="hidden" asp-for="ImageUrl"/>
+            <input id="curImg" type="hidden" value="@await Model.GetImageUrl()" asp-for="ImageUrl"/>
             <div class="imageButtons">
-            <i class="fa-solid fa-arrow-left" asp-for="ImageUrl" onclick="prevImg(document.getElementById('curImg').value)"></i>
-            <button type="submit">
-            <i class="fa-solid fa-check checkmark"></i>
-            </button>
-            <i class="fa-solid fa-arrow-right" asp-for="ImageUrl" onclick="nextImg(document.getElementById('curImg').value)"></i>
+                <i class="fa-solid fa-arrow-left" asp-for="ImageUrl" onclick="prevImg(document.getElementById('curImg').value)"></i>
+                <button class="checkmark" type="submit">
+                    <i class="fa-solid fa-check"></i>
+                </button>
+                <i class="fa-solid fa-arrow-right" asp-for="ImageUrl" onclick="nextImg(document.getElementById('curImg').value)"></i>
             </form> 
         </div>
         </div>
@@ -111,12 +111,11 @@
                         <div>
                         <form method="POST" asp-page-handler="Like"> 
                             <input type="hidden" value="@cheep.Id" asp-for="CheepId"/>
-                            @if (!await Model.IsLiked(cheep.Id, cheep.Author)) 
+                           @if (await Model.IsLiked(cheep.Id, (await Model.GetCurrentAuthor(User.Identity?.Name!)).Name)) 
                             {
-                                <button class="likeButton" type="submit">Like</button>
-                            } else {
                                 <button class="likeButton" type="submit">Dislike</button>
-
+                            } else {
+                                <button class="likeButton" type="submit">Like</button>
                             }
                             
                         </form> 
