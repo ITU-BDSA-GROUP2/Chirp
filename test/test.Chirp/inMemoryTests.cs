@@ -132,19 +132,21 @@ public class InMemoryTests : IDisposable {
      [Fact]
      public async void CreateCheep() {
         //Arrange
-        var cheepDto = new CheepDto("Hello my friends! :)", "Voldemort", DateTime.Now);
+        var cheepMessage = "Hello my friends! :)";
+        var cheepAuthor = "Voldemort";
+        var time = DateTime.Now;
 
         //Act
-        await cController.CreateCheep(cheepDto);
+        await cController.CreateCheep(cheepMessage, cheepAuthor, time);
         var cheep = await context.Cheeps
-        .Where(c => c.Text == cheepDto.Text)
+        .Where(c => c.Text == cheepMessage)
         .FirstOrDefaultAsync();
 
         //Assert
         Assert.NotNull(cheep);
-        Assert.Equal(cheepDto.Text, cheep.Text);
-        Assert.Equal(cheepDto.Author, cheep.Author.Name);
-        Assert.Equal(cheepDto.Timestamp, cheep.TimeStamp);
+        Assert.Equal(cheepMessage, cheep.Text);
+        Assert.Equal(cheepAuthor, cheep.Author.Name);
+        Assert.Equal(time, cheep.TimeStamp);
      }
 
 
@@ -189,8 +191,7 @@ public class InMemoryTests : IDisposable {
         var email = "Hansemanden@asd.com";
         await aController.CreateNewAuthor(authorName, email);
         for (int i = 0; i < 50; i++) {
-            var cheep = new CheepDto(i.ToString(), authorName, DateTime.Now);
-            await cController.CreateCheep(cheep);
+            await cController.CreateCheep(i.ToString(), authorName, DateTime.Now);
         }
         var pageSize = 32;
         var expectedCheepCount = 53;
@@ -217,8 +218,7 @@ public class InMemoryTests : IDisposable {
         var email = "Hansemanden@asd.com";
         await aController.CreateNewAuthor(authorName, email);
         for (int i = 0; i < 50; i++) {
-            var cheep = new CheepDto(i.ToString(), authorName, DateTime.Now);
-            await cController.CreateCheep(cheep);
+            await cController.CreateCheep(i.ToString(), authorName, DateTime.Now);
         }
         var pageSize = 32;
         var expectedCheepCount = 50;
@@ -249,8 +249,7 @@ public class InMemoryTests : IDisposable {
         var email = "Hansemanden@asd.com";
         await aController.CreateNewAuthor(authorName, email);
         for (int i = 0; i < 50; i++) {
-            var cheep = new CheepDto(i.ToString(), authorName, DateTime.Now);
-            await cController.CreateCheep(cheep);
+            await cController.CreateCheep(i.ToString(), authorName, DateTime.Now);
         }
         var expectedCheepCount = 53;
         
@@ -270,8 +269,7 @@ public class InMemoryTests : IDisposable {
         var email = "Hansemanden@asd.com";
         await aController.CreateNewAuthor(authorName, email);
         for (int i = 0; i < 50; i++) {
-            var cheep = new CheepDto(i.ToString(), authorName, DateTime.Now);
-            await cController.CreateCheep(cheep);
+            await cController.CreateCheep(i.ToString(), authorName, DateTime.Now);
         }
         var expectedCheepCount = 50;
         
@@ -370,11 +368,8 @@ public class InMemoryTests : IDisposable {
         Assert.NotNull(updatedAuthorCheck);
         Assert.Null(oldAuthor);
 
-        Assert.Equal(updatedAuthorCheck.Name, "Voldemor");
-        Assert.Equal(updatedAuthorCheck.Email, "Voldemor@gmail.com");
-
-
-
+        Assert.Equal("Voldemor", updatedAuthorCheck.Name);
+        Assert.Equal("Voldemor@gmail.com", updatedAuthorCheck.Email);
     }
 
 
