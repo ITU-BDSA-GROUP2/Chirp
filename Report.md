@@ -1,3 +1,6 @@
+---
+title: _Chirp!_ Project Report
+subtitle: ITU BDSA 2023 Group `02`
 author:
 - "Oliver Prip Hagmund <ohag@itu.dk>"
 - "Casper Pilgaard <cpil@itu.dk>"
