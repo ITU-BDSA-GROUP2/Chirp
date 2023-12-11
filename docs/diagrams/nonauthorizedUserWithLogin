@@ -1,0 +1,12 @@
+@startuml
+start
+:look at cheeps;
+:click login;
+:go to login page;
+split
+:login without github;
+split again
+:login with github;
+end split
+stop
+@enduml
