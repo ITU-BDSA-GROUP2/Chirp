@@ -22,8 +22,27 @@ Here comes a description of our domain model.
 
 ## User activities
 
-![PlantUML model]
-(http://www.plantuml.com/plantuml/svg/VP11ReGm34NtFeMNp1MOpLp51JDO63jA78suVO6ehQOgtKL-J_z9UPIW77LLE1-GEJ45zEg-80KECtCgToX99K2cZchCdb4AJgxgBnvl63CRTXkN6_I3oh1WjKRH3QcDt86rS6V-BVsbs2XJYo4zIUn8dWn9CzEueShorNnBZb8ET1KxsV-f_fKb-CTuOst53TSDGrPMCRvIwCDhuFgRgp_t-tuCJ_3O-yUtVm80)
+<div hidden>
+```
+@startuml nonauthorizedUserWithoutLoginActivityDiagram
+
+start
+:look at cheeps;
+:click register;
+:go to register page;
+split
+:register without github;
+split again
+:register with github;
+end split
+stop
+@enduml
+
+```
+</div>
+
+![](nonauthorizedUserWithoutLoginActivityDiagram.svg)
+
 
 ## Sequence of functionality/calls trough _Chirp!_
 
@@ -46,3 +65,4 @@ Here we talk about our Ethics.
 ## License
 
 ## LLMs, ChatGPT, CoPilot, and others
+```
