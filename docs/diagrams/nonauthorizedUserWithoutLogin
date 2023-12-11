@@ -1,0 +1,12 @@
+@startuml
+start
+:look at cheeps;
+:click register;
+:go to register page;
+split
+:register without github;
+split again
+:register with github;
+end split
+stop
+@enduml
