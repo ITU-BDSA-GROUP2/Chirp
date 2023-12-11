@@ -22,7 +22,11 @@ Here comes a description of our domain model.
 
 ## User activities
 
-![user activity diagram](https://www.plantuml.com/plantuml/svg/JOx13i8m28RlVGgUOxlCnADNunaxmiYwqhHKeqylEcCyaO-V3vYQORM-9SYQiTkYLPuqdnlLYzXoKfPyY2OtiSTHa2jkuQE48QckW0Pn8Ifj34DC4bT8RyM95KntWe9COsWbYNjxwov-gnkmrtxzXe2Calz7VZdb6VO5pRI4oTc_3Yy0)
+![user activity diagram of a nonauthorised user that has registered](https://www.plantuml.com/plantuml/svg/JOx13i8m28RlVGgUOxlCnADNunaxmiYwqhHKeqylEcCyaO-V3vYQORM-9SYQiTkYLPuqdnlLYzXoKfPyY2OtiSTHa2jkuQE48QckW0Pn8Ifj34DC4bT8RyM95KntWe9COsWbYNjxwov-gnkmrtxzXe2Calz7VZdb6VO5pRI4oTc_3Yy0)
+
+![user activity diagram of a nonauthorised user that has not registered](https://www.plantuml.com/plantuml/svg/NOx13SCm24NlJC4SoIMhK1SH5DTO1glh5xML3pa1ZmVwXmUDcAyAtmQsQdOX1PQJkViEMwbQBXmiwi4ZWHY6BO2TX7VmNZMl5trhd3O39Ujy_FT8GjfkrbAuFV7tniCw73bdhWy0)
+
+![user activity diagram of an authorised user](https://www.plantuml.com/plantuml/svg/VP11ReGm34NtFeMNp1MOpLp51JDO63jA78suVO6ehQOgtKL-J_z9UPIW77LLE1-GEJ45zEg-80KECtCgToX99K2cZchCdb4AJgxgBnvl63CRTXkN6_I3oh1WjKRH3QcDt86rS6V-BVsbs2XJYo4zIUn8dWn9CzEueShorNnBZb8ET1KxsV-f_fKb-CTuOst53TSDGrPMCRvIwCDhuFgRgp_t-tuCJ_3O-yUtVm80)
 
 ## Sequence of functionality/calls trough _Chirp!_
 
