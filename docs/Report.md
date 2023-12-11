@@ -22,28 +22,6 @@ Here comes a description of our domain model.
 
 ## User activities
 
-<div hidden>
-```
-@startuml nonauthorizedUserWithoutLoginActivityDiagram
-
-start
-:look at cheeps;
-:click register;
-:go to register page;
-split
-:register without github;
-split again
-:register with github;
-end split
-stop
-@enduml
-
-```
-</div>
-
-![](nonauthorizedUserWithoutLoginActivityDiagram.png)
-
-
 ## Sequence of functionality/calls trough _Chirp!_
 
 # Process
@@ -65,4 +43,7 @@ Here we talk about our Ethics.
 ## License
 
 ## LLMs, ChatGPT, CoPilot, and others
+
+```
+
 ```

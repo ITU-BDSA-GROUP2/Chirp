@@ -1,4 +1,4 @@
-@startuml
+@startuml nonauthorizedUserWithLoginActivityDiagram
 start
 :look at cheeps;
 :click login;
