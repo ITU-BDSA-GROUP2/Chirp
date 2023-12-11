@@ -22,6 +22,8 @@ Here comes a description of our domain model.
 
 ## User activities
 
+![user activity diagram](https://www.plantuml.com/plantuml/svg/JOx13i8m28RlVGgUOxlCnADNunaxmiYwqhHKeqylEcCyaO-V3vYQORM-9SYQiTkYLPuqdnlLYzXoKfPyY2OtiSTHa2jkuQE48QckW0Pn8Ifj34DC4bT8RyM95KntWe9COsWbYNjxwov-gnkmrtxzXe2Calz7VZdb6VO5pRI4oTc_3Yy0)
+
 ## Sequence of functionality/calls trough _Chirp!_
 
 # Process
