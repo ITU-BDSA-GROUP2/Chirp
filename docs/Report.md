@@ -41,7 +41,7 @@ stop
 ```
 </div>
 
-![](nonauthorizedUserWithoutLoginActivityDiagram.svg)
+![](nonauthorizedUserWithoutLoginActivityDiagram.png)
 
 
 ## Sequence of functionality/calls trough _Chirp!_
