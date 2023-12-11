@@ -22,11 +22,24 @@ Here comes a description of our domain model.
 
 ## User activities
 
+@startuml
+start
+:look at cheeps;
+:click register;
+:go to register page;
+split
+:register without github;
+split again
+:register with github;
+end split
+stop
+@enduml
+
 ## Sequence of functionality/calls trough _Chirp!_
 
 # Process
 
-Here comes a description of our Process. 
+Here comes a description of our Process.
 
 ## Build, test, release, and deployment
 
@@ -38,7 +51,7 @@ Here comes a description of our Process.
 
 # Ethics
 
-Here we talk about our Ethics. 
+Here we talk about our Ethics.
 
 ## License
 
