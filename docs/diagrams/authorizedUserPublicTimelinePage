@@ -1,0 +1,26 @@
+@startuml
+start
+repeat
+:look at cheeps;
+split
+if(author is followed) then (yes)
+:click unfollow on a cheep;
+else(no)
+:click follow on a cheep;
+endif
+split again
+if(cheep already liked) then(yes)
+:click dislike cheep;
+else(no)
+:click like on a cheep;
+endif
+split again
+:write a cheep;
+split again
+:click on my timeline;
+split again
+:click on about me;
+split again
+:logout;
+stop
+@enduml
