@@ -129,8 +129,6 @@ public class InMemoryTests : IDisposable {
     }
         
 
-
-     
     //CheepRepository test methods
      [Fact]
      public async void CreateCheep() {
@@ -262,7 +260,7 @@ public class InMemoryTests : IDisposable {
         //Assert
         Assert.NotNull(allCheeps);
         
-        Assert.Equal(expectedCheepCount, allCheeps.Count());
+        Assert.Equal(expectedCheepCount, allCheeps);
     }
 
     [Fact]
@@ -282,7 +280,7 @@ public class InMemoryTests : IDisposable {
         //Assert
         Assert.NotNull(allCheepsFromHans);
         
-        Assert.Equal(expectedCheepCount, allCheepsFromHans.Count());
+        Assert.Equal(expectedCheepCount, allCheepsFromHans);
     }
 
     [Fact]
