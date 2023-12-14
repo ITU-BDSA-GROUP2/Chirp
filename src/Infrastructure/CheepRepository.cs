@@ -54,21 +54,17 @@ public class CheepRepository : ICheepRepository
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<CheepDto>> GetAllCheeps() 
+    public async Task<int> GetAllCheeps() 
     {
         return await db.Cheeps
-            .OrderByDescending(c => c.TimeStamp)
-            .Select(c => new CheepDto(c.Text, c.Author.Name, c.TimeStamp, c.CheepId, c.Likes))
-            .ToListAsync();
+            .CountAsync();
     }
 
-    public async Task<IEnumerable<CheepDto>> GetAllCheepsFromAuthor(string authorName) 
+    public async Task<int> GetAllCheepsFromAuthor(string authorName) 
     {
         return await db.Cheeps
-            .OrderByDescending(c => c.TimeStamp)
             .Where(u => u.Author.Name == authorName)
-            .Select(c => new CheepDto(c.Text, c.Author.Name, c.TimeStamp, c.CheepId, c.Likes))
-            .ToListAsync();
+            .CountAsync();
     }
 
     public async Task<IEnumerable<CheepDto>> GetAllCheepsFromFollowed(string user, int page) 
@@ -91,7 +87,7 @@ public class CheepRepository : ICheepRepository
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<CheepDto>> GetAllCheepsFromFollowedCount(string user) 
+    public async Task<int> GetAllCheepsFromFollowedCount(string user) 
     {
 
         var userId = await db.Authors
@@ -103,10 +99,8 @@ public class CheepRepository : ICheepRepository
             .Select(a => a.FollowedAuthorId)
             .ToListAsync();
         return await db.Cheeps
-            .OrderByDescending(c => c.TimeStamp)
             .Where(u => u.Author.Name == user || followedList.Contains(u.AuthorId))
-            .Select(c => new CheepDto(c.Text, c.Author.Name, c.TimeStamp, c.CheepId, c.Likes))
-            .ToListAsync();
+            .CountAsync();
     }
 
 }

@@ -104,7 +104,6 @@ public class AuthorRepository : IAuthorRepository
             return;
         }
 
-        
         author.Name = newName;
         author.Email = email;
         await db.SaveChangesAsync();

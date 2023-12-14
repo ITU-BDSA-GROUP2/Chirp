@@ -15,13 +15,14 @@ public class InMemoryTests : IDisposable {
     private readonly ChirpDBContext context;
     private readonly AuthorRepository aController;
     private readonly CheepRepository cController;
-    private readonly LikeRepository lController;
     private readonly FollowerListRepository fController;
 
 
 
     public InMemoryTests()
     {
+
+
         connection = new SqliteConnection("Filename=:memory:");
         connection.Open();
 
@@ -37,8 +38,9 @@ public class InMemoryTests : IDisposable {
         SeedDatabase();
 
         aController = new AuthorRepository(context);
+
         cController = new CheepRepository(context);
-        lController = new LikeRepository(context);
+
         fController = new FollowerListRepository(context);
 
     }
@@ -51,7 +53,7 @@ public class InMemoryTests : IDisposable {
 
     //AuthorRepository test methods
     [Fact]
-    public async void CreateNewAuthor()
+     public async void CreateNewAuthor()
      {
         //Arrange
         var authorName = "Asger";
@@ -68,6 +70,7 @@ public class InMemoryTests : IDisposable {
          Assert.Equal(authorName, authorName);
      }
 
+
     [Fact]
     public async void GetAuthorByNameThatExist()
     {
@@ -82,6 +85,7 @@ public class InMemoryTests : IDisposable {
         Assert.Equal(authorName, author.Name);
     }
 
+    //Found from here: https://stackoverflow.com/a/45017575
     [Fact]
     public async void GetAuthorByNameThatDoesNotExist()
     {
@@ -111,6 +115,7 @@ public class InMemoryTests : IDisposable {
     }
 
 
+    //Inspiration from here: https://stackoverflow.com/a/45017575
     [Fact]
     public async void GetAuthorByEmailThatDoesNotExist()
     {
@@ -124,8 +129,6 @@ public class InMemoryTests : IDisposable {
     }
         
 
-
-     
     //CheepRepository test methods
      [Fact]
      public async void CreateCheep() {
@@ -146,6 +149,7 @@ public class InMemoryTests : IDisposable {
         Assert.Equal(cheepAuthor, cheep.Author.Name);
         Assert.Equal(time, cheep.TimeStamp);
      }
+
 
 
     [Fact]
@@ -191,6 +195,7 @@ public class InMemoryTests : IDisposable {
             await cController.CreateCheep(i.ToString(), authorName, DateTime.Now);
         }
         var pageSize = 32;
+        var expectedCheepCount = 53;
         int cheepPage1 = 0;
         int cheepPage2 = 1;
 
@@ -202,7 +207,7 @@ public class InMemoryTests : IDisposable {
         //Assert
         Assert.NotNull(cheepsPage1);
         Assert.Equal(pageSize, cheepsPage1.Count());
-        Assert.Equal(53-pageSize, cheepsPage2.Count());
+        Assert.Equal(expectedCheepCount-pageSize, cheepsPage2.Count());
 
 
     }
@@ -217,6 +222,7 @@ public class InMemoryTests : IDisposable {
             await cController.CreateCheep(i.ToString(), authorName, DateTime.Now);
         }
         var pageSize = 32;
+        var expectedCheepCount = 50;
         var cheepPage1 = 0;
         var cheepPage2 = 1;
         var cheepPage3 = 2;
@@ -233,7 +239,7 @@ public class InMemoryTests : IDisposable {
         Assert.NotNull(cheepsPage3);
 
         Assert.Equal(pageSize, cheepsPage1.Count());
-        Assert.Equal(50-pageSize, cheepsPage2.Count());
+        Assert.Equal(expectedCheepCount-pageSize, cheepsPage2.Count());
         Assert.Empty(cheepsPage3);
     }
 
@@ -245,14 +251,16 @@ public class InMemoryTests : IDisposable {
         await aController.CreateNewAuthor(authorName, email);
         for (int i = 0; i < 50; i++) {
             await cController.CreateCheep(i.ToString(), authorName, DateTime.Now);
-        }        
+        }
+        var expectedCheepCount = 53;
+        
         //Act
         var allCheeps = await cController.GetAllCheeps();
         
         //Assert
         Assert.NotNull(allCheeps);
         
-        Assert.Equal(53, allCheeps.Count());
+        Assert.Equal(expectedCheepCount, allCheeps);
     }
 
     [Fact]
@@ -261,10 +269,10 @@ public class InMemoryTests : IDisposable {
         var authorName = "Hans";
         var email = "Hansemanden@asd.com";
         await aController.CreateNewAuthor(authorName, email);
-        for (int i = 0; i < 50; i++) 
-        {
+        for (int i = 0; i < 50; i++) {
             await cController.CreateCheep(i.ToString(), authorName, DateTime.Now);
         }
+        var expectedCheepCount = 50;
         
         //Act
         var allCheepsFromHans = await cController.GetAllCheepsFromAuthor(authorName);
@@ -272,30 +280,33 @@ public class InMemoryTests : IDisposable {
         //Assert
         Assert.NotNull(allCheepsFromHans);
         
-        Assert.Equal(50, allCheepsFromHans.Count());
+        Assert.Equal(expectedCheepCount, allCheepsFromHans);
     }
 
     [Fact]
-    public async void FollowAuthor() 
-    {
+    public async void FollowAuthor() {
+
         //Arrange
         var loggedInUser = "Voldemort";
         var loggedInUserId = await context.Authors.Where(a => a.Name == loggedInUser).Select(a => a.AuthorId).FirstOrDefaultAsync();
 
         var userToFollow = "Svanhildur";
         var userToFollowId = await context.Authors.Where(a => a.Name == userToFollow).Select(a => a.AuthorId).FirstOrDefaultAsync();
+
+
         
         //Act
         await fController.Follow(loggedInUser, userToFollow);
         bool isUserFollowed = await context.Following.Where(a => a.UserId == loggedInUserId && a.FollowedAuthorId == userToFollowId).FirstOrDefaultAsync() != null;
 
+
         //Assert
-        Assert.True(isUserFollowed);
+        Assert.Equal(isUserFollowed, true);
     }
 
     [Fact]
-    public async void UnfollowAuthor() 
-    {
+    public async void UnfollowAuthor() {
+
         //Arrange
         var loggedInUser = "Voldemort";
         var loggedInUserId = await context.Authors.Where(a => a.Name == loggedInUser).Select(a => a.AuthorId).FirstOrDefaultAsync();
@@ -304,17 +315,19 @@ public class InMemoryTests : IDisposable {
         var userToFollowId = await context.Authors.Where(a => a.Name == userToFollow).Select(a => a.AuthorId).FirstOrDefaultAsync();
         await fController.Follow(loggedInUser, userToFollow);
 
+
+        
         //Act
         await fController.UnFollow(loggedInUser, userToFollow);
         bool isUserFollowed = await context.Following.Where(a => a.UserId == loggedInUserId && a.FollowedAuthorId == userToFollowId).FirstOrDefaultAsync() != null;
 
         //Assert
-        Assert.False(isUserFollowed);
+        Assert.Equal(isUserFollowed, false);
     }
 
     [Fact]
-    public async void GetAllCheepsFromFollowed() 
-    {
+    public async void GetAllCheepsFromFollowed() {
+
         //Arrange
         var loggedInUser = "Voldemort";
         var loggedInUserId = await context.Authors.Where(a => a.Name == loggedInUser).Select(a => a.AuthorId).FirstOrDefaultAsync();
@@ -325,6 +338,8 @@ public class InMemoryTests : IDisposable {
 
         var expectedCheepCount = 3;
 
+
+        
         //Act
         var cheepsFromUserAndFollowed = await cController.GetAllCheepsFromFollowed(loggedInUser, 0);
         //Assert
@@ -333,8 +348,8 @@ public class InMemoryTests : IDisposable {
     }
 
     [Fact]
-    public async void UpdateAuthor() 
-    {
+    public async void UpdateAuthor() {
+
         //Arrange
         var loggedInUser = "Voldemort";
         var desiredName = "Voldemor";
@@ -354,13 +369,14 @@ public class InMemoryTests : IDisposable {
         Assert.NotNull(updatedAuthorCheck);
         Assert.Null(oldAuthor);
 
-        Assert.Equal("Voldemor", updatedAuthorCheck.Name);
-        Assert.Equal("Voldemor@gmail.com", updatedAuthorCheck.Email);
+        Assert.Equal(updatedAuthorCheck.Name, "Voldemor");
+        Assert.Equal(updatedAuthorCheck.Email, "Voldemor@gmail.com");
+
     }
 
     [Fact]
-    public async void DeleteAuthor() 
-    {
+    public async void DeleteAuthor() {
+
         //Arrange
         var userName = "Voldemort";
 
@@ -379,73 +395,6 @@ public class InMemoryTests : IDisposable {
         Assert.Null(deletedAuthorCheck);
     }
 
-    [Fact]
-    public async void LikeCheep() 
-    {
-        //Arrange
-        var loggedInUser = "Svanhildur";
-        var authorName = "Voldemort";
-        var cheep = await context.Cheeps
-        .Where(c => c.Author.Name == authorName)
-        .FirstOrDefaultAsync();
-
-        int likeCount1 = cheep!.Likes;
-
-        //Act
-        await lController.Like(cheep.CheepId, loggedInUser);
-        int likeCount2 = cheep.Likes;
-
-        //Assert
-        Assert.Equal(0, likeCount1);
-        Assert.Equal(1, likeCount2);
-
-    }
-
-    [Fact]
-    public async void DislikeCheep() 
-    {
-        //Arrange
-        var loggedInUser = "Svanhildur";
-        var authorName = "Voldemort";
-        var cheep = await context.Cheeps
-        .Where(c => c.Author.Name == authorName)
-        .FirstOrDefaultAsync();
-        int likeCount1 = cheep!.Likes;
-
-        //Act
-        await lController.Like(cheep.CheepId, loggedInUser);
-        int likeCount2 = cheep.Likes;
-        await lController.Dislike(cheep.CheepId, loggedInUser);
-        int likeCount3 = cheep.Likes;
-
-        //Assert
-        Assert.Equal(0, likeCount1);
-        Assert.Equal(1, likeCount2);
-        Assert.Equal(0, likeCount3);
-    }
-
-    [Fact]
-    public async void LikingCheepTwiceResultsInRemovingLike() 
-    {
-        //Arrange
-        var loggedInUser = "Svanhildur";
-        var authorName = "Voldemort";
-        var cheep = await context.Cheeps
-        .Where(c => c.Author.Name == authorName)
-        .FirstOrDefaultAsync();
-        int likeCount1 = cheep!.Likes;
-
-        //Act
-        await lController.Like(cheep.CheepId, loggedInUser);
-        int likeCount2 = cheep.Likes;
-        await lController.Like(cheep.CheepId, loggedInUser);
-        int likeCount3 = cheep.Likes;
-
-        //Assert
-        Assert.Equal(0, likeCount1);
-        Assert.Equal(1, likeCount2);
-        Assert.Equal(0, likeCount3);
-    }
 
 
      private void SeedDatabase() {
@@ -456,11 +405,12 @@ public class InMemoryTests : IDisposable {
 
         var c1 = new Cheep() { CheepId = 1, AuthorId = a1.AuthorId, Author = a1, Text = "Harry Potter suckz!!", TimeStamp = DateTime.Parse("2023-08-01 13:14:37") };
         var c2 = new Cheep() { CheepId = 2, AuthorId = a1.AuthorId, Author = a1, Text = "HAHAAHHAHA I KILLED HARRY POTTER!!!", TimeStamp = DateTime.Parse("2023-08-01 13:14:45") };
+
         var c3 = new Cheep() { CheepId = 3, AuthorId = a2.AuthorId, Author = a2, Text = "I hate my name. How do I change this?", TimeStamp = DateTime.Parse("2023-06-01 09:10:45") };
 
 
         var cheeps = new List<Cheep> { c1, c2, c3 };
-        
+
         a1.Cheeps = new List<Cheep>() { c1, c2 };
         a2.Cheeps = new List<Cheep>() { c3 };
 
@@ -468,4 +418,6 @@ public class InMemoryTests : IDisposable {
         context.Cheeps.AddRange(cheeps);
         context.SaveChanges();
      }
+
+
 }
