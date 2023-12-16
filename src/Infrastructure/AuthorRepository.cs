@@ -75,7 +75,7 @@ public class AuthorRepository : IAuthorRepository
         .Where(u => u.Name == authorName)
         .FirstOrDefaultAsync();
 
-        if (!await ValidateImageUrl(imageUrl)) 
+        if (!ValidateImageUrl(imageUrl)) 
         {
             return;
         }
@@ -83,7 +83,7 @@ public class AuthorRepository : IAuthorRepository
         await db.SaveChangesAsync();
     }
 
-    public async Task<bool> ValidateImageUrl(string imageUrl) 
+    public bool ValidateImageUrl(string imageUrl) 
     {
         var list = new List<string>();
         list.Add("images/bird1.webp");
@@ -104,7 +104,6 @@ public class AuthorRepository : IAuthorRepository
             return;
         }
 
-        
         author.Name = newName;
         author.Email = email;
         await db.SaveChangesAsync();
