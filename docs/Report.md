@@ -49,6 +49,8 @@ The process we went through was we would meet when new tasks where given to make
 ## How to make _Chirp!_ work locally
 
 ## How to run test suite locally
+To run our in memory tests and unit tests, start by standing at the root of the directory called Chirp. then from the terminal type ->
+cd test/test.Chirp after that run the command -> dotnet test. Within the inMemoryTests.cs file you will find test suites that tests various database methods which lies within the AuthorRepository, CheepRepository and FollowerListRepository. 
 
 # Ethics
 
