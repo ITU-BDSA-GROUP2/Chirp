@@ -159,10 +159,6 @@ public class Tests : PageTest
         await Page.Locator("li").Filter(new() { HasText = "o@o.com Follow Yeet — 11/28/2023 11:26:39 Like 0" }).GetByRole(AriaRole.Button).ClickAsync();
 
         await Expect(Page.Locator("body")).Not.ToContainTextAsync("o@o.com Unfollow Yeet — 11/28/2023 11:26:39 Like 0");
-
-
-
-
     }
 
 }
