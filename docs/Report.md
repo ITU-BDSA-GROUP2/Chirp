@@ -61,6 +61,7 @@ To see our playwright tests stand at the root of our directory Chirp then type i
 Here we talk about our Ethics.
 
 ## License
+To choose the license we started by looking at the website https://choosealicense.com/licenses/ to learn which license would fit our needs best, we immediately noticed the different types of permissions conditions and limitations. our group confirmed we wanted as few limitations and conditions as possible because it would be easier for the public to use our code. We Came to the conclusion to choose the MIT license. Just to be sure we asked our TA at one of our meetings if the license was suitable for our project and dependencies. He agreed and we opted for the MIT license.     
 
 ## LLMs, ChatGPT, CoPilot, and others
 
