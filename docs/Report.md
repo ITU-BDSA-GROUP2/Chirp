@@ -22,9 +22,15 @@ Here comes a description of our domain model.
 
 ## User activities
 
-![user activity diagram of a non-authorized user that has registered](https://www.plantuml.com/plantuml/svg/JOx13i8m28RlVGgUOxlCnADNunaxmiYwqhHKeqylEcCyaO-V3vYQORM-9SYQiTkYLPuqdnlLYzXoKfPyY2OtiSTHa2jkuQE48QckW0Pn8Ifj34DC4bT8RyM95KntWe9COsWbYNjxwov-gnkmrtxzXe2Calz7VZdb6VO5pRI4oTc_3Yy0) ![user activity diagram of a non-authorized user that has not registered](https://www.plantuml.com/plantuml/svg/NOx13SCm24NlJC4SoIMhK1SH5DTO1glh5xML3pa1ZmVwXmUDcAyAtmQsQdOX1PQJkViEMwbQBXmiwi4ZWHY6BO2TX7VmNZMl5trhd3O39Ujy_FT8GjfkrbAuFV7tniCw73bdhWy0)
+In this segment we will show 3 different user-activity diagrams that shows how a user would use our website.
 
-![user activity diagram of an authorized user](https://www.plantuml.com/plantuml/svg/VP11ReGm34NtFeMNp1MOpLp51JDO63jA78suVO6ehQOgtKL-J_z9UPIW77LLE1-GEJ45zEg-80KECtCgToX99K2cZchCdb4AJgxgBnvl63CRTXkN6_I3oh1WjKRH3QcDt86rS6V-BVsbs2XJYo4zIUn8dWn9CzEueShorNnBZb8ET1KxsV-f_fKb-CTuOst53TSDGrPMCRvIwCDhuFgRgp_t-tuCJ_3O-yUtVm80)
+The diagrams below show how a non-authorized user will use the "Chirp!" application there are 2 different but very similar looking diagrams. The left one is how a user who has registered on the site but is not logged in yet. The right one show a user who has not yet registered themselves as a user.
+
+![User activity diagram of a non-authorized user that has registered](https://www.plantuml.com/plantuml/svg/JOx13i8m28RlVGgUOxlCnADNunaxmiYwqhHKeqylEcCyaO-V3vYQORM-9SYQiTkYLPuqdnlLYzXoKfPyY2OtiSTHa2jkuQE48QckW0Pn8Ifj34DC4bT8RyM95KntWe9COsWbYNjxwov-gnkmrtxzXe2Calz7VZdb6VO5pRI4oTc_3Yy0) ![user activity diagram of a non-authorized user that has not registered](https://www.plantuml.com/plantuml/svg/NOx13SCm24NlJC4SoIMhK1SH5DTO1glh5xML3pa1ZmVwXmUDcAyAtmQsQdOX1PQJkViEMwbQBXmiwi4ZWHY6BO2TX7VmNZMl5trhd3O39Ujy_FT8GjfkrbAuFV7tniCw73bdhWy0)
+
+The diagram below shows how an authorized user will use the "Chirp!" application it is shown as a loop since most of the tasks that a user can do will still end up with them at the front page looking at cheeps. We omitted how they interact with the "about me" page and the "my timeline" page. For the "my timeline" page what a user can interact with is about the same as public timeline the cheeps are just different. For the "about me" page we omitted it since the things a user can can change their information and the diagram would look almost identical to the 2 previous diagrams in this section.
+
+![User activity diagram of an authorized user](https://www.plantuml.com/plantuml/svg/VP11ReGm34NtFeMNp1MOpLp51JDO63jA78suVO6ehQOgtKL-J_z9UPIW77LLE1-GEJ45zEg-80KECtCgToX99K2cZchCdb4AJgxgBnvl63CRTXkN6_I3oh1WjKRH3QcDt86rS6V-BVsbs2XJYo4zIUn8dWn9CzEueShorNnBZb8ET1KxsV-f_fKb-CTuOst53TSDGrPMCRvIwCDhuFgRgp_t-tuCJ_3O-yUtVm80)
 
 ## Sequence of functionality/calls through _Chirp!_
 
@@ -35,6 +41,8 @@ Here comes a description of our Process.
 ## Build, test, release, and deployment
 
 ## Team work
+
+We do not have any unfinished issues on our project board
 
 ## How to make _Chirp!_ work locally
 
