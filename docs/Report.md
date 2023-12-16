@@ -54,9 +54,8 @@ cd test/test.Chirp after that run the command -> dotnet test. Within the inMemor
 
 In our UnitTestChirp.cs file you will find some out-commented unit tests. These are all methods that are not in use anymore or they fail which then stops our action workflow from deploying. We chose to use the inLineData format for the tests, this was to test different values on a single method at once. Some of the tests consist of testing the web application such as being able to see the public/private timeline or finding specific users cheeps.   
 
-To see our playwright tests stand at the root of our directory Chirp then type in the terminal -> cd test/PlaywrightTests once you are in the directory type -> dotnet test this will run various Razor web application tests. all of the methods starts by connecting to our Azure front webpage. The PlayWright tests works by calling different methods on the page it is currently on such as 
-GetByRole() or GetByPlaceholder() which essentially finds the desired text field/button and then calls the methods such as FillAsync() or ClickAsync() which fills the field with text or clicks a button respectively. Once that is done     
-
+To see our playwright tests stand at the root of our directory Chirp then type in the terminal -> cd test/PlaywrightTests once you are in the directory type -> dotnet test this will run various Razor web application tests. all of the methods starts by connecting to our Azure front webpage. The PlayWright tests works by calling different methods from the Playwright library. these methods are for example GetByRole() or GetByPlaceholder() which essentially finds the desired text field/button and then calls the methods such as FillAsync() or ClickAsync() which fills the field with text or clicks a button respectively. Once that is done and it is on the correct page with the correct information we call the Expect method to check that the correct text is found and if so the test succeeds. 
+ 
 # Ethics
 
 Here we talk about our Ethics.
