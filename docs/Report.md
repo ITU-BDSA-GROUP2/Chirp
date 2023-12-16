@@ -42,7 +42,9 @@ Here comes a description of our Process.
 
 ## Team work
 
-We do not have any unfinished issues on our project board
+We do not have any unfinished issues on our project board we have made all the features that we set out to make, one part of our program that we could have worked more on would have been to add more test though, specifically for our wild style features.
+
+The process we went through was we would meet when new tasks where given to make new issues. Usually it was 2 people who sat and made the new issues who these where changed between weeks. The other people would work on previous tasks we maybe hadn't completed yet. We would then delegate the new issues between us sometimes 2 or 3 people would work on one issue using pair programming otherwise it would be 1 person working on 1 issue. We would also make a new branch, specifically for that issue. We where not great at using the project board and would often put an issue up on the project board in the in progress column and then forget about the project board. Then 2 weeks later put the issue over in the done column if the issue was solved. If we felt that an issue was solved we would then make a pull request to merge to main. Then most of the time another member of the team who hadn't worked on the issue would review and approve the merge, but if no one answered the messages for a pull request. One of the team members who worked on the issue would approve and merge themselves. We did this, so we wouldn't have branches that didn't get used for more than a day.
 
 ## How to make _Chirp!_ work locally
 
