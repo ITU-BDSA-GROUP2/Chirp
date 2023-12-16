@@ -50,7 +50,9 @@ The process we went through was we would meet when new tasks where given to make
 
 ## How to run test suite locally
 To run our in memory tests and unit tests, start by standing at the root of the directory called Chirp. then from the terminal type ->
-cd test/test.Chirp after that run the command -> dotnet test. Within the inMemoryTests.cs file you will find test suites that tests various database methods which lies within the AuthorRepository, CheepRepository and FollowerListRepository. 
+cd test/test.Chirp after that run the command -> dotnet test. Within the inMemoryTests.cs file you will find test suites that tests various database methods which lies within the AuthorRepository, CheepRepository and FollowerListRepository. It starts by creating a new database after that it establishes a connection to the database and then seeds it with various cheeps and authors. We use the typical Arrange, Act and Assert notation to test the different repository methods. Once the tests are completed we dispose of the database and all the cheeps and authors within it. 
+
+In our UnitTestChirp.cs file you will find some out-commented unit tests. These are all methods that are not in use anymore. We chose to use the inLineData format for the tests, this was to test different values on a single method at once. these tests consist of  
 
 # Ethics
 
