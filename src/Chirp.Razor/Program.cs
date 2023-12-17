@@ -11,10 +11,7 @@ public class Program {
 
         var builder = WebApplication.CreateBuilder(args);
 
-        // Vælg MIT license
-        // Opdater eller slet issue workflow 
-        // chrip_cli branch 
-
+        
         // Add services to the container.
         //builder.Services.AddDbContext<ChirpDBContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("Chirp")));
 
@@ -47,11 +44,6 @@ public class Program {
                 o.ClientId = builder.Configuration["AUTHENTICATION_GITHUB_CLIENTID"]!;
                 o.ClientSecret = builder.Configuration["GITHUB_PROVIDER_AUTHENTICATION_SECRET"]!;
             });
-
-
-        // Tror den skal se således ud
-        //builder.Services.AddSingleton<ICheepRepository, CheepRepository>();
-
 
         var app = builder.Build();
 
