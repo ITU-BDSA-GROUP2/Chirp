@@ -4,7 +4,11 @@ using EFCore;
 using Microsoft.EntityFrameworkCore;
 namespace Infrastructure;
 
-
+// <summary>
+//   This class represents a repository for 'Like'
+//   It implements the ILikeRepository interface
+//   This repository contains methods for liking and disliking cheeps
+// </summary>
 
 public class LikeRepository : ILikeRepository
 {
@@ -15,73 +19,84 @@ public class LikeRepository : ILikeRepository
         db = context;
     }
 
-
-    public async Task Like(int id, string userName)
+    // <summary>
+    //   This method checks if both the CheepID and userName points to a cheep and author respectively
+    //   If both exist it either calls 'Dislike()', if the user have liked the cheep before 
+    //   or adds a like if the author haven't liked the cheep before.
+    // </summary>
+    public async Task Like(int CheepId, string userName)
     {
         var user = await db.Authors
         .Where(a => a.Name == userName)
         .FirstOrDefaultAsync();
 
-        if (user == null) {
+        if (user == null) 
+        {
             return;
         }
-        
-        var checkIfUserLiked = await db.Likes
-        .Where(l => l.UserId == user.AuthorId &&
-        l.CheepId == id)
-        .FirstOrDefaultAsync();
 
         var cheep = await db.Cheeps
-        .Where(c => c.CheepId == id)
+        .Where(c => c.CheepId == CheepId)
         .FirstOrDefaultAsync();
 
-    
-        if (cheep == null) {
+        if (cheep == null) 
+        {
             return;
         }
 
-        if (await IsLiked(id, userName)) {     
-            await Dislike(id, userName);       
+        if (await IsLiked(CheepId, userName)) 
+        {     
+            await Dislike(CheepId, userName);       
             return;
         }
 
-        var like = new Like {
-            CheepId = id,
+        var like = new Like 
+        {
+            CheepId = CheepId,
             UserId = user.AuthorId,
         };
+
         cheep.Likes += 1;
         db.Likes.Add(like);
 
         await db.SaveChangesAsync();
     }
 
-    public async Task Dislike(int id, string userName)
+    // <summary>
+    //   This method checks if both the CheepID and userName points to a cheep and author respectively
+    //   If both exist it either calls 'Like()', if the user haven't liked the cheep before 
+    //   or removes a like if the author have already liked the cheep.
+    // </summary>
+    public async Task Dislike(int CheepId, string userName)
     {
         var user = await db.Authors
         .Where(a => a.Name == userName)
         .FirstOrDefaultAsync();
 
-        if (user == null) {
+        if (user == null) 
+        {
             return;
         }
 
         var cheep = await db.Cheeps
-        .Where(c => c.CheepId == id)
+        .Where(c => c.CheepId == CheepId)
         .FirstOrDefaultAsync();
 
     
-        if (cheep == null) {
+        if (cheep == null) 
+        {
             return;
         }
 
-        if (!await IsLiked(id, userName)) {
-            await Like(id, userName);
+        if (!await IsLiked(CheepId, userName)) 
+        {
+            await Like(CheepId, userName);
             return;
         }
 
         var like = await db.Likes
         .Where(l => l.UserId == user.AuthorId &&
-        l.CheepId == id)
+        l.CheepId == CheepId)
         .FirstOrDefaultAsync();
 
         cheep.Likes -= 1;
@@ -90,14 +105,18 @@ public class LikeRepository : ILikeRepository
         await db.SaveChangesAsync();
     }
 
-    public async Task<bool> IsLiked(int id, string userName) {
+    // <summary>
+    //   This method checks if the user already likes a cheep
+    // </summary>
+    public async Task<bool> IsLiked(int CheepId, string userName) 
+    {
         var user = await db.Authors
         .Where(a => a.Name == userName)
         .FirstOrDefaultAsync();
 
         var checkIfUserLiked = await db.Likes
         .Where(l => l.UserId == user.AuthorId &&
-        l.CheepId == id)
+        l.CheepId == CheepId)
         .FirstOrDefaultAsync();
 
         return checkIfUserLiked != null;
