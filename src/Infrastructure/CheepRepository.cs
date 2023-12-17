@@ -89,7 +89,6 @@ public class CheepRepository : ICheepRepository
 
     public async Task<int> GetAllCheepsFromFollowedCount(string user) 
     {
-
         var userId = await db.Authors
             .Where(a => a.Name == user)
             .Select(a => a.AuthorId).FirstOrDefaultAsync();

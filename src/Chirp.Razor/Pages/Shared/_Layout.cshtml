@@ -40,7 +40,7 @@
             </div>
             <div class=footer>
             @{
-                double numberOfPages = Math.Ceiling((double)Model.AllCheeps / 32);
+                double numberOfPages = Math.Ceiling(Convert.ToDouble(Model.AllCheeps) / 32);
             }
             @if (numberOfPages > 1)
             {

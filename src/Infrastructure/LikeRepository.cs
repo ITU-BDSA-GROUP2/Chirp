@@ -84,6 +84,12 @@ public class LikeRepository : ILikeRepository
         l.CheepId == id)
         .FirstOrDefaultAsync();
 
+        //Shouldn't be possible
+        if (like == null) 
+        {
+            return;
+        }
+
         cheep.Likes -= 1;
         db.Likes.Remove(like);
 
@@ -94,6 +100,12 @@ public class LikeRepository : ILikeRepository
         var user = await db.Authors
         .Where(a => a.Name == userName)
         .FirstOrDefaultAsync();
+
+        //This shouldn't be possible.
+        if (user == null) 
+        {
+            return false;
+        }
 
         var checkIfUserLiked = await db.Likes
         .Where(l => l.UserId == user.AuthorId &&

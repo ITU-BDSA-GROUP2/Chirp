@@ -22,7 +22,7 @@ public class AboutMeModel : PageModel
     
 
     public IEnumerable<CheepDto> Cheeps { get; set; } = new List<CheepDto>();
-    public IEnumerable<CheepDto> AllCheeps { get; set; } = new List<CheepDto>();
+    public int AllCheeps { get; set; } = 0;
     public IEnumerable<FollowDto> Followers { get; set; } = new List<FollowDto>();
 
 
@@ -74,13 +74,18 @@ public class AboutMeModel : PageModel
         return Page();
     }
 
-    public async Task<AuthorDto> getAuthor(int id) 
+    public async Task<AuthorDto?> getAuthor(int id) 
     {
         return await _authorRepo.GetAuthorByID(id);
     }
 
-    public async Task<string> GetImageUrl() {
+    public async Task<string> GetImageUrl() 
+    {
         return await _authorRepo.GetAuthorImageUrl(User.Identity!.Name!);
+    }
+
+    public ActionResult RedirectToStartPage() {
+        return Redirect("/");
     }
 
 
@@ -102,15 +107,15 @@ public class AboutMeModel : PageModel
     }
 
     public async Task<ActionResult> OnPostImage() {
-        Console.WriteLine("HER");
-        Console.WriteLine(ImageUrl);
         await _authorRepo.SetAuthorImageUrl(User.Identity!.Name!, ImageUrl);
         return RedirectToPage();
     }
 
-    public async Task<AuthorDto> GetCurrentAuthor(string name) 
+    public async Task<AuthorDto?> GetCurrentAuthor(string name) 
     {
-        return await _authorRepo.GetAuthorByName(name);
+        var user = await _authorRepo.GetAuthorByName(name);
+
+        return user;
     }
 
     public async Task<bool> IsLiked(int id, string authorName)
@@ -129,7 +134,7 @@ public class AboutMeModel : PageModel
     public async Task<ActionResult> OnPostUpdateAuthor() 
     {
 
-        var currentUser = User.Identity!.Name!;
+        var currentUser = User.Identity?.Name!;
 
         var user = await _userManager.FindByNameAsync(currentUser);
 
@@ -161,8 +166,6 @@ public class AboutMeModel : PageModel
                 ModelState.AddModelError("ErrorMessageEmail", "Email already in use");
             }
 
-
-
             if (ModelState.IsValid) 
             {
                 user.UserName = Username;
@@ -191,8 +194,8 @@ public class AboutMeModel : PageModel
         if (user == null) 
         {
             ModelState.AddModelError("ErrorMessage", "Something went wrong");
-            Followers = await _followRepo.GetFollowers(User.Identity!.Name!); 
-            Cheeps = await _service.GetCheepsFromAuthor(User.Identity!.Name!, 0); 
+            Followers = await _followRepo.GetFollowers(User.Identity?.Name!); 
+            Cheeps = await _service.GetCheepsFromAuthor(User.Identity?.Name!, 0); 
             return Page();
         }
 
@@ -205,8 +208,8 @@ public class AboutMeModel : PageModel
             return Redirect("/");
         }
 
-        Followers = await _followRepo.GetFollowers(User.Identity!.Name!); 
-        Cheeps = await _service.GetCheepsFromAuthor(User.Identity!.Name!, 0); 
+        Followers = await _followRepo.GetFollowers(User.Identity?.Name!); 
+        Cheeps = await _service.GetCheepsFromAuthor(User.Identity?.Name!, 0); 
         return Page();
     }  
 }
