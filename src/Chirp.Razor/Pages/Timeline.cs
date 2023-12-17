@@ -54,7 +54,9 @@ public class TimelineModel : PageModel
         {
             await _service.CreateCheep(CheepText, user, DateTime.UtcNow);
             return RedirectToPage();
-        } else {
+        } 
+        else 
+        {
             ModelState.AddModelError("ErrorMessageLength", "Cheep must not be blank");
         }
         return RedirectToPage();
@@ -97,9 +99,9 @@ public class TimelineModel : PageModel
             return Redirect("/Identity/Account/Register"); // If you are not authenticated redirect
         }
 
-        if (CheepId == 0) {
+        if (CheepId == 0) 
+        {
             return RedirectToPage();
-
         } 
         await _likeRepo.Like(CheepId, user.Name);
         return RedirectToPage();
@@ -113,7 +115,8 @@ public class TimelineModel : PageModel
 
     public async Task<bool> IsLiked(int id, string authorName)
     {
-        if (authorName == null) {
+        if (authorName == null) 
+        {
             return false;
         }
         return await _likeRepo.IsLiked(id, authorName);
