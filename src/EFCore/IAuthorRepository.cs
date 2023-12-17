@@ -1,5 +1,12 @@
 namespace EFCore;
 
+// <summary>
+//   This class represents an interface to a repository for 'Author'.
+//   This interface contains method-signatures for creating and deleting authors, 
+//   querying the database for authors based on different search-criteria and
+//   updating author information.
+// </summary>
+
 public interface IAuthorRepository
 {
     public Task CreateNewAuthor(string name, string email);
