@@ -79,7 +79,8 @@ public class AboutMeModel : PageModel
         return await _authorRepo.GetAuthorByID(id);
     }
 
-    public async Task<string> GetImageUrl() {
+    public async Task<string> GetImageUrl() 
+    {
         return await _authorRepo.GetAuthorImageUrl(User.Identity!.Name!);
     }
 
@@ -90,20 +91,20 @@ public class AboutMeModel : PageModel
 
         if (user.Name == null) 
         {
-            return Redirect("/Identity/Account/Register"); //Should never be possible.
+            return Redirect("/Identity/Account/Register"); // If you are not authenticated redirect
         }
 
-        if (CheepId == 0) {
+        if (CheepId == 0) 
+        {
             return RedirectToPage();
-
         } 
+
         await _likeRepo.Like(CheepId, user.Name);
         return RedirectToPage();
     }
 
-    public async Task<ActionResult> OnPostImage() {
-        Console.WriteLine("HER");
-        Console.WriteLine(ImageUrl);
+    public async Task<ActionResult> OnPostImage() 
+    {
         await _authorRepo.SetAuthorImageUrl(User.Identity!.Name!, ImageUrl);
         return RedirectToPage();
     }
@@ -115,7 +116,8 @@ public class AboutMeModel : PageModel
 
     public async Task<bool> IsLiked(int id, string authorName)
     {
-        if (authorName == null) {
+        if (authorName == null) 
+        {
             return false;
         }
         return await _likeRepo.IsLiked(id, authorName);
@@ -126,6 +128,14 @@ public class AboutMeModel : PageModel
         return await _authorRepo.GetAuthorImageUrl(authorName);
     }
 
+    // <summary>
+    //   This method updates the author username and/or email.
+    //   First it checks if the new username and email 
+    //   is not equal to the old values, if it is it returns without change.
+    //   Then it checks if the username or email is already in use,
+    //   if they are it returns with corresponding error messages.
+    //   If we have come this far we update the username and/or email.
+    // </summary>
     public async Task<ActionResult> OnPostUpdateAuthor() 
     {
 
@@ -142,50 +152,45 @@ public class AboutMeModel : PageModel
             return RedirectToPage();
         } 
 
-            // Update email if it doesn't exist
-            var emailCheck = await _userManager.FindByEmailAsync(Email);
+        // Update email if it doesn't exist
+        var emailCheck = await _userManager.FindByEmailAsync(Email);
 
-            // Update Username
-            var usernameCheck = await _userManager.FindByNameAsync(Username);
+        // Update Username
+        var usernameCheck = await _userManager.FindByNameAsync(Username);
 
-            var authorNameCheck = await _authorRepo.GetAuthorByName(Username);
-            var authorEmailCheck = await _authorRepo.GetAuthorByEmail(Email);
+        var authorNameCheck = await _authorRepo.GetAuthorByName(Username);
+        var authorEmailCheck = await _authorRepo.GetAuthorByEmail(Email);
 
 
-            if (usernameCheck != null || authorNameCheck!=null)
+        if (usernameCheck != null || authorNameCheck!=null)
+        {
+            ModelState.AddModelError("ErrorMessageUsername", "Username already in use");
+        }
+        if (emailCheck != null || authorEmailCheck!=null)
+        {
+            ModelState.AddModelError("ErrorMessageEmail", "Email already in use");
+        }
+
+        if (ModelState.IsValid) 
+        {
+            user.UserName = Username;
+            user.Email = Email;
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded) 
             {
-                ModelState.AddModelError("ErrorMessageUsername", "Username already in use");
+                await _signInManager.SignInAsync(user, isPersistent: false);
+                await _authorRepo.UpdateAuthor(currentName, user.UserName, user.Email);
+                return RedirectToAction("/");
             }
-            if (emailCheck != null || authorEmailCheck!=null)
-            {
-                ModelState.AddModelError("ErrorMessageEmail", "Email already in use");
-            }
-
-
-
-            if (ModelState.IsValid) 
-            {
-                user.UserName = Username;
-                user.Email = Email;
-                var result = await _userManager.UpdateAsync(user);
-
-                if (result.Succeeded) 
-                {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    await _authorRepo.UpdateAuthor(currentName, user.UserName, user.Email);
-                    return RedirectToAction("/");
-                }
-            }
+        }
             
         Followers = await _followRepo.GetFollowers(user.UserName!); 
         Cheeps = await _service.GetCheepsFromAuthor(user.UserName!, 0); 
         return Page();
-
     }
 
     public async Task<ActionResult> OnPostDeleteAuthor() 
     {
-
         var user = await _userManager.FindByNameAsync(User.Identity!.Name!);
 
         if (user == null) 
