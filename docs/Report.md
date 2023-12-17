@@ -50,17 +50,25 @@ To build the program we use the "build_and_test.yml" workflow. This workflow run
 
 Running the tests is done with the last step in the "build_and_test.yml" workflow file. This step is called "Test" and runs the command "dotnet test test/test.Chirp --no-build --verbosity normal", which runs our tests. We have put alot of thought and effort into having the correct and necessary tests such as; end to end (also called E2E), Integration, and unit tests. These tests are done with the Triple A principle in mind (arrange, act and assert).
 
-### Unit tests
+#### Unit tests
 The unit tests are designed to test the different units of the program. We do this using the triple A principle, of arranging acting and asserting. This is a structured way of designing and performing tests to ensure a level of consistency throughout the tests. It is important to consistently and rigourisly test the many different units of the program since we must isolate the written code to test and determine (pass or fail) if it works as intended. 
 (Insert unit test example) 
 
-### Triple A principle
+#### Triple A principle
 Using the triple A principle, of arranging acting and asserting we always have a consistent way of testing. This methodology revolves around first arranging your test, this means inputting and creating the necessary data structures that we might want to test. We then act upon them by affecting the data and testing some method. Lastly we assert what we expect from our result and compare to what we get, these should correspond. This is a structured way of designing and performing tests to ensure a level of consistency throughout the tests. These are criteria we have set for our unit test to ensure their validity and usefulness to evaluate whether a functionality works as intended.
 
-### Release 
-The intended use of the release.yml workflow is to create and release zip files, for windows mac and linux where the program can be found and ran. We have designed our release workflow so that it runs using a for loop, to reduce redundancy. Furthermore our there are certain requirements for our release workflow to run which we view as crucial for the design of the worklow. The first major requirement our workflow has, is that it only runs once a tag has been pushed. This is important since all releases require a tag, furthermore this allows us to describe our tag format so that we are consistent when creating our tags. This can be seen on line 6 in the workflow where the tag format is "v*.*.*" which is in accordance with Semantic versioning (breaking.feature.fix) from session_03. The next major requirement in our release workflow is that we have added the "build_and_test.yml" as a job which needs to run and complete appropriately, meaning the program must build correctly and all the tests must pass, before the release job runs. This is a suitable requirement since we would never want to release a version of the program where the tests do not pass, meaning some units dont work as intended. 
+#### In memory 
 
-Integration? E2E? In memory? Playwright?
+
+#### Playwright
+
+### Release 
+The intended use of the release.yml workflow is to create and release zip files, for windows mac and linux where the program can be found and ran. We have designed our release workflow so that it runs using a for loop, to reduce redundancy. Furthermore our there are certain requirements for our release workflow to run which we view as crucial for the design of the worklow. The first major requirement our workflow has, is that it only runs once a tag has been pushed. This is important since all releases require a tag, furthermore this allows us to describe our tag format so that we are consistent when creating our tags. This can be seen on line 6 in the workflow where the tag format is "v*.*.*" which is in accordance with Semantic versioning (breaking.feature.fix) from session_03. The next major requirement in our release workflow is that we have added the "build_and_test.yml" as a job which needs to run and complete appropriately, meaning the program must build correctly and all the tests must pass, before the release job runs. This results in a uml diagram of workflows looking like this: 
+![UML Diagram of workflows](https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuN8gpSn9YK_CIualIIqkqQlCpL7GjLC8Iir9JInE1NEj58fI2qipYr9J599Iq_ABKe5ya6ncNZgNGsfU2j0K0000)
+
+This is a suitable requirement since we would never want to release a version of the program where the tests do not pass, meaning some units dont work as intended. 
+
+### Deploy
 
 ## Team work
 
