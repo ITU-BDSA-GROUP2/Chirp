@@ -5,6 +5,12 @@
     ViewData["Title"] = "Chirp!";
     Layout = "Shared/_Layout";
     var currentUser = await Model.GetCurrentAuthor(User.Identity?.Name!);
+
+    if (currentUser == null) 
+    {
+        Model.RedirectToStartPage();
+        return;
+    }
 }
 
 <div>
@@ -71,10 +77,17 @@
             <ul>
                 @foreach (var follower in Model.Followers)
                 {
+                    var nameOfFollower =  await Model.getAuthor(follower.AuthorId);
+
+                    if (nameOfFollower == null) 
+                    {
+                        <li>ERROR</li>
+                    }
+                    else
+                    {
+                        <li><a href="/@nameOfFollower.Name.">@nameOfFollower</a></li>
+                    }
                     
-                       var nameOfFollower =  Model.getAuthor(follower.AuthorId).Result.Name;
-                    
-                    <li><a href="/@nameOfFollower">@nameOfFollower</a></li>
                 }
             </ul>
         }
@@ -111,7 +124,7 @@
                         <div>
                         <form method="POST" asp-page-handler="Like"> 
                             <input type="hidden" value="@cheep.Id" asp-for="CheepId"/>
-                           @if (!await Model.IsLiked(cheep.Id, User.Identity.Name))
+                           @if (!await Model.IsLiked(cheep.Id, User.Identity?.Name!))
                             {
                                 <button class="likeButton" type="submit">Like</button>
                             } else {

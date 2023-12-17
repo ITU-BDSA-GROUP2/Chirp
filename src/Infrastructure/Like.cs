@@ -7,6 +7,4 @@ public class Like
     
     [Required]
     public int UserId { get; set; }
-
-
 }

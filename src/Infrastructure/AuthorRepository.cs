@@ -63,10 +63,17 @@ public class AuthorRepository : IAuthorRepository
 
     public async Task<string> GetAuthorImageUrl(string authorName)
     {
-         return await db.Authors
+        var imageURL = await db.Authors
         .Where(u => u.Name == authorName)
         .Select(a => a.ImageUrl)
         .FirstOrDefaultAsync();
+
+        if (imageURL == null) 
+        {
+            imageURL = "images/bird1.webp";
+        }
+
+        return imageURL;
     }
 
     public async Task SetAuthorImageUrl(string authorName, string imageUrl)
@@ -75,6 +82,11 @@ public class AuthorRepository : IAuthorRepository
         .Where(u => u.Name == authorName)
         .FirstOrDefaultAsync();
 
+        //This should not be possible
+        if (author == null) {
+            return;
+        }
+        //This should not be possible
         if (!ValidateImageUrl(imageUrl)) 
         {
             return;

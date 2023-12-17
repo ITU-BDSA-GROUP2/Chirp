@@ -46,6 +46,8 @@ public class TimelineModel : PageModel
     public async Task<ActionResult> OnPostCheep(string? author)
     {
         var user = User.Identity!.Name!;
+        
+        //This shouldn't happen, since you should be added to the database when creating profile.
         if (await _authorRepo.GetAuthorByName(user!) == null) 
         {
             await _authorRepo.CreateNewAuthor(user, user);
@@ -54,7 +56,9 @@ public class TimelineModel : PageModel
         {
             await _service.CreateCheep(CheepText, user, DateTime.UtcNow);
             return RedirectToPage();
-        } else {
+        } 
+        else 
+        {
             ModelState.AddModelError("ErrorMessageLength", "Cheep must not be blank");
         }
         return RedirectToPage();
@@ -113,7 +117,8 @@ public class TimelineModel : PageModel
 
     public async Task<bool> IsLiked(int id, string authorName)
     {
-        if (authorName == null) {
+        if (authorName == null) 
+        {
             return false;
         }
         return await _likeRepo.IsLiked(id, authorName);
