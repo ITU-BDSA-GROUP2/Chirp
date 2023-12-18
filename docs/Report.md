@@ -14,11 +14,12 @@ numbersections: true
 
 ## Domain model
 
-Here comes a description of our domain model.
+The diagram below shows our domain model, the classes are the important entities in our program, as they relate to the real world domain of interest. The identity entitie is made to show that we use asp.net core identity.
+![domain model](https://www.plantuml.com/plantuml/svg/HOzH2i9034J_SugvG2zGH2g2NrvYiT46jrj9Keg8TtTrj_KlCo-xC-dCW_eyHhh4O8RZmFoeys7sOT8gJbECqy9gLP_bpkiiFISNVxu8aEHP4s2kacwOZJM5aVyEZq4YlQbyZwPaeiMYucpOqvQLOTrgSVsPNrpscr8Xao5a5xIsGBEzAcn77QS-t_W1)
 
 ## Architecture — In the small
 
-![Onion diagram of the program](Pictures/onion.drawio%20(3).png)
+![Onion diagram of the program](<Pictures/onion.drawio%20(3).png>)
 
 ## Architecture of deployed application
 
@@ -35,7 +36,6 @@ The diagram below illustrates how an authorized user could use the "Chirp!" appl
 ![User activity diagram of an authorized user](https://www.plantuml.com/plantuml/svg/VP11ReGm34NtFeMNp1MOpLp51JDO63jA78suVO6ehQOgtKL-J_z9UPIW77LLE1-GEJ45zEg-80KECtCgToX99K2cZchCdb4AJgxgBnvl63CRTXkN6_I3oh1WjKRH3QcDt86rS6V-BVsbs2XJYo4zIUn8dWn9CzEueShorNnBZb8ET1KxsV-f_fKb-CTuOst53TSDGrPMCRvIwCDhuFgRgp_t-tuCJ_3O-yUtVm80)
 
 ## Sequence of functionality/calls through _Chirp!_
-
 
 # Process
 ## Build, test, release, and deployment
@@ -87,20 +87,23 @@ The deploy-job requires the build-job to finish successfully, it then runs using
 It is important to note that this workflow makes and runs a separate build-job which does not require tests to pass. We have only found this out now and would have liked to change it, so it is similar to the release workflow. This would reduce redundant code (making a build job when we already have a build_and_test.yml) and it would be more suitable to ensure that we only deploy once all tests pass, since we do not want to deploy a faulty application.
 
 ## Team work
-We do not have any unfinished issues on our project board we have made all the features that we set out to make. One part of our program that we could have worked more on would have been to add more test, specifically for our wild-style features.
+
+![Project board](Pictures/projectboard.png)
+We do not have any unfinished issues on our project board we have made all the features that we set out to make, one part of our program that we could have worked more on would have been to add more test, specifically for our wild-style features.
 
 The process we went through was we would meet when new tasks where given to make new issues. Usually two people would sit down and write the coming weeks issues. The other people would work on previous tasks we had not completed yet. We would then delegate the new issues between us. Depending on the problem size we would sometimes work two or three people on one issue using pair programming otherwise it would be a single person working on one issue each. We would also make a new branch, specifically for that issue. We were not the best at using the project board and would often put an issue in the wrong column or place an issue in the "in-progress"-column and then forget all about it, after we finished work. We would then rediscover our old issues and move them to the correct column, the next week when new issues had to be written. If we at that time felt the issue was solved we would then make a pull request to merge into main. Most of the time another member of the team who had not worked on the issue would review and approve the merge, but if no one answered the messages for a pull request. One of the team members who worked on the issue would approve and merge themselves, so the branches did not stay alive for too long.
 
 ## How to make _Chirp!_ work locally
+
 There are a few things you need to setup, before you are able to use Chirp locally.
 'You will need to install Docker, which you can install from this link:' https://www.docker.com/products/docker-desktop/
 You now need to get the database up and running. You now need to run one of these commands depending on your system.
 
 Windows
-docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=6d3a3bdb-7993-42ab-8eb4-5fb4e27ef44a" -p 1433:1433  --name sqlpreview --hostname sqlpreview -d mcr.microsoft.com/mssql/server:2022-latest
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=6d3a3bdb-7993-42ab-8eb4-5fb4e27ef44a" -p 1433:1433 --name sqlpreview --hostname sqlpreview -d mcr.microsoft.com/mssql/server:2022-latest
 
-Mac 
-users docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=6d3a3bdb-7993-42ab-8eb4-5fb4e27ef44a" -p 1433:1433  --name sqlpreview --hostname sqlpreview -d mcr.microsoft.com/azure-sql-edge:latest
+Mac
+users docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=6d3a3bdb-7993-42ab-8eb4-5fb4e27ef44a" -p 1433:1433 --name sqlpreview --hostname sqlpreview -d mcr.microsoft.com/azure-sql-edge:latest
 
 Now the database should be properly set up.
 
@@ -112,26 +115,28 @@ dotnet user-secrets set "GITHUB_PROVIDER_AUTHENTICATION_SECRET" "1d0ace927b02173
 
 dotnet user-secrets set "AUTHENTICATION_GITHUB_CLIENTID" "f2b9cc87834340f6215a"
 
-To start the program, type dotnet run. Make sure to be in the Chirp.Razor folder with your terminal when running this command. If you should be in the root directory, type cd src/Chirp.Razor in your terminal to go the correct folder. 
-
+To start the program, type dotnet run. Make sure to be in the Chirp.Razor folder with your terminal when running this command. If you should be in the root directory, type cd src/Chirp.Razor in your terminal to go the correct folder.
 
 ## How to run test suite locally
+
 To run our in memory tests and unit tests, start by standing at the root of the directory called Chirp. Then from the terminal type ->
-cd test/test.Chirp after that run the command -> dotnet test. Within the inMemoryTests.cs file you will find test suites that tests various database methods which lies within the AuthorRepository, CheepRepository and FollowerListRepository. It starts by creating a new database after that it establishes a connection to the database and then seeds it with various cheeps and authors. We use the typical Arrange, Act and Assert notation to test the different repository methods. Once the tests are completed we dispose of the database and all the cheeps and authors within it. 
+cd test/test.Chirp after that run the command -> dotnet test. Within the inMemoryTests.cs file you will find test suites that tests various database methods which lies within the AuthorRepository, CheepRepository and FollowerListRepository. It starts by creating a new database after that it establishes a connection to the database and then seeds it with various cheeps and authors. We use the typical Arrange, Act and Assert notation to test the different repository methods. Once the tests are completed we dispose of the database and all the cheeps and authors within it.
 
-In our UnitTestChirp.cs file you will find some out-commented unit tests. These are all methods that are not in use anymore or they fail which then stops our action workflow from deploying. We chose to use the inLineData format for the tests, this was to test different values on a single method at once. Some of the tests consist of testing the web application such as being able to see the public/private timeline or finding specific users cheeps.   
+In our UnitTestChirp.cs file you will find some out-commented unit tests. These are all methods that are not in use anymore or they fail which then stops our action workflow from deploying. We chose to use the inLineData format for the tests, this was to test different values on a single method at once. Some of the tests consist of testing the web application such as being able to see the public/private timeline or finding specific users cheeps.
 
-To see our playwright tests stand at the root of our directory Chirp then type in the terminal -> cd test/PlaywrightTests once you are in the directory type -> dotnet test this will run various Razor web application tests. all of the methods starts by connecting to our Azure front webpage. The PlayWright tests works by calling different methods from the Playwright library. these methods are for example GetByRole() or GetByPlaceholder() which essentially finds the desired text field/button and then calls the methods such as FillAsync() or ClickAsync() which fills the field with text or clicks a button respectively. Once that is done and it is on the correct page with the correct information we call the Expect method to check that the correct text is found and if so the test succeeds. 
- 
+To see our playwright tests stand at the root of our directory Chirp then type in the terminal -> cd test/PlaywrightTests once you are in the directory type -> dotnet test this will run various Razor web application tests. all of the methods starts by connecting to our Azure front webpage. The PlayWright tests works by calling different methods from the Playwright library. these methods are for example GetByRole() or GetByPlaceholder() which essentially finds the desired text field/button and then calls the methods such as FillAsync() or ClickAsync() which fills the field with text or clicks a button respectively. Once that is done and it is on the correct page with the correct information we call the Expect method to check that the correct text is found and if so the test succeeds.
+
 # Ethics
 
 Here we talk about our Ethics.
 
 ## License
-To choose the license we started by looking at the website https://choosealicense.com/licenses/ to learn which license would fit our needs best, we immediately noticed the different types of permissions conditions and limitations. our group confirmed we wanted as few limitations and conditions as possible because it would be easier for the public to use our code. We Came to the conclusion to choose the MIT license. Just to be sure we asked our TA at one of our meetings if the license was suitable for our project and dependencies. He agreed and we opted for the MIT license.     
+
+To choose the license we started by looking at the website https://choosealicense.com/licenses/ to learn which license would fit our needs best, we immediately noticed the different types of permissions conditions and limitations. our group confirmed we wanted as few limitations and conditions as possible because it would be easier for the public to use our code. We Came to the conclusion to choose the MIT license. Just to be sure we asked our TA at one of our meetings if the license was suitable for our project and dependencies. He agreed and we opted for the MIT license.
 
 ## LLMs, ChatGPT, CoPilot, and others
-When we encountered difficult issues throughout the program and were unable to find an answer right away on the internet, we decided to get some help from ChatGPT. Sometimes it helped us, sometimes we didn't get any further. Whenever we would commit anything that the AI either wrote for us or gave us inspiration for, we would write a commit message, that we had gotten help from ChatGPT.  
+
+When we encountered difficult issues throughout the program and were unable to find an answer right away on the internet, we decided to get some help from ChatGPT. Sometimes it helped us, sometimes we didn't get any further. Whenever we would commit anything that the AI either wrote for us or gave us inspiration for, we would write a commit message, that we had gotten help from ChatGPT.
 
 ```
 
