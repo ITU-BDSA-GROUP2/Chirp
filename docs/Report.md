@@ -96,9 +96,9 @@ The process we went through was we would meet when new tasks where given to make
 
 ## How to make _Chirp!_ work locally
 
-There are a few things you need to setup, before you are able to use Chirp locally.
-'You will need to install Docker, which you can install from this link:' https://www.docker.com/products/docker-desktop/
-You now need to get the database up and running. You now need to run one of these commands depending on your system.
+There are a few things you need to set up, before you are able to use Chirp locally. You will need to install Docker, which you can install from this link: https://www.docker.com/products/docker-desktop/
+
+You now need to get the database up and running. You need to run one of these commands depending on your system.
 
 Windows
 ``` console
@@ -121,7 +121,16 @@ dotnet user-secrets set "GITHUB_PROVIDER_AUTHENTICATION_SECRET" "1d0ace927b02173
 ``` console
 dotnet user-secrets set "AUTHENTICATION_GITHUB_CLIENTID" "f2b9cc87834340f6215a"
 ```
-To start the program, type dotnet run. Make sure to be in the Chirp.Razor folder with your terminal when running this command. If you should be in the root directory, type cd src/Chirp.Razor in your terminal to go the correct folder.
+To start the program, type:
+``` console
+dotnet run
+```
+
+Make sure you are in the Chirp.Razor directory when running this command. If you should be in the root directory, type the following command in your terminal to go the correct folder.
+``` console
+cd src/Chirp.Razor 
+``` console
+
 
 ## How to run test suite locally
 
