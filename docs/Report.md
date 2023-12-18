@@ -43,22 +43,23 @@ In this section we will discuss our continuous deployment of the Chirp software 
 
 ![UML Diagram of workflows](https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuGfApKbDB4xLgypDKT2rKt0gpSn9YK_CIualIIqk0OjQAHIb5fPc5gMcA2IbfkKNfGBv83sPUUbS3gbvAK1J0000)
 
+
 ### Building
 To build the program we use the "build_and_test.yml" workflow. This workflow runs on pushes and pulls to main branch, this is to view the status of our tests whenever something gets added or merged. In the workflow, the three first steps are responsible for building the program before testing. The first step is "Setup .NET" which uses "actions/setup-dotnet@v3", with dotnet version 7.0. This is responsible for setting up the program before building it, and is a part of the "action/checkout@v3" collection. The next step is to restore dependencies, which is done by running:
----
+``` console
 dotnet restore src/Chirp.Razor
----
+```
 This is a necessary step to ensure all our dependencies are restored. Lastly we run the "Build" step which runs the
----
+``` console
 dotnet build src/Chirp.Razor --no-restore
----
+```
 command, which is responsible for building the program so that it can be tested upon.   
 
 ### Testing
 Running the tests is done with the last step in the "build_and_test.yml" workflow. This step is called "Test" and runs the command: 
----
+``` console
 dotnet test test/test.Chirp --no-build --verbosity normal
----
+```
 which runs our test suit. We have put a lot of thought and effort into having the correct and necessary tests such as; Unit-, Integration-, and end-to-end tests (also called E2E). These tests are made with the Triple-A principle in mind (arrange, act and assert).
 
 #### Triple A principle
@@ -100,21 +101,26 @@ There are a few things you need to setup, before you are able to use Chirp local
 You now need to get the database up and running. You now need to run one of these commands depending on your system.
 
 Windows
+``` console
 docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=6d3a3bdb-7993-42ab-8eb4-5fb4e27ef44a" -p 1433:1433 --name sqlpreview --hostname sqlpreview -d mcr.microsoft.com/mssql/server:2022-latest
+```
 
 Mac
+``` console
 users docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=6d3a3bdb-7993-42ab-8eb4-5fb4e27ef44a" -p 1433:1433 --name sqlpreview --hostname sqlpreview -d mcr.microsoft.com/azure-sql-edge:latest
-
+```
 Now the database should be properly set up.
 
 You will now need to run the last set of commands before being able to run the program, the first one is to connect to the database and the two latter is for connecting with GitHub.
-
+``` console
 dotnet user-secrets set "ConnectionStrings:ChirpDb" "Server=127.0.0.1,1433; Database=Master; User Id=SA; Password=6d3a3bdb-7993-42ab-8eb4-5fb4e27ef44a; Encrypt=True;TrustServerCertificate=True"
-
+```
+``` console
 dotnet user-secrets set "GITHUB_PROVIDER_AUTHENTICATION_SECRET" "1d0ace927b02173f9a878119fdb0f5069da49be8"
-
+```
+``` console
 dotnet user-secrets set "AUTHENTICATION_GITHUB_CLIENTID" "f2b9cc87834340f6215a"
-
+```
 To start the program, type dotnet run. Make sure to be in the Chirp.Razor folder with your terminal when running this command. If you should be in the root directory, type cd src/Chirp.Razor in your terminal to go the correct folder.
 
 ## How to run test suite locally
