@@ -79,6 +79,28 @@ We do not have any unfinished issues on our project board we have made all the f
 The process we went through was we would meet when new tasks where given to make new issues. Usually it was 2 people who sat and made the new issues who these where changed between weeks. The other people would work on previous tasks we maybe hadn't completed yet. We would then delegate the new issues between us sometimes 2 or 3 people would work on one issue using pair programming otherwise it would be 1 person working on 1 issue. We would also make a new branch, specifically for that issue. We where not great at using the project board and would often put an issue up on the project board in the in progress column and then forget about the project board. Then 2 weeks later put the issue over in the done column if the issue was solved. If we felt that an issue was solved we would then make a pull request to merge to main. Then most of the time another member of the team who hadn't worked on the issue would review and approve the merge, but if no one answered the messages for a pull request. One of the team members who worked on the issue would approve and merge themselves. We did this, so we wouldn't have branches that didn't get used for more than a day.
 
 ## How to make _Chirp!_ work locally
+There are a few things you need to setup, before you are able to use Chirp locally.
+'You will need to install Docker, which you can install from this link:' https://www.docker.com/products/docker-desktop/
+You now need to get the database up and running. You now need to run one of these commands depending on your system.
+
+Windows
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=6d3a3bdb-7993-42ab-8eb4-5fb4e27ef44a" -p 1433:1433  --name sqlpreview --hostname sqlpreview -d mcr.microsoft.com/mssql/server:2022-latest
+
+Mac 
+users docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=6d3a3bdb-7993-42ab-8eb4-5fb4e27ef44a" -p 1433:1433  --name sqlpreview --hostname sqlpreview -d mcr.microsoft.com/azure-sql-edge:latest
+
+Now the database should be properly set up.
+
+You will now need to run the last set of commands before being able to run the program, the first one is to connect to the database and the two latter is for connecting with GitHub.
+
+dotnet user-secrets set "ConnectionStrings:ChirpDb" "Server=127.0.0.1,1433; Database=Master; User Id=SA; Password=6d3a3bdb-7993-42ab-8eb4-5fb4e27ef44a; Encrypt=True;TrustServerCertificate=True"
+
+dotnet user-secrets set "GITHUB_PROVIDER_AUTHENTICATION_SECRET" "1d0ace927b02173f9a878119fdb0f5069da49be8"
+
+dotnet user-secrets set "AUTHENTICATION_GITHUB_CLIENTID" "f2b9cc87834340f6215a"
+
+To start the program, type dotnet run. Make sure to be in the Chirp.Razor folder with your terminal when running this command. If you should be in the root directory, type cd src/Chirp.Razor in your terminal to go the correct folder. 
+
 
 ## How to run test suite locally
 To run our in memory tests and unit tests, start by standing at the root of the directory called Chirp. Then from the terminal type ->
@@ -96,6 +118,8 @@ Here we talk about our Ethics.
 To choose the license we started by looking at the website https://choosealicense.com/licenses/ to learn which license would fit our needs best, we immediately noticed the different types of permissions conditions and limitations. our group confirmed we wanted as few limitations and conditions as possible because it would be easier for the public to use our code. We Came to the conclusion to choose the MIT license. Just to be sure we asked our TA at one of our meetings if the license was suitable for our project and dependencies. He agreed and we opted for the MIT license.     
 
 ## LLMs, ChatGPT, CoPilot, and others
+
+When we encountered difficult issues throughout the program and were unable to find an answer right away on the internet, we decided to get some help from ChatGPT. Sometimes it helped us, sometimes we didn't get any further. Whenever we would commit anything that the AI either wrote for us or gave us inspiration for, we would write a commit message, that we had gotten help from ChatGPT.  
 
 ```
 

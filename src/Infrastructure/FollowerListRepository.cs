@@ -4,7 +4,11 @@ using EFCore;
 using Microsoft.EntityFrameworkCore;
 namespace Infrastructure;
 
-
+// <summary>
+//   This class represents a repository for 'Followerlist'
+//   It implements the IFollowerlistRepository interface
+//   This repository contains methods for following and unfollowing other authors
+// </summary>
 
 public class FollowerListRepository : IFollowerListRepository
 {
@@ -15,7 +19,11 @@ public class FollowerListRepository : IFollowerListRepository
         db = context;
     }
 
-
+    // <summary>
+    //   This method checks if both the authorFollows and authorFollowed points to two authors
+    //   If they do, it then checks if 'authorFollows' already follows 'authorFollowed' 
+    //   if the follow relationship dose not exist already the method creates it
+    // </summary>
     public async Task Follow(string authorFollows, string authorFollowed)
     {
         var user = await db.Authors
@@ -24,7 +32,7 @@ public class FollowerListRepository : IFollowerListRepository
 
         if (user == null) 
         {
-            throw new ArgumentNullException("No user logged in");
+            return;
         }
 
         var followedUser = await db.Authors
@@ -33,7 +41,7 @@ public class FollowerListRepository : IFollowerListRepository
 
         if (followedUser == null) 
         {
-            throw new ArgumentNullException("User tried to follow does not exist");
+            return;
         }
 
         var followList = new FollowerList {
@@ -49,6 +57,11 @@ public class FollowerListRepository : IFollowerListRepository
         await db.SaveChangesAsync();
     }
 
+    // <summary>
+    //   This method checks if both the authorFollows and authorFollowed points to two authors
+    //   If they do, it then checks if 'authorFollows' already follows 'authorFollowed' 
+    //   if the follow relationship dose not exist it returns else it removes the relationship
+    // </summary>
     public async Task UnFollow(string authorFollows, string authorFollowed)
     {
         var user = await db.Authors
@@ -57,7 +70,7 @@ public class FollowerListRepository : IFollowerListRepository
 
         if (user == null) 
         {
-            throw new ArgumentNullException("No user logged in");
+           return;
         }
 
         var followedUser = await db.Authors
@@ -66,7 +79,7 @@ public class FollowerListRepository : IFollowerListRepository
 
         if (followedUser == null) 
         {
-            throw new ArgumentNullException("User tried to follow does not exist");
+            return;
         }
 
         var unfollow = await db.Following
@@ -86,6 +99,11 @@ public class FollowerListRepository : IFollowerListRepository
         await db.SaveChangesAsync();
     }
 
+    // <summary>
+    //   This method checks if authorName points to a author.
+    //   If it does not it returns an empty enumerable object.
+    //   If it does it returns a list with all the followers of the author
+    // </summary>
     public async Task<IEnumerable<FollowDto>> GetFollowers(string authorName)
     {
         var user = await db.Authors
