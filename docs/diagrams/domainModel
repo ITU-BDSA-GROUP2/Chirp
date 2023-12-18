@@ -1,0 +1,15 @@
+@startuml
+class Cheep
+class Author
+class Followers
+class Likes
+class identity{
+  int id
+  string username
+  string email
+}
+Author - Cheep : writes >
+Followers - Author : follows >
+Cheep - Likes : has > 
+identity -- Author : has <
+@enduml
