@@ -12,14 +12,10 @@ public class Program {
         var builder = WebApplication.CreateBuilder(args);
 
         
-        // Add services to the container.
-        //builder.Services.AddDbContext<ChirpDBContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("Chirp")));
+       
 
         builder.Services.AddRazorPages();
-
-        // var folder = Environment.SpecialFolder.LocalApplicationData;
-        // var path = Environment.GetFolderPath(folder);
-        // var DbPath = System.IO.Path.Join(path, "chirp.db");
+    
         var connectionString = builder.Configuration.GetConnectionString("ChirpDb");
 
         builder.Services.AddDbContext<ChirpDBContext>(
