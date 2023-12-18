@@ -129,7 +129,7 @@ dotnet run
 Make sure you are in the Chirp.Razor directory when running this command. If you should be in the root directory, type the following command in your terminal to go the correct folder.
 ``` console
 cd src/Chirp.Razor 
-``` console
+```
 
 
 ## How to run test suite locally
