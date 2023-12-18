@@ -36,12 +36,11 @@ The diagram below shows how an authorized user will use the "Chirp!" application
 
 ## Sequence of functionality/calls through _Chirp!_
 
-# Process
 
+# Process
 Here comes a description of our Process.
 
 ## Build, test, release, and deployment
-
 In this section we will discuss our continuous deployment of the Chirp software using GitHub Actions. We will provide an in depth explanation of how our continuous deployment tackles building the program, testing, deploying to the web platform, and ensuring working releases for all relevant platforms. 
 
 ### Building
@@ -66,14 +65,14 @@ It should be disclosed that we lately have been trying to limit the amount we ru
 
 ### Release 
 The intended use of the release.yml workflow is to create and release zip files, for windows mac and linux where the program can be found and ran. We have designed our release workflow so that it runs using a for loop, to reduce redundancy. Furthermore our there are certain requirements for our release workflow to run which we view as crucial for the design of the worklow. The first major requirement our workflow has, is that it only runs once a tag has been pushed. This is important since all releases require a tag, furthermore this allows us to describe our tag format so that we are consistent when creating our tags. This can be seen on line 6 in the workflow where the tag format is "v*.*.*" which is in accordance with Semantic versioning (breaking.feature.fix) from session_03. The next major requirement in our release workflow is that we have added the "build_and_test.yml" as a job which needs to run and complete appropriately, meaning the program must build correctly and all the tests must pass, before the release job runs. This results in a uml diagram of workflows looking like this: 
-![UML Diagram of workflows](https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuN8gpSn9YK_CIualIIqkqQlCpL7GjLC8Iir9JInE1NEj58fI2qipYr9J599Iq_ABKe5ya6ncNZgNGsfU2j0K0000)
+![UML Diagram of workflows](https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuGfApKbDB4xLgypDKT2rKt0gpSn9YK_CIualIIqk0OjQAHIb5fPc5gMcA2IbfkKNfGBv83sPUUbS3gbvAK1J0000)
 
 This is a suitable requirement since we would never want to release a version of the program where the tests do not pass, meaning some units dont work as intended. 
 
 ### Deploy
 
-## Team work
 
+## Team work
 We do not have any unfinished issues on our project board we have made all the features that we set out to make, one part of our program that we could have worked more on would have been to add more test though, specifically for our wild style features.
 
 The process we went through was we would meet when new tasks where given to make new issues. Usually it was 2 people who sat and made the new issues who these where changed between weeks. The other people would work on previous tasks we maybe hadn't completed yet. We would then delegate the new issues between us sometimes 2 or 3 people would work on one issue using pair programming otherwise it would be 1 person working on 1 issue. We would also make a new branch, specifically for that issue. We where not great at using the project board and would often put an issue up on the project board in the in progress column and then forget about the project board. Then 2 weeks later put the issue over in the done column if the issue was solved. If we felt that an issue was solved we would then make a pull request to merge to main. Then most of the time another member of the team who hadn't worked on the issue would review and approve the merge, but if no one answered the messages for a pull request. One of the team members who worked on the issue would approve and merge themselves. We did this, so we wouldn't have branches that didn't get used for more than a day.
@@ -118,7 +117,6 @@ Here we talk about our Ethics.
 To choose the license we started by looking at the website https://choosealicense.com/licenses/ to learn which license would fit our needs best, we immediately noticed the different types of permissions conditions and limitations. our group confirmed we wanted as few limitations and conditions as possible because it would be easier for the public to use our code. We Came to the conclusion to choose the MIT license. Just to be sure we asked our TA at one of our meetings if the license was suitable for our project and dependencies. He agreed and we opted for the MIT license.     
 
 ## LLMs, ChatGPT, CoPilot, and others
-
 When we encountered difficult issues throughout the program and were unable to find an answer right away on the internet, we decided to get some help from ChatGPT. Sometimes it helped us, sometimes we didn't get any further. Whenever we would commit anything that the AI either wrote for us or gave us inspiration for, we would write a commit message, that we had gotten help from ChatGPT.  
 
 ```
