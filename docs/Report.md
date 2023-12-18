@@ -41,7 +41,8 @@ The diagram below shows how an authorized user will use the "Chirp!" application
 Here comes a description of our Process.
 
 ## Build, test, release, and deployment
-In this section we will discuss our continuous deployment of the Chirp software using GitHub Actions. We will provide an in depth explanation of how our continuous deployment tackles building the program, testing, deploying to the web platform, and ensuring working releases for all relevant platforms. 
+In this section we will discuss our continuous deployment of the Chirp software using GitHub Actions. We will provide an in depth explanation of how our continuous deployment tackles building the program, testing, deploying to the web platform, and ensuring working releases for all relevant platforms. Here is an illustration which displays this:
+![UML Diagram of workflows](https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuGfApKbDB4xLgypDKT2rKt0gpSn9YK_CIualIIqk0OjQAHIb5fPc5gMcA2IbfkKNfGBv83sPUUbS3gbvAK1J0000)
 
 ### Building
 build the program we use the "build_and_test.yml" workflow. This workflow runs on pushes and pulls to the main branch, this is to view the status of our tests whenever something gets added or possibly merged. In the workflow, the 3 first steps are responsible for building the program before testing. The first step is "Setup .NET" which uses "actions/setup-dotnet@v3", with dotnet version 7.0. This is responsible for setting up the program before building it, and is a part of the "action/checkout@v3" collection. The next step is to restore dependencies, which is done by running "dotnet restore src/Chirp.Razor" this simply runs this in the commandline as a necessary build step to ensure all our dependencies are restored. Lastly we run the "Build" step which runs the "dotnet build src/Chirp.Razor --no-restore" command, which essentially responsible for building the program so that it now can be tested upon.   
@@ -67,12 +68,12 @@ It should be disclosed that we lately have been trying to limit the amount we ru
 The intended use of the release.yml workflow is to create and release zip files, for windows mac and linux where the program can be found and ran. We have designed our release workflow so that it runs using a for loop, to reduce redundancy. Furthermore our there are certain requirements for our release workflow to run which we view as crucial for the design of the worklow. The first major requirement our workflow has, is that it only runs once a tag has been pushed. This is important since all releases require a tag, furthermore this allows us to describe our tag format so that we are consistent when creating our tags. This can be seen on line 6 in the workflow where the tag format is "v*.*.*" which is in accordance with Semantic versioning (breaking.feature.fix) from session_03. The next major requirement in our release workflow is that we have added the "build_and_test.yml" as a job which needs to run and complete appropriately, meaning the program must build correctly and all the tests must pass, before the release job runs. 
 This is a suitable requirement since we would never want to release a version of the program where the tests do not pass, meaning some units dont work as intended. 
 
-![UML Diagram of workflows](https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuGfApKbDB4xLgypDKT2rKt0gpSn9YK_CIualIIqk0OjQAHIb5fPc5gMcA2IbfkKNfGBv83sPUUbS3gbvAK1J0000)
-
 ### Deploy
 We deploy using the "main_bdsagroup2chirprazor.yml", this workflow only runs on pushes to the main branch, to ensure all new features are deployed to the website. The deploy workflow consists of two jobs, build and deploy. 
 The build job has 4 steps; the first setup is to setup .NET core, second step is to build with dotnet, thirdly it publishes and lastly it uploads the artifact so it is ready to be deployed through the deploy job. 
 The deploy job requires the build job to succesfully have run first, it then runs using two steps. First step is to download the artifact uploaded by the build job. Second step is to deploy that artifact to the azure web app, once this is done the deployment is finished. 
+
+It is important to note that this workflow makes and runs a seperate build job which does not require tests to pass. We have only found this out now and would have liked to change it so it is similar to the release workflow. This would reduce redundant code (making a build job when we already have a build_and_test.yml) and it would be more suitable to ensure that we only deploy once all tests pass, since we dont want to deploy a faulty application.
 
 ## Team work
 We do not have any unfinished issues on our project board we have made all the features that we set out to make, one part of our program that we could have worked more on would have been to add more test though, specifically for our wild style features.
