@@ -64,13 +64,15 @@ An end to end test (reffered to as E2E) is a form of test that evaluates the fun
 It should be disclosed that we lately have been trying to limit the amount we run our playwright tests since it interacts with the webpage, which we are convinced drain our credits on azure. 
 
 ### Release 
-The intended use of the release.yml workflow is to create and release zip files, for windows mac and linux where the program can be found and ran. We have designed our release workflow so that it runs using a for loop, to reduce redundancy. Furthermore our there are certain requirements for our release workflow to run which we view as crucial for the design of the worklow. The first major requirement our workflow has, is that it only runs once a tag has been pushed. This is important since all releases require a tag, furthermore this allows us to describe our tag format so that we are consistent when creating our tags. This can be seen on line 6 in the workflow where the tag format is "v*.*.*" which is in accordance with Semantic versioning (breaking.feature.fix) from session_03. The next major requirement in our release workflow is that we have added the "build_and_test.yml" as a job which needs to run and complete appropriately, meaning the program must build correctly and all the tests must pass, before the release job runs. This results in a uml diagram of workflows looking like this: 
-![UML Diagram of workflows](https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuGfApKbDB4xLgypDKT2rKt0gpSn9YK_CIualIIqk0OjQAHIb5fPc5gMcA2IbfkKNfGBv83sPUUbS3gbvAK1J0000)
-
+The intended use of the release.yml workflow is to create and release zip files, for windows mac and linux where the program can be found and ran. We have designed our release workflow so that it runs using a for loop, to reduce redundancy. Furthermore our there are certain requirements for our release workflow to run which we view as crucial for the design of the worklow. The first major requirement our workflow has, is that it only runs once a tag has been pushed. This is important since all releases require a tag, furthermore this allows us to describe our tag format so that we are consistent when creating our tags. This can be seen on line 6 in the workflow where the tag format is "v*.*.*" which is in accordance with Semantic versioning (breaking.feature.fix) from session_03. The next major requirement in our release workflow is that we have added the "build_and_test.yml" as a job which needs to run and complete appropriately, meaning the program must build correctly and all the tests must pass, before the release job runs. 
 This is a suitable requirement since we would never want to release a version of the program where the tests do not pass, meaning some units dont work as intended. 
 
-### Deploy
+![UML Diagram of workflows](https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuGfApKbDB4xLgypDKT2rKt0gpSn9YK_CIualIIqk0OjQAHIb5fPc5gMcA2IbfkKNfGBv83sPUUbS3gbvAK1J0000)
 
+### Deploy
+We deploy using the "main_bdsagroup2chirprazor.yml", this workflow only runs on pushes to the main branch, to ensure all new features are deployed to the website. The deploy workflow consists of two jobs, build and deploy. 
+The build job has 4 steps; the first setup is to setup .NET core, second step is to build with dotnet, thirdly it publishes and lastly it uploads the artifact so it is ready to be deployed through the deploy job. 
+The deploy job requires the build job to succesfully have run first, it then runs using two steps. First step is to download the artifact uploaded by the build job. Second step is to deploy that artifact to the azure web app, once this is done the deployment is finished. 
 
 ## Team work
 We do not have any unfinished issues on our project board we have made all the features that we set out to make, one part of our program that we could have worked more on would have been to add more test though, specifically for our wild style features.
