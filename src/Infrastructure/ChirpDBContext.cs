@@ -4,6 +4,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
+// <summary>
+//   This class represents our database context.
+//   This class connects our database with out repositories
+//   so that we can query the database through our repositories
+// </summary>
+
 public class ChirpDBContext : IdentityDbContext
 {
     public DbSet<Cheep> Cheeps { get; set; }
@@ -15,7 +21,6 @@ public class ChirpDBContext : IdentityDbContext
     public DbSet<Like> Likes { get; set; }
 
     public ChirpDBContext(DbContextOptions<ChirpDBContext> options) : base(options) {}
-
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -1,5 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
+// <summary>
+//   This class represents the user of the Chirp! application
+//   Since this is a twitter clone every user is an author.
+// </summary>
 public class Author
 {
     [Required]

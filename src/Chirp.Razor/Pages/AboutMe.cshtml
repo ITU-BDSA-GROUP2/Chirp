@@ -17,22 +17,18 @@
     <h2> About me </h2>
     <div class="userInformation">
         <div class="profilePicture">
-        <form method="POST" asp-page-handler="Image">
-            
-            <img id ="imgid" src="@await Model.GetImageUrl()" value="@await Model.GetImageUrl()" asp-for="ImageUrl"> 
-            <input id="curImg" type="hidden" value="@await Model.GetImageUrl()" asp-for="ImageUrl"/>
-            <div class="imageButtons">
-                <i class="fa-solid fa-arrow-left" asp-for="ImageUrl" onclick="prevImg(document.getElementById('curImg').value)"></i>
-                <button class="checkmark" type="submit">
-                    <i class="fa-solid fa-check"></i>
-                </button>
-                <i class="fa-solid fa-arrow-right" asp-for="ImageUrl" onclick="nextImg(document.getElementById('curImg').value)"></i>
-            </form> 
+            <form method="POST" asp-page-handler="Image">        
+                <img id ="imgid" src="@await Model.GetImageUrl()" value="@await Model.GetImageUrl()" asp-for="ImageUrl"> 
+                <input id="curImg" type="hidden" value="@await Model.GetImageUrl()" asp-for="ImageUrl"/>
+                <div class="imageButtons">
+                    <i class="fa-solid fa-arrow-left" asp-for="ImageUrl" onclick="prevImg(document.getElementById('curImg').value)"></i>
+                    <button class="checkmark" type="submit">
+                        <i class="fa-solid fa-check"></i>
+                    </button>
+                    <i class="fa-solid fa-arrow-right" asp-for="ImageUrl" onclick="nextImg(document.getElementById('curImg').value)"></i>
+                </form> 
+            </div>
         </div>
-        </div>
-
-        
-
         <div>
             <form class="updateUserInformation" method="POST" asp-page-handler="UpdateAuthor">
                 <div>
@@ -69,7 +65,9 @@
             </form>
         </div>
     </div>
+
     <hr>
+
     <div class="followesList">
         @if (Model.Followers.Any())
         {
@@ -95,53 +93,54 @@
         {
             <p class="text">You are not following anyone.</p>
         }
-   </div>
-   <hr>
-    <div>
-    @if (Model.Cheeps.Any())
-    {
-       <ul id="messagelist" class="cheeps">
-        @foreach (var cheep in Model.Cheeps)
-        {
-            <li>
-                <img src="@await Model.GetImageUrl(cheep.Author)"> 
-                <p class="cheepAuhtor">
-                    <strong>
-                        <a href="/@cheep.Author">@cheep.Author</a>
-                    </strong>
-                </p>
-                            
-                <p class="cheepText">
-                    @cheep.Text
-                </p>
+    </div>
 
-                <br>
-                <hr>
+    <hr>
+
+    <div>
+        @if (Model.Cheeps.Any())
+        {
+            <ul id="messagelist" class="cheeps">
+                @foreach (var cheep in Model.Cheeps)
+                {
+                    <li>
+                        <img src="@await Model.GetImageUrl(cheep.Author)"> 
+                        <p class="cheepAuhtor">
+                            <strong>
+                                <a href="/@cheep.Author">@cheep.Author</a>
+                            </strong>
+                        </p>        
+                        <p class="cheepText">@cheep.Text</p>
+
+                        <br>
+                        <hr>
                     
-                <div class="footerGrouping">
-                    <p class="time"><small>&mdash; @cheep.Timestamp.ToLocalTime()</small></p>
-                    <span class="likeWrapper">
-                        <div>
-                        <form method="POST" asp-page-handler="Like"> 
-                            <input type="hidden" value="@cheep.Id" asp-for="CheepId"/>
-                           @if (!await Model.IsLiked(cheep.Id, User.Identity?.Name!))
-                            {
-                                <button class="likeButton" type="submit">Like</button>
-                            } else {
-                                <button class="likeButton" type="submit">Dislike</button>
-                            }
-                            
-                        </form> 
+                        <div class="footerGrouping">
+                            <p class="time"><small>&mdash; @cheep.Timestamp.ToLocalTime()</small></p>
+                            <span class="likeWrapper">
+                                <div>
+                                    <form method="POST" asp-page-handler="Like"> 
+                                        <input type="hidden" value="@cheep.Id" asp-for="CheepId"/>
+                                        @if (!await Model.IsLiked(cheep.Id, User.Identity.Name))
+                                        {
+                                            <button class="likeButton" type="submit">Like</button>
+                                        } 
+                                        else 
+                                        {
+                                            <button class="likeButton" type="submit">Dislike</button>
+                                        }
+                                    </form> 
+                                </div>
+                                <span class="likeCounter">@cheep.Likes</span>
+                            </span>
                         </div>
-                        <span class="likeCounter">@cheep.Likes</span>
-                    </span>
-                </div>
-            </li>
+                    </li>
+                }
+            </ul>
         }
-    </ul>
-    }
-    else
-    {
-        <em>There are no cheeps so far.</em>
-    }
+        else
+        {
+            <em>There are no cheeps so far.</em>
+        }
+    </div>
 </div>

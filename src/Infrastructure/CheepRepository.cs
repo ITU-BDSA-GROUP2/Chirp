@@ -4,6 +4,14 @@ using EFCore;
 using Microsoft.EntityFrameworkCore;
 namespace Infrastructure;
 
+
+// <summary>
+//   This class represents a repository for 'Cheep'
+//   It implements the ICheepRepository interface
+//   This repository contains methods for creating and deleting cheeps 
+//   and returning cheeps based on different search criteria like 
+//   all cheeps from a certain author or all cheeps by a followed author etc. 
+// </summary>
 public class CheepRepository : ICheepRepository
 {
     private readonly ChirpDBContext db;
@@ -13,16 +21,18 @@ public class CheepRepository : ICheepRepository
         db = context;
     }
 
-    public async Task CreateCheep(string text, string name, DateTime timestamp)
+
+    public async Task CreateCheep(string text, string authorName, DateTime timestamp)
     {
         var author = await db.Authors
-        .Where(a => a.Name == name)
+        .Where(a => a.Name == authorName)
         .FirstOrDefaultAsync();
 
         if (author == null) 
         {
-            throw new ArgumentNullException("Author doesn't exist");
+            return;
         }
+
         var newCheep = new Cheep {
             Text = text,
             TimeStamp = timestamp,
@@ -69,7 +79,6 @@ public class CheepRepository : ICheepRepository
 
     public async Task<IEnumerable<CheepDto>> GetAllCheepsFromFollowed(string user, int page) 
     {
-
         var userId = await db.Authors
             .Where(a => a.Name == user)
             .Select(a => a.AuthorId).FirstOrDefaultAsync();
@@ -80,7 +89,7 @@ public class CheepRepository : ICheepRepository
             .ToListAsync();
         return await db.Cheeps
             .OrderByDescending(c => c.TimeStamp)
-            .Where(u => u.Author.Name == user || followedList.Contains(u.AuthorId))
+            .Where(u => u.Author.Name == user || followedList.Contains(u.AuthorId))
             .Skip(page*pageSize)
             .Take(pageSize)
             .Select(c => new CheepDto(c.Text, c.Author.Name, c.TimeStamp, c.CheepId, c.Likes))
@@ -98,7 +107,7 @@ public class CheepRepository : ICheepRepository
             .Select(a => a.FollowedAuthorId)
             .ToListAsync();
         return await db.Cheeps
-            .Where(u => u.Author.Name == user || followedList.Contains(u.AuthorId))
+            .Where(u => u.Author.Name == user || followedList.Contains(u.AuthorId))
             .CountAsync();
     }
 

@@ -70,7 +70,7 @@ public class TimelineModel : PageModel
 
         if (user.Name == null) 
         {
-            return Redirect("/Identity/Account/Register");
+            return Redirect("/Identity/Account/Register"); // If you are not authenticated redirect
         }
 
         await _followRepo.Follow(user.Name, Author);
@@ -84,7 +84,7 @@ public class TimelineModel : PageModel
 
         if (user.Name == null) 
         {
-            return Redirect("/Identity/Account/Register"); //Should never be possible.
+            return Redirect("/Identity/Account/Register"); // If you are not authenticated redirect
         }
 
         await _followRepo.UnFollow(user.Name, Author);
@@ -98,12 +98,12 @@ public class TimelineModel : PageModel
 
         if (user.Name == null) 
         {
-            return Redirect("/Identity/Account/Register"); //Should never be possible.
+            return Redirect("/Identity/Account/Register"); // If you are not authenticated redirect
         }
 
-        if (CheepId == 0) {
+        if (CheepId == 0) 
+        {
             return RedirectToPage();
-
         } 
         await _likeRepo.Like(CheepId, user.Name);
         return RedirectToPage();

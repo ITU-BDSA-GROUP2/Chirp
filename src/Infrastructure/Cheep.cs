@@ -1,5 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
+// <summary>
+//   This class represents a message in the Chirp! application
+// </summary>
 public class Cheep
 {
     [Required]

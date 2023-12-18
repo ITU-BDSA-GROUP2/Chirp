@@ -2,45 +2,41 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <ul id="messagelist" class="cheeps">
-        @foreach (var cheep in Model.Cheeps)
-        {
-            <li>
-                <img src="@await Model.GetImageUrl(cheep.Author)"> 
-                <p class="cheepAuhtor">
-                    <strong>
-                        <a href="/@cheep.Author">@cheep.Author</a>
-                    </strong>
-                </p>
-
-                @if (!cheep.Author.Equals(User.Identity?.Name)) 
+    @foreach (var cheep in Model.Cheeps)
+    {
+        <li>
+            <img src="@await Model.GetImageUrl(cheep.Author)"> 
+            <p class="cheepAuhtor">
+                <strong>
+                    <a href="/@cheep.Author">@cheep.Author</a>
+                </strong>
+            </p>
+            @if (!cheep.Author.Equals(User.Identity?.Name)) 
+            {
+                @if (await Model.IsFollowed(cheep.Author)) 
                 {
-                    @if (await Model.IsFollowed(cheep.Author)) 
-                    {
-                        <form method="POST" asp-page-handler="Unfollow" > 
-                            <input type="hidden" value="@cheep.Author" asp-for="Author"/>
+                    <form method="POST" asp-page-handler="Unfollow" > 
+                        <input type="hidden" value="@cheep.Author" asp-for="Author"/>
                         <button class="followButton" type="submit">Unfollow</button>
-                        </form>
-                    }
-                    else 
-                    {
-                        <form method="POST" asp-page-handler="Follow" > 
-                            <input type="hidden" value="@cheep.Author" asp-for="Author"/>
-                            <button class="followButton" type="submit">Follow</button>
-                        </form> 
-                    }
+                    </form>
                 }
-                            
-                <p class="cheepText">
-                    @cheep.Text
-                </p>
+                else 
+                {
+                    <form method="POST" asp-page-handler="Follow" > 
+                        <input type="hidden" value="@cheep.Author" asp-for="Author"/>
+                        <button class="followButton" type="submit">Follow</button>
+                    </form> 
+                }
+            }                
+            <p class="cheepText">@cheep.Text</p>
 
-                <br>
-                <hr>
+            <br>
+            <hr>
 
-                <div class="footerGrouping">
-                    <p class="time"><small>&mdash; @cheep.Timestamp.ToLocalTime()</small></p>
-                    <span class="likeWrapper">
-                        <div>
+            <div class="footerGrouping">
+                <p class="time"><small>&mdash; @cheep.Timestamp.ToLocalTime()</small></p>
+                <span class="likeWrapper">
+                    <div>
                         <form method="POST" asp-page-handler="Like"> 
                             <input type="hidden" value="@cheep.Id" asp-for="CheepId"/>
                             @if (!await Model.IsLiked(cheep.Id, User.Identity?.Name!)) 
@@ -50,14 +46,12 @@
                             else 
                             {
                                 <button class="likeButton" type="submit">Dislike</button>
-
                             }
-                            
                         </form> 
-                        </div>
-                        <span class="likeCounter">@cheep.Likes</span>
-                    </span>
-                </div>
-            </li>
-        }
-    </ul>
+                    </div>
+                    <span class="likeCounter">@cheep.Likes</span>
+                </span>
+            </div>
+        </li>
+    }
+</ul>

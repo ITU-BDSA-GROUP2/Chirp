@@ -5,6 +5,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
 
+// <summary>
+//   This class represents a repository for 'Author'.
+//   It implements the IAuthorRepository interface.
+//   This repository contains methods for creating and deleting authors. 
+//   Furthermore it have multiple methods for returning an AuthorDTO object with different parameters
+//   And lastly some methods for updating the author information and image.
+// </summary>
+
 public class AuthorRepository : IAuthorRepository
 {
     private readonly ChirpDBContext db;
