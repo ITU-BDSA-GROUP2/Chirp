@@ -18,6 +18,8 @@ Here comes a description of our domain model.
 
 ## Architecture — In the small
 
+![Onion diagram of the program](Pictures/onion.drawio%20(3).png)
+
 ## Architecture of deployed application
 
 ## User activities
