@@ -22,6 +22,7 @@ The diagram below shows our domain model, the classes are the important entities
 ![Onion diagram of the program](<Pictures/onion.drawio%20(3).png>)
 
 ## Architecture of deployed application
+![Illustration of deployed architecture](<Pictures/DeployedArcitecture.png>)
 
 ## User activities
 
