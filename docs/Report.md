@@ -107,11 +107,16 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=6d3a3bdb-7993-42ab-8eb4-5fb4
 
 Mac
 ``` console
-users docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=6d3a3bdb-7993-42ab-8eb4-5fb4e27ef44a" -p 1433:1433 --name sqlpreview --hostname sqlpreview -d mcr.microsoft.com/azure-sql-edge:latest
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=6d3a3bdb-7993-42ab-8eb4-5fb4e27ef44a" -p 1433:1433 --name sqlpreview --hostname sqlpreview -d mcr.microsoft.com/azure-sql-edge:latest
 ```
 Now the database should be properly set up.
 
-You will now need to run the last set of commands before being able to run the program, the first one is to connect to the database and the two latter is for connecting with GitHub.
+Make sure you are in the Chirp.Razor directory when running the last set of commands. If you should be in the root directory, type the following command in your terminal to go the correct folder.
+``` console
+cd src/Chirp.Razor 
+```
+
+The first one is to connect to the database and the two latter is for connecting with GitHub authentication. (The GitHub authentication locally is not the same as the website for safety reasons)
 ``` console
 dotnet user-secrets set "ConnectionStrings:ChirpDb" "Server=127.0.0.1,1433; Database=Master; User Id=SA; Password=6d3a3bdb-7993-42ab-8eb4-5fb4e27ef44a; Encrypt=True;TrustServerCertificate=True"
 ```
@@ -126,10 +131,6 @@ To start the program, type:
 dotnet run
 ```
 
-Make sure you are in the Chirp.Razor directory when running this command. If you should be in the root directory, type the following command in your terminal to go the correct folder.
-``` console
-cd src/Chirp.Razor 
-```
 
 
 ## How to run test suite locally
@@ -152,6 +153,8 @@ To choose the license we started by looking at the website https://choosealicens
 ## LLMs, ChatGPT, CoPilot, and others
 
 When we encountered difficult issues throughout the program and were unable to find an answer right away on the internet, we decided to get some help from ChatGPT. Sometimes it helped us, sometimes we did not get any further. Whenever we would commit anything that the AI either wrote for us or gave us inspiration for, we would write a commit message, that we had gotten help from ChatGPT.
+
+When we first chose the images for the website, we took the first ones we could find, so we could be ready for the project demo day. However, we were not sure about the copyright of these images. Therefore, we instead decided to use OpenAI's image generation to create the images for our website. We researched and found out that there would be no copyright issues this way.
 
 ```
 
