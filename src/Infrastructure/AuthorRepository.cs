@@ -78,7 +78,7 @@ public class AuthorRepository : IAuthorRepository
 
         if (imageURL == null) 
         {
-            imageURL = "images/bird1.webp";
+            imageURL = "images/bird1.png";
         }
 
         return imageURL;
@@ -106,10 +106,16 @@ public class AuthorRepository : IAuthorRepository
     public bool ValidateImageUrl(string imageUrl) 
     {
         var list = new List<string>();
-        list.Add("images/bird1.webp");
-        list.Add("images/Bird2.png");
-        list.Add("images/Bird3.png");
-        list.Add("images/Image4.png");
+        list.Add("images/bird1.png");
+        list.Add("images/bird2.png");
+        list.Add("images/bird3.png");
+        list.Add("images/bird4.png");
+        list.Add("images/bird5.png");
+        list.Add("images/bird6.png");
+        list.Add("images/bird7.png");
+        list.Add("images/bird8.png");
+        list.Add("images/bird9.png");
+        list.Add("images/bird10.png");
 
         return list.Contains(imageUrl);
     }

@@ -17,5 +17,5 @@ public class Author
     public List<Cheep> Cheeps { get; set; } = new List<Cheep>();
 
     [Required]
-    public string ImageUrl { get; set; } = "images/bird1.webp";
+    public string ImageUrl { get; set; } = "images/bird1.png";
 }
