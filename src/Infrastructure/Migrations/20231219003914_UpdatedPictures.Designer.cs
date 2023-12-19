@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Chirp.Razor.Migrations
 {
     [DbContext(typeof(ChirpDBContext))]
-    [Migration("20231206134523_AddedImageToAuthor")]
-    partial class AddedImageToAuthor
+    [Migration("20231219003914_UpdatedPictures")]
+    partial class UpdatedPictures
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

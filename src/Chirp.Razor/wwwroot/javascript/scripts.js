@@ -1,8 +1,15 @@
-    var images = new Array("images/bird1.webp",
-"images/Bird2.png",
-"images/Bird3.png",
-"images/Image4.png");
-
+    var images = new Array(
+        "images/bird1.png",
+        "images/bird2.png",
+        "images/bird3.png",
+        "images/bird4.png",
+        "images/bird5.png",
+        "images/bird6.png",
+        "images/bird7.png",
+        "images/bird8.png",
+        "images/bird9.png",
+        "images/bird10.png",
+    );
 function nextImg(curImg) {
     let imgNum = 0;
 
@@ -38,10 +45,10 @@ function prevImg(curImg) {
 }
 
 function checkOverFlow(i) {
-    if (i > 3) {
+    if (i > 9) {
         return 0;
     } else if (i < 0) {
-        return 3;
+        return 9;
     } 
     return i;
 }
