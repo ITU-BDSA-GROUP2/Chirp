@@ -24,7 +24,6 @@ The diagram below shows our domain model, the classes are the important entities
 ## Architecture of deployed application
 
 ## User activities
-
 In this segment we present three different user-activity diagrams that illustrates how a user would use our website.
 
 The diagrams below illustrates how a non-authorized user will use the "Chirp!" application there are two very similar diagrams. The left diagram illustrates how a user would login to Chirp, with an existing account. The right diagram illustrates a new user to Chirp! registering an account for the first time.
@@ -45,7 +44,9 @@ In this section we will discuss our continuous deployment of the Chirp software 
 
 
 ### Building
-To build the program we use the "build_and_test.yml" workflow. This workflow runs on pushes and pulls to main branch, this is to view the status of our tests whenever something gets added or merged. In the workflow, the three first steps are responsible for building the program before testing. The first step is "Setup .NET" which uses "actions/setup-dotnet@v3", with dotnet version 7.0. This is responsible for setting up the program before building it, and is a part of the "action/checkout@v3" collection. The next step is to restore dependencies, which is done by running:
+To build the program we use the "build_and_test.yml" workflow. This workflow runs on pushes and pulls to main branch, this is to view the status of our tests whenever something gets added or merged. In the workflow, the three first steps are responsible for building the program before testing. 
+![Sequence diagram for build and test workflow](https://www.plantuml.com/plantuml/svg/XP0nhi8m341tdyBpbtxAXXIM2iJAK7g1qfWsKd4Yns7WzAIb6q9TdZpuFLckatQY-J71CY3OAscEQ2xdzW3tANJgUK0EIYX-6DMY2yga_q-Iv0FZtkpC7zY6aWOXT1I97N7lAVq8IEOrWh9QIVhgD7g9fkbUGS0Uiv_Sjd-RrxxjjcItPQNqGJN3B0KezqIeYLtvoHi0)
+The first step is "Setup .NET" which uses "actions/setup-dotnet@v3", with dotnet version 7.0. This is responsible for setting up the program before building it, and is a part of the "action/checkout@v3" collection. The next step is to restore dependencies, which is done by running:
 ``` console
 dotnet restore src/Chirp.Razor
 ```
@@ -77,11 +78,15 @@ An end-to-end test (referred to as E2E) is a form of test that evaluates the fun
 It should be disclosed that we lately have been trying to limit the amount we run our playwright tests since it interacts with the webpage, which we are convinced drain our credits on azure. 
 
 ### Release 
-The intended use of the release.yml workflow is to create and release zip files, for windows, mac and linux where the program can be found and ran. We have designed our release workflow so that it runs using a for-loop, to reduce redundancy. Furthermore, there are certain requirements for our release workflow to run which we view as crucial for the design of the worklow. The first major requirement our workflow has, is that it only runs once a tag has been pushed. This is important since all releases require a tag, this allows us to describe our tag format so that we are consistent when creating our tags. This can be seen on line 6 in the workflow where the tag format is "v*.*.*" which is in accordance with Semantic versioning (breaking.feature.fix) from session_03. The next major requirement in our release workflow is that we have added the "build_and_test.yml" as a job which needs to run and complete appropriately, meaning the program must build correctly and all the tests must pass before the release job runs. 
+The intended use of the release.yml workflow is to create and release zip files, for windows, mac and linux where the program can be found and ran. Here is an illustration of how the release workflow works: 
+![Sequence diagram for release workflow](https://www.plantuml.com/plantuml/svg/TP2nJiCm48PtFyMfwW1396PNhKeH51PKYS2ABl7XMBtOaU_Cy-Ca0rEtxwpxlz-weoXcBIER1OmzbS0EC3feINHdVbA-6W1xGP5r0lGOulpsWe5t5IWwGpKnKlPaxDD0_JML6hOVf6a2bpJIFAxoJ4meL6sSK4Fq49CIvE07jR3kr290PfWOjV8eK6JUhDnmIjEY1aL_mv9B1Eg719lsyRpVtlcWu4Zw73g2Hj4BD0rsNQRV_SFz1Wu7s9xVsjVFq_Vp-vUnbz9naE7_hwArz4ZHpRVw0m00)
+
+ We have designed our release workflow so that it runs using a for-loop, to reduce redundancy. Furthermore, there are certain requirements for our release workflow to run which we view as crucial for the design of the worklow. The first major requirement our workflow has, is that it only runs once a tag has been pushed. This is important since all releases require a tag, this allows us to describe our tag format so that we are consistent when creating our tags. This can be seen on line 6 in the workflow where the tag format is "v*.*.*" which is in accordance with Semantic versioning (breaking.feature.fix) from session_03. The next major requirement in our release workflow is that we have added the "build_and_test.yml" as a job which needs to run and complete appropriately, meaning the program must build correctly and all the tests must pass before the release job runs. 
 This is a suitable requirement since we would never want to release a version of the program where the tests do not pass. 
 
 ### Deploy
-We deploy using the "main_bdsagroup2chirprazor.yml". This workflow only runs on pushes to main branch, to ensure all new features are deployed to the website. The deploy-workflow consists of two jobs; build and deploy. 
+We deploy using the "main_bdsagroup2chirprazor.yml". This workflow only runs on pushes to main branch, to ensure all new features are deployed to the website. The deploy-workflow consists of two jobs; build and deploy. Here is an illustration of the workflow:
+![Sequence diagram for the deploy workflow](https://www.plantuml.com/plantuml/svg/NP31JiGW48RlynJ_4-pLP7lPrVNgHOtdLgOjXZ9a65prwMLBcnWvaP_vFpuuPUlLoX9etT2aKXBkYmyE7p8GwZe-iw6cXwV75po8SaTZaDvyd1356EgdsOvmOf4DdwpPIyJTuQlL6-tgRTv6kfPVsdmgG_1vtiBNLD4ErSMF_RjX58NZ6dul7Etcr157XrLqqxsivystWQ_n7qLbmR2_Qh-_rKnm_YdAUEC1vvJ-yYcR93hLuFP5z0i0)
 The build job has four steps; The first step is to set up .NET core, second step is to build with dotnet, thirdly it publishes, and lastly it uploads the artifact so it is ready to be deployed through the deploy-job. 
 The deploy-job requires the build-job to finish successfully, it then runs using two steps. First step is to download the artifact uploaded by the build job. Second step is to deploy that artifact to the azure web app, once this is done the deployment is finished. 
 
