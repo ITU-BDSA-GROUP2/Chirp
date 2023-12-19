@@ -45,10 +45,10 @@ function prevImg(curImg) {
 }
 
 function checkOverFlow(i) {
-    if (i > 3) {
+    if (i > 9) {
         return 0;
     } else if (i < 0) {
-        return 3;
+        return 9;
     } 
     return i;
 }
