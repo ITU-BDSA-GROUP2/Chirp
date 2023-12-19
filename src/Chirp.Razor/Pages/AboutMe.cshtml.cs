@@ -37,7 +37,7 @@ public class AboutMeModel : PageModel
     public string Email { get; set; } = "";
 
     [BindProperty]
-    public string ImageUrl { get; set; } = "images/bird1.webp";
+    public string ImageUrl { get; set; } = "images/bird1.png";
 
     [BindProperty]
     public int CheepId { get; set; } = 0;
