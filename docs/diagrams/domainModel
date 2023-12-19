@@ -1,12 +1,29 @@
 @startuml
-class Cheep
-class Author
-class Followers
-class Likes
+class Cheep{
+  int Id
+  string Text
+  DateTime Timestamp
+  int Likes
+  in AuthorId
+}
+class Author{
+  Int Id
+  String Name
+  String Email
+  List Cheeps
+}
+class Followers{
+  int UserId
+  int FollowedAuthorId
+}
+class Likes{
+  int CheepId
+  int UserId
+}
 class identity{
-  int id
-  string username
-  string email
+  int Id
+  string Username
+  string Email
 }
 Author - Cheep : writes >
 Followers - Author : follows >
