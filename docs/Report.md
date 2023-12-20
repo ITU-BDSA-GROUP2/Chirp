@@ -28,8 +28,6 @@ The diagram below shows our domain model, the classes are the important entities
 
 ## Architecture of deployed application
 
-![](){: .center-image }
-
 <p align="center">
   <img src="Pictures/DeployedArcitecture.png" alt = "Illustration of deployed architecture" />
 </p>
