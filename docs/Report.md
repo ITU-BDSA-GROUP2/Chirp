@@ -85,7 +85,7 @@ We deploy using the main_bdsagroup2chirprazor.yml. This workflow only runs on pu
 The build job has four steps; The first step is to set up .NET core. Second step is to build. Thirdly it publishes and lastly it uploads the artifact.
 The deploy-job requires the build-job to finish successfully. The first step of the deploy-job is to download the artifact uploaded by the build job. The second step is to deploy that artifact to the azure web app.
 
-It is important to note that this workflow makes and runs a separate build-job which does not require tests to pass. We recently found out about this and would have liked to change it. This would ensure that we only deploy once all tests pass, since we do not want to deploy a faulty application.
+It is important to note that this workflow makes and runs a separate build-job which does not require tests to pass. We recently discovered this and would have liked to change it. This would ensure that we only deploy once all tests pass, since we do not want to deploy a faulty application.
 
 ## Team work
 
