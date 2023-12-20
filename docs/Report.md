@@ -65,7 +65,7 @@ Upon becoming an authorized user, they attempt to create a cheep.
 
 ## Build, test, release, and deployment
 
-In this section we will discuss our continuous deployment of the Chirp software using GitHub Actions. We will provide an in-depth explanation of how our continuous deployment tackles building-, testing- and deploying the program to the web platform, and ensuring working releases for all relevant platforms. Here is an illustration which displays this:
+We have used Github Actions to continuously deploy our Chirp application. We will provide an in-depth explanation of how our continuous deployment tackles building-, testing- and deploying the program to the web platform, and ensuring working releases for all relevant platforms.
 
 <p align="center">
   <img src="https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuGfApKbDB4xLgypDKT2rKt0gpSn9YK_CIualIIqk0OjQAHIb5fPc5gMcA2IbfkKNfGBv83sPUUbSBga5EVcLK6MPnGgPUIcf1Qb08g-4om580sq00000" alt = "UML Diagram of workflows" />
@@ -79,35 +79,35 @@ To build the program we use the "build_and_test.yml" workflow. This workflow run
   <img src="https://www.plantuml.com/plantuml/svg/XP0nhi8m341tdyBpbtxAXXIM2iJAK7g1qfWsKd4Yns7WzAIb6q9TdZpuFLckatQY-J71CY3OAscEQ2xdzW3tANJgUK0EIYX-6DMY2yga_q-Iv0FZtkpC7zY6aWOXT1I97N7lAVq8IEOrWh9QIVhgD7g9fkbUGS0Uiv_Sjd-RrxxjjcItPQNqGJN3B0KezqIeYLtvoHi0" alt = "Sequence diagram for build and test workflow" />
 </p>
 
-The first step is "Setup .NET" which uses "actions/setup-dotnet@v3", with dotnet version 7.0. This is responsible for setting up the program before building it, and is a part of the "action/checkout@v3" collection. The next step is to restore dependencies, this is a necessary step to ensure all our dependencies are restored. Lastly we run the "Build" step.Which is responsible for building the program so that it can be tested upon.
+The first step is "Setup .NET" which uses "actions/setup-dotnet@v3", with dotnet version 7.0. This is responsible for setting up the program before building it, and is a part of the "action/checkout@v3" collection. The next step is to restore dependencies, this is a necessary step to ensure all our dependencies are restored. Lastly we run the "Build" step, which is responsible for building the program so that it can be tested upon.
 
 ### Testing
 
-Running the tests is done with the last step in the "build_and_test.yml" workflow. This step is called "Test" and runs our test suit. We have put a lot of thought and effort into having the correct and necessary tests such as; Unit-, Integration-, and end-to-end tests (also called E2E). These tests are made with the Triple-A principle in mind (arrange, act and assert).
+Running the tests is done with the last step in the "build_and_test.yml" workflow. This step is called "Test" and runs our test suit. We have put a lot of thought and effort into having the correct and necessary tests such as; Unit- and Integration-tests. 
 
 ### Release
 
 The intended use of the release.yml workflow is to create and release zip files, for windows, mac and linux where the program can be found and ran. Here is an illustration of how the release workflow works:
 
 <p align="center">
-  <img src="https://www.plantuml.com/plantuml/svg/TP2nJiCm48PtFyMfwW1396PNhKeH51PKYS2ABl7XMBtOaU_Cy-Ca0rEtxwpxlz-weoXcBIER1OmzbS0EC3feINHdVbA-6W1xGP5r0lGOulpsWe5t5IWwGpKnKlPaxDD0_JML6hOVf6a2bpJIFAxoJ4meL6sSK4Fq49CIvE07jR3kr290PfWOjV8eK6JUhDnmIjEY1aL_mv9B1Eg719lsyRpVtlcWu4Zw73g2Hj4BD0rsNQRV_SFz1Wu7s9xVsjVFq_Vp-vUnbz9naE7_hwArz4ZHpRVw0m00" alt = "Sequence diagram for release workflow" />
+  <img src="https://www.plantuml.com/plantuml/svg/TOunJyCm48Lt_ufJrG66ICokMfKYA2oe4e4LNUB3iNgn8z-Ptu-J34pTlcUzz_cEefYrZ6mMCFPK0Zl0wA0bqPtvIVbg0Em5HTO4w374-Uq50-ygK7I6wcAaxCdOfu7wQofrR3z8omGkQQGvhl9CJ2XKRPnGG_GGanBau0Uri7RgHu3CC35gvL6WoDoit71Aqw86HN_3aai4weS4c_RnlD_U-Q3WIFeSEe96qGiq3NPTfj_zm_q63WVOdj_Qry_Jz_Fxbx6Nqd6GuVzMqJIP8qLNHlu3" alt="Sequence diagram for release workflow" />
 </p>
 
-We have designed our release workflow so that it runs using a for-loop, to reduce redundancy. Furthermore, there are certain requirements for our release workflow to run which we view as crucial for the design of the worklow. The first major requirement our workflow has, is that it only runs once a tag has been pushed. This is important since all releases require a tag, this allows us to describe our tag format so that we are consistent when creating our tags. This can be seen on line 6 in the workflow where the tag format is "v*.*.\*" which is in accordance with Semantic versioning (breaking.feature.fix) from session_03. The next major requirement in our release workflow is that we have added the "build_and_test.yml" as a job which needs to run and complete appropriately, meaning the program must build correctly and all the tests must pass before the release job runs.
+There are certain requirements for our release workflow to run which we view as crucial for the design of the worklow. The first major requirement our workflow has, is that it only runs once a tag has been pushed. The tag format is "v*.*.\*" which is in accordance with Semantic versioning. The next major requirement in our release workflow is that we have added the build_and_test.yml as a job which needs to run and complete appropriately, meaning the program must build correctly and all the tests must pass before the release job runs.
 This is a suitable requirement since we would never want to release a version of the program where the tests do not pass.
 
 ### Deploy
 
-We deploy using the "main_bdsagroup2chirprazor.yml". This workflow only runs on pushes to main branch, to ensure all new features are deployed to the website. The deploy-workflow consists of two jobs; build and deploy. Here is an illustration of the workflow:
+We deploy using the main_bdsagroup2chirprazor.yml. This workflow only runs on pushes to main branch, to ensure all new features are deployed to the website. The deploy-workflow consists of two jobs; build and deploy. Here is an illustration of the workflow:
 
 <p align="center">
   <img src="https://www.plantuml.com/plantuml/svg/NP31JiGW48RlynJ_4-pLP7lPrVNgHOtdLgOjXZ9a65prwMLBcnWvaP_vFpuuPUlLoX9etT2aKXBkYmyE7p8GwZe-iw6cXwV75po8SaTZaDvyd1356EgdsOvmOf4DdwpPIyJTuQlL6-tgRTv6kfPVsdmgG_1vtiBNLD4ErSMF_RjX58NZ6dul7Etcr157XrLqqxsivystWQ_n7qLbmR2_Qh-_rKnm_YdAUEC1vvJ-yYcR93hLuFP5z0i0" alt = "Sequence diagram for the deploy workflow" />
 </p>
 
-The build job has four steps; The first step is to set up .NET core, second step is to build with dotnet, thirdly it publishes, and lastly it uploads the artifact so it is ready to be deployed through the deploy-job.
-The deploy-job requires the build-job to finish successfully, it then runs using two steps. First step is to download the artifact uploaded by the build job. Second step is to deploy that artifact to the azure web app, once this is done the deployment is finished.
+The build job has four steps; The first step is to set up .NET core. Second step is to build. Thirdly it publishes and lastly it uploads the artifact.
+The deploy-job requires the build-job to finish successfully. The first step of the deploy-job is to download the artifact uploaded by the build job. The second step is to deploy that artifact to the azure web app.
 
-It is important to note that this workflow makes and runs a separate build-job which does not require tests to pass. We have only found this out now and would have liked to change it, so it is similar to the release workflow. This would reduce redundant code (making a build job when we already have a build_and_test.yml) and it would be more suitable to ensure that we only deploy once all tests pass, since we do not want to deploy a faulty application.
+It is important to note that this workflow makes and runs a separate build-job which does not require tests to pass. We recently found out about this and would have liked to change it. This would ensure that we only deploy once all tests pass, since we do not want to deploy a faulty application.
 
 ## Team work
 
@@ -115,9 +115,9 @@ It is important to note that this workflow makes and runs a separate build-job w
   <img src="Pictures/projectboard.png" alt = "Project board" />
 </p>
 
-We do not have any unfinished issues on our project board we have made all the features that we set out to make, one part of our program that we could have worked more on would have been to add more test, specifically for our wild-style features.
+We do not have any unfinished issues on our project board and we have made all the features that we set out to make. One part of our program that we could have worked more on would have been to add more test, specifically for our wild-style features.
 
-The process we went through was we would meet when new tasks where given to make new issues. We had a github workflow that automatically added the new feature tag to issues. Usually two people would sit down and write the coming weeks issues. The other people would work on previous tasks we had not completed yet. We would then delegate the new issues between us. Depending on the problem size we would sometimes work two or three people on one issue using pair programming otherwise it would be a single person working on one issue each. We would also make a new branch, specifically for that issue. We were not the best at using the project board and would often put an issue in the wrong column or place an issue in the "in-progress"-column and then forget all about it, after we finished work. We would then rediscover our old issues and move them to the correct column, the next week when new issues had to be written. If we at that time felt the issue was solved we would then make a pull request to merge into main. Most of the time another member of the team who had not worked on the issue would review and approve the merge, but if no one answered the messages for a pull request. One of the team members who worked on the issue would approve and merge themselves, so the branches did not stay alive for too long.
+The process we went through was we would meet when new tasks were given to make new issues. We had a GitHub workflow that automatically added the new feature tag to issues. Usually two people would sit down and write the coming weeks issues. The other people would work on previous tasks we had not completed yet. We would then delegate the new issues between us. Depending on the problem size we would sometimes work two or three people on one issue using pair programming otherwise it would be a single person working on one issue each. We would also make a new branch, specifically for that issue. We were not the best at keeping track of our project board. We would place an issue in the "in-progress"-column and then forget about it, even after it had been resolved. When we had new issues to write, we would make a pull request for the old issue and move it to the "Done"-column. Most of the time another member of the team who had not worked on the issue would review and approve the merge, but if no one answered the messages for a pull request. One of the team members who worked on the issue would approve and merge themselves, so the branches did not stay alive for too long.
 
 ## How to make _Chirp!_ work locally
 
@@ -152,11 +152,13 @@ Make sure you are in the Chirp.Razor directory when running the last set of comm
 cd src/Chirp.Razor
 ```
 
-The first one is to connect to the database and the two latter is for connecting with GitHub authentication. (The GitHub authentication locally is not the same as the website for safety reasons)
+This command is for connecting to the database.
 
 ```console
 dotnet user-secrets set "ConnectionStrings:ChirpDb" "Server=127.0.0.1,1433; Database=Master; User Id=SA; Password=6d3a3bdb-7993-42ab-8eb4-5fb4e27ef44a; Encrypt=True;TrustServerCertificate=True"
 ```
+
+These two commands are for the GitHub authentication. (The GitHub authentication locally is not the same as the website for safety reasons)
 
 ```console
 dotnet user-secrets set "GITHUB_PROVIDER_AUTHENTICATION_SECRET" "1d0ace927b02173f9a878119fdb0f5069da49be8"
