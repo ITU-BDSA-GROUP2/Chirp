@@ -40,7 +40,7 @@ The illustration below illustrates the architecture of our deployed "Chirp!" app
 
 In this segment we present three different user-activity diagrams that illustrates how a user would use our website.
 
-The diagrams below illustrates how a non-authorized user will use the "Chirp!" application there are two very similar diagrams. The top ones shows how a non-authorized user can use our program if they are already registered and the bottom one shows a user that hasn't registered.
+The diagrams below illustrates how a non-authorized user will use the "Chirp!" application. They are two very similar diagrams. The first two shows how a non-authorized user can use our program if they are already registered and the bottom one shows a user that hasn't registered.
 
 <p align="center">
   <img src="https://www.plantuml.com/plantuml/svg/LOz1pW8n28Ntd89pp6pcJ_wbM-CQEwGbqobDIpLwUgjDnhY2ztXyXAKQ5MjxnAI9cWKjykJrNBbSnC99lQG_Pt8JU_mB-K8xV5QWS6OodABgXhrnWJdN6MgEOd3OQe4BjiwhQB9pbCGz1IE7v4aIJ2wAsp2-hyqmUKNJeJ2JvmCwhBjOq6ReUstN-PVqZHnpJYiEG3NDi7JT7tu1" alt = "User activity diagram of a non-authorized user that has registered" />
@@ -49,7 +49,7 @@ The diagrams below illustrates how a non-authorized user will use the "Chirp!" a
   <img src="https://www.plantuml.com/plantuml/svg/NOz1giCm30NtEeNEaMno5V_yXotYM4QIwVLhMcfeLtuUXW4T7ibYt9LUWmmTANYhgXVFSHQW-qxUgmGjh55WF1pc77AZIiF7ufIJDDhEAkV5XYmUi9ssh1ow0FUKiSABFYIAZk0yt_7ta_oobeBsp--CXtOwvdyUz0G0" alt = "user activity diagram of a non-authorized user that has not registered" />
 </p>
 
-The diagram below illustrates how an authorized user could use the "Chirp!" application. The diagram is illustrated as a loop since most of the tasks that a user could do would end up with them at the front page looking at cheeps. We omitted how a user could interact with the "About me"- and "My timeline"-page. The difference between the "Public timeline" and "My timeline" is the cheeps they show. The "Public timeline" show all cheeps and the "My timeline" only shows personal cheeps and cheeps from authors they follow. The "About me" page we omitted it since a user can change their information and the diagram would look almost identical to the two previous diagrams in this section.
+The diagram below illustrates how an authorized user can use the "Chirp!" application. The diagram is illustrated as a loop, since most of the tasks that an authorized-user can do will end up with them at the public-timeline looking at cheeps. We omit how an  authorized-user can interact with the "About me"- and "My timeline"-page. The difference between the "Public timeline" and "My timeline" are the cheeps they show. The "Public timeline" shows all cheeps and the "My timeline" only shows personal cheeps and cheeps from authors they follow. We omit the "about-me"-page, since an authorized-user can change their information.
 
 <p align="center">
   <img src="https://www.plantuml.com/plantuml/svg/XP51ZeCm34NtEOMNz0fqqwjuY2aMnaQneuhR3pIQIXsrOXVvFVstoCq3IzH5qlEH2gs4aNencm43XebezMloLJWIZntMcAm0EumcOW_A5uY95BgD_9BwGNYOeMgZO0hOHgw9nAbJUqcV5CqyjXZW7LcFv9C1IY7C6mZFVystP6O_qBVOmKvI_QDmqCjuPst556ml5wXEnI5u8M6bR-wodIhuOpLW-S_5xljzFuQjwKQQZo_w1G00" alt = "User activity diagram of an authorized user" />
