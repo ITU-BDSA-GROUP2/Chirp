@@ -16,15 +16,15 @@ numbersections: true
 
 The diagram below shows our domain model, the classes are the important entities in our program, as they relate to the real world domain of interest. The identity entity is made to show that we use asp.net core identity.
 
-![domain model](https://www.plantuml.com/plantuml/svg/RO_TIiKm3CVl-nHvWRs0Y1pn0muSlF7u0CL65soxqMHCaRsxwR9EmNCpclm_yjk1nHUPKdIlqJF3NOyuVZi0oWB7e0-MGlaTplWfEjrxmJCbXFhHR1etxua-aDStt4xI3qN3YvLkYzfwRAtFrlha4_vE3ybJrF54B4R2UyVZ4ECmO-46zy9ORzYmgU7VwOhL8bRPCgsWEIbW5fAlIpzVhTbG-I_gukmWTDODLp0N4cIuSJkmYkPIzMrTLjdydG6gqdlTWciKqEqfqwxT0NEOKlm1)
+![domain model](https://www.plantuml.com/plantuml/svg/RO_TIiKm3CVl-nHvWRs0Y1pn0muSlF7u0CL65soxqMHCaRsxwR9EmNCpclm_yjk1nHUPKdIlqJF3NOyuVZi0oWB7e0-MGlaTplWfEjrxmJCbXFhHR1etxua-aDStt4xI3qN3YvLkYzfwRAtFrlha4_vE3ybJrF54B4R2UyVZ4ECmO-46zy9ORzYmgU7VwOhL8bRPCgsWEIbW5fAlIpzVhTbG-I_gukmWTDODLp0N4cIuSJkmYkPIzMrTLjdydG6gqdlTWciKqEqfqwxT0NEOKlm1){: .center-image }
 
 ## Architecture — In the small
 
-![Onion diagram of the program](<Pictures/onion.drawio%20(3).png>)
+![Onion diagram of the program](<Pictures/onion.drawio%20(3).png>){: .center-image }
 
 ## Architecture of deployed application
 
-![Illustration of deployed architecture](Pictures/DeployedArcitecture.png)
+![Illustration of deployed architecture](Pictures/DeployedArcitecture.png){: .center-image }
 
 ## User activities
 
@@ -32,29 +32,29 @@ In this segment we present three different user-activity diagrams that illustrat
 
 The diagrams below illustrates how a non-authorized user will use the "Chirp!" application there are two very similar diagrams. The top ones shows how a non-authorized user can use our program if they are already registered and the bottom one shows a user that hasn't registered.
 
-![User activity diagram of a non-authorized user that has registered](https://www.plantuml.com/plantuml/svg/LOz1pW8n28Ntd89pp6pcJ_wbM-CQEwGbqobDIpLwUgjDnhY2ztXyXAKQ5MjxnAI9cWKjykJrNBbSnC99lQG_Pt8JU_mB-K8xV5QWS6OodABgXhrnWJdN6MgEOd3OQe4BjiwhQB9pbCGz1IE7v4aIJ2wAsp2-hyqmUKNJeJ2JvmCwhBjOq6ReUstN-PVqZHnpJYiEG3NDi7JT7tu1) ![user activity diagram of a non-authorized user that has not registered](https://www.plantuml.com/plantuml/svg/NOz1giCm30NtEeNEaMno5V_yXotYM4QIwVLhMcfeLtuUXW4T7ibYt9LUWmmTANYhgXVFSHQW-qxUgmGjh55WF1pc77AZIiF7ufIJDDhEAkV5XYmUi9ssh1ow0FUKiSABFYIAZk0yt_7ta_oobeBsp--CXtOwvdyUz0G0)
+![User activity diagram of a non-authorized user that has registered](https://www.plantuml.com/plantuml/svg/LOz1pW8n28Ntd89pp6pcJ_wbM-CQEwGbqobDIpLwUgjDnhY2ztXyXAKQ5MjxnAI9cWKjykJrNBbSnC99lQG_Pt8JU_mB-K8xV5QWS6OodABgXhrnWJdN6MgEOd3OQe4BjiwhQB9pbCGz1IE7v4aIJ2wAsp2-hyqmUKNJeJ2JvmCwhBjOq6ReUstN-PVqZHnpJYiEG3NDi7JT7tu1){: .center-image } ![user activity diagram of a non-authorized user that has not registered](https://www.plantuml.com/plantuml/svg/NOz1giCm30NtEeNEaMno5V_yXotYM4QIwVLhMcfeLtuUXW4T7ibYt9LUWmmTANYhgXVFSHQW-qxUgmGjh55WF1pc77AZIiF7ufIJDDhEAkV5XYmUi9ssh1ow0FUKiSABFYIAZk0yt_7ta_oobeBsp--CXtOwvdyUz0G0){: .center-image }
 
 The diagram below illustrates how an authorized user could use the "Chirp!" application. The diagram is illustrated as a loop since most of the tasks that a user could do would end up with them at the front page looking at cheeps. We omitted how a user could interact with the "About me"- and "My timeline"-page. The difference between the "Public timeline" and "My timeline" is the cheeps they show. The "Public timeline" show all cheeps and the "My timeline" only shows personal cheeps and cheeps from authors they follow. The "About me" page we omitted it since a user can change their information and the diagram would look almost identical to the two previous diagrams in this section.
 
-![User activity diagram of an authorized user](https://www.plantuml.com/plantuml/svg/XP51ZeCm34NtEOMNz0fqqwjuY2aMnaQneuhR3pIQIXsrOXVvFVstoCq3IzH5qlEH2gs4aNencm43XebezMloLJWIZntMcAm0EumcOW_A5uY95BgD_9BwGNYOeMgZO0hOHgw9nAbJUqcV5CqyjXZW7LcFv9C1IY7C6mZFVystP6O_qBVOmKvI_QDmqCjuPst556ml5wXEnI5u8M6bR-wodIhuOpLW-S_5xljzFuQjwKQQZo_w1G00)
+![User activity diagram of an authorized user](https://www.plantuml.com/plantuml/svg/XP51ZeCm34NtEOMNz0fqqwjuY2aMnaQneuhR3pIQIXsrOXVvFVstoCq3IzH5qlEH2gs4aNencm43XebezMloLJWIZntMcAm0EumcOW_A5uY95BgD_9BwGNYOeMgZO0hOHgw9nAbJUqcV5CqyjXZW7LcFv9C1IY7C6mZFVystP6O_qBVOmKvI_QDmqCjuPst556ml5wXEnI5u8M6bR-wodIhuOpLW-S_5xljzFuQjwKQQZo_w1G00){: .center-image }
 
 ## Sequence of functionality/calls through _Chirp!_
-:----:
-![Sequence diagram of the Azure Web API with calls to the database and OAuth](<Pictures/SequenceDiagram.jpg>)
-:----:
+
+![Sequence diagram of the Azure Web API with calls to the database and OAuth](<Pictures/SequenceDiagram.jpg>){: .center-image }
+
 # Process
 
 ## Build, test, release, and deployment
 
 In this section we will discuss our continuous deployment of the Chirp software using GitHub Actions. We will provide an in-depth explanation of how our continuous deployment tackles building-, testing- and deploying the program to the web platform, and ensuring working releases for all relevant platforms. Here is an illustration which displays this:
 
-![UML Diagram of workflows](https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuGfApKbDB4xLgypDKT2rKt0gpSn9YK_CIualIIqk0OjQAHIb5fPc5gMcA2IbfkKNfGBv83sPUUbSBga5EVcLK6MPnGgPUIcf1Qb08g-4om580sq00000)
+![UML Diagram of workflows](https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuGfApKbDB4xLgypDKT2rKt0gpSn9YK_CIualIIqk0OjQAHIb5fPc5gMcA2IbfkKNfGBv83sPUUbSBga5EVcLK6MPnGgPUIcf1Qb08g-4om580sq00000){: .center-image }
 
 ### Building
 
 To build the program we use the "build_and_test.yml" workflow. This workflow runs on pushes and pulls to main branch, this is to view the status of our tests whenever something gets added or merged. In the workflow, the three first steps are responsible for building the program before testing.
 
-![Sequence diagram for build and test workflow](https://www.plantuml.com/plantuml/svg/XP0nhi8m341tdyBpbtxAXXIM2iJAK7g1qfWsKd4Yns7WzAIb6q9TdZpuFLckatQY-J71CY3OAscEQ2xdzW3tANJgUK0EIYX-6DMY2yga_q-Iv0FZtkpC7zY6aWOXT1I97N7lAVq8IEOrWh9QIVhgD7g9fkbUGS0Uiv_Sjd-RrxxjjcItPQNqGJN3B0KezqIeYLtvoHi0)
+![Sequence diagram for build and test workflow](https://www.plantuml.com/plantuml/svg/XP0nhi8m341tdyBpbtxAXXIM2iJAK7g1qfWsKd4Yns7WzAIb6q9TdZpuFLckatQY-J71CY3OAscEQ2xdzW3tANJgUK0EIYX-6DMY2yga_q-Iv0FZtkpC7zY6aWOXT1I97N7lAVq8IEOrWh9QIVhgD7g9fkbUGS0Uiv_Sjd-RrxxjjcItPQNqGJN3B0KezqIeYLtvoHi0){: .center-image }
 
 The first step is "Setup .NET" which uses "actions/setup-dotnet@v3", with dotnet version 7.0. This is responsible for setting up the program before building it, and is a part of the "action/checkout@v3" collection. The next step is to restore dependencies, this is a necessary step to ensure all our dependencies are restored. Lastly we run the "Build" step.Which is responsible for building the program so that it can be tested upon.
 
@@ -65,7 +65,7 @@ Running the tests is done with the last step in the "build_and_test.yml" workflo
 ### Release
 
 The intended use of the release.yml workflow is to create and release zip files, for windows, mac and linux where the program can be found and ran. Here is an illustration of how the release workflow works:
-![Sequence diagram for release workflow](https://www.plantuml.com/plantuml/svg/TP2nJiCm48PtFyMfwW1396PNhKeH51PKYS2ABl7XMBtOaU_Cy-Ca0rEtxwpxlz-weoXcBIER1OmzbS0EC3feINHdVbA-6W1xGP5r0lGOulpsWe5t5IWwGpKnKlPaxDD0_JML6hOVf6a2bpJIFAxoJ4meL6sSK4Fq49CIvE07jR3kr290PfWOjV8eK6JUhDnmIjEY1aL_mv9B1Eg719lsyRpVtlcWu4Zw73g2Hj4BD0rsNQRV_SFz1Wu7s9xVsjVFq_Vp-vUnbz9naE7_hwArz4ZHpRVw0m00)
+![Sequence diagram for release workflow](https://www.plantuml.com/plantuml/svg/TP2nJiCm48PtFyMfwW1396PNhKeH51PKYS2ABl7XMBtOaU_Cy-Ca0rEtxwpxlz-weoXcBIER1OmzbS0EC3feINHdVbA-6W1xGP5r0lGOulpsWe5t5IWwGpKnKlPaxDD0_JML6hOVf6a2bpJIFAxoJ4meL6sSK4Fq49CIvE07jR3kr290PfWOjV8eK6JUhDnmIjEY1aL_mv9B1Eg719lsyRpVtlcWu4Zw73g2Hj4BD0rsNQRV_SFz1Wu7s9xVsjVFq_Vp-vUnbz9naE7_hwArz4ZHpRVw0m00){: .center-image }
 
 We have designed our release workflow so that it runs using a for-loop, to reduce redundancy. Furthermore, there are certain requirements for our release workflow to run which we view as crucial for the design of the worklow. The first major requirement our workflow has, is that it only runs once a tag has been pushed. This is important since all releases require a tag, this allows us to describe our tag format so that we are consistent when creating our tags. This can be seen on line 6 in the workflow where the tag format is "v*.*.\*" which is in accordance with Semantic versioning (breaking.feature.fix) from session_03. The next major requirement in our release workflow is that we have added the "build_and_test.yml" as a job which needs to run and complete appropriately, meaning the program must build correctly and all the tests must pass before the release job runs.
 This is a suitable requirement since we would never want to release a version of the program where the tests do not pass.
@@ -73,7 +73,7 @@ This is a suitable requirement since we would never want to release a version of
 ### Deploy
 
 We deploy using the "main_bdsagroup2chirprazor.yml". This workflow only runs on pushes to main branch, to ensure all new features are deployed to the website. The deploy-workflow consists of two jobs; build and deploy. Here is an illustration of the workflow:
-![Sequence diagram for the deploy workflow](https://www.plantuml.com/plantuml/svg/NP31JiGW48RlynJ_4-pLP7lPrVNgHOtdLgOjXZ9a65prwMLBcnWvaP_vFpuuPUlLoX9etT2aKXBkYmyE7p8GwZe-iw6cXwV75po8SaTZaDvyd1356EgdsOvmOf4DdwpPIyJTuQlL6-tgRTv6kfPVsdmgG_1vtiBNLD4ErSMF_RjX58NZ6dul7Etcr157XrLqqxsivystWQ_n7qLbmR2_Qh-_rKnm_YdAUEC1vvJ-yYcR93hLuFP5z0i0)
+![Sequence diagram for the deploy workflow](https://www.plantuml.com/plantuml/svg/NP31JiGW48RlynJ_4-pLP7lPrVNgHOtdLgOjXZ9a65prwMLBcnWvaP_vFpuuPUlLoX9etT2aKXBkYmyE7p8GwZe-iw6cXwV75po8SaTZaDvyd1356EgdsOvmOf4DdwpPIyJTuQlL6-tgRTv6kfPVsdmgG_1vtiBNLD4ErSMF_RjX58NZ6dul7Etcr157XrLqqxsivystWQ_n7qLbmR2_Qh-_rKnm_YdAUEC1vvJ-yYcR93hLuFP5z0i0){: .center-image }
 The build job has four steps; The first step is to set up .NET core, second step is to build with dotnet, thirdly it publishes, and lastly it uploads the artifact so it is ready to be deployed through the deploy-job.
 The deploy-job requires the build-job to finish successfully, it then runs using two steps. First step is to download the artifact uploaded by the build job. Second step is to deploy that artifact to the azure web app, once this is done the deployment is finished.
 
@@ -81,7 +81,7 @@ It is important to note that this workflow makes and runs a separate build-job w
 
 ## Team work
 
-![Project board](Pictures/projectboard.png)
+![Project board](Pictures/projectboard.png){: .center-image }
 We do not have any unfinished issues on our project board we have made all the features that we set out to make, one part of our program that we could have worked more on would have been to add more test, specifically for our wild-style features.
 
 The process we went through was we would meet when new tasks where given to make new issues. We had a github workflow that automatically added the new feature tag to issues. Usually two people would sit down and write the coming weeks issues. The other people would work on previous tasks we had not completed yet. We would then delegate the new issues between us. Depending on the problem size we would sometimes work two or three people on one issue using pair programming otherwise it would be a single person working on one issue each. We would also make a new branch, specifically for that issue. We were not the best at using the project board and would often put an issue in the wrong column or place an issue in the "in-progress"-column and then forget all about it, after we finished work. We would then rediscover our old issues and move them to the correct column, the next week when new issues had to be written. If we at that time felt the issue was solved we would then make a pull request to merge into main. Most of the time another member of the team who had not worked on the issue would review and approve the merge, but if no one answered the messages for a pull request. One of the team members who worked on the issue would approve and merge themselves, so the branches did not stay alive for too long.
