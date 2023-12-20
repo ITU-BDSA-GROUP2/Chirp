@@ -103,7 +103,7 @@ And git which you can install from this link: https://git-scm.com/downloads
 You can now clone the repository by running:
 
 ```console
-git clone https://github.com/BDSA23-GROUP2/Chirp
+git clone https://github.com/ITU-BDSA23-GROUP2/Chirp
 ```
 
 You now need to get the database up and running. You need to run one of these commands depending on your system.
@@ -189,4 +189,4 @@ To choose the license we started by looking at the website https://choosealicens
 
 When we encountered difficult issues throughout the program and were unable to find an answer right away on the internet, we decided to get some help from ChatGPT. Sometimes it helped us, sometimes we did not get any further. Whenever we would commit anything that the AI either wrote for us or gave us inspiration for, we would write a commit message, that we had gotten help from ChatGPT.
 
-When we first chose the images for the website, we took the first ones we could find, so we could be ready for the project demo day. However, we were not sure about the copyright of these images. Therefore, we instead decided to use OpenAI's image generation to create the images for our website. We researched and found out that there would be no copyright issues this way. Source: Section 3.a https://openai.com/policies/mar-2023-terms.
+When we first chose the images for the website, we took the first ones we could find, so we could be ready for the project demo day. However, we were not sure about the copyright of these images. Therefore, we instead decided to use OpenAI's image generation to create the images for our website. We researched and discovered that there would be no copyright issues this way. Source: Section 3.a https://openai.com/policies/mar-2023-terms.
