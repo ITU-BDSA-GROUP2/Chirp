@@ -40,7 +40,11 @@ The diagram below illustrates how an authorized user could use the "Chirp!" appl
 
 ## Sequence of functionality/calls through _Chirp!_
 
-![Sequence diagram of the Azure Web API with calls to the database and OAuth](<Pictures/SequenceDiagram.jpg>){: .center-image }
+<p align="center">
+  <img src="Pictures/SequenceDiagram.jpg" />
+</p>
+
+**![Sequence diagram of the Azure Web API with calls to the database and OAuth](<Pictures/SequenceDiagram.jpg>){: .center-image }**
 
 # Process
 
