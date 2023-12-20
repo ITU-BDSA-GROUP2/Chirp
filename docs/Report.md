@@ -22,7 +22,7 @@ The diagram below shows our domain model. The classes are the important entities
 
 ## Architecture — In the small
 
-The illustration below illustrates an onion diagram of our "Chirp!" application.
+The illustration below highlights the organization of our code base, within our onion architecture.
 
 <p align="center">
   <img src="Pictures/onion.drawio%20(3).png" alt = "Onion diagram of the program" />
@@ -30,15 +30,13 @@ The illustration below illustrates an onion diagram of our "Chirp!" application.
 
 ## Architecture of deployed application
 
-The illustration below illustrates the architecture of our deployed "Chirp!" application.
+The illustration below exemplify the architecture of our deployed application, with focus on our client-server relation.
 
 <p align="center">
   <img src="Pictures/DeployedArcitecture.png" alt = "Illustration of deployed architecture" />
 </p>
 
 ## User activities
-
-In this segment we present three different user-activity diagrams that illustrates how a user would use our website.
 
 The diagram below illustrates how a non-authorized user will use the "Chirp!" application.
 
