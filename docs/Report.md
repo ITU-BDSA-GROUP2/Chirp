@@ -110,15 +110,13 @@ You now need to get the database up and running. You need to run one of these co
 
 Windows
 
-```console
 docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=6d3a3bdb-7993-42ab-8eb4-5fb4e27ef44a" -p 1433:1433 --name sqlpreview --hostname sqlpreview -d mcr.microsoft.com/mssql/server:2022-latest
-```
+
 
 Mac
 
-```console
 docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=6d3a3bdb-7993-42ab-8eb4-5fb4e27ef44a" -p 1433:1433 --name sqlpreview --hostname sqlpreview -d mcr.microsoft.com/azure-sql-edge:latest
-```
+
 
 Now the database should be properly set up.
 
@@ -130,19 +128,17 @@ cd src/Chirp.Razor
 
 This command is for connecting to the database.
 
-```console
+
 dotnet user-secrets set "ConnectionStrings:ChirpDb" "Server=127.0.0.1,1433; Database=Master; User Id=SA; Password=6d3a3bdb-7993-42ab-8eb4-5fb4e27ef44a; Encrypt=True;TrustServerCertificate=True"
-```
+
 
 These two commands are for the GitHub authentication. (The GitHub authentication locally is not the same as the website for safety reasons)
 
-```console
-dotnet user-secrets set "GITHUB_PROVIDER_AUTHENTICATION_SECRET" "1d0ace927b02173f9a878119fdb0f5069da49be8"
-```
 
-```console
+dotnet user-secrets set "GITHUB_PROVIDER_AUTHENTICATION_SECRET" "1d0ace927b02173f9a878119fdb0f5069da49be8"
+
 dotnet user-secrets set "AUTHENTICATION_GITHUB_CLIENTID" "f2b9cc87834340f6215a"
-```
+
 
 To start the program, type:
 
