@@ -14,7 +14,7 @@ numbersections: true
 
 ## Domain model
 
-The diagram below shows our domain model, the classes are the important entities in our program, as they relate to the real world domain of interest. The identity entity is made to show that we use asp.net core identity.
+The diagram below shows our domain model. The classes are the important entities in our program, as they relate to the real world domain of interest. The identity entity is made to show that we use asp.net core identity.
 
 <p align="center">
   <img src="https://www.plantuml.com/plantuml/svg/RO_TIiKm3CVl-nHvWRs0Y1pn0muSlF7u0CL65soxqMHCaRsxwR9EmNCpclm_yjk1nHUPKdIlqJF3NOyuVZi0oWB7e0-MGlaTplWfEjrxmJCbXFhHR1etxua-aDStt4xI3qN3YvLkYzfwRAtFrlha4_vE3ybJrF54B4R2UyVZ4ECmO-46zy9ORzYmgU7VwOhL8bRPCgsWEIbW5fAlIpzVhTbG-I_gukmWTDODLp0N4cIuSJkmYkPIzMrTLjdydG6gqdlTWciKqEqfqwxT0NEOKlm1" alt = "domain model" />
@@ -22,11 +22,15 @@ The diagram below shows our domain model, the classes are the important entities
 
 ## Architecture — In the small
 
+The illustration below illustrates an onion diagram of our "Chirp!" application.
+
 <p align="center">
   <img src="Pictures/onion.drawio%20(3).png" alt = "Onion diagram of the program" />
 </p>
 
 ## Architecture of deployed application
+
+The illustration below illustrates the architecture of our deployed "Chirp!" application.
 
 <p align="center">
   <img src="Pictures/DeployedArcitecture.png" alt = "Illustration of deployed architecture" />
@@ -119,6 +123,12 @@ The process we went through was we would meet when new tasks where given to make
 ## How to make _Chirp!_ work locally
 
 There are a few things you need to set up, before you are able to use Chirp locally. You will need to install Docker, which you can install from this link: https://www.docker.com/products/docker-desktop/
+And git which you can install from this link: https://git-scm.com/downloads
+
+You can now clone the repository by running:
+```console
+git clone https://github.com/BDSA23-GROUP2/Chirp
+```
 
 You now need to get the database up and running. You need to run one of these commands depending on your system.
 
