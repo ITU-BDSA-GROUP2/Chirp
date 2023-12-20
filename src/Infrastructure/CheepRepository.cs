@@ -63,7 +63,7 @@ public class CheepRepository : ICheepRepository
             .Select(c => new CheepDto(c.Text, c.Author.Name, c.TimeStamp, c.CheepId, c.Likes))
             .ToListAsync();
     }
-
+    
     public async Task<int> GetAllCheeps() 
     {
         return await db.Cheeps

@@ -39,11 +39,8 @@ The diagram below illustrates how an authorized user could use the "Chirp!" appl
 ![User activity diagram of an authorized user](https://www.plantuml.com/plantuml/svg/XP51ZeCm34NtEOMNz0fqqwjuY2aMnaQneuhR3pIQIXsrOXVvFVstoCq3IzH5qlEH2gs4aNencm43XebezMloLJWIZntMcAm0EumcOW_A5uY95BgD_9BwGNYOeMgZO0hOHgw9nAbJUqcV5CqyjXZW7LcFv9C1IY7C6mZFVystP6O_qBVOmKvI_QDmqCjuPst556ml5wXEnI5u8M6bR-wodIhuOpLW-S_5xljzFuQjwKQQZo_w1G00)
 
 ## Sequence of functionality/calls through _Chirp!_
-
-![Sequence diagram of the Azure Web API with calls to the database and OAuth](Pictures/SequenceDiagram.jpg)
-
-![Internal Sequence diagram](Pictures/SequenceDiagramInternal.jpg)
-
+![Sequence diagram of the Azure Web API with calls to the database and OAuth](<Pictures/SequenceDiagram.jpg>)
+:----:
 # Process
 
 ## Build, test, release, and deployment
