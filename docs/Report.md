@@ -44,7 +44,7 @@ The diagram below illustrates how a non-authorized user will use the "Chirp!" ap
   <img src="https://www.plantuml.com/plantuml/svg/VOv1QiGm34NtEeNEaMocq6MtfMir8sGnZcLakQKzVSq4386IbQtFq_kwjI2FlcSiLgX7CjTVlhytzW-Dz6QYvMKB_TBuULKIfnsUA-1ScGANRFR0yTaISsqhj9erOCOMYHtxy3KCtJbhuK71mI49QO5boxezq5cq1ViAYnY6pG0h2K_rJByralL06M__NC_A4pKHBdSyD2si_dT4Dj4oBtXEv_eZkkYUo4NnRSnzp_07" alt = "user activity diagram of a non-authorized user" />
 </p>
 
-The diagram below illustrates how an authorized user can use the "Chirp!" application. The diagram is illustrated as a loop, since most of the tasks that an authorized user can do will end up with them at the "Public timeline" looking at cheeps. We omit how an authorized-user can interact with the "About me"- and "My timeline"-page. The difference between the "Public timeline" and "My timeline" are the cheeps they show. The "Public timeline" shows all cheeps and the "My timeline" only shows personal cheeps and cheeps from authors they follow. We omit the "about-me"-page, since an authorized user can change their information.
+The diagram below illustrates how an authorized user can use the "Chirp!" application. The diagram is illustrated as a loop, since most of the tasks that an authorized user can do will end up with them at the "Public timeline" looking at cheeps. We omit how an authorized-user can interact with the "About me"- and "My timeline"-page. The difference between the "Public timeline" and "My timeline" are the cheeps they show. The "Public timeline" shows all cheeps and the "My timeline" only shows personal cheeps and cheeps from authors they follow. 
 
 <p align="center">
   <img src="https://www.plantuml.com/plantuml/svg/XP51ZeCm34NtEOMNz0fqqwjuY2aMnaQneuhR3pIQIXsrOXVvFVstoCq3IzH5qlEH2gs4aNencm43XebezMloLJWIZntMcAm0EumcOW_A5uY95BgD_9BwGNYOeMgZO0hOHgw9nAbJUqcV5CqyjXZW7LcFv9C1IY7C6mZFVystP6O_qBVOmKvI_QDmqCjuPst556ml5wXEnI5u8M6bR-wodIhuOpLW-S_5xljzFuQjwKQQZo_w1G00" alt = "User activity diagram of an authorized user" />
@@ -52,7 +52,7 @@ The diagram below illustrates how an authorized user can use the "Chirp!" applic
 
 ## Sequence of functionality/calls through _Chirp!_
 
-The sequence diagram below demonstrates a user-journey of three different functionalities.
+The sequence diagram below demonstrates the sequences of three different functionalities.
 Firstly the user attempts to access the webpage.
 Secondly the user attempts to gain authorization, by becoming an authorized user.
 Upon becoming an authorized user, they attempt to create a cheep.
@@ -65,7 +65,7 @@ Upon becoming an authorized user, they attempt to create a cheep.
 
 ## Build, test, release, and deployment
 
-We have used Github Actions to continuously deploy our Chirp application. We will provide an in-depth explanation of how our continuous deployment tackles building-, testing- and deploying the program to the web platform, and ensuring working releases for all relevant platforms.
+We have used Github Actions to continuously deploy our Chirp application. We will provide an explanation of how our continuous deployment tackles building-, testing- and deploying the program to the web platform, and ensuring working releases for all relevant platforms.
 
 <p align="center">
   <img src="https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuGfApKbDB4xLgypDKT2rKt0gpSn9YK_CIualIIqk0OjQAHIb5fPc5gMcA2IbfkKNfGBv83sPUUbSBga5EVcLK6MPnGgPUIcf1Qb08g-4om580sq00000" alt = "UML Diagram of workflows" />
@@ -115,9 +115,9 @@ It is important to note that this workflow makes and runs a separate build-job w
   <img src="Pictures/projectboard.png" alt = "Project board" />
 </p>
 
-We do not have any unfinished issues on our project board and we have made all the features that we set out to make. One part of our program that we could have worked more on would have been to add more test, specifically for our wild-style features.
+After each lecture we would quickly take each new software development and process step and convert them into issues. We had a GitHub workflow that automatically added the new feature tag to issues. Usually two people would sit down and write the coming weeks issues. The other people would work on previous tasks we had not completed yet. We would then delegate the new issues between us. Depending on the problem size we would sometimes work two or three people on one issue using pair programming otherwise it would be a single person working on one issue each. We would also make a new branch, specifically for that issue. We were not the best at keeping track of our project board. We would sometimes place an issue in the "in-progress"-column and then forget about it, even after it had been resolved. When we had new issues to write, we would make a pull request for the old issue and move it to the "Done"-column. Most of the time another member of the team who had not worked on the issue would review and approve the merge, but if no one answered the messages for a pull request. One of the team members who worked on the issue would approve and merge themselves, so the branches did not stay alive for too long.
 
-The process we went through was we would meet when new tasks were given to make new issues. We had a GitHub workflow that automatically added the new feature tag to issues. Usually two people would sit down and write the coming weeks issues. The other people would work on previous tasks we had not completed yet. We would then delegate the new issues between us. Depending on the problem size we would sometimes work two or three people on one issue using pair programming otherwise it would be a single person working on one issue each. We would also make a new branch, specifically for that issue. We were not the best at keeping track of our project board. We would place an issue in the "in-progress"-column and then forget about it, even after it had been resolved. When we had new issues to write, we would make a pull request for the old issue and move it to the "Done"-column. Most of the time another member of the team who had not worked on the issue would review and approve the merge, but if no one answered the messages for a pull request. One of the team members who worked on the issue would approve and merge themselves, so the branches did not stay alive for too long.
+We do not have any unfinished issues on our project board, and we have made all the features that we set out to make. One part of our program that we could have worked more on would have been to add more UI test, specifically for our wild-style features (see 'How to run test suite locally').
 
 ## How to make _Chirp!_ work locally
 
@@ -174,15 +174,6 @@ To start the program, type:
 dotnet run
 ```
 
-## What tests do we have?
-
-The unit tests are designed to test the different units of the program. We do this using the Triple-A principle, of arranging acting and asserting. It is important to consistently and rigourisly test the many different units of the program since we must isolate the written code to test and determine (pass or fail) if it works as intended.
-
-We also want to isolate the different units and test them in an in-memory context, we do this using "in-memory tests" which is a different form of unit test. This way we can simulate external dependencies and involve our in-memory database (sqlite), in our unit tests.
-
-Lastly we want to test the functionality of the program from start to finish, this is done with an end-to-end test (also called E2E). We perform our E2E test using Playwright wherein we write several tests that ensure we cover an entire users journey and test all the functionalities within, making this a suitable E2E test.
-It should be disclosed that we lately have been trying to limit the amount we run our playwright tests since it interacts with the webpage, which we are convinced drain our credits on azure.
-
 ## How to run test suite locally
 
 To run our unit tests suite (including in-memory tests), from the root directory of the Chirp application. Run the following commands:
@@ -192,27 +183,34 @@ cd test/test.Chirp
 ```console
 dotnet test
 ```
-The InMemoryTests.cs file tests various repository methods. This includes, e.g. testing of the CreateCheep-, UpdateAuthor- and FollowAuthor-method. For each test it starts by creating a database and seeds it with cheeps and authors. Once the tests are complete it disposes the database.
+The InMemoryTests.cs file tests various repository methods. This includes, testing of the CreateCheep-, UpdateAuthor- and FollowAuthor-method. For each test it starts by creating a database and seeds it with cheeps and authors. Once the tests are complete it disposes the database.
 
 The UnitTestChirp.cs file tests if the public- and private-timeline exists, and if it can find specific users cheeps.
 
-Make sure you are in the root directory when running the following commands. If you should be in the root directory, type the following commands in your terminal to run our UI test suite:
+Make sure you are in the root directory when running the following commands. If you should be in the root directory, type the following commands in your terminal to run our UI test suite. 
 ```console
 cd test/PlaywrightTests 
 ```
+If this is the first time running our UI tests you need to run an extra command before they work, this however requires you to have power-shell installed:
+```console
+pwsh bin/Debug/net7.0/playwright.ps1 install
+```
+Now you are ready to run our UI tests, just type in the following command:
 ```console
 dotnet test
 ```
-All of our UI tests are tested on our Azure webpage. 
+
+All of our UI tests are tested directly on our Azure webpage. Our UI test suit consists of both small unit tests like checking if the title of our page is "Chirp!" and integration test that test if a user can log in and follow another author.
+Our UI test suit is not covering all our wild style functionalities. After we had made our first UI tests (located in the UITest.cs script), we quickly ran out of credits. Fearing we would end in a situation like other groups we stopped creating and running our UI tests for the fear of not being able to host the webpage for the entirety of the course.  
 
 # Ethics
 
 ## License
 
-To choose the license we started by looking at the website https://choosealicense.com/licenses/ to learn which license there were and which one would fit our project best. We immediately noticed the different types of permissions, conditions and limitations. our group confirmed we wanted as few limitations and conditions as possible because it would be easier for the public to use our code. We came to the conclusion that the MIT license was the way to go. Just to be sure we asked our TA at one of our meetings if the license was suitable for our project and dependencies. He agreed and we opted for the MIT license.
+To choose the license we started by looking at the website https://choosealicense.com/licenses/ to learn which license there were and which one would fit our project best. We immediately noticed the different types of permissions, conditions and limitations. Our group confirmed we wanted as few limitations and conditions as possible because it would be easier for the public to use our code. We came to the conclusion that the MIT license was the way to go. Just to be sure we asked our TA at one of our meetings if the license was suitable for our project and dependencies. He agreed and we opted for the MIT license.
 
 ## LLMs, ChatGPT, CoPilot, and others
 
 When we encountered difficult issues throughout the program and were unable to find an answer right away on the internet, we decided to get some help from ChatGPT. Sometimes it helped us, sometimes we did not get any further. Whenever we would commit anything that the AI either wrote for us or gave us inspiration for, we would write a commit message, that we had gotten help from ChatGPT.
 
-When we first chose the images for the website, we took the first ones we could find, so we could be ready for the project demo day. However, we were not sure about the copyright of these images. Therefore, we instead decided to use OpenAI's image generation to create the images for our website. We researched and found out that there would be no copyright issues this way.
+When we first chose the images for the website, we took the first ones we could find, so we could be ready for the project demo day. However, we were not sure about the copyright of these images. Therefore, we instead decided to use OpenAI's image generation to create the images for our website. We researched and found out that there would be no copyright issues this way. Source: Section 3.a https://openai.com/policies/mar-2023-terms.
