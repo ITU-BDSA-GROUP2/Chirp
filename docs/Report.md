@@ -15,6 +15,7 @@ numbersections: true
 ## Domain model
 
 The diagram below shows our domain model, the classes are the important entities in our program, as they relate to the real world domain of interest. The identity entitie is made to show that we use asp.net core identity.
+
 ![domain model](https://www.plantuml.com/plantuml/svg/RO_TIiKm3CVl-nHvWRs0Y1pn0muSlF7u0CL65soxqMHCaRsxwR9EmNCpclm_yjk1nHUPKdIlqJF3NOyuVZi0oWB7e0-MGlaTplWfEjrxmJCbXFhHR1etxua-aDStt4xI3qN3YvLkYzfwRAtFrlha4_vE3ybJrF54B4R2UyVZ4ECmO-46zy9ORzYmgU7VwOhL8bRPCgsWEIbW5fAlIpzVhTbG-I_gukmWTDODLp0N4cIuSJkmYkPIzMrTLjdydG6gqdlTWciKqEqfqwxT0NEOKlm1)
 
 ## Architecture — In the small
@@ -54,48 +55,14 @@ In this section we will discuss our continuous deployment of the Chirp software 
 ### Building
 
 To build the program we use the "build_and_test.yml" workflow. This workflow runs on pushes and pulls to main branch, this is to view the status of our tests whenever something gets added or merged. In the workflow, the three first steps are responsible for building the program before testing.
+
 ![Sequence diagram for build and test workflow](https://www.plantuml.com/plantuml/svg/XP0nhi8m341tdyBpbtxAXXIM2iJAK7g1qfWsKd4Yns7WzAIb6q9TdZpuFLckatQY-J71CY3OAscEQ2xdzW3tANJgUK0EIYX-6DMY2yga_q-Iv0FZtkpC7zY6aWOXT1I97N7lAVq8IEOrWh9QIVhgD7g9fkbUGS0Uiv_Sjd-RrxxjjcItPQNqGJN3B0KezqIeYLtvoHi0)
-The first step is "Setup .NET" which uses "actions/setup-dotnet@v3", with dotnet version 7.0. This is responsible for setting up the program before building it, and is a part of the "action/checkout@v3" collection. The next step is to restore dependencies, which is done by running:
 
-```console
-dotnet restore src/Chirp.Razor
-```
-
-This is a necessary step to ensure all our dependencies are restored. Lastly we run the "Build" step which runs the
-
-```console
-dotnet build src/Chirp.Razor --no-restore
-```
-
-command, which is responsible for building the program so that it can be tested upon.
+The first step is "Setup .NET" which uses "actions/setup-dotnet@v3", with dotnet version 7.0. This is responsible for setting up the program before building it, and is a part of the "action/checkout@v3" collection. The next step is to restore dependencies, this is a necessary step to ensure all our dependencies are restored. Lastly we run the "Build" step.Which is responsible for building the program so that it can be tested upon.
 
 ### Testing
 
-Running the tests is done with the last step in the "build_and_test.yml" workflow. This step is called "Test" and runs the command:
-
-```console
-dotnet test test/test.Chirp --no-build --verbosity normal
-```
-
-which runs our test suit. We have put a lot of thought and effort into having the correct and necessary tests such as; Unit-, Integration-, and end-to-end tests (also called E2E). These tests are made with the Triple-A principle in mind (arrange, act and assert).
-
-#### Triple A principle
-
-Using the Triple-A principle, of arranging, acting and asserting we always have a consistent way of testing. This methodology revolves around first arranging your test, this means inputting and creating the necessary data structures that we might want to test. We then act upon them by affecting the data and testing some method. Lastly we assert what we expect from our result and compare to what we get. This is a structured way of designing and performing tests to ensure a level of consistency throughout the test suit. These are criteria we have set for our unit test to ensure their validity and usefulness to evaluate whether a functionality works as intended.
-
-#### Unit tests
-
-The unit tests are designed to test the different units of the program. We do this using the Triple-A principle, of arranging acting and asserting. This is a structured way of designing and performing tests to ensure a level of consistency throughout the tests. It is important to consistently and rigourisly test the many different units of the program since we must isolate the written code to test and determine (pass or fail) if it works as intended.
-(Insert unit test example)
-
-#### In memory
-
-Along with testing the smallest parts of the program in isolation, and without interacting with external resources. We also want to test the intricate units of the program whilst operating in an in-memory context, for this we use in-memory tests. Executing tests in an in-memory context allows us to simulate external dependencies and involve our in-memory database (sqlite). This essentially allows for more in depth testing, this is also done whilst applying the Triple-A principle.
-
-#### End to end tests using Playwright
-
-An end-to-end test (referred to as E2E) is a form of test that evaluates the functionality of a program from start to finish, covering a users entire journey. We achieve this test using Playwright, which is a testing library that allows us to automate browser action, interact with web pages, and perform operations that simulate user actions. This means that by using Playwright we can write several tests that ensure we cover an entire users journey and test all the functionalities within, making this a suitable E2E test.
-It should be disclosed that we lately have been trying to limit the amount we run our playwright tests since it interacts with the webpage, which we are convinced drain our credits on azure.
+Running the tests is done with the last step in the "build_and_test.yml" workflow. This step is called "Test" and runs our test suit. We have put a lot of thought and effort into having the correct and necessary tests such as; Unit-, Integration-, and end-to-end tests (also called E2E). These tests are made with the Triple-A principle in mind (arrange, act and assert).
 
 ### Release
 
@@ -167,6 +134,15 @@ To start the program, type:
 dotnet run
 ```
 
+## What tests do we have?
+
+The unit tests are designed to test the different units of the program. We do this using the Triple-A principle, of arranging acting and asserting. It is important to consistently and rigourisly test the many different units of the program since we must isolate the written code to test and determine (pass or fail) if it works as intended. 
+
+We also want to isolate the different units and test them in an in-memory context, we do this using "in-memory tests" which is a different form of unit test. This way we can simulate external dependencies and involve our in-memory database (sqlite), in our unit tests. 
+
+Lastly we want to test the functionality of the program from start to finish, this is done with an end-to-end test (also called E2E). We perform our E2E test using Playwright wherein we write several tests that ensure we cover an entire users journey and test all the functionalities within, making this a suitable E2E test. 
+It should be disclosed that we lately have been trying to limit the amount we run our playwright tests since it interacts with the webpage, which we are convinced drain our credits on azure.
+
 ## How to run test suite locally
 
 To run our in memory tests and unit tests, start by standing at the root of the directory called Chirp. Then from the terminal type ->
@@ -177,8 +153,6 @@ In our UnitTestChirp.cs file you will find some out-commented unit tests. These 
 To see our playwright tests stand at the root of our directory Chirp then type in the terminal -> cd test/PlaywrightTests once you are in the directory type -> dotnet test this will run various Razor web application tests. all of the methods starts by connecting to our Azure front webpage. The PlayWright tests works by calling different methods from the Playwright library. these methods are for example GetByRole() or GetByPlaceholder() which essentially finds the desired text field/button and then calls the methods such as FillAsync() or ClickAsync() which fills the field with text or clicks a button respectively. Once that is done and it is on the correct page with the correct information we call the Expect method to check that the correct text is found and if so the test succeeds.
 
 # Ethics
-
-Here we talk about our Ethics.
 
 ## License
 
