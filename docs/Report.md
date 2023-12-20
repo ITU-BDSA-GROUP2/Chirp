@@ -40,16 +40,13 @@ The illustration below illustrates the architecture of our deployed "Chirp!" app
 
 In this segment we present three different user-activity diagrams that illustrates how a user would use our website.
 
-The diagrams below illustrates how a non-authorized user will use the "Chirp!" application. They are two very similar diagrams. The first two shows how a non-authorized user can use our program if they are already registered and the bottom one shows a user that hasn't registered.
+The diagram below illustrates how a non-authorized user will use the "Chirp!" application.
 
 <p align="center">
-  <img src="https://www.plantuml.com/plantuml/svg/LOz1pW8n28Ntd89pp6pcJ_wbM-CQEwGbqobDIpLwUgjDnhY2ztXyXAKQ5MjxnAI9cWKjykJrNBbSnC99lQG_Pt8JU_mB-K8xV5QWS6OodABgXhrnWJdN6MgEOd3OQe4BjiwhQB9pbCGz1IE7v4aIJ2wAsp2-hyqmUKNJeJ2JvmCwhBjOq6ReUstN-PVqZHnpJYiEG3NDi7JT7tu1" alt = "User activity diagram of a non-authorized user that has registered" />
-</p>
-<p align="center">
-  <img src="https://www.plantuml.com/plantuml/svg/NOz1giCm30NtEeNEaMno5V_yXotYM4QIwVLhMcfeLtuUXW4T7ibYt9LUWmmTANYhgXVFSHQW-qxUgmGjh55WF1pc77AZIiF7ufIJDDhEAkV5XYmUi9ssh1ow0FUKiSABFYIAZk0yt_7ta_oobeBsp--CXtOwvdyUz0G0" alt = "user activity diagram of a non-authorized user that has not registered" />
+  <img src="https://www.plantuml.com/plantuml/svg/VOv1QiGm34NtEeNEaMocq6MtfMir8sGnZcLakQKzVSq4386IbQtFq_kwjI2FlcSiLgX7CjTVlhytzW-Dz6QYvMKB_TBuULKIfnsUA-1ScGANRFR0yTaISsqhj9erOCOMYHtxy3KCtJbhuK71mI49QO5boxezq5cq1ViAYnY6pG0h2K_rJByralL06M__NC_A4pKHBdSyD2si_dT4Dj4oBtXEv_eZkkYUo4NnRSnzp_07" alt = "user activity diagram of a non-authorized user" />
 </p>
 
-The diagram below illustrates how an authorized user can use the "Chirp!" application. The diagram is illustrated as a loop, since most of the tasks that an authorized user can do will end up with them at the "Public timeline" looking at cheeps. We omit how an  authorized-user can interact with the "About me"- and "My timeline"-page. The difference between the "Public timeline" and "My timeline" are the cheeps they show. The "Public timeline" shows all cheeps and the "My timeline" only shows personal cheeps and cheeps from authors they follow. We omit the "about-me"-page, since an authorized user can change their information.
+The diagram below illustrates how an authorized user can use the "Chirp!" application. The diagram is illustrated as a loop, since most of the tasks that an authorized user can do will end up with them at the "Public timeline" looking at cheeps. We omit how an authorized-user can interact with the "About me"- and "My timeline"-page. The difference between the "Public timeline" and "My timeline" are the cheeps they show. The "Public timeline" shows all cheeps and the "My timeline" only shows personal cheeps and cheeps from authors they follow. We omit the "about-me"-page, since an authorized user can change their information.
 
 <p align="center">
   <img src="https://www.plantuml.com/plantuml/svg/XP51ZeCm34NtEOMNz0fqqwjuY2aMnaQneuhR3pIQIXsrOXVvFVstoCq3IzH5qlEH2gs4aNencm43XebezMloLJWIZntMcAm0EumcOW_A5uY95BgD_9BwGNYOeMgZO0hOHgw9nAbJUqcV5CqyjXZW7LcFv9C1IY7C6mZFVystP6O_qBVOmKvI_QDmqCjuPst556ml5wXEnI5u8M6bR-wodIhuOpLW-S_5xljzFuQjwKQQZo_w1G00" alt = "User activity diagram of an authorized user" />
@@ -58,14 +55,13 @@ The diagram below illustrates how an authorized user can use the "Chirp!" applic
 ## Sequence of functionality/calls through _Chirp!_
 
 The sequence diagram below demonstrates a user-journey of three different functionalities.
-Firstly the user attempts to access the webpage. 
+Firstly the user attempts to access the webpage.
 Secondly the user attempts to gain authorization, by becoming an authorized user.
 Upon becoming an authorized user, they attempt to create a cheep.
 
 <p align="center">
   <img src="Pictures/SequenceDiagram.jpg" alt = "Sequence Diagram" />
 </p>
-
 
 # Process
 
@@ -131,6 +127,7 @@ There are a few things you need to set up, before you are able to use Chirp loca
 And git which you can install from this link: https://git-scm.com/downloads
 
 You can now clone the repository by running:
+
 ```console
 git clone https://github.com/BDSA23-GROUP2/Chirp
 ```
@@ -189,11 +186,11 @@ It should be disclosed that we lately have been trying to limit the amount we ru
 ## How to run test suite locally
 
 To run our in memory tests and unit tests, start by standing at the root of the directory called Chirp. Then from the terminal type ->
-cd test/test.Chirp after that run the command -> dotnet test. Within the inMemoryTests.cs file you will find test suites that tests various database methods which lies within the AuthorRepository, CheepRepository and FollowerListRepository. For each test in the class it starts by creating a database and seeds it with cheeps and authors. Once the tests are complete it disposes the database. 
+cd test/test.Chirp after that run the command -> dotnet test. Within the inMemoryTests.cs file you will find test suites that tests various database methods which lies within the AuthorRepository, CheepRepository and FollowerListRepository. For each test in the class it starts by creating a database and seeds it with cheeps and authors. Once the tests are complete it disposes the database.
 
 **We chose to use the inLineData format for the tests, this was to test different values on a single method at once. Some of the tests consist of testing the web application such as being able to see the public/private timeline or finding specific users cheeps.**
 
-To see our playwright tests stand at the root of our directory Chirp then type in the terminal -> cd test/PlaywrightTests once you are in the directory type -> dotnet test this will run various Razor web application tests. 
+To see our playwright tests stand at the root of our directory Chirp then type in the terminal -> cd test/PlaywrightTests once you are in the directory type -> dotnet test this will run various Razor web application tests.
 
 **all of the methods starts by connecting to our Azure front webpage. The PlayWright tests works by calling different methods from the Playwright library. these methods are for example GetByRole() or GetByPlaceholder() which essentially finds the desired text field/button and then calls the methods such as FillAsync() or ClickAsync() which fills the field with text or clicks a button respectively. Once that is done and it is on the correct page with the correct information we call the Expect method to check that the correct text is found and if so the test succeeds.**
 

@@ -1,8 +1,10 @@
-@startuml
+@startuml nonauthorizedUserDiagram
 start
 repeat :look at cheeps;
 split
 :look at other users timelines;
+
+
 split again
 :click register;
 :go to register page;
@@ -10,6 +12,15 @@ split
 :register without github;
 split again
 :register with github;
+end split
+stop
+split again
+:click login;
+:go to login page;
+split
+:login without github;
+split again
+:login with github;
 end split
 stop
 @enduml
