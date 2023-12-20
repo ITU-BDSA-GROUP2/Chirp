@@ -187,15 +187,21 @@ The InMemoryTests.cs file tests various repository methods. This includes, testi
 
 The UnitTestChirp.cs file tests if the public- and private-timeline exists, and if it can find specific users cheeps.
 
-Make sure you are in the root directory when running the following commands. If you should be in the root directory, type the following commands in your terminal to run our UI test suite:
+Make sure you are in the root directory when running the following commands. If you should be in the root directory, type the following commands in your terminal to run our UI test suite. 
 ```console
 cd test/PlaywrightTests 
 ```
+If this is the first time running our UI tests you need to run an extra command before they work, this however requires you to have power-shell installed:
+```console
+pwsh bin/Debug/net7.0/playwright.ps1 install
+```
+Now you are ready to run our UI tests, just type in the following command:
 ```console
 dotnet test
 ```
-All of our UI tests are tested on our Azure webpage. 
-It should be disclosed that we lately have been trying to limit the amount we run our playwright tests since it interacts with the webpage, which we are convinced drain our credits on azure.
+
+All of our UI tests are tested directly on our Azure webpage. Our UI test suit consists of both small unit tests like checking if the title of our page is "Chirp!" and integration test that test if a user can log in and follow another author.
+Our UI test suit is not covering all our wild style functionalities. After we had made our first UI tests (located in the UITest.cs script), we quickly ran out of credits. Fearing we would end in a situation like other groups we stopped creating and running our UI tests for the fear of not being able to host the webpage for the entirety of the course.  
 
 # Ethics
 
@@ -207,4 +213,4 @@ To choose the license we started by looking at the website https://choosealicens
 
 When we encountered difficult issues throughout the program and were unable to find an answer right away on the internet, we decided to get some help from ChatGPT. Sometimes it helped us, sometimes we did not get any further. Whenever we would commit anything that the AI either wrote for us or gave us inspiration for, we would write a commit message, that we had gotten help from ChatGPT.
 
-When we first chose the images for the website, we took the first ones we could find, so we could be ready for the project demo day. However, we were not sure about the copyright of these images. Therefore, we instead decided to use OpenAI's image generation to create the images for our website. We researched and found out that there would be no copyright issues this way.
+When we first chose the images for the website, we took the first ones we could find, so we could be ready for the project demo day. However, we were not sure about the copyright of these images. Therefore, we instead decided to use OpenAI's image generation to create the images for our website. We researched and found out that there would be no copyright issues this way. Source: Section 3.a https://openai.com/policies/mar-2023-terms.
