@@ -22,7 +22,8 @@ The diagram below shows our domain model, the classes are the important entities
 ![Onion diagram of the program](<Pictures/onion.drawio%20(3).png>)
 
 ## Architecture of deployed application
-![Illustration of deployed architecture](<Pictures/DeployedArcitecture.png>)
+
+![Illustration of deployed architecture](Pictures/DeployedArcitecture.png)
 
 ## User activities
 
@@ -30,16 +31,18 @@ In this segment we present three different user-activity diagrams that illustrat
 
 The diagrams below illustrates how a non-authorized user will use the "Chirp!" application there are two very similar diagrams. The left diagram illustrates how a user would login to Chirp, with an existing account. The right diagram illustrates a new user to Chirp! registering an account for the first time.
 
-![User activity diagram of a non-authorized user that has registered](https://www.plantuml.com/plantuml/svg/JOx13i8m28RlVGgUOxlCnADNunaxmiYwqhHKeqylEcCyaO-V3vYQORM-9SYQiTkYLPuqdnlLYzXoKfPyY2OtiSTHa2jkuQE48QckW0Pn8Ifj34DC4bT8RyM95KntWe9COsWbYNjxwov-gnkmrtxzXe2Calz7VZdb6VO5pRI4oTc_3Yy0) ![user activity diagram of a non-authorized user that has not registered](https://www.plantuml.com/plantuml/svg/NOx13SCm24NlJC4SoIMhK1SH5DTO1glh5xML3pa1ZmVwXmUDcAyAtmQsQdOX1PQJkViEMwbQBXmiwi4ZWHY6BO2TX7VmNZMl5trhd3O39Ujy_FT8GjfkrbAuFV7tniCw73bdhWy0)
+![User activity diagram of a non-authorized user that has registered](https://www.plantuml.com/plantuml/svg/LOz1pW8n28Ntd89pp6pcJ_wbM-CQEwGbqobDIpLwUgjDnhY2ztXyXAKQ5MjxnAI9cWKjykJrNBbSnC99lQG_Pt8JU_mB-K8xV5QWS6OodABgXhrnWJdN6MgEOd3OQe4BjiwhQB9pbCGz1IE7v4aIJ2wAsp2-hyqmUKNJeJ2JvmCwhBjOq6ReUstN-PVqZHnpJYiEG3NDi7JT7tu1) ![user activity diagram of a non-authorized user that has not registered](https://www.plantuml.com/plantuml/svg/NOz1giCm30NtEeNEaMno5V_yXotYM4QIwVLhMcfeLtuUXW4T7ibYt9LUWmmTANYhgXVFSHQW-qxUgmGjh55WF1pc77AZIiF7ufIJDDhEAkV5XYmUi9ssh1ow0FUKiSABFYIAZk0yt_7ta_oobeBsp--CXtOwvdyUz0G0)
 
 The diagram below illustrates how an authorized user could use the "Chirp!" application. The diagram is illustrated as a loop since most of the tasks that a user could do would end up with them at the front page looking at cheeps. We omitted how a user could interact with the "About me"- and "My timeline"-page. The difference between the "Public timeline" and "My timeline" is the cheeps they show. The "Public timeline" show all cheeps and the "My timeline" only shows personal cheeps and cheeps from authors they follow. The "About me" page we omitted it since a user can change their information and the diagram would look almost identical to the two previous diagrams in this section.
 
 ![User activity diagram of an authorized user](https://www.plantuml.com/plantuml/svg/VP11ReGm34NtFeMNp1MOpLp51JDO63jA78suVO6ehQOgtKL-J_z9UPIW77LLE1-GEJ45zEg-80KECtCgToX99K2cZchCdb4AJgxgBnvl63CRTXkN6_I3oh1WjKRH3QcDt86rS6V-BVsbs2XJYo4zIUn8dWn9CzEueShorNnBZb8ET1KxsV-f_fKb-CTuOst53TSDGrPMCRvIwCDhuFgRgp_t-tuCJ_3O-yUtVm80)
 
 ## Sequence of functionality/calls through _Chirp!_
-![Sequence diagram of the Azure Web API with calls to the database and OAuth](<Pictures/SequenceDiagram.jpg>)
 
-![Internal Sequence diagram](<Pictures/SequenceDiagramInternal.jpg>)
+![Sequence diagram of the Azure Web API with calls to the database and OAuth](Pictures/SequenceDiagram.jpg)
+
+![Internal Sequence diagram](Pictures/SequenceDiagramInternal.jpg)
+
 # Process
 
 ## Build, test, release, and deployment
