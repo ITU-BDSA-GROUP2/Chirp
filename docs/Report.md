@@ -57,17 +57,15 @@ Upon becoming an authorized user, they attempt to create a cheep.
 We have used Github Actions to continuously deploy our Chirp application. We will provide an explanation of how our continuous deployment tackles building-, testing- and deploying the program to the web platform, and ensuring working releases for all relevant platforms.
 
 ![UML Diagram of workflows](https://www.plantuml.com/plantuml/svg/SoWkIImgAStDuGfApKbDB4xLgypDKT2rKt0gpSn9YK_CIualIIqk0OjQAHIb5fPc5gMcA2IbfkKNfGBv83sPUUbSBga5EVcLK6MPnGgPUIcf1Qb08g-4om580sq00000)
-### Building
+### Building and Testing
 
 To build the program we use the "build_and_test.yml" workflow. This workflow runs on pushes and pulls to main branch, this is to view the status of our tests whenever something gets added or merged. In the workflow, the three first steps are responsible for building the program before testing.
 
 ![Sequence diagram for build and test workflow](https://www.plantuml.com/plantuml/svg/XP0nhi8m341tdyBpbtxAXXIM2iJAK7g1qfWsKd4Yns7WzAIb6q9TdZpuFLckatQY-J71CY3OAscEQ2xdzW3tANJgUK0EIYX-6DMY2yga_q-Iv0FZtkpC7zY6aWOXT1I97N7lAVq8IEOrWh9QIVhgD7g9fkbUGS0Uiv_Sjd-RrxxjjcItPQNqGJN3B0KezqIeYLtvoHi0)
 
-The first step is "Setup .NET" which uses "actions/setup-dotnet@v3", with dotnet version 7.0. This is responsible for setting up the program before building it, and is a part of the "action/checkout@v3" collection. The next step is to restore dependencies, this is a necessary step to ensure all our dependencies are restored. Lastly we run the "Build" step, which is responsible for building the program so that it can be tested upon.
+The first step is "Setup .NET" which uses "actions/setup-dotnet@v3", with dotnet version 7.0. This is responsible for setting up the program before building it, and is a part of the "action/checkout@v3" collection. The next step is to restore dependencies, this is a necessary step to ensure all our dependencies are restored. Lastly we run the "Build" step, which is responsible for building the program so that it can be tested upon. 
 
-### Testing
-
-Running the tests is done with the last step in the "build_and_test.yml" workflow. This step is called "Test" and runs our test suit. We have put a lot of thought and effort into having the correct and necessary tests such as; Unit- and Integration-tests. 
+Running the tests is done with the last step in the "build_and_test.yml" workflow. This step is called "Test" and runs our test suit.
 
 ### Release
 
