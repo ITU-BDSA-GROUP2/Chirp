@@ -185,14 +185,25 @@ It should be disclosed that we lately have been trying to limit the amount we ru
 
 ## How to run test suite locally
 
-To run our in memory tests and unit tests, start by standing at the root of the directory called Chirp. Then from the terminal type ->
-cd test/test.Chirp after that run the command -> dotnet test. Within the inMemoryTests.cs file you will find test suites that tests various database methods which lies within the AuthorRepository, CheepRepository and FollowerListRepository. For each test in the class it starts by creating a database and seeds it with cheeps and authors. Once the tests are complete it disposes the database.
+To run our unit tests suite (including in-memory tests), from the root directory of the Chirp application. Run the following commands:
+```console
+cd test/test.Chirp 
+```
+```console
+dotnet test
+```
+The InMemoryTests.cs file tests various repository methods. This includes, e.g. testing of the CreateCheep-, UpdateAuthor- and FollowAuthor-method. For each test it starts by creating a database and seeds it with cheeps and authors. Once the tests are complete it disposes the database.
 
-**We chose to use the inLineData format for the tests, this was to test different values on a single method at once. Some of the tests consist of testing the web application such as being able to see the public/private timeline or finding specific users cheeps.**
+The UnitTestChirp.cs file tests if the public- and private-timeline exists, and if it can find specific users cheeps.
 
-To see our playwright tests stand at the root of our directory Chirp then type in the terminal -> cd test/PlaywrightTests once you are in the directory type -> dotnet test this will run various Razor web application tests.
-
-**all of the methods starts by connecting to our Azure front webpage. The PlayWright tests works by calling different methods from the Playwright library. these methods are for example GetByRole() or GetByPlaceholder() which essentially finds the desired text field/button and then calls the methods such as FillAsync() or ClickAsync() which fills the field with text or clicks a button respectively. Once that is done and it is on the correct page with the correct information we call the Expect method to check that the correct text is found and if so the test succeeds.**
+Make sure you are in the root directory when running the following commands. If you should be in the root directory, type the following commands in your terminal to run our UI test suite:
+```console
+cd test/PlaywrightTests 
+```
+```console
+dotnet test
+```
+All of our UI tests are tested on our Azure webpage. 
 
 # Ethics
 
@@ -205,7 +216,3 @@ To choose the license we started by looking at the website https://choosealicens
 When we encountered difficult issues throughout the program and were unable to find an answer right away on the internet, we decided to get some help from ChatGPT. Sometimes it helped us, sometimes we did not get any further. Whenever we would commit anything that the AI either wrote for us or gave us inspiration for, we would write a commit message, that we had gotten help from ChatGPT.
 
 When we first chose the images for the website, we took the first ones we could find, so we could be ready for the project demo day. However, we were not sure about the copyright of these images. Therefore, we instead decided to use OpenAI's image generation to create the images for our website. We researched and found out that there would be no copyright issues this way.
-
-```
-
-```
