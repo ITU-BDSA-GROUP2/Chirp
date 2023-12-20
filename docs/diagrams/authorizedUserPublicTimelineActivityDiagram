@@ -17,6 +17,8 @@ endif
 split again
 :write a cheep;
 split again
+:click on other users timeline;
+split again
 :click on my timeline;
 split again
 :click on about me;
