@@ -145,7 +145,7 @@ It should be disclosed that we lately have been trying to limit the amount we ru
 To run our in memory tests and unit tests, start by standing at the root of the directory called Chirp. Then from the terminal type ->
 cd test/test.Chirp after that run the command -> dotnet test. Within the inMemoryTests.cs file you will find test suites that tests various database methods which lies within the AuthorRepository, CheepRepository and FollowerListRepository. For each test in the class it starts by creating a database and seeds it with cheeps and authors. Once the tests are complete it disposes the database. 
 
-In our UnitTestChirp.cs file you will find some out-commented unit tests. These are all methods that are not in use anymore or they fail which then stops our action workflow from deploying. We chose to use the inLineData format for the tests, this was to test different values on a single method at once. Some of the tests consist of testing the web application such as being able to see the public/private timeline or finding specific users cheeps.
+**We chose to use the inLineData format for the tests, this was to test different values on a single method at once. Some of the tests consist of testing the web application such as being able to see the public/private timeline or finding specific users cheeps.**
 
 To see our playwright tests stand at the root of our directory Chirp then type in the terminal -> cd test/PlaywrightTests once you are in the directory type -> dotnet test this will run various Razor web application tests. 
 
