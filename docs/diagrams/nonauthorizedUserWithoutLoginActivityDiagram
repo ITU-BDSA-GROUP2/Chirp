@@ -1,6 +1,9 @@
 @startuml
 start
-:look at cheeps;
+repeat :look at cheeps;
+split
+:look at other users timelines;
+split again
 :click register;
 :go to register page;
 split
